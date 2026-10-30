@@ -486,24 +486,18 @@ mark.gs-accent {
 	background-image: var(--wp--preset--gradient--deco-block);
 }
 
-.wp-block-image.is-style-deco-frame-left::before {
-	inset-block-start: calc(-1 * var(--wp--preset--spacing--60));
-	inset-inline-end: calc(-1 * var(--wp--preset--spacing--60));
-}
-
-.wp-block-image.is-style-deco-frame-left::after {
-	inset-block-end: calc(-1 * var(--wp--preset--spacing--60));
-	inset-inline-start: calc(-1 * var(--wp--preset--spacing--60));
-}
-
+/* Figma uses the same corners for both (1:221/1:222, 1:240/1:241, 1:254/1:255): top-right and
+   bottom-left. "Left/right" only names the photo's column, so the two styles render alike. */
+.wp-block-image.is-style-deco-frame-left::before,
 .wp-block-image.is-style-deco-frame-right::before {
 	inset-block-start: calc(-1 * var(--wp--preset--spacing--60));
-	inset-inline-start: calc(-1 * var(--wp--preset--spacing--60));
+	inset-inline-end: calc(-1 * var(--wp--preset--spacing--60));
 }
 
+.wp-block-image.is-style-deco-frame-left::after,
 .wp-block-image.is-style-deco-frame-right::after {
 	inset-block-end: calc(-1 * var(--wp--preset--spacing--60));
-	inset-inline-end: calc(-1 * var(--wp--preset--spacing--60));
+	inset-inline-start: calc(-1 * var(--wp--preset--spacing--60));
 }
 
 /* No image → no decorative frame (AGENTS.md §6). */

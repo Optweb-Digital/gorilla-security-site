@@ -11,6 +11,6 @@
 ],
   "config": { "WP_DEBUG": true, "SCRIPT_DEBUG": true },
   "lifecycleScripts": {
-    "afterStart": "npx wp-env run cli wp theme activate gorilla-security && npx wp-env run cli wp rewrite structure '/%postname%/'"
+    "afterStart": "npx wp-env run cli wp theme activate gorilla-security && npx wp-env run cli wp rewrite structure /%postname%/ && npx wp-env run cli wp rewrite flush --hard"
   }
 }

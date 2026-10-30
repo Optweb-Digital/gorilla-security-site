@@ -32,6 +32,26 @@
 				{ "slug": "night-2", "name": "Night 2", "color": "#141A24" },
 				{ "slug": "on-dark", "name": "On dark", "color": "#DFDFDF" },
 				{ "slug": "white", "name": "White", "color": "#FFFFFF" }
+			],
+			"gradients": [
+				{ "slug": "brand", "name": "Brand", "gradient": "linear-gradient(90deg, #61107A 0%, #6A0D71 39.42%, #6D0D60 67.79%, #9F0B57 100%)" },
+				{ "slug": "brand-text", "name": "Brand text", "gradient": "linear-gradient(90deg, rgba(187, 14, 181, 0.9) 0%, rgba(26, 0, 31, 0.9) 100%)" },
+				{ "slug": "deco-block", "name": "Deco block", "gradient": "linear-gradient(250.59deg, #930274 6.97%, #A90279 34.28%, #80026F 64.07%, #7F016E 93.03%)" },
+				{ "slug": "soft-section", "name": "Soft section", "gradient": "linear-gradient(-70.91deg, rgba(255, 255, 255, 0) 34.85%, #FDF9FF 70.52%)" },
+				{ "slug": "glass", "name": "Glass", "gradient": "linear-gradient(180deg, rgba(255, 255, 255, 0.2) 2.36%, rgba(255, 255, 255, 0) 118.39%)" },
+				{ "slug": "night-fade", "name": "Night fade", "gradient": "linear-gradient(235.5deg, rgba(11, 13, 22, 0) 12.7%, #0E0C1B 53.69%)" },
+				{ "slug": "photo-shade", "name": "Photo shade", "gradient": "linear-gradient(180deg, rgba(23, 21, 21, 0) 27.07%, #0D0D0D 85.23%)" },
+				{ "slug": "rule-fade", "name": "Rule fade", "gradient": "linear-gradient(90deg, rgba(135, 12, 107, 0.39) 0%, rgba(97, 16, 122, 0) 100%)" }
+			]
+		},
+		"shadow": {
+			"defaultPresets": false,
+			"presets": [
+				{ "slug": "soft", "name": "Soft (section)", "shadow": "0 4px 13px 0 rgba(0, 0, 0, 0.11)" },
+				{ "slug": "glass", "name": "Glass (floating)", "shadow": "-20px 22px 70px 0 rgba(0, 0, 0, 0.25)" },
+				{ "slug": "field", "name": "Field", "shadow": "0 1px 14px 0 rgba(0, 0, 0, 0.1)" },
+				{ "slug": "badge", "name": "Badge", "shadow": "0 4px 4px 0 rgba(0, 0, 0, 0.17)" },
+				{ "slug": "glow", "name": "Glow (FAQ)", "shadow": "0 0 33px 0 #DFCFDC" }
 			]
 		},
 		"typography": {
@@ -82,7 +102,11 @@
 			]
 		},
 		"custom": {
-			"radius": { "xs": "6px", "sm": "10px", "md": "12px", "lg": "20px", "xl": "30px", "2xl": "37px", "pill": "9999px" }
+			"radius": { "xs": "6px", "sm": "10px", "md": "12px", "lg": "20px", "xl": "30px", "2xl": "37px", "pill": "9999px" },
+			"blur": { "glass": "35px" },
+			"duration": { "fast": "150ms", "base": "200ms", "slow": "400ms" },
+			"easing": { "standard": "cubic-bezier(0.2, 0, 0, 1)" },
+			"control": { "sm": "48px", "field": "56px", "md": "60px", "lg": "71px" }
 		}
 	},
 	"styles": {

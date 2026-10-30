@@ -50,9 +50,24 @@ the layer styles.
 Figma uses `rgba(…, .9)` text colors; they are flattened to solid hex over white. Keep it that way.
 
 ### Gradients
-`brand` (buttons/active tab) · `brand-text` (accent words, stat numbers) · `deco-block` (shapes
-behind photos) · `soft-section` (grey→white→pink section bg) · `glass` · `night-fade` (footer) ·
-`photo-shade` (testimonial cards) · `rule-fade` (stepper dividers).
+`--wp--preset--gradient--{slug}`. Values extracted from Figma 2026-10-30.
+
+| Slug | Use | Figma node | Value |
+|---|---|---|---|
+| `brand` | fill buttons, active tab | 1:233 (also 1:111, 1:542) | `90deg, #61107A 0%, #6A0D71 39.42%, #6D0D60 67.79%, #9F0B57 100%` |
+| `brand-text` | accent words, stat numbers (solid fallback per rules-log 001) | 1:9 | `90deg, rgba(187,14,181,.9) → rgba(26,0,31,.9)` |
+| `deco-block` | shapes behind photos | 1:240 | `250.59deg, #930274 6.97%, #A90279 34.28%, #80026F 64.07%, #7F016E 93.03%` |
+| `soft-section` | white → lilac wash over quote-split photo | 1:171 | `-70.91deg, transparent 34.85% → #FDF9FF 70.52%` |
+| `glass` | glass bar / light glass cards | 1:524 | `180deg, rgba(255,255,255,.2) 2.36% → transparent 118.39%` |
+| `night-fade` | footer / dark overlays | 1:429 | `235.5deg, rgba(11,13,22,0) 12.7% → #0E0C1B 53.69%` |
+| `photo-shade` | testimonial card photo | 1:4621 | `180deg, rgba(23,21,21,0) 27.07% → #0D0D0D 85.23%` |
+| `rule-fade` | stepper dividers | I1:522;1:4081 | `90deg, rgba(135,12,107,.39) → transparent` |
+
+Seen in Figma but **not tokenised** (single use, or pending designer confirmation, so handle in section CSS
+via existing tokens or ask first): violet glass on phone button 1:532 (`189.72deg, rgba(121,7,96,.5) → transparent`),
+rating badge 1:4626 (`brand-500 → brand-900`, compose from palette), brands-strip side shadow 1:514
+(`34px 0 17px rgba(0,0,0,.16)`), stepper active bar I1:522;1:4088 (`#BDBDBD`), dark field 1:101
+(fill `rgba(13,18,26,.38)`, border `rgba(255,255,255,.28)`), dark-form eyebrow 1:98 `#990573` (→ `brand-500`).
 
 ### Typography
 Poppins 400/500/600 only (the single Inter layer in the form note → Poppins). Headings 600,
@@ -81,7 +96,21 @@ in blocks; pick a slug.
 - Layout: `contentSize 1080px`, `wideSize 1620px` (Figma content width 162 → 1783).
 - Radius: `xs 6` fields · `sm 10` badges/tabs · `md 12` buttons, glass bar · `lg 20` testimonials,
   glass cards · `xl 30` photos, cards · `2xl 37` FAQ container · `pill`.
-- Shadow: `soft` section · `glass` floating · `field` inputs · `badge` review chip · `glow` FAQ.
+- Radius 22px on the dark quote card 1:97 → `lg` (within 2px).
+- Shadow (`--wp--preset--shadow--{slug}`):
+
+| Slug | Use | Figma node | Value |
+|---|---|---|---|
+| `soft` | white section panels | 1:7 | `0 4px 13px rgba(0,0,0,.11)` |
+| `glass` | glass bar, floating glass | 1:524, 1:532 | `-20px 22px 70px rgba(0,0,0,.25)` |
+| `field` | light form fields | 1:179 | `0 1px 14px rgba(0,0,0,.1)` |
+| `badge` | review badge | 1:114 | `0 4px 4px rgba(0,0,0,.17)` |
+| `glow` | FAQ container | 1:342 | `0 0 33px #DFCFDC` |
+
+- Custom (`--wp--custom--{group}--{key}`): `blur--glass` 35px (1:524) · control heights `control--sm` 48
+  (header button 1:542, light field 1:179) · `control--field` 56 (dark field 1:101) · `control--md` 60 (1:233) ·
+  `control--lg` 71 (font-size Lead button; not seen in Figma) · `duration--fast/base/slow` 150/200/400ms and
+  `easing--standard` `cubic-bezier(.2,0,0,1)` — **house defaults, not from Figma** (the file has no motion).
 
 ---
 

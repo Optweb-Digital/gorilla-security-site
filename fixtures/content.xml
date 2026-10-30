@@ -95,6 +95,178 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->
+<h2 class="wp-block-heading">Foundation specimen</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"className":"is-style-eyebrow"} -->
+<p class="is-style-eyebrow">Eyebrow · block styles and components</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Security Build <mark class="gs-accent">Around</mark> You — accent words keep a solid fallback colour</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"className":"is-style-lead-with-bar"} -->
+<p class="is-style-lead-with-bar">Lead with bar: advanced security and smart technology, professionally designed and installed for homes and businesses. This sentence is deliberately three times longer than the Figma lead so the bar has to stretch with the text instead of staying at a fixed height.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="/contact-us/#quote">Get A Quote</a></div>
+<!-- /wp:button -->
+
+<!-- wp:button {"className":"gs-btn-sm"} -->
+<div class="wp-block-button gs-btn-sm"><a class="wp-block-button__link wp-element-button" href="/contact-us/#quote">Get A Quote (small)</a></div>
+<!-- /wp:button -->
+
+<!-- wp:button {"className":"is-style-outline"} -->
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="/contact-us/">Know More</a></div>
+<!-- /wp:button -->
+
+<!-- wp:button {"className":"is-style-fill-no-icon"} -->
+<div class="wp-block-button is-style-fill-no-icon"><a class="wp-block-button__link wp-element-button" href="/contact-us/#quote">Request a Quote</a></div>
+<!-- /wp:button -->
+
+<!-- wp:button {"className":"is-style-light-phone"} -->
+<div class="wp-block-button is-style-light-phone"><a class="wp-block-button__link wp-element-button" href="/contact-us/">[[TODO: phone]]</a></div>
+<!-- /wp:button -->
+
+<!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="/contact-us/#quote">A button label that is far longer than any label in Figma so it must wrap onto several lines</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons -->
+
+<!-- wp:group {"backgroundColor":"night","layout":{"type":"flex","flexWrap":"wrap","verticalAlignment":"top"}} -->
+<div class="wp-block-group has-night-background-color has-background"><!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button {"className":"is-style-glass-phone"} -->
+<div class="wp-block-button is-style-glass-phone"><a class="wp-block-button__link wp-element-button" href="/contact-us/">[[TODO: phone]]</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons -->
+
+<!-- wp:group {"className":"is-style-glass-light","textColor":"white"} -->
+<div class="wp-block-group is-style-glass-light has-white-color has-text-color"><!-- wp:paragraph -->
+<p>Glass · light</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"is-style-glass-violet-outline"} -->
+<div class="wp-block-group is-style-glass-violet-outline"><!-- wp:paragraph -->
+<p>24/7 Support</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"is-style-glass-dark"} -->
+<div class="wp-block-group is-style-glass-dark"><!-- wp:paragraph -->
+<p>Glass · dark — a longer line of copy to check the panel grows with its content.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:group {"className":"is-style-card"} -->
+<div class="wp-block-group is-style-card"><!-- wp:paragraph -->
+<p>Card</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:group {"className":"is-style-card-tint","layout":{"type":"flex","flexWrap":"nowrap"}} -->
+<div class="wp-block-group is-style-card-tint"><!-- wp:group {"className":"gs-icon-circle gs-ico-cctv"} -->
+<div class="wp-block-group gs-icon-circle gs-ico-cctv"></div>
+<!-- /wp:group -->
+
+<!-- wp:paragraph -->
+<p>Card · tint with an icon circle</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
+
+<!-- wp:columns {"className":"is-style-stats-with-dividers"} -->
+<div class="wp-block-columns is-style-stats-with-dividers"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:paragraph {"className":"gs-stat__num"} -->
+<p class="gs-stat__num">6+</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"gs-stat__label"} -->
+<p class="gs-stat__label">Security Solutions</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:paragraph {"className":"gs-stat__num"} -->
+<p class="gs-stat__num">600+</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"gs-stat__label"} -->
+<p class="gs-stat__label">Homes &amp; Businesses across a much longer label</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:paragraph {"className":"gs-stat__num"} -->
+<p class="gs-stat__num">1000+</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"gs-stat__label"} -->
+<p class="gs-stat__label">Happy Customers</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
+
+<!-- wp:list {"className":"is-style-checklist"} -->
+<ul class="wp-block-list is-style-checklist"><!-- wp:list-item -->
+<li>Centralised Control</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>A checklist item long enough to wrap onto a second line, so the tick has to stay aligned with the text block</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:image {"sizeSlug":"full","className":"is-style-deco-frame-left"} -->
+<figure class="wp-block-image size-full is-style-deco-frame-left"><img src="http://localhost:8888/wp-content/themes/gorilla-security/assets/images/split-2.svg" alt="Placeholder photo for the split image section"/></figure>
+<!-- /wp:image --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:image {"sizeSlug":"full","className":"is-style-deco-frame-right"} -->
+<figure class="wp-block-image size-full is-style-deco-frame-right"><img src="http://localhost:8888/wp-content/themes/gorilla-security/assets/images/split-3.svg" alt="Placeholder photo for the icon trio section"/></figure>
+<!-- /wp:image --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
+
+<!-- wp:group {"className":"gs-faq"} -->
+<div class="wp-block-group gs-faq"><!-- wp:details {"className":"is-style-faq-numbered"} -->
+<details class="wp-block-details is-style-faq-numbered"><summary>What security systems does Gorilla Security specialise in installing?</summary><!-- wp:paragraph -->
+<p>[[TODO: copy]]</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+
+<!-- wp:details {"showContent":true,"className":"is-style-faq-numbered"} -->
+<details class="wp-block-details is-style-faq-numbered" open><summary>How can I benefit from a security system installation at my residence?</summary><!-- wp:paragraph -->
+<p>Our security systems offer enhanced safety, providing real-time monitoring, intrusion detection, and access control. Enjoy peace of mind knowing that your property is protected around the clock.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+
+<!-- wp:details {"className":"is-style-faq-numbered"} -->
+<details class="wp-block-details is-style-faq-numbered"><summary>A deliberately long question that runs to two or three lines at narrow widths to check the number, the text and the toggle icon stay aligned?</summary><!-- wp:paragraph -->
+<p>[[TODO: copy]]</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details --></div>
+<!-- /wp:group -->
+
+<!-- wp:social-links {"className":"is-style-tint-circles"} -->
+<ul class="wp-block-social-links is-style-tint-circles"><!-- wp:social-link {"url":"https://example.com/","service":"facebook"} /-->
+
+<!-- wp:social-link {"url":"https://example.com/","service":"instagram"} /--></ul>
+<!-- /wp:social-links -->
+
+<!-- wp:heading -->
 <h2 class="wp-block-heading">Patterns</h2>
 <!-- /wp:heading -->
 

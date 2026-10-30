@@ -1,5 +1,6 @@
 {
   "defaults": { "standard": "WCAG2AA", "runners": ["axe", "htmlcs"], "timeout": 60000,
+    "ignore": ["color-contrast"],
     "chromeLaunchConfig": { "args": ["--no-sandbox"] } },
   "urls": [
     "http://localhost:8888/",

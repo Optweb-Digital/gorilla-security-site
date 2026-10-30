@@ -87,6 +87,10 @@ Poppins 400/500/600 only (the single Inter layer in the form note → Poppins). 
 | 18 | `medium` (base body, buttons, nav, eyebrow) | 16 → 18 |
 | 16 / 14 / 13 | `base` / `small` / `caption` | fixed |
 
+**CSS variable names are kebab-cased by WordPress:** slug `h3` → `--wp--preset--font-size--h-3`,
+`h2-xl` → `--…--h-2-xl`, radius `2xl` → `--wp--custom--radius--2-xl` (class `has-h-3-font-size`). The
+pattern helper `gorilla_slug_class()` handles classes; in CSS use the kebab name (lint enforces it, rules-log 005).
+
 Fluid sizes are computed by WP between 390px and 1920px viewports. Never set `px` font sizes
 in blocks; pick a slug.
 

@@ -3,10 +3,14 @@
   "rules": {
     "selector-class-pattern": ["^[a-z0-9]+(?:-[a-z0-9]+)*(?:__[a-z0-9]+(?:-[a-z0-9]+)*)?(?:--[a-z0-9]+(?:-[a-z0-9]+)*)?$", { "message": "Use lowercase BEM: .gs-block__el--mod (design-system.md)" }],
     "color-no-hex": [true, { "message": "Use a theme.json token (var(--wp--preset--color--*) or --gs-*)" }],
-    "declaration-property-value-disallowed-list": {
-      "font-size": ["/^\\d+px$/"],
-      "/^(margin|padding|gap)/": ["/^\\d{2,}px$/"]
-    }
+    "declaration-property-value-disallowed-list": [
+      {
+        "font-size": ["/^\\d+px$/", "/--wp--(preset|custom)--[a-z0-9-]*([a-z][0-9]|[0-9][a-z])/"],
+        "/^(margin|padding|gap)/": ["/^\\d{2,}px$/", "/--wp--(preset|custom)--[a-z0-9-]*([a-z][0-9]|[0-9][a-z])/"],
+        "/^(?!font-size$|margin|padding|gap)/": ["/--wp--(preset|custom)--[a-z0-9-]*([a-z][0-9]|[0-9][a-z])/"]
+      },
+      { "message": "No raw px here, and WordPress kebab-cases slugs (h3 → h-3, 2xl → 2-xl): reference the generated variable name" }
+    ]
   },
   "overrides": [{ "files": ["**/components.css"], "rules": {} }]
 }

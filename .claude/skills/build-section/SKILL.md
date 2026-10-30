@@ -31,6 +31,9 @@ Add/refresh the section on the `fixtures-stress-test` page with: long copy (3×)
 ## 5. Verify
 - Compare against the Figma screenshot at 1920px; check 1100, 781, 390px.
 - Keyboard-tab through the section; confirm focus is visible and order is logical.
+- Validate the markup: in the block editor run `wp.blocks.parse()` on each pattern's content (REST
+  `/wp/v2/block-patterns/patterns`) and the front-page template; every block must have `isValid` (rules-log 008).
+- Open every overlay/menu at 390px and confirm it covers the viewport (rules-log 007).
 - Run `npm run check`. Fix failures. Do not disable rules to pass.
 
 ## 6. Hand back

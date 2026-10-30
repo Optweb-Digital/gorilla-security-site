@@ -64,6 +64,8 @@ mark.gs-accent {
 
 .gs-ico-access-card { --gs-ico: url(../icons/access-card.svg); }
 
+.gs-ico-arrow-down { --gs-ico: url(../icons/arrow-down.svg); }
+
 .gs-ico-arrow-left { --gs-ico: url(../icons/arrow-left.svg); }
 
 .gs-ico-arrow-right { --gs-ico: url(../icons/arrow-right.svg); }
@@ -730,5 +732,311 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 
 	.gs-header__actions .wp-block-button.gs-btn-sm .wp-block-button__link::after {
 		content: none;
+	}
+}
+
+/* ---------- Hero — Figma 1:69–1:161, quote card 1:97 ---------- */
+.gs-hero-page {
+	margin-block-start: 0;
+}
+
+.gs-hero-page > .gs-hero:first-child {
+	margin-block-start: 0;
+}
+
+.wp-block-cover.gs-hero {
+	align-items: stretch;
+	min-block-size: clamp(640px, 100svh, 1006px);
+
+	/* Clear the fixed header (48px controls + bar padding), then Figma's gap above the H1. */
+	padding-block: calc(var(--wp--custom--control--sm) + var(--wp--preset--spacing--70) + var(--wp--preset--spacing--30)) var(--wp--preset--spacing--40);
+	padding-inline: clamp(16px, 4.7vw, 90px);
+
+	/* Solid night under the photo: fallback if it fails to load, and what contrast checkers measure. */
+	background-color: var(--wp--preset--color--night);
+	color: var(--wp--preset--color--white);
+}
+
+.gs-hero .wp-block-cover__inner-container {
+	display: flex;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--40);
+}
+
+.gs-hero__cols {
+	flex-grow: 1;
+	gap: var(--wp--preset--spacing--60);
+	margin-block: 0;
+}
+
+.gs-hero__main {
+	display: flex;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--50);
+}
+
+.gs-hero__main > * {
+	margin-block: 0;
+}
+
+/* Readable over any part of the photo (the nav text shadow from Figma, reused). */
+.gs-hero__title,
+.gs-hero .is-style-lead-with-bar {
+	text-shadow: 0 0 4px color-mix(in srgb, var(--wp--preset--color--night) 53%, transparent);
+}
+
+.gs-hero__title.wp-block-heading {
+	color: var(--wp--preset--color--white);
+	font-weight: 400;
+	letter-spacing: -0.03em;
+	line-height: 1.12;
+}
+
+.gs-hero .is-style-lead-with-bar {
+	flex: 0 1 420px;
+	margin: 0;
+	color: var(--wp--preset--color--white);
+}
+
+.gs-hero__row {
+	gap: var(--wp--preset--spacing--40);
+}
+
+/* Review badge — Figma 1:114. */
+.gs-review-badge {
+	gap: var(--wp--preset--spacing--10);
+	min-block-size: var(--wp--custom--control--sm);
+	padding-block: var(--wp--preset--spacing--10);
+	padding-inline: var(--wp--preset--spacing--10) var(--wp--preset--spacing--30);
+	border-radius: var(--gs-r-sm);
+	background-color: var(--wp--preset--color--white);
+	box-shadow: var(--wp--preset--shadow--badge);
+}
+
+.gs-review-badge__source {
+	margin: 0;
+}
+
+.gs-review-badge .gs-review-badge__source img {
+	display: block;
+	inline-size: 32px;
+	block-size: 32px;
+	border-radius: var(--gs-r-pill);
+}
+
+.gs-review-badge__text {
+	margin: 0;
+	color: var(--gs-brand);
+	font-size: var(--wp--preset--font-size--small);
+	letter-spacing: -0.04em;
+	line-height: 1.4;
+	white-space: nowrap;
+}
+
+.gs-review-badge__stars {
+	letter-spacing: 0.08em;
+}
+
+/* Hero CTA — Figma 1:81: violet glass like the glass phone button, no icon. */
+.gs-hero .wp-block-button.gs-hero__cta a.wp-block-button__link {
+	min-block-size: var(--wp--custom--control--sm);
+	border: 1px solid var(--wp--preset--color--surface);
+	background-image: linear-gradient(189.72deg, color-mix(in srgb, var(--wp--preset--color--brand-600) 50%, transparent) 20.7%, transparent 136%);
+	box-shadow: var(--wp--preset--shadow--glass);
+	-webkit-backdrop-filter: blur(var(--gs-blur));
+	backdrop-filter: blur(var(--gs-blur));
+}
+
+/* Social rail — Figma 1:83: vertical violet glass pill with white icon circles. */
+.wp-block-social-links.gs-hero__social {
+	align-self: flex-start;
+	gap: var(--wp--preset--spacing--10);
+	padding: var(--wp--preset--spacing--10);
+	border: 1px solid color-mix(in srgb, var(--wp--preset--color--surface) 36%, transparent);
+	border-radius: var(--gs-r-md);
+	background-image: linear-gradient(193.53deg, color-mix(in srgb, var(--wp--preset--color--brand-600) 50%, transparent) 20.7%, transparent 136%);
+	box-shadow: var(--wp--preset--shadow--glass);
+}
+
+.wp-block-social-links.gs-hero__social .wp-social-link {
+	background-color: var(--wp--preset--color--white);
+	color: var(--wp--preset--color--brand-700);
+}
+
+/* Trust strip — Figma 1:515/1:516. */
+.gs-trust-strip {
+	align-self: flex-start;
+	gap: var(--wp--preset--spacing--50);
+	inline-size: min(100%, 741px);
+	padding-block: var(--wp--preset--spacing--30);
+	padding-inline: var(--wp--preset--spacing--50);
+	border-radius: var(--gs-r-md);
+	background-image: linear-gradient(90deg, var(--wp--preset--color--white), var(--wp--preset--color--border) 50%, color-mix(in srgb, var(--wp--preset--color--white) 63%, transparent));
+}
+
+.gs-trust-strip__logo {
+	margin: 0;
+}
+
+.gs-trust-strip .gs-trust-strip__logo img {
+	display: block;
+	inline-size: auto;
+	max-inline-size: 165px;
+	block-size: auto;
+	max-block-size: 60px;
+}
+
+/* Scroll cue — Figma 1:73: 86px violet glass circle. */
+.gs-hero__scroll-wrap {
+	display: flex;
+	justify-content: center;
+}
+
+.gs-hero__scroll {
+	--gs-ico-size: 40%;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	inline-size: clamp(56px, 4.5vw, 86px);
+	block-size: clamp(56px, 4.5vw, 86px);
+	border: 1px solid color-mix(in srgb, var(--wp--preset--color--surface) 36%, transparent);
+	border-radius: var(--gs-r-pill);
+	background-color: color-mix(in srgb, var(--wp--preset--color--brand-600) 50%, transparent);
+	color: var(--wp--preset--color--white);
+	-webkit-backdrop-filter: blur(var(--gs-blur));
+	backdrop-filter: blur(var(--gs-blur));
+}
+
+/* Quote card — Figma 1:97. */
+
+/* Beats core's .wp-block-columns:not(...) > .wp-block-column flex-basis: 0. */
+.wp-block-columns.gs-hero__cols > .wp-block-column.gs-hero__aside {
+	flex: 0 1 465px;
+}
+
+.wp-block-columns.gs-hero__cols > .wp-block-column.gs-hero__main {
+	flex: 1 1 0;
+	min-inline-size: 0;
+}
+
+.gs-quote-card {
+	display: flex;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--20);
+}
+
+.gs-quote-card > * {
+	margin-block: 0;
+}
+
+/* brand-100 instead of Figma #990573 (1.8:1 on dark glass) for AA contrast. */
+.gs-quote-card__eyebrow {
+	color: var(--wp--preset--color--brand-100);
+	font-size: var(--wp--preset--font-size--lead);
+	font-weight: 600;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+}
+
+.gs-quote-card__title.wp-block-heading {
+	color: var(--wp--preset--color--white);
+}
+
+.gs-quote-card__text,
+.gs-quote-card__note {
+	color: var(--wp--preset--color--on-dark);
+	font-size: var(--wp--preset--font-size--small);
+	line-height: 1.5;
+}
+
+/* Forms (Contact Form 7 inside .gs-form). Light default; dark variant — Figma fields 1:101–1:111. */
+.gs-form {
+	display: grid;
+	gap: var(--wp--preset--spacing--20);
+}
+
+.gs-form :where(input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]), select, textarea) {
+	box-sizing: border-box;
+	inline-size: 100%;
+	min-block-size: var(--wp--custom--control--field);
+	padding-block: var(--wp--preset--spacing--20);
+	padding-inline: var(--wp--preset--spacing--40);
+	border: 1px solid var(--wp--preset--color--surface);
+	border-radius: var(--gs-r-xs);
+	background-color: var(--wp--preset--color--white);
+	box-shadow: var(--wp--preset--shadow--field);
+	color: var(--wp--preset--color--heading);
+	font: inherit;
+	font-size: var(--wp--preset--font-size--small);
+}
+
+.gs-form :where(textarea) {
+	min-block-size: calc(var(--wp--custom--control--field) * 1.45);
+}
+
+.gs-form--dark :where(input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]), select, textarea) {
+	border-color: color-mix(in srgb, var(--wp--preset--color--white) 28%, transparent);
+	border-radius: var(--gs-r-md);
+	background-color: color-mix(in srgb, var(--wp--preset--color--night) 38%, transparent);
+	box-shadow: none;
+	color: var(--wp--preset--color--white);
+}
+
+.gs-form--dark :where(input, textarea)::placeholder {
+	color: var(--wp--preset--color--on-dark);
+}
+
+.gs-form :where(input[type="submit"]) {
+	inline-size: 100%;
+	min-block-size: var(--wp--custom--control--md);
+	border: 1px solid color-mix(in srgb, var(--wp--preset--color--white) 25%, transparent);
+	border-radius: var(--gs-r-md);
+	background-image: var(--gs-grad);
+	color: var(--wp--preset--color--white);
+	font: inherit;
+	cursor: pointer;
+}
+
+.gs-form--dark > p {
+	color: var(--wp--preset--color--on-dark);
+	font-size: var(--wp--preset--font-size--small);
+}
+
+@media (max-width: 1100px) {
+
+	.gs-hero__cols {
+
+		/* Core forces nowrap !important on columns from 782px; the card stacks below 1100px. */
+		flex-wrap: wrap !important;
+	}
+
+	.wp-block-columns.gs-hero__cols > .wp-block-column.gs-hero__main,
+	.wp-block-columns.gs-hero__cols > .wp-block-column.gs-hero__aside {
+		flex-basis: 100%;
+	}
+
+	.wp-block-columns.gs-hero__cols > .wp-block-column.gs-hero__aside {
+		max-inline-size: 560px;
+	}
+}
+
+@media (max-width: 600px) {
+
+	.wp-block-cover.gs-hero {
+		padding-block-start: calc(var(--wp--custom--control--sm) + var(--wp--preset--spacing--70) + var(--wp--preset--spacing--40));
+	}
+
+	.wp-block-social-links.gs-hero__social {
+		flex-direction: row;
+	}
+
+	.gs-trust-strip {
+		gap: var(--wp--preset--spacing--30);
+		padding-inline: var(--wp--preset--spacing--30);
+	}
+
+	.gs-trust-strip .gs-trust-strip__logo img {
+		max-inline-size: 110px;
+		max-block-size: 44px;
 	}
 }

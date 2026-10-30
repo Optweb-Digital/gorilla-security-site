@@ -209,7 +209,7 @@ the editor's Patterns panel is the live component catalogue.
 - Location: `assets/icons/*.svg` — 24×24, 1.8px stroke, `currentColor`, kebab-case names
   (`cctv`, `bell`, `intercom`, `access-card`, `lock`, `smart-home`, `shield`, `gear`, `wrench`,
   `phone`, `mail`, `map-pin`, `clock`, `headset`, `check`, `star`, `plus`, `close`,
-  `arrow-left/right`, `chevron-down`, `lightbulb`, `smartphone`, `laptop`, `building-shield`,
+  `arrow-left/right/down`, `chevron-down`, `lightbulb`, `smartphone`, `laptop`, `building-shield`,
   `chip`, `play`).
 - Source: Lucide (`lucide-static` 1.65.0, ISC — `assets/icons/LICENSE-lucide.txt`), stroke set to 1.8.
   Renamed from Lucide: `intercom` = monitor-speaker · `access-card` = id-card · `smart-home` = house-wifi ·
@@ -285,8 +285,9 @@ pages = **Landing (no title)** template + `split-*`, `services-tabs`, `faq`, `ct
   "Mon to Fri 5:30am–7pm / Sat to Sun 5:30am–5pm". `gorilla_site('hours')` stays empty until confirmed.
 - Quote forms differ: hero card 1:97 has 5 fields (name, phone, email, service, message); quote-split
   1:172 has 6 (name, email, phone, purpose, requirement, message). Confirm the Contact Form 7 setup.
-- Hero has two elements with no clear role: a 48×141 rail at 1:83 (left edge) and an 86px circle at
-  1:73. Ask the designer before building them.
+- Hero 1:83 is a social-links rail and 1:73 a scroll-down cue (identified 2026-10-31). The rail
+  renders only once `gorilla_site( 'social' )` URLs are confirmed.
+- Quote card eyebrow 1:98 is `#990573` on dark glass (≈1.8:1) — built in `brand-100` for AA. Designer to confirm.
 - Services tabs (1:162): the panel layers are stacked in the reverse order of the tab bar — map
   panels by their title, not by layer order.
 - Section copy says "Gorilla Security **& Locksmith**" once (1:244) vs "& Automation"

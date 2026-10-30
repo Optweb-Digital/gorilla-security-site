@@ -178,7 +178,7 @@ function gorilla_img( $name ) {
  * Values are intentionally empty until confirmed — see "Open decisions" in
  * docs/project-context.md. Never invent phone numbers, emails or addresses.
  *
- * @param string $key Optional key: phone, email, address, hours.
+ * @param string $key Optional key: phone, email, address, hours, social (service => URL).
  * @return array|string All details, or one value ('' when unknown).
  */
 function gorilla_site( $key = '' ) {
@@ -190,6 +190,11 @@ function gorilla_site( $key = '' ) {
 			'email'   => '',
 			'address' => '',
 			'hours'   => array(),
+			'social'  => array(
+				'instagram' => '',
+				'facebook'  => '',
+				'linkedin'  => '',
+			),
 		)
 	);
 

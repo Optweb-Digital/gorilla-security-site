@@ -162,8 +162,16 @@ mark.gs-accent {
 
 /* ---------- Buttons ---------- */
 
+/* Long labels wrap and the button grows in height (AGENTS.md §6). */
+.wp-block-button {
+	max-inline-size: 100%;
+}
+
 /* Fill (default) — Figma 1:233: brand gradient, 60px, white 25% hairline, arrow right. */
 .wp-block-button__link {
+	max-inline-size: 100%;
+	white-space: normal;
+	overflow-wrap: anywhere;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;

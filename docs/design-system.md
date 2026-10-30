@@ -127,24 +127,24 @@ Components are **core blocks + block styles + CSS classes + patterns**. No custo
 | Button — fill (gradient + arrow) | core/button, default style | `Submit — Request a Quote` (e.g. 1:233) |
 | Button — outline | button style **Outline** | 1:558 |
 | Button — light phone | style **Light · phone** | 1:302 |
-| Button — glass phone | style **Glass · phone** | 1:531 |
+| Button — glass phone | style **Glass · phone** | 1:531 (header; fill 1:532) |
 | Button — no icon (submit) | style **Fill · no icon** | 1:111 |
 | Button sizes | `gs-btn-sm` (48px) · default (60px) · font size `Lead` (71px) | — |
 | Eyebrow | paragraph style **Eyebrow** | 1:24 |
 | Accent heading words | select words → **Highlight** (renders `<mark>`) | gradient spans in every H2 |
-| Lead with bar | paragraph style **Lead with bar** | 1:76 |
+| Lead with bar | paragraph style **Lead with bar** | 1:76 (hero) |
 | Card / Card tint | group styles **Card**, **Card · tint** | 1:28 |
-| Glass light / dark / violet outline | group styles **Glass · light / dark / violet outline** | 1:524, 1:97, 1:314 |
+| Glass light / dark / violet outline | group styles **Glass · light / dark / violet outline** | 1:524 (header bar), 1:97, 1:314 |
 | Icon circle | group with `gs-icon-circle gs-ico-{name}` (+ `--sm/--md/--dark/--solid`) | ellipses 1:33 etc. |
 | Feature row | `gs-feature` group (icon circle + title + text) | 1:29 |
 | Stats | columns style **Stats with dividers**, `gs-stat__num` / `gs-stat__label` | 1:12 |
 | Checklist | list style **Checklist** | 1:565… |
 | Icon trio | group `gs-icon-trio` | 1:265 |
-| Deco photo frame | image styles **Deco frame · left / right** | 1:240/1:241, 1:254/1:255 |
+| Deco photo frame | image styles **Deco frame · left / right** (same corners: top-right + bottom-left; name = photo column) | 1:221/1:222, 1:240/1:241, 1:254/1:255 |
 | Float card | group `gs-float-card` | 1:1051 |
 | Review badge | group `gs-review-badge` | 1:114 |
-| Trust strip | group `gs-trust-strip` | 1:515 |
-| Round arrows | `gorilla_arrows()` helper (core/html buttons) | 1:607 |
+| Trust strip | group `gs-trust-strip` | 1:515 (hero) |
+| Round arrows | `gorilla_arrows()` helper (core/html buttons) | 1:419 (testimonials, 76px) · 1:607 (services) |
 | Tabs | `gs-tabs` › `gs-tabs__nav` (buttons, `gs-ico-*`) + `gs-tabs__panel` × n | 1:162 |
 | Stepper | `gs-steps` › `gs-steps__media` (images) + `gs-steps__list` › `gs-step` × n | 1:522 |
 | Marquee | `gs-marquee` › `gs-marquee__track` | 1:510 |
@@ -197,10 +197,10 @@ the editor's Patterns panel is the live component catalogue.
 | about-portrait / about-van | 1:68 / 1:67 | service-alarm / intercom | 1:973 / 1:881 |
 | why-1 … why-6 | 1:4101, 1:4099, 1:4097, 1:4095, 1:4093, 1:4091 | service-access / locks / home | 1:799 / 1:707 / 1:615 |
 | quote-installer | 1:170 | split-1 / 2 / 3 | 1:237 / 1:252 / 1:288 |
-| cta-bg / cta-model | 1:291 / 1:320 (transparent PNG) | testimonial-1 … 5 | 1:4620, 1:4376, 1:4432, 1:4492, 1:4556 |
-| footer-bg | 1:428 | logo / badge-local | 1:545 / 1:507 |
+| cta-bg / cta-model | 1:291 (+ overlay 1:292) / 1:320 (transparent PNG) | testimonial-1 … 5 | 1:4620, 1:4376, 1:4432, 1:4492, 1:4556 |
+| footer-bg | 1:428 (+ overlays 1:429/1:430, in 1:426) | logo / badge-local | 1:545 / 1:507 |
 | trust-licence / partner-1 / warranty / partner-2 | 1:517 / 1:519 / 1:520 / 1:521 | brand-01 … 10 | children of 1:510 |
-| review-source | 1:161 | | |
+| review-source | 1:161 (hero review badge) | | |
 
 ---
 
@@ -253,7 +253,7 @@ gorilla-security/
 ├── assets/js/gorilla.js    tabs, stepper, slider, marquee, header state
 ├── assets/icons/           SVG icon set
 ├── assets/images/          labelled placeholders (replace with Media Library images)
-├── assets/fonts/           put poppins-400/500/600.woff2 here (Google Fonts fallback until then)
+├── assets/fonts/           Poppins 400/500/600 latin woff2 (self-hosted, OFL)
 ├── parts/                  header.html, footer.html → reference patterns
 ├── patterns/               one file per section/component
 └── templates/              front-page, page, page-landing, single, index, 404
@@ -279,8 +279,16 @@ pages = **Landing (no title)** template + `split-*`, `services-tabs`, `faq`, `ct
 
 - Only the home page at 1920px is designed — no tablet/mobile frames, hover/focus states, form
   error states or inner pages. Theme defines sensible defaults for all of these.
-- "Why us" steps 02–06 and FAQ answers 01, 03–08 have no copy in Figma; patterns contain draft
-  copy marked for review.
+- "Why us" steps 02–06 and FAQ answers 01, 03–08 have no copy in Figma; patterns use
+  `[[TODO: copy]]` until the content writer supplies it (AGENTS.md §9 — no invented copy).
+- Opening hours conflict: contact card 1:199 "Mon–Sat 8:00 AM–6:00 PM" vs footer 1:485
+  "Mon to Fri 5:30am–7pm / Sat to Sun 5:30am–5pm". `gorilla_site('hours')` stays empty until confirmed.
+- Quote forms differ: hero card 1:97 has 5 fields (name, phone, email, service, message); quote-split
+  1:172 has 6 (name, email, phone, purpose, requirement, message). Confirm the Contact Form 7 setup.
+- Hero has two elements with no clear role: a 48×141 rail at 1:83 (left edge) and an 86px circle at
+  1:73. Ask the designer before building them.
+- Services tabs (1:162): the panel layers are stacked in the reverse order of the tab bar — map
+  panels by their title, not by layer order.
 - Section copy says "Gorilla Security **& Locksmith**" once (1:244) vs "& Automation"
   everywhere else; the pattern uses "Gorilla Security".
 - Header "Get A Quote" and other CTAs link to `/contact-us/#quote` — confirm the target.

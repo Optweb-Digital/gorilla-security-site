@@ -34,6 +34,104 @@ mark.gs-accent {
 	overflow-wrap: anywhere;
 }
 
+/* ---------- Icons (CSS mask, inherit currentColor) ---------- */
+[class*="gs-ico-"]::before {
+	content: "";
+	display: inline-block;
+	flex-shrink: 0;
+	inline-size: var(--gs-ico-size, 1.25em);
+	block-size: var(--gs-ico-size, 1.25em);
+	background-color: currentcolor;
+	-webkit-mask: var(--gs-ico) center / contain no-repeat;
+	mask: var(--gs-ico) center / contain no-repeat;
+}
+
+.gs-ico-access-card { --gs-ico: url(../icons/access-card.svg); }
+
+.gs-ico-arrow-left { --gs-ico: url(../icons/arrow-left.svg); }
+
+.gs-ico-arrow-right { --gs-ico: url(../icons/arrow-right.svg); }
+
+.gs-ico-bell { --gs-ico: url(../icons/bell.svg); }
+
+.gs-ico-building-shield { --gs-ico: url(../icons/building-shield.svg); }
+
+.gs-ico-cctv { --gs-ico: url(../icons/cctv.svg); }
+
+.gs-ico-check { --gs-ico: url(../icons/check.svg); }
+
+.gs-ico-chevron-down { --gs-ico: url(../icons/chevron-down.svg); }
+
+.gs-ico-chip { --gs-ico: url(../icons/chip.svg); }
+
+.gs-ico-clock { --gs-ico: url(../icons/clock.svg); }
+
+.gs-ico-close { --gs-ico: url(../icons/close.svg); }
+
+.gs-ico-gear { --gs-ico: url(../icons/gear.svg); }
+
+.gs-ico-headset { --gs-ico: url(../icons/headset.svg); }
+
+.gs-ico-intercom { --gs-ico: url(../icons/intercom.svg); }
+
+.gs-ico-laptop { --gs-ico: url(../icons/laptop.svg); }
+
+.gs-ico-lightbulb { --gs-ico: url(../icons/lightbulb.svg); }
+
+.gs-ico-lock { --gs-ico: url(../icons/lock.svg); }
+
+.gs-ico-mail { --gs-ico: url(../icons/mail.svg); }
+
+.gs-ico-map-pin { --gs-ico: url(../icons/map-pin.svg); }
+
+.gs-ico-phone { --gs-ico: url(../icons/phone.svg); }
+
+.gs-ico-play { --gs-ico: url(../icons/play.svg); }
+
+.gs-ico-plus { --gs-ico: url(../icons/plus.svg); }
+
+.gs-ico-shield { --gs-ico: url(../icons/shield.svg); }
+
+.gs-ico-smart-home { --gs-ico: url(../icons/smart-home.svg); }
+
+.gs-ico-smartphone { --gs-ico: url(../icons/smartphone.svg); }
+
+.gs-ico-star { --gs-ico: url(../icons/star.svg); }
+
+.gs-ico-wrench { --gs-ico: url(../icons/wrench.svg); }
+
+/* Icon circle — Figma 1:33 (69px), 1:205 (46px), 1:471 (34px); icon ≈ half the circle. */
+.gs-icon-circle {
+	--gs-circle: 69px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	inline-size: var(--gs-circle);
+	block-size: var(--gs-circle);
+	border-radius: var(--gs-r-pill);
+	background-color: var(--wp--preset--color--brand-100);
+	color: var(--wp--preset--color--brand-700);
+}
+
+.gs-icon-circle::before {
+	--gs-ico-size: 50%;
+}
+
+.gs-icon-circle--md { --gs-circle: 46px; }
+
+.gs-icon-circle--sm { --gs-circle: 34px; }
+
+.gs-icon-circle--dark {
+	background-color: var(--wp--preset--color--brand-700);
+	color: var(--wp--preset--color--white);
+}
+
+.gs-icon-circle--solid {
+	background: var(--wp--preset--gradient--brand);
+	color: var(--wp--preset--color--white);
+}
+
 @media (prefers-reduced-motion: reduce) {
 
 	*,

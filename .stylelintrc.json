@@ -1,6 +1,7 @@
 {
   "extends": "@wordpress/stylelint-config",
   "rules": {
+    "selector-class-pattern": ["^[a-z0-9]+(?:-[a-z0-9]+)*(?:__[a-z0-9]+(?:-[a-z0-9]+)*)?(?:--[a-z0-9]+(?:-[a-z0-9]+)*)?$", { "message": "Use lowercase BEM: .gs-block__el--mod (design-system.md)" }],
     "color-no-hex": [true, { "message": "Use a theme.json token (var(--wp--preset--color--*) or --gs-*)" }],
     "declaration-property-value-disallowed-list": {
       "font-size": ["/^\\d+px$/"],

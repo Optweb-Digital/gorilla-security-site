@@ -207,6 +207,11 @@ the editor's Patterns panel is the live component catalogue.
   `phone`, `mail`, `map-pin`, `clock`, `headset`, `check`, `star`, `plus`, `close`,
   `arrow-left/right`, `chevron-down`, `lightbulb`, `smartphone`, `laptop`, `building-shield`,
   `chip`, `play`).
+- Source: Lucide (`lucide-static` 1.65.0, ISC — `assets/icons/LICENSE-lucide.txt`), stroke set to 1.8.
+  Renamed from Lucide: `intercom` = monitor-speaker · `access-card` = id-card · `smart-home` = house-wifi ·
+  `gear` = settings · `close` = x · `building-shield` = building-2 · `chip` = cpu. Each SVG's first line names its source.
+- Icon circle sizes: default 69px (1:33) · `--md` 46px (1:205) · `--sm` 34px (1:471); fill `brand-100`,
+  icon `brand-700`. `--dark` (brand-700 fill, white icon) and `--solid` (brand gradient, white icon) for dark/accent areas.
 - Use via CSS mask so icons inherit color: add `gs-ico-{name}` to an icon circle or tab button.
   To add an icon: drop the SVG in `assets/icons/`, add one `.gs-ico-{name}` line in
   `components.css`.

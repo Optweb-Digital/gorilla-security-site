@@ -15,8 +15,12 @@
 	--gs-r-md: var(--wp--custom--radius--md);
 	--gs-r-lg: var(--wp--custom--radius--lg);
 	--gs-r-xl: var(--wp--custom--radius--xl);
-	--gs-r-2xl: var(--wp--custom--radius--2xl);
+	--gs-r-2xl: var(--wp--custom--radius--2-xl);
 	--gs-r-pill: var(--wp--custom--radius--pill);
+	--gs-grad: var(--wp--preset--gradient--brand);
+	--gs-grad-text: var(--wp--preset--gradient--brand-text);
+	--gs-blur: var(--wp--custom--blur--glass);
+	--gs-ease: var(--wp--custom--duration--base) var(--wp--custom--easing--standard);
 }
 
 /* ---------- Base ---------- */
@@ -25,9 +29,21 @@
 	outline-offset: 2px;
 }
 
+/* Accent words (rules-log 001): solid colour first, gradient text only where clipping is supported. */
 mark.gs-accent {
 	background: none;
 	color: var(--gs-brand);
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+
+	mark.gs-accent,
+	.gs-stat__num {
+		background-image: var(--gs-grad-text);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+	}
 }
 
 :where(p, li, dd, figcaption) {
@@ -142,6 +158,435 @@ mark.gs-accent {
 		scroll-behavior: auto;
 		transition-duration: 0.01ms;
 	}
+}
+
+/* ---------- Buttons ---------- */
+
+/* Fill (default) — Figma 1:233: brand gradient, 60px, white 25% hairline, arrow right. */
+.wp-block-button__link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--wp--preset--spacing--20);
+	min-block-size: var(--wp--custom--control--md);
+	padding-block: var(--wp--preset--spacing--20);
+	padding-inline: var(--wp--preset--spacing--50);
+	border: 1px solid color-mix(in srgb, var(--wp--preset--color--white) 25%, transparent);
+	background-image: var(--gs-grad);
+	font-weight: 400;
+	line-height: 1.3;
+	text-align: center;
+	transition: filter var(--gs-ease), background-color var(--gs-ease), color var(--gs-ease);
+}
+
+.wp-block-button__link::after {
+	content: "";
+	flex-shrink: 0;
+	inline-size: 1em;
+	block-size: 1em;
+	background-color: currentcolor;
+	-webkit-mask: url(../icons/arrow-right.svg) center / contain no-repeat;
+	mask: url(../icons/arrow-right.svg) center / contain no-repeat;
+}
+
+.wp-block-button__link:hover,
+.wp-block-button__link:focus-visible {
+	filter: brightness(1.12);
+}
+
+.wp-block-button.gs-btn-sm .wp-block-button__link {
+	min-block-size: var(--wp--custom--control--sm);
+	padding-block: var(--wp--preset--spacing--10);
+	padding-inline: var(--wp--preset--spacing--40);
+}
+
+.wp-block-button.has-custom-font-size .wp-block-button__link,
+.wp-block-button__link.has-lead-font-size {
+	min-block-size: var(--wp--custom--control--lg);
+}
+
+/* Fill · no icon — Figma 1:111 (form submit). */
+.wp-block-button.is-style-fill-no-icon .wp-block-button__link::after {
+	content: none;
+}
+
+/* Outline — Figma 1:558: 2px brand border, brand text, medium weight. */
+.wp-block-button.is-style-outline .wp-block-button__link {
+	border: 2px solid var(--gs-brand);
+	background: transparent;
+	color: var(--gs-brand);
+	font-weight: 500;
+}
+
+/* Phone buttons — icon before the number, no arrow. */
+.wp-block-button.is-style-light-phone .wp-block-button__link,
+.wp-block-button.is-style-glass-phone .wp-block-button__link {
+	--gs-ico: url(../icons/phone.svg);
+}
+
+.wp-block-button.is-style-light-phone .wp-block-button__link::after,
+.wp-block-button.is-style-glass-phone .wp-block-button__link::after {
+	content: none;
+}
+
+.wp-block-button.is-style-light-phone .wp-block-button__link::before,
+.wp-block-button.is-style-glass-phone .wp-block-button__link::before {
+	content: "";
+	flex-shrink: 0;
+	inline-size: 1.1em;
+	block-size: 1.1em;
+	background-color: currentcolor;
+	-webkit-mask: var(--gs-ico) center / contain no-repeat;
+	mask: var(--gs-ico) center / contain no-repeat;
+}
+
+/* Light · phone — Figma 1:302: white, 2px brand-300 border, brand text. */
+.wp-block-button.is-style-light-phone .wp-block-button__link {
+	border: 2px solid var(--wp--preset--color--brand-300);
+	background: var(--wp--preset--color--white);
+	color: var(--gs-brand);
+	font-weight: 500;
+}
+
+/* Glass · phone — Figma 1:531/1:532: violet glass (composed from brand-600), light border, blur. */
+.wp-block-button.is-style-glass-phone .wp-block-button__link {
+	min-block-size: var(--wp--custom--control--sm);
+	border: 1px solid var(--wp--preset--color--surface);
+	background-image: linear-gradient(189.72deg, color-mix(in srgb, var(--wp--preset--color--brand-600) 50%, transparent) 20.7%, transparent 136%);
+	box-shadow: var(--wp--preset--shadow--glass);
+	-webkit-backdrop-filter: blur(var(--gs-blur));
+	backdrop-filter: blur(var(--gs-blur));
+	color: var(--wp--preset--color--white);
+}
+
+.wp-block-button.is-style-outline .wp-block-button__link:hover,
+.wp-block-button.is-style-outline .wp-block-button__link:focus-visible {
+	filter: none;
+	background-color: var(--gs-brand);
+	color: var(--wp--preset--color--white);
+}
+
+/* ---------- Text styles ---------- */
+
+/* Eyebrow — Figma 1:24: 40×3 brand-300 bar, 18px, +0.13em tracking. */
+.is-style-eyebrow {
+	display: flex;
+	align-items: center;
+	gap: var(--wp--preset--spacing--30);
+	color: var(--wp--preset--color--body);
+	font-size: var(--wp--preset--font-size--medium);
+	letter-spacing: 0.13em;
+	line-height: 1.9;
+}
+
+.is-style-eyebrow::before {
+	content: "";
+	flex-shrink: 0;
+	inline-size: 40px;
+	block-size: 3px;
+	background-color: var(--wp--preset--color--brand-300);
+}
+
+/* Lead with bar — Figma 1:76: 5px brand bar fading down, lead size. */
+.is-style-lead-with-bar {
+	position: relative;
+	padding-inline-start: var(--wp--preset--spacing--30);
+	font-size: var(--wp--preset--font-size--lead);
+}
+
+.is-style-lead-with-bar::before {
+	content: "";
+	position: absolute;
+	inset-block: 0.3em 0;
+	inset-inline-start: 0;
+	inline-size: 5px;
+	background-image: linear-gradient(180deg, var(--gs-brand), transparent);
+}
+
+/* ---------- Surfaces ---------- */
+
+/* Card — white panel; Card · tint — Figma 1:28 (brand-50, radius 30). */
+.wp-block-group.is-style-card,
+.wp-block-group.is-style-card-tint {
+	padding: var(--wp--preset--spacing--50);
+	border-radius: var(--gs-r-xl);
+}
+
+.wp-block-group.is-style-card {
+	background-color: var(--wp--preset--color--white);
+	box-shadow: var(--wp--preset--shadow--soft);
+}
+
+.wp-block-group.is-style-card-tint {
+	background-color: var(--wp--preset--color--brand-50);
+}
+
+/* Glass · light — Figma 1:524: white glass gradient, 2px white border, blur, floating shadow. */
+.wp-block-group.is-style-glass-light,
+.wp-block-group.is-style-glass-violet-outline {
+	padding: var(--wp--preset--spacing--40);
+	background-image: var(--wp--preset--gradient--glass);
+	box-shadow: var(--wp--preset--shadow--glass);
+	-webkit-backdrop-filter: blur(var(--gs-blur));
+	backdrop-filter: blur(var(--gs-blur));
+}
+
+.wp-block-group.is-style-glass-light {
+	border: 2px solid var(--wp--preset--color--white);
+	border-radius: var(--gs-r-md);
+}
+
+/* Glass · violet outline — Figma 1:314: 2px brand-200 border, radius 20. */
+.wp-block-group.is-style-glass-violet-outline {
+	border: 2px solid var(--wp--preset--color--brand-200);
+	border-radius: var(--gs-r-lg);
+	color: var(--wp--preset--color--white);
+}
+
+/* Glass · dark — Figma 1:97: night-2 at 58%, white 32% border, radius 22 → lg. */
+.wp-block-group.is-style-glass-dark {
+	padding: var(--wp--preset--spacing--50);
+	border: 1px solid color-mix(in srgb, var(--wp--preset--color--white) 32%, transparent);
+	border-radius: var(--gs-r-lg);
+	background-color: color-mix(in srgb, var(--wp--preset--color--night-2) 58%, transparent);
+	-webkit-backdrop-filter: blur(var(--gs-blur));
+	backdrop-filter: blur(var(--gs-blur));
+	color: var(--wp--preset--color--white);
+}
+
+/* ---------- Data and lists ---------- */
+
+/* Stats with dividers — Figma 1:12: gradient numbers, 2px dividers between columns. */
+.wp-block-columns.is-style-stats-with-dividers {
+	gap: 0;
+}
+
+.wp-block-columns.is-style-stats-with-dividers > .wp-block-column {
+	padding-inline: var(--wp--preset--spacing--50);
+}
+
+.wp-block-columns.is-style-stats-with-dividers > .wp-block-column:first-child {
+	padding-inline-start: 0;
+}
+
+.wp-block-columns.is-style-stats-with-dividers > .wp-block-column + .wp-block-column {
+	border-inline-start: 2px solid var(--wp--preset--color--border);
+}
+
+.gs-stat__num {
+	margin: 0;
+	color: var(--gs-brand);
+	font-size: var(--wp--preset--font-size--h-3);
+	font-weight: 600;
+	letter-spacing: -0.03em;
+	line-height: 1.4;
+}
+
+.gs-stat__label {
+	margin: 0;
+	font-size: var(--wp--preset--font-size--lead);
+	letter-spacing: 0.04em;
+	line-height: 1.3;
+}
+
+@media (max-width: 600px) {
+
+	.wp-block-columns.is-style-stats-with-dividers > .wp-block-column {
+		padding-inline: 0;
+	}
+
+	.wp-block-columns.is-style-stats-with-dividers > .wp-block-column + .wp-block-column {
+		padding-block-start: var(--wp--preset--spacing--30);
+		border-inline-start: 0;
+		border-block-start: 2px solid var(--wp--preset--color--border);
+	}
+}
+
+/* Checklist — Figma 1:565: 41px tint circle with brand check, brand text at lead size. */
+.wp-block-list.is-style-checklist {
+	display: grid;
+	gap: var(--wp--preset--spacing--30);
+	padding-inline-start: 0;
+	list-style: none;
+}
+
+.wp-block-list.is-style-checklist > li {
+	--gs-check: 41px;
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: var(--wp--preset--spacing--30);
+	min-block-size: var(--gs-check);
+	color: var(--gs-brand);
+	font-size: var(--wp--preset--font-size--lead);
+	line-height: 1.5;
+}
+
+/* Circle: brand fill inside a brand-100 ring. */
+.wp-block-list.is-style-checklist > li::before {
+	content: "";
+	flex-shrink: 0;
+	inline-size: var(--gs-check);
+	block-size: var(--gs-check);
+	border-radius: var(--gs-r-pill);
+	background-color: var(--gs-brand);
+	box-shadow: inset 0 0 0 7px var(--wp--preset--color--brand-100);
+}
+
+/* White tick masked on top of the circle. */
+.wp-block-list.is-style-checklist > li::after {
+	content: "";
+	position: absolute;
+	inset-block-start: calc(50% - var(--gs-check) / 2);
+	inset-inline-start: 0;
+	inline-size: var(--gs-check);
+	block-size: var(--gs-check);
+	background-color: var(--wp--preset--color--white);
+	-webkit-mask: url(../icons/check.svg) center / 40% no-repeat;
+	mask: url(../icons/check.svg) center / 40% no-repeat;
+}
+
+/* ---------- Images ---------- */
+
+/* Deco frame — Figma 1:240/1:241 around 1:252: two brand blocks peek out from opposite corners. */
+.wp-block-image.is-style-deco-frame-left,
+.wp-block-image.is-style-deco-frame-right {
+	position: relative;
+	isolation: isolate;
+	margin: var(--wp--preset--spacing--60);
+}
+
+.wp-block-image.is-style-deco-frame-left img,
+.wp-block-image.is-style-deco-frame-right img {
+	display: block;
+	inline-size: 100%;
+	block-size: auto;
+	border-radius: var(--gs-r-xl);
+	object-fit: cover;
+}
+
+.wp-block-image.is-style-deco-frame-left::before,
+.wp-block-image.is-style-deco-frame-left::after,
+.wp-block-image.is-style-deco-frame-right::before,
+.wp-block-image.is-style-deco-frame-right::after {
+	content: "";
+	position: absolute;
+	z-index: -1;
+	inline-size: 52%;
+	block-size: 56%;
+	border-radius: var(--gs-r-xl);
+	background-image: var(--wp--preset--gradient--deco-block);
+}
+
+.wp-block-image.is-style-deco-frame-left::before {
+	inset-block-start: calc(-1 * var(--wp--preset--spacing--60));
+	inset-inline-end: calc(-1 * var(--wp--preset--spacing--60));
+}
+
+.wp-block-image.is-style-deco-frame-left::after {
+	inset-block-end: calc(-1 * var(--wp--preset--spacing--60));
+	inset-inline-start: calc(-1 * var(--wp--preset--spacing--60));
+}
+
+.wp-block-image.is-style-deco-frame-right::before {
+	inset-block-start: calc(-1 * var(--wp--preset--spacing--60));
+	inset-inline-start: calc(-1 * var(--wp--preset--spacing--60));
+}
+
+.wp-block-image.is-style-deco-frame-right::after {
+	inset-block-end: calc(-1 * var(--wp--preset--spacing--60));
+	inset-inline-end: calc(-1 * var(--wp--preset--spacing--60));
+}
+
+/* No image → no decorative frame (AGENTS.md §6). */
+.wp-block-image.is-style-deco-frame-left:not(:has(img)),
+.wp-block-image.is-style-deco-frame-right:not(:has(img)) {
+	display: none;
+}
+
+/* ---------- FAQ (numbered) — Figma 1:339 ---------- */
+.gs-faq {
+	counter-reset: gs-faq;
+	padding: var(--wp--preset--spacing--40);
+	border-radius: var(--gs-r-2xl);
+	background-color: var(--wp--preset--color--white);
+	box-shadow: var(--wp--preset--shadow--glow);
+}
+
+.wp-block-details.is-style-faq-numbered {
+	counter-increment: gs-faq;
+	margin: 0;
+	padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+	border-radius: var(--gs-r-2xl);
+	transition: background-color var(--gs-ease);
+}
+
+.wp-block-details.is-style-faq-numbered + .wp-block-details.is-style-faq-numbered:not([open]) {
+	border-block-start: 1px solid var(--wp--preset--color--border);
+	border-start-start-radius: 0;
+	border-start-end-radius: 0;
+}
+
+.wp-block-details.is-style-faq-numbered[open] {
+	background-color: var(--wp--preset--color--brand-100);
+}
+
+.wp-block-details.is-style-faq-numbered > summary {
+	display: flex;
+	align-items: baseline;
+	gap: var(--wp--preset--spacing--40);
+	color: var(--wp--preset--color--muted);
+	font-size: var(--wp--preset--font-size--lead);
+	font-weight: 500;
+	letter-spacing: -0.03em;
+	line-height: 1.75;
+	list-style: none;
+	cursor: pointer;
+}
+
+.wp-block-details.is-style-faq-numbered > summary::-webkit-details-marker {
+	display: none;
+}
+
+.wp-block-details.is-style-faq-numbered > summary::before {
+	content: counter(gs-faq, decimal-leading-zero);
+	flex-shrink: 0;
+	min-inline-size: 2.5ch;
+	font-size: var(--wp--preset--font-size--lead);
+	font-weight: 400;
+	opacity: 0.52;
+}
+
+.wp-block-details.is-style-faq-numbered > summary::after {
+	content: "";
+	flex-shrink: 0;
+	align-self: center;
+	inline-size: 1.2em;
+	block-size: 1.2em;
+	margin-inline-start: auto;
+	background-color: currentcolor;
+	-webkit-mask: url(../icons/plus.svg) center / contain no-repeat;
+	mask: url(../icons/plus.svg) center / contain no-repeat;
+}
+
+.wp-block-details.is-style-faq-numbered[open] > summary::after {
+	-webkit-mask-image: url(../icons/close.svg);
+	mask-image: url(../icons/close.svg);
+}
+
+.wp-block-details.is-style-faq-numbered > :not(summary) {
+	margin-block-start: var(--wp--preset--spacing--20);
+	padding-inline-start: calc(2.5ch + var(--wp--preset--spacing--40));
+}
+
+/* ---------- Social links · tint circles (matches footer contact circles, Figma 1:471) ---------- */
+.wp-block-social-links.is-style-tint-circles .wp-social-link {
+	background-color: var(--wp--preset--color--brand-100);
+	color: var(--wp--preset--color--brand-700);
+}
+
+.wp-block-social-links.is-style-tint-circles .wp-social-link a {
+	padding: 0.4em;
 }
 
 /* ---------- Sections (Figma order) ---------- */

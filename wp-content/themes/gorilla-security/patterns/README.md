@@ -13,7 +13,7 @@ One PHP file per section/component, created by `/build-section`. Header:
  * @package gorilla-security
  */
 ?>
-<?php echo wp_kses_post( gs_heading( __( 'Frequently asked [[questions]]', 'gorilla-security' ) ) ); ?>
+<?php echo wp_kses_post( gorilla_heading( __( 'Frequently asked [[questions]]', 'gorilla-security' ) ) ); ?>
 ```
 
 Planned slugs (docs/design-system.md §2): header · hero · quote-card · about · brands · why-us ·

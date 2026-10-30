@@ -13,7 +13,7 @@
 | Key | Value |
 |---|---|
 | Theme slug (`<THEME_SLUG>`) | `gorilla-security` |
-| PHP prefix (`<PREFIX>`) | `gs` (functions `gs_*`, hooks `gs/*`, meta `_gs_*`) |
+| PHP prefix (`<PREFIX>`) | `gorilla` (functions `gorilla_*`, constants `GORILLA_*`, hooks `gorilla/*`, meta `_gorilla_*`) — WPCS requires ≥ 4 chars |
 | CSS namespace (`<CSS_NS>`) | `gs` (`.gs-block__el--mod`) |
 | Text domain (`<TEXT_DOMAIN>`) | `gorilla-security` |
 | mu-plugin | `wp-content/mu-plugins/gs-core/` |
@@ -62,4 +62,4 @@
 - [ ] CTA target URL confirmed (`/contact-us/#quote`?)
 - [ ] Copy for "Why us" steps 02–06 and FAQ answers 01, 03–08
 - [ ] Partner/brand logo files supplied by partners
-- [ ] Site details for `gs_site()`: phone, email, address, opening hours
+- [ ] Site details for `gorilla_site()`: phone, email, address, opening hours

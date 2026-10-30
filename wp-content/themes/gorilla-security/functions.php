@@ -2,7 +2,7 @@
 /**
  * Gorilla Security theme bootstrap.
  *
- * Presentation only: enqueue, block-style registry, pattern categories, gs_img(), gs_site().
+ * Presentation only: enqueue, block-style registry, pattern categories, gorilla_img(), gorilla_site().
  * Custom post types, meta and integrations belong in the gs-core mu-plugin.
  *
  * @package gorilla-security
@@ -19,7 +19,7 @@ require_once get_template_directory() . '/inc/pattern-helpers.php';
  *
  * @return void
  */
-function gs_enqueue_assets() {
+function gorilla_enqueue_assets() {
 	$dir = get_template_directory();
 	$uri = get_template_directory_uri();
 
@@ -41,24 +41,24 @@ function gs_enqueue_assets() {
 		)
 	);
 }
-add_action( 'wp_enqueue_scripts', 'gs_enqueue_assets' );
+add_action( 'wp_enqueue_scripts', 'gorilla_enqueue_assets' );
 
 /**
  * Load the component stylesheet in the block editor too, so patterns preview correctly.
  *
  * @return void
  */
-function gs_editor_styles() {
+function gorilla_editor_styles() {
 	add_editor_style( 'assets/css/components.css' );
 }
-add_action( 'after_setup_theme', 'gs_editor_styles' );
+add_action( 'after_setup_theme', 'gorilla_editor_styles' );
 
 /**
  * Register pattern categories shown in the inserter.
  *
  * @return void
  */
-function gs_register_pattern_categories() {
+function gorilla_register_pattern_categories() {
 	register_block_pattern_category(
 		'gorilla-sections',
 		array( 'label' => __( 'Gorilla · Sections', 'gorilla-security' ) )
@@ -68,7 +68,7 @@ function gs_register_pattern_categories() {
 		array( 'label' => __( 'Gorilla · Components', 'gorilla-security' ) )
 	);
 }
-add_action( 'init', 'gs_register_pattern_categories' );
+add_action( 'init', 'gorilla_register_pattern_categories' );
 
 /**
  * Register block styles listed in docs/design-system.md §2.
@@ -77,7 +77,7 @@ add_action( 'init', 'gs_register_pattern_categories' );
  *
  * @return void
  */
-function gs_register_block_styles() {
+function gorilla_register_block_styles() {
 	$styles = array(
 		'core/button'       => array(
 			'outline'      => __( 'Outline', 'gorilla-security' ),
@@ -126,7 +126,7 @@ function gs_register_block_styles() {
 		}
 	}
 }
-add_action( 'init', 'gs_register_block_styles' );
+add_action( 'init', 'gorilla_register_block_styles' );
 
 /**
  * Return the URL of a theme image by base name, preferring real photos over placeholders.
@@ -136,7 +136,7 @@ add_action( 'init', 'gs_register_block_styles' );
  * @param string $name Base file name without extension, e.g. 'hero-bg'.
  * @return string Image URL, or an empty string when no file exists.
  */
-function gs_img( $name ) {
+function gorilla_img( $name ) {
 	$name = sanitize_file_name( $name );
 	foreach ( array( 'webp', 'jpg', 'png', 'svg' ) as $ext ) {
 		$relative = '/assets/images/' . $name . '.' . $ext;
@@ -156,9 +156,9 @@ function gs_img( $name ) {
  * @param string $key Optional key: phone, email, address, hours.
  * @return array|string All details, or one value ('' when unknown).
  */
-function gs_site( $key = '' ) {
+function gorilla_site( $key = '' ) {
 	$site = apply_filters(
-		'gs/site',
+		'gorilla/site',
 		array(
 			'name'    => 'Gorilla Security',
 			'phone'   => '',

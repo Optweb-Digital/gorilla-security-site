@@ -14,7 +14,7 @@ Prefer, in order: core blocks in a pattern (one-off content) → post meta + Blo
 - `register_post_type` with `show_in_rest => true`, sensible `supports`, `template` locking where layout must not break.
 - `register_post_meta` with `type`, `single`, `show_in_rest`, `sanitize_callback`, `auth_callback`.
 - Block Bindings source via `register_block_bindings_source` when meta must appear inside theme patterns.
-- Prefix everything `gs_` / `_gs_`. Escape at output, sanitize at input.
+- Prefix everything `gorilla_` / `_gorilla_` (constants `GORILLA_`, hooks `gorilla/`). Escape at output, sanitize at input.
 
 ## 3. Populate from copy
 - Read `docs/copy/{page}.md`. Map each copy block to a field. Report anything in copy with no field, and any field with no copy.

@@ -14,9 +14,9 @@
     <properties><property name="text_domain" type="array"><element value="gorilla-security"/></property></properties>
   </rule>
   <rule ref="WordPress.NamingConventions.PrefixAllGlobals">
-    <properties><property name="prefixes" type="array"><element value="gs"/></property></properties>
+    <properties><property name="prefixes" type="array"><element value="gorilla"/></property></properties>
   </rule>
-  <!-- Project hooks use gs/{name} (docs/project-context.md). -->
+  <!-- Project hooks use gorilla/{name} (docs/project-context.md). -->
   <rule ref="WordPress.NamingConventions.ValidHookName">
     <properties><property name="additionalWordDelimiters" value="/"/></properties>
   </rule>

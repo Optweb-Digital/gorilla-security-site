@@ -19,7 +19,7 @@ Rules: within ~2px or near-identical tint → existing token. Anything marked Ne
 
 ## 3. Build
 - Pattern file `patterns/{slug}.php` with header (Title, Slug `gorilla-security/{slug}`, Categories, Keywords).
-- Use `inc/pattern-helpers.php` helpers (`gs_heading`, `gs_button`, `gs_eyebrow`, `gs_icon`, `gs_image`, `gs_arrows`).
+- Use `inc/pattern-helpers.php` helpers (`gorilla_heading`, `gorilla_button`, `gorilla_eyebrow`, `gorilla_icon`, `gorilla_image`, `gorilla_arrows`).
 - Layout via Group/Columns flex/grid. No absolute positioning, no Tailwind, no px font sizes.
 - Strings translatable with text domain `gorilla-security`. Copy from `docs/copy/`; missing copy → `[[TODO: copy]]`.
 - Component CSS appended to `assets/css/components.css` in Figma order, using tokens only.

@@ -13,9 +13,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'GS_CORE_DIR', __DIR__ );
+define( 'GORILLA_CORE_DIR', __DIR__ );
 
-foreach ( glob( GS_CORE_DIR . '/inc/*.php' ) as $gs_core_file ) {
-	require_once $gs_core_file;
+foreach ( glob( GORILLA_CORE_DIR . '/inc/*.php' ) as $gorilla_core_file ) {
+	require_once $gorilla_core_file;
 }
-unset( $gs_core_file );
+unset( $gorilla_core_file );

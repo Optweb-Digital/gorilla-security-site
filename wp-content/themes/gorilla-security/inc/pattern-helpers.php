@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @param array  $attrs Block attributes.
  * @return string
  */
-function gs_block_open( $block, $attrs = array() ) {
+function gorilla_block_open( $block, $attrs = array() ) {
 	$attrs = array_filter(
 		$attrs,
 		static function ( $value ) {
@@ -37,7 +37,7 @@ function gs_block_open( $block, $attrs = array() ) {
  * @param string $slug Preset slug.
  * @return string
  */
-function gs_slug_class( $slug ) {
+function gorilla_slug_class( $slug ) {
 	return function_exists( '_wp_to_kebab_case' ) ? _wp_to_kebab_case( $slug ) : sanitize_html_class( $slug );
 }
 
@@ -48,7 +48,7 @@ function gs_slug_class( $slug ) {
  * @param array  $args { level: int 1–6, size: font-size slug, class: extra classes, align: left|center|right }.
  * @return string Block markup, or '' when $text is empty.
  */
-function gs_heading( $text, $args = array() ) {
+function gorilla_heading( $text, $args = array() ) {
 	if ( '' === trim( (string) $text ) ) {
 		return '';
 	}
@@ -74,7 +74,7 @@ function gs_heading( $text, $args = array() ) {
 		$classes[] = $args['class'];
 	}
 	if ( $args['size'] ) {
-		$classes[] = 'has-' . gs_slug_class( $args['size'] ) . '-font-size';
+		$classes[] = 'has-' . gorilla_slug_class( $args['size'] ) . '-font-size';
 	}
 
 	$attrs = array(
@@ -84,7 +84,7 @@ function gs_heading( $text, $args = array() ) {
 		'fontSize'  => $args['size'],
 	);
 
-	return gs_block_open( 'heading', $attrs ) . "\n"
+	return gorilla_block_open( 'heading', $attrs ) . "\n"
 		. '<h' . $level . ' class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $html . '</h' . $level . '>' . "\n"
 		. '<!-- /wp:heading -->';
 }
@@ -97,15 +97,15 @@ function gs_heading( $text, $args = array() ) {
  * @param string $size  Optional font-size slug.
  * @return string Block markup, or '' when $text is empty.
  */
-function gs_paragraph( $text, $style = '', $size = '' ) {
+function gorilla_paragraph( $text, $style = '', $size = '' ) {
 	if ( '' === trim( (string) $text ) ) {
 		return '';
 	}
 	$class   = $style ? 'is-style-' . sanitize_html_class( $style ) : '';
-	$classes = array_filter( array( $class, $size ? 'has-' . gs_slug_class( $size ) . '-font-size' : '' ) );
+	$classes = array_filter( array( $class, $size ? 'has-' . gorilla_slug_class( $size ) . '-font-size' : '' ) );
 	$attr    = $classes ? ' class="' . esc_attr( implode( ' ', $classes ) ) . '"' : '';
 
-	return gs_block_open(
+	return gorilla_block_open(
 		'paragraph',
 		array(
 			'className' => $class,
@@ -120,27 +120,27 @@ function gs_paragraph( $text, $style = '', $size = '' ) {
  * @param string $text Eyebrow text.
  * @return string
  */
-function gs_eyebrow( $text ) {
-	return gs_paragraph( $text, 'eyebrow' );
+function gorilla_eyebrow( $text ) {
+	return gorilla_paragraph( $text, 'eyebrow' );
 }
 
 /**
- * Single core/button. Wrap one or more in gs_buttons().
+ * Single core/button. Wrap one or more in gorilla_buttons().
  *
- * @param string $label Button label.
- * @param string $url   Link target.
- * @param string $style Optional block style: outline, light-phone, glass-phone, fill-no-icon.
- * @param string $class Optional extra class, e.g. 'gs-btn-sm'.
+ * @param string $label       Button label.
+ * @param string $url         Link target.
+ * @param string $style       Optional block style: outline, light-phone, glass-phone, fill-no-icon.
+ * @param string $extra_class Optional extra class, e.g. 'gs-btn-sm'.
  * @return string Block markup, or '' when label is empty.
  */
-function gs_button( $label, $url, $style = '', $class = '' ) {
+function gorilla_button( $label, $url, $style = '', $extra_class = '' ) {
 	if ( '' === trim( (string) $label ) ) {
 		return '';
 	}
-	$classes = array_filter( array( $style ? 'is-style-' . sanitize_html_class( $style ) : '', $class ) );
+	$classes = array_filter( array( $style ? 'is-style-' . sanitize_html_class( $style ) : '', $extra_class ) );
 	$wrapper = implode( ' ', array_merge( array( 'wp-block-button' ), $classes ) );
 
-	return gs_block_open( 'button', array( 'className' => implode( ' ', $classes ) ) ) . "\n"
+	return gorilla_block_open( 'button', array( 'className' => implode( ' ', $classes ) ) ) . "\n"
 		. '<div class="' . esc_attr( $wrapper ) . '"><a class="wp-block-button__link wp-element-button" href="' . esc_url( $url ) . '">' . esc_html( $label ) . '</a></div>' . "\n"
 		. '<!-- /wp:button -->';
 }
@@ -148,10 +148,10 @@ function gs_button( $label, $url, $style = '', $class = '' ) {
 /**
  * Wrap buttons in a core/buttons block.
  *
- * @param string[] $buttons Markup from gs_button().
+ * @param string[] $buttons Markup from gorilla_button().
  * @return string Block markup, or '' when no buttons.
  */
-function gs_buttons( $buttons ) {
+function gorilla_buttons( $buttons ) {
 	$buttons = array_filter( (array) $buttons );
 	if ( ! $buttons ) {
 		return '';
@@ -167,15 +167,15 @@ function gs_buttons( $buttons ) {
  * @param string $style Optional block style, e.g. 'deco-frame-left'.
  * @return string
  */
-function gs_image( $name, $alt = '', $style = '' ) {
-	$src = gs_img( $name );
+function gorilla_image( $name, $alt = '', $style = '' ) {
+	$src = gorilla_img( $name );
 	if ( '' === $src ) {
 		return '';
 	}
 	$class   = $style ? 'is-style-' . sanitize_html_class( $style ) : '';
 	$classes = trim( 'wp-block-image size-full ' . $class );
 
-	return gs_block_open(
+	return gorilla_block_open(
 		'image',
 		array(
 			'sizeSlug'  => 'full',
@@ -193,12 +193,12 @@ function gs_image( $name, $alt = '', $style = '' ) {
  * @param string $modifier Optional modifier: sm, md, dark, solid.
  * @return string
  */
-function gs_icon( $name, $modifier = '' ) {
+function gorilla_icon( $name, $modifier = '' ) {
 	$classes = 'gs-icon-circle gs-ico-' . sanitize_html_class( $name );
 	if ( $modifier ) {
 		$classes .= ' gs-icon-circle--' . sanitize_html_class( $modifier );
 	}
-	return gs_block_open( 'group', array( 'className' => $classes ) ) . "\n"
+	return gorilla_block_open( 'group', array( 'className' => $classes ) ) . "\n"
 		. '<div class="wp-block-group ' . esc_attr( $classes ) . '"></div>' . "\n"
 		. '<!-- /wp:group -->';
 }
@@ -209,7 +209,7 @@ function gs_icon( $name, $modifier = '' ) {
  * @param string $controls ID of the element the arrows scroll.
  * @return string
  */
-function gs_arrows( $controls ) {
+function gorilla_arrows( $controls ) {
 	$id = esc_attr( $controls );
 	return "<!-- wp:html -->\n"
 		. '<div class="gs-arrows">'

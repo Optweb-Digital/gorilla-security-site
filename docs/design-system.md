@@ -111,7 +111,7 @@ Components are **core blocks + block styles + CSS classes + patterns**. No custo
 | Float card | group `gs-float-card` | 1:1051 |
 | Review badge | group `gs-review-badge` | 1:114 |
 | Trust strip | group `gs-trust-strip` | 1:515 |
-| Round arrows | `gs_arrows()` helper (core/html buttons) | 1:607 |
+| Round arrows | `gorilla_arrows()` helper (core/html buttons) | 1:607 |
 | Tabs | `gs-tabs` › `gs-tabs__nav` (buttons, `gs-ico-*`) + `gs-tabs__panel` × n | 1:162 |
 | Stepper | `gs-steps` › `gs-steps__media` (images) + `gs-steps__list` › `gs-step` × n | 1:522 |
 | Marquee | `gs-marquee` › `gs-marquee__track` | 1:510 |
@@ -125,10 +125,10 @@ Components are **core blocks + block styles + CSS classes + patterns**. No custo
 `header` · `hero` · `quote-card` · `about` · `brands` · `why-us` · `services-tabs` ·
 `quote-split` · `contact-card` · `split-intro` · `split-image-left` · `split-icon-trio` ·
 `cta-dark` · `testimonials` · `faq` · `footer`. `templates/front-page.html` assembles the home
-page in Figma order. Patterns use helpers from `inc/pattern-helpers.php` (`gs_button`,
-`gs_heading` with `[[accent]]` syntax, `gs_eyebrow`, `gs_icon`, `gs_image`, `gs_arrows`) so
+page in Figma order. Patterns use helpers from `inc/pattern-helpers.php` (`gorilla_button`,
+`gorilla_heading` with `[[accent]]` syntax, `gorilla_eyebrow`, `gorilla_icon`, `gorilla_image`, `gorilla_arrows`) so
 every atom serializes identically. Site-wide details (phone, email, address, hours) live in
-`gs_site()` in `functions.php`.
+`gorilla_site()` in `functions.php`.
 
 No Storybook. The browsable reference is the **Gorilla Security Design System** artifact, and
 the editor's Patterns panel is the live component catalogue.
@@ -152,7 +152,7 @@ the editor's Patterns panel is the live component catalogue.
 
 - Images are **Media Library** content, not theme files. `assets/images/*.svg` are labelled
   placeholders (each shows its Figma node id and size) so patterns render before real photos
-  exist. Replace in the editor; `gs_img()` will also pick up a `.webp/.jpg/.png` with the same
+  exist. Replace in the editor; `gorilla_img()` will also pick up a `.webp/.jpg/.png` with the same
   name dropped into `assets/images/`.
 - Export from Figma at 2× as WebP (photos) or SVG/PNG (logos). Let WordPress generate
   responsive `srcset`; keep photos ≤ 2400px wide, ~200 KB.
@@ -209,7 +209,7 @@ the editor's Patterns panel is the live component catalogue.
 gorilla-security/
 ├── style.css               theme header only
 ├── theme.json              ALL tokens + global element styles
-├── functions.php           enqueue, block-style registry, gs_img(), gs_site()
+├── functions.php           enqueue, block-style registry, gorilla_img(), gorilla_site()
 ├── inc/pattern-helpers.php serializers for repeated atoms
 ├── assets/css/components.css   component layer (sections ordered as in Figma)
 ├── assets/js/gorilla.js    tabs, stepper, slider, marquee, header state

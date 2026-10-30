@@ -129,6 +129,31 @@ function gorilla_register_block_styles() {
 add_action( 'init', 'gorilla_register_block_styles' );
 
 /**
+ * Mark a custom navigation link to the home URL as current on the front page.
+ *
+ * Core only marks links to a post ID as current, so the header's "Home" link was never active.
+ *
+ * @param string $block_content Rendered block HTML.
+ * @param array  $block         Parsed block.
+ * @return string
+ */
+function gorilla_mark_home_nav_link( $block_content, $block ) {
+	$url = isset( $block['attrs']['url'] ) ? $block['attrs']['url'] : '';
+	if ( ! is_front_page() || untrailingslashit( $url ) !== untrailingslashit( home_url( '/' ) ) ) {
+		return $block_content;
+	}
+	$tags = new WP_HTML_Tag_Processor( $block_content );
+	if ( $tags->next_tag( 'li' ) ) {
+		$tags->add_class( 'current-menu-item' );
+	}
+	if ( $tags->next_tag( 'a' ) ) {
+		$tags->set_attribute( 'aria-current', 'page' );
+	}
+	return $tags->get_updated_html();
+}
+add_filter( 'render_block_core/navigation-link', 'gorilla_mark_home_nav_link', 10, 2 );
+
+/**
  * Return the URL of a theme image by base name, preferring real photos over placeholders.
  *
  * Looks in assets/images/ for {name}.webp, .jpg, .png, then .svg (labelled placeholder).

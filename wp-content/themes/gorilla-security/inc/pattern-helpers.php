@@ -165,25 +165,71 @@ function gorilla_buttons( $buttons ) {
  * @param string $name  Base name in assets/images/, e.g. 'about-portrait'.
  * @param string $alt   Alt text; '' for decorative images.
  * @param string $style Optional block style, e.g. 'deco-frame-left'.
+ * @param array  $args  { class: extra classes, href: wrap the image in a link }.
  * @return string
  */
-function gorilla_image( $name, $alt = '', $style = '' ) {
+function gorilla_image( $name, $alt = '', $style = '', $args = array() ) {
 	$src = gorilla_img( $name );
 	if ( '' === $src ) {
 		return '';
 	}
-	$class   = $style ? 'is-style-' . sanitize_html_class( $style ) : '';
+	$args = wp_parse_args(
+		$args,
+		array(
+			'class' => '',
+			'href'  => '',
+		)
+	);
+
+	$class   = trim( ( $style ? 'is-style-' . sanitize_html_class( $style ) : '' ) . ' ' . $args['class'] );
 	$classes = trim( 'wp-block-image size-full ' . $class );
+	$img     = '<img src="' . esc_url( $src ) . '" alt="' . esc_attr( $alt ) . '"/>';
+	if ( $args['href'] ) {
+		$img = '<a href="' . esc_url( $args['href'] ) . '">' . $img . '</a>';
+	}
 
 	return gorilla_block_open(
 		'image',
 		array(
-			'sizeSlug'  => 'full',
-			'className' => $class,
+			'sizeSlug'        => 'full',
+			'linkDestination' => $args['href'] ? 'custom' : null,
+			'className'       => $class,
 		)
 	) . "\n"
-		. '<figure class="' . esc_attr( $classes ) . '"><img src="' . esc_url( $src ) . '" alt="' . esc_attr( $alt ) . '"/></figure>' . "\n"
+		. '<figure class="' . esc_attr( $classes ) . '">' . $img . '</figure>' . "\n"
 		. '<!-- /wp:image -->';
+}
+
+/**
+ * Single core/navigation-link (self-closing). Wrap in a core/navigation block.
+ *
+ * Pass a page path to link the page by ID, so core marks it current (`current-menu-item`) on that page.
+ *
+ * @param string $label     Link label.
+ * @param string $url       Link target (used when no page matches $page_path).
+ * @param string $page_path Optional page path, e.g. 'contact-us'.
+ * @return string Block markup, or '' when label is empty.
+ */
+function gorilla_nav_link( $label, $url, $page_path = '' ) {
+	if ( '' === trim( (string) $label ) ) {
+		return '';
+	}
+	$attrs = array(
+		'label' => $label,
+		'url'   => $url,
+		'kind'  => 'custom',
+	);
+	$page  = $page_path ? get_page_by_path( $page_path ) : null;
+	if ( $page ) {
+		$attrs = array(
+			'label' => $label,
+			'type'  => 'page',
+			'id'    => $page->ID,
+			'url'   => get_permalink( $page ),
+			'kind'  => 'post-type',
+		);
+	}
+	return '<!-- wp:navigation-link ' . wp_json_encode( $attrs, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . ' /-->';
 }
 
 /**

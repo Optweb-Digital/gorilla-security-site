@@ -592,3 +592,143 @@ mark.gs-accent {
 }
 
 /* ---------- Sections (Figma order) ---------- */
+
+/* ---------- Header — Figma 1:523 ---------- */
+
+/* Solid and sticky by default; fixed glass over the hero on front/landing pages until scrolled. */
+.wp-block-template-part:has(> .gs-header) {
+	position: sticky;
+	inset-block-start: var(--wp-admin--admin-bar--height, 0);
+	z-index: 100;
+}
+
+body:has(.gs-hero-page) .wp-block-template-part:has(> .gs-header) {
+	position: fixed;
+	inset-inline: 0;
+}
+
+.gs-header {
+	margin-block: 0;
+	padding-block: var(--wp--preset--spacing--20);
+	padding-inline: var(--wp--preset--spacing--60);
+}
+
+.gs-header__bar.is-style-glass-light {
+	gap: var(--wp--preset--spacing--40);
+	padding-block: var(--wp--preset--spacing--30);
+	padding-inline: var(--wp--preset--spacing--40);
+	border-color: var(--wp--preset--color--white);
+	background-color: var(--wp--preset--color--white);
+	background-image: none;
+	box-shadow: var(--wp--preset--shadow--soft);
+	transition: background-color var(--gs-ease), box-shadow var(--gs-ease);
+}
+
+body:has(.gs-hero-page) .gs-header:not(.gs-header--solid) .gs-header__bar {
+	background-color: transparent;
+	background-image: var(--wp--preset--gradient--glass);
+	box-shadow: var(--wp--preset--shadow--glass);
+}
+
+.gs-header__logo {
+	flex-shrink: 0;
+	margin: 0;
+}
+
+.gs-header .gs-header__logo img {
+	display: block;
+	inline-size: clamp(120px, 11.7vw, 225px);
+	block-size: auto;
+	aspect-ratio: 3 / 1;
+}
+
+.gs-header__nav {
+	flex: 1 1 auto;
+	font-size: var(--wp--preset--font-size--medium);
+}
+
+.gs-header__nav .wp-block-navigation__container {
+	gap: var(--wp--preset--spacing--70);
+}
+
+.gs-header__nav .wp-block-navigation-item__content {
+	color: var(--wp--preset--color--heading);
+}
+
+.gs-header__nav .current-menu-item > .wp-block-navigation-item__content {
+	color: var(--gs-brand);
+	font-weight: 600;
+}
+
+/* Over the hero: white links with Figma's soft shadow; the open mobile menu keeps dark text. */
+body:has(.gs-hero-page) .gs-header:not(.gs-header--solid) .wp-block-navigation__responsive-container:not(.is-menu-open) .wp-block-navigation-item__content:not(.current-menu-item > *),
+body:has(.gs-hero-page) .gs-header:not(.gs-header--solid) .wp-block-navigation__responsive-container-open {
+	color: var(--wp--preset--color--white);
+	text-shadow: 0 0 4px color-mix(in srgb, var(--wp--preset--color--night) 53%, transparent);
+}
+
+/* backdrop-filter makes the bar the containing block for the fixed mobile overlay; drop it while open. */
+body .gs-header .gs-header__bar:has(.wp-block-navigation__responsive-container.is-menu-open) {
+	-webkit-backdrop-filter: none;
+	backdrop-filter: none;
+}
+
+.gs-header__actions {
+	flex-shrink: 0;
+	gap: var(--wp--preset--spacing--30);
+}
+
+/* Glass phone on a solid bar needs a solid fill to stay readable. */
+.gs-header--solid .wp-block-button.gs-header__phone .wp-block-button__link,
+body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button__link {
+	background-color: var(--wp--preset--color--brand-600);
+}
+
+@media (max-width: 781px) {
+
+	/* Phone becomes icon-only; the number stays the accessible name. */
+	.wp-block-button.gs-header__phone .wp-block-button__link {
+		inline-size: var(--wp--custom--control--sm);
+		padding-inline: 0;
+		font-size: 0;
+	}
+
+	.wp-block-button.gs-header__phone .wp-block-button__link::before {
+		inline-size: var(--wp--preset--font-size--lead);
+		block-size: var(--wp--preset--font-size--lead);
+	}
+}
+
+@media (max-width: 600px) {
+
+	.gs-header {
+		padding-inline: var(--wp--preset--spacing--20);
+	}
+
+	.gs-header__bar.is-style-glass-light {
+		gap: var(--wp--preset--spacing--20);
+		padding-inline: var(--wp--preset--spacing--30);
+	}
+
+	.gs-header__nav {
+		flex: 0 0 auto;
+		order: 3;
+	}
+
+	.gs-header .gs-header__logo img {
+		inline-size: 100px;
+	}
+
+	.gs-header__actions {
+		gap: var(--wp--preset--spacing--20);
+	}
+
+	/* Room for logo + call + quote + menu button at 390px: drop the quote arrow. */
+	.gs-header__actions .wp-block-button.gs-btn-sm .wp-block-button__link {
+		padding-inline: var(--wp--preset--spacing--30);
+	}
+
+	.gs-header__actions .wp-block-button.gs-btn-sm .wp-block-button__link::after {
+		content: none;
+	}
+}

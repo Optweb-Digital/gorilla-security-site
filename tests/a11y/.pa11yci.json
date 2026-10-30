@@ -1,0 +1,9 @@
+{
+  "defaults": { "standard": "WCAG2AA", "runners": ["axe", "htmlcs"], "timeout": 60000,
+    "chromeLaunchConfig": { "args": ["--no-sandbox"] } },
+  "urls": [
+    "http://localhost:8888/",
+    "http://localhost:8888/contact-us/",
+    "http://localhost:8888/fixtures-stress-test/"
+  ]
+}

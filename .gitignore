@@ -1,0 +1,15 @@
+/wordpress/
+/wp-content/*
+!/wp-content/themes/
+/wp-content/themes/*
+!/wp-content/themes/gorilla-security/
+!/wp-content/mu-plugins/
+/vendor/
+/node_modules/
+.env
+*.sql
+*.sql.gz
+.lighthouseci/
+CLAUDE.local.md
+.claude/settings.local.json
+.DS_Store

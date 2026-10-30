@@ -60,6 +60,7 @@
 - [ ] Staging and production URLs
 - [ ] Names for tech lead, designer, developers, content writer
 - [ ] CTA target URL confirmed (`/contact-us/#quote`?)
+- [ ] "Know More" targets (About links to `#services` for now) · Figma typo "livinng" (1:39) built as "living"
 - [ ] Copy for "Why us" steps 02–06 and FAQ answers 01, 03–08
 - [ ] Partner/brand logo files supplied by partners
 - [ ] Site details for `gorilla_site()`: phone, email, address, opening hours

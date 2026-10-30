@@ -24,6 +24,12 @@
 }
 
 /* ---------- Base ---------- */
+
+/* In-page anchors (#about, #services, #quote) land below the fixed/sticky header. */
+html {
+	scroll-padding-block-start: calc(var(--wp--custom--control--sm) + var(--wp--preset--spacing--70) + var(--wp--preset--spacing--30));
+}
+
 :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
 	outline: 2px solid var(--gs-focus);
 	outline-offset: 2px;
@@ -392,6 +398,12 @@ mark.gs-accent {
 	line-height: 1.4;
 }
 
+/* Stat values and labels are short: break only a word that cannot fit (not "anywhere"). */
+.gs-stat__num,
+.gs-stat__label {
+	overflow-wrap: break-word;
+}
+
 .gs-stat__label {
 	margin: 0;
 	font-size: var(--wp--preset--font-size--lead);
@@ -401,14 +413,34 @@ mark.gs-accent {
 
 @media (max-width: 600px) {
 
-	.wp-block-columns.is-style-stats-with-dividers > .wp-block-column {
+	/* Only when the columns actually stack (core's default); not-stacked stats keep side dividers. */
+	.wp-block-columns.is-style-stats-with-dividers:not(.is-not-stacked-on-mobile) > .wp-block-column {
 		padding-inline: 0;
 	}
 
-	.wp-block-columns.is-style-stats-with-dividers > .wp-block-column + .wp-block-column {
+	.wp-block-columns.is-style-stats-with-dividers:not(.is-not-stacked-on-mobile) > .wp-block-column + .wp-block-column {
 		padding-block-start: var(--wp--preset--spacing--30);
 		border-inline-start: 0;
 		border-block-start: 2px solid var(--wp--preset--color--border);
+	}
+
+	/* Side-by-side stats at phone width: tighter columns, smaller numbers.
+	   :nth-child(n) only matches the specificity of the stacked rules above (lint ordering). */
+	.wp-block-columns.is-style-stats-with-dividers.is-not-stacked-on-mobile > .wp-block-column:nth-child(n) {
+		padding-inline: var(--wp--preset--spacing--20);
+	}
+
+	.wp-block-columns.is-style-stats-with-dividers.is-not-stacked-on-mobile > .wp-block-column:first-child {
+		padding-inline-start: 0;
+	}
+
+	.is-not-stacked-on-mobile .gs-stat__num {
+		font-size: var(--wp--preset--font-size--h-5);
+	}
+
+	.is-not-stacked-on-mobile .gs-stat__label {
+		font-size: var(--wp--preset--font-size--base);
+		letter-spacing: 0;
 	}
 }
 
@@ -1038,5 +1070,139 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 	.gs-trust-strip .gs-trust-strip__logo img {
 		max-inline-size: 110px;
 		max-block-size: 44px;
+	}
+}
+
+/* ---------- About — Figma 1:6 ---------- */
+.gs-about.wp-block-group {
+	margin-block-start: 0;
+	padding-block: var(--wp--preset--spacing--80);
+	background-color: var(--wp--preset--color--white);
+	box-shadow: var(--wp--preset--shadow--soft);
+}
+
+.wp-block-columns.gs-about__cols {
+	gap: var(--wp--preset--spacing--40);
+	margin-block: 0;
+}
+
+/* Figma columns 569 / 535 / 489 of 1621. */
+.wp-block-columns.gs-about__cols > .wp-block-column.gs-about__intro {
+	display: flex;
+	flex: 1.1 1 0;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--40);
+	padding-inline-end: var(--wp--preset--spacing--30);
+}
+
+.wp-block-columns.gs-about__cols > .wp-block-column.gs-about__media {
+	flex: 1 1 0;
+}
+
+.wp-block-columns.gs-about__cols > .wp-block-column.gs-about__aside {
+	display: flex;
+	flex: 0.92 1 0;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--30);
+}
+
+.gs-about__intro > * {
+	margin-block: 0;
+}
+
+.gs-about__intro .wp-block-buttons {
+	margin-block-start: var(--wp--preset--spacing--20);
+}
+
+.gs-about__intro .is-style-stats-with-dividers {
+	margin-block-start: var(--wp--preset--spacing--40);
+}
+
+.gs-about .gs-about__photo {
+	block-size: 100%;
+	margin: 0;
+}
+
+.gs-about .gs-about__photo img {
+	display: block;
+	inline-size: 100%;
+	block-size: 100%;
+	border-radius: var(--gs-r-xl);
+	object-fit: cover;
+}
+
+.gs-about .gs-about__photo--van {
+	flex: 1 1 auto;
+	min-block-size: 200px;
+}
+
+/* Feature rows — Figma 1:29: 69px icon circle, title + text, 2px dividers. */
+.gs-about__features {
+	display: flex;
+	flex-direction: column;
+}
+
+.gs-feature {
+	gap: var(--wp--preset--spacing--40);
+	padding-block: var(--wp--preset--spacing--40);
+}
+
+.gs-feature:first-child {
+	padding-block-start: 0;
+}
+
+.gs-feature:last-child {
+	padding-block-end: 0;
+}
+
+.gs-feature + .gs-feature {
+	border-block-start: 2px solid var(--wp--preset--color--border);
+}
+
+.gs-feature__body > * {
+	margin-block: 0;
+}
+
+.gs-feature__title.wp-block-heading {
+	margin-block-end: var(--wp--preset--spacing--10);
+	color: var(--wp--preset--color--ink);
+	letter-spacing: -0.03em;
+	line-height: 1.5;
+}
+
+.gs-feature__body p {
+	letter-spacing: -0.03em;
+	line-height: 1.5;
+}
+
+@media (max-width: 1100px) {
+
+	.wp-block-columns.gs-about__cols {
+		flex-wrap: wrap !important; /* core forces nowrap from 782px */
+	}
+
+	.wp-block-columns.gs-about__cols > .wp-block-column.gs-about__intro {
+		flex-basis: 100%;
+		padding-inline-end: 0;
+	}
+
+	.wp-block-columns.gs-about__cols > .wp-block-column.gs-about__media {
+		max-block-size: 640px;
+	}
+}
+
+@media (max-width: 600px) {
+
+	.gs-about .gs-about__photo img {
+		block-size: auto;
+		aspect-ratio: 4 / 5;
+	}
+
+	.gs-about .gs-about__photo--van img {
+		aspect-ratio: 489 / 314;
+	}
+
+	.gs-feature .gs-icon-circle {
+		--gs-circle: 46px;
 	}
 }

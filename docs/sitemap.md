@@ -27,9 +27,9 @@ Figma order, top to bottom. "Root" is the group to pass to `get_metadata`; the o
 | 5 | `why-us` | 1:522 (instance) | stepper track I1:522;1:4087 / active I1:522;1:4088 · dividers I1:522;1:4081… · images I1:522;1:4091–1:4101 | Stepper | done locally (`feat/why-us`) — copy for steps 02–06 pending | TBD |
 | 6 | `services-tabs` | 1:162 | panels 1:615–1:1078 · services arrows 1:607 · checklist 1:565 · float card 1:1051. **Panel layers are in reverse order to the tab bar** — map by tab label, not layer order | Tabs, Checklist, Float card, Round arrows | done locally (`feat/services`) — "Know More" waits for service pages | TBD |
 | 7 | `quote-split` (+ `contact-card`) | 1:169 | photo 1:170 · wash 1:171 · form 1:172 · contact card 1:199 | `gs-form`, contact card | done locally (`feat/quote-split`) — contact card shows once phone/hours are confirmed; dropdown options pending | TBD |
-| 8 | `split-intro` | 1:220 | deco 1:221/1:222 · image 1:237 | Deco frame · right | not started | TBD |
-| 9 | `split-image-left` | 1:238 | deco 1:240/1:241 · image 1:252 | Deco frame · left | not started | TBD |
-| 10 | `split-icon-trio` | 1:253 | deco 1:254/1:255 · icon trio 1:265 · image 1:288 | Deco frame · right, Icon trio | not started | TBD |
+| 8 | `split-intro` | 1:220 | deco 1:221/1:222 · image 1:237 | Deco frame · right | done locally (`feat/splits`) — Know More → `#services` | TBD |
+| 9 | `split-image-left` | 1:238 | deco 1:240/1:241 · image 1:252 | Deco frame · left | done locally (`feat/splits`) — "& Locksmith" built as "Gorilla Security" | TBD |
+| 10 | `split-icon-trio` | 1:253 | deco 1:254/1:255 · icon trio 1:265 · image 1:288 | Deco frame · right, Icon trio | done locally (`feat/splits`) | TBD |
 | 11 | `cta-dark` | 1:289 | bg 1:291 + overlay 1:292 · model 1:320 · stat cards 1:314 / 1:321 · buttons 1:299 / 1:302 | Glass · violet outline, Button light phone | not started | TBD |
 | 12 | `testimonials` | 1:407 | slider 1:418 (cards 1:4619…) · **testimonial arrows 1:419** | Slider, Testimonial card, Round arrows | not started | TBD |
 | 13 | `faq` | 1:334 | container 1:342 · open row 1:343 · items 1:339 | FAQ (numbered) | not started | TBD |

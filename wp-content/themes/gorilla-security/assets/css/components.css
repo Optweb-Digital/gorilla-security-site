@@ -2085,3 +2085,128 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 		border-inline-start: 0;
 	}
 }
+
+/* ---------- Splits — Figma 1:220 / 1:238 / 1:253 ---------- */
+.gs-split.wp-block-group {
+	margin-block-start: 0;
+	padding-block: var(--wp--preset--spacing--80);
+	background-color: var(--wp--preset--color--white);
+}
+
+/* 1:239: same grey → white → pink band as Services. */
+.gs-split--tint.wp-block-group {
+	background-image: linear-gradient(100deg, var(--wp--preset--color--surface-2), var(--wp--preset--color--white) 48%, color-mix(in srgb, var(--wp--preset--color--brand-500) 32%, var(--wp--preset--color--white)));
+}
+
+.wp-block-columns.gs-split__cols {
+	gap: var(--wp--preset--spacing--90);
+	align-items: center;
+	margin: 0;
+}
+
+/* Figma: text ≈ 627–740px, photo 786px (+ deco overhang). */
+.wp-block-columns.gs-split__cols > .wp-block-column.gs-split__text {
+	display: flex;
+	flex: 0.9 1 0;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--40);
+}
+
+.wp-block-columns.gs-split__cols > .wp-block-column.gs-split__media {
+	flex: 1 1 0;
+	min-inline-size: 0;
+}
+
+.gs-split__text > * {
+	margin-block: 0;
+}
+
+.gs-split__text .wp-block-buttons {
+	gap: var(--wp--preset--spacing--40);
+	margin-block-start: var(--wp--preset--spacing--30);
+}
+
+.gs-split__text .wp-block-heading {
+	line-height: 1.2;
+}
+
+.gs-split .gs-split__photo img {
+	aspect-ratio: 786 / 609;
+}
+
+/* 1:244 sets intro, sub-heads and bullets as one compact text block. */
+.gs-split--image-left .wp-block-columns.gs-split__cols > .wp-block-column.gs-split__text {
+	flex-grow: 1.05;
+	gap: var(--wp--preset--spacing--20);
+	line-height: 1.6;
+}
+
+.gs-split--image-left .gs-split__text > .wp-block-heading {
+	margin-block-end: var(--wp--preset--spacing--20);
+}
+
+.gs-split__list {
+	margin-block: 0;
+	padding-inline-start: 1.4em;
+	line-height: 1.6;
+}
+
+/* Icon trio — Figma 1:265: three 69px circles over 20px semibold labels, 1px dividers. */
+.gs-icon-trio.wp-block-group {
+	align-items: stretch;
+	gap: 0;
+	margin-block-start: var(--wp--preset--spacing--30);
+}
+
+.gs-icon-trio__item.wp-block-group {
+	flex: 1 1 0;
+	gap: var(--wp--preset--spacing--30);
+	align-items: center;
+	padding-inline: var(--wp--preset--spacing--30);
+	text-align: center;
+}
+
+.gs-icon-trio__item + .gs-icon-trio__item {
+	border-inline-start: 1px solid color-mix(in srgb, var(--wp--preset--color--night) 20%, transparent);
+}
+
+.gs-split .gs-icon-trio .gs-icon-trio__item.wp-block-group p {
+	margin: 0;
+	color: var(--wp--preset--color--ink);
+	font-size: var(--wp--preset--font-size--lead);
+	font-weight: 600;
+	letter-spacing: -0.03em;
+	line-height: 1.45;
+}
+
+@media (max-width: 1100px) {
+
+	.wp-block-columns.gs-split__cols {
+		flex-wrap: wrap !important; /* core forces nowrap from 782px */
+	}
+
+	.wp-block-columns.gs-split__cols > .wp-block-column.gs-split__text,
+	.wp-block-columns.gs-split__cols > .wp-block-column.gs-split__media {
+		flex-basis: 100%;
+	}
+
+	/* Photo after the text on every split when stacked. */
+	.gs-split--image-left .gs-split__media {
+		order: 2;
+	}
+}
+
+@media (max-width: 600px) {
+
+	.gs-icon-trio__item.wp-block-group {
+		padding-inline: var(--wp--preset--spacing--10);
+	}
+
+	.gs-icon-trio__item .gs-icon-circle {
+		--gs-circle: 46px;
+	}
+
+	.gs-split .gs-icon-trio .gs-icon-trio__item.wp-block-group p {
+		font-size: var(--wp--preset--font-size--small);
+	}
+}

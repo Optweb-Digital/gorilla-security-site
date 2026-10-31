@@ -1454,3 +1454,204 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 		max-block-size: 44px;
 	}
 }
+
+/* ---------- Why us (stepper) — Figma 1:522 ---------- */
+.gs-why.wp-block-group {
+	margin-block-start: 0;
+	padding-block: var(--wp--preset--spacing--60) var(--wp--preset--spacing--80);
+	background-color: var(--wp--preset--color--white);
+}
+
+.wp-block-columns.gs-why__cols {
+	gap: var(--wp--preset--spacing--80);
+	margin-block: 0;
+}
+
+/* Figma: intro 647px, list 933px (track at x 821). */
+.wp-block-columns.gs-why__cols > .wp-block-column.gs-why__intro {
+	display: flex;
+	flex: 0.7 1 0;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--40);
+}
+
+.wp-block-columns.gs-why__cols > .wp-block-column.gs-why__list {
+	display: flex;
+	flex: 1 1 0;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--40);
+}
+
+.gs-why__intro > *,
+.gs-why__list > * {
+	margin-block: 0;
+}
+
+.gs-why__list > .wp-block-buttons {
+	justify-content: flex-end;
+}
+
+/* Photo per step: only the active one shows. */
+.gs-steps__media {
+	position: relative;
+	flex-grow: 1;
+	min-block-size: 360px;
+	overflow: hidden;
+	border-radius: var(--gs-r-xl);
+	aspect-ratio: 647 / 563;
+}
+
+.gs-steps__media .gs-steps__img {
+	position: absolute;
+	inset: 0;
+	margin: 0;
+	opacity: 0;
+	transition: opacity var(--wp--custom--duration--slow) var(--wp--custom--easing--standard);
+}
+
+.gs-steps__media .gs-steps__img.is-active {
+	opacity: 1;
+}
+
+.gs-steps__media .gs-steps__img img {
+	display: block;
+	inline-size: 100%;
+	block-size: 100%;
+	object-fit: cover;
+}
+
+/* Steps: 8px brand-100 track (1:4087) with the active segment (1:4088). */
+.gs-steps {
+	position: relative;
+	counter-reset: gs-step;
+	padding-inline-start: calc(8px + var(--wp--preset--spacing--40));
+}
+
+.gs-steps::before {
+	content: "";
+	position: absolute;
+	inset-block: 0;
+	inset-inline-start: 0;
+	inline-size: 8px;
+	border-radius: var(--gs-r-pill);
+	background-color: var(--wp--preset--color--brand-100);
+}
+
+.gs-step.wp-block-group {
+	position: relative;
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: var(--wp--preset--spacing--40);
+	align-items: start;
+	margin: 0;
+	padding-block: var(--wp--preset--spacing--40);
+	counter-increment: gs-step;
+}
+
+/* 3px rule-fade divider under each step (1:4081…). */
+.gs-step.wp-block-group:not(:last-child) {
+	background: var(--wp--preset--gradient--rule-fade) bottom left / 100% 3px no-repeat;
+}
+
+/* Step number (1:4057): 60px brand-text gradient; inactive at ~20%. Decorative (CSS content). */
+.gs-step::before {
+	content: counter(gs-step, decimal-leading-zero);
+	min-inline-size: 2ch;
+	color: var(--gs-brand);
+	font-size: var(--wp--preset--font-size--h-2);
+	font-weight: 600;
+	letter-spacing: -0.03em;
+	line-height: 1;
+	opacity: 0.22;
+	transition: opacity var(--gs-ease);
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+
+	.gs-step::before {
+		background-image: var(--gs-grad-text);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+	}
+}
+
+.gs-step.is-active::before {
+	opacity: 1;
+}
+
+/* Active segment on the track, level with the active step. */
+.gs-step.is-active::after {
+	content: "";
+	position: absolute;
+	inset-block: 0;
+	inset-inline-start: calc(-1 * (8px + var(--wp--preset--spacing--40)));
+	inline-size: 8px;
+	border-radius: var(--gs-r-pill);
+	background-color: color-mix(in srgb, var(--wp--preset--color--body) 25%, var(--wp--preset--color--border));
+}
+
+.gs-step__body > * {
+	margin-block: 0;
+}
+
+.gs-step__title.wp-block-heading {
+	color: var(--wp--preset--color--ink);
+	letter-spacing: -0.03em;
+	line-height: 1.5;
+}
+
+.gs-step.is-active .gs-step__title.wp-block-heading {
+	color: var(--gs-brand);
+}
+
+.gs-step__body p {
+	margin-block-start: var(--wp--preset--spacing--10);
+	letter-spacing: -0.03em;
+	line-height: 1.5;
+}
+
+/* With JS only the active step's text shows; titles become buttons. */
+.gs-js .gs-step:not(.is-active) .gs-step__body p {
+	display: none;
+}
+
+.gs-step__toggle {
+	display: block;
+	inline-size: 100%;
+	padding: 0;
+	border: 0;
+	background: none;
+	color: inherit;
+	font: inherit;
+	letter-spacing: inherit;
+	text-align: start;
+	cursor: pointer;
+}
+
+@media (max-width: 1100px) {
+
+	.wp-block-columns.gs-why__cols {
+		flex-wrap: wrap !important; /* core forces nowrap from 782px */
+	}
+
+	.wp-block-columns.gs-why__cols > .wp-block-column.gs-why__intro,
+	.wp-block-columns.gs-why__cols > .wp-block-column.gs-why__list {
+		flex-basis: 100%;
+	}
+
+	.gs-steps__media {
+		max-block-size: 520px;
+	}
+}
+
+@media (max-width: 600px) {
+
+	.gs-why__list > .wp-block-buttons {
+		justify-content: flex-start;
+	}
+
+	.gs-step::before {
+		font-size: var(--wp--preset--font-size--h-4);
+	}
+}

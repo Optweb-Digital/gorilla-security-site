@@ -83,6 +83,66 @@
 		} );
 	}
 
+	/**
+	 * Stepper (why us): each step title becomes a button that shows its text and photo.
+	 * Without JS every step's text is visible and the first photo shows.
+	 */
+	function initSteppers() {
+		document.querySelectorAll( '.gs-steps' ).forEach( function ( list, n ) {
+			const section = list.closest( '.gs-why' ) || list.parentElement;
+			const steps = Array.from( list.querySelectorAll( '.gs-step' ) );
+			const images = section.querySelectorAll( '.gs-steps__img' );
+			const canHover = window.matchMedia( '(hover: hover)' ).matches;
+
+			const activate = function ( index ) {
+				steps.forEach( function ( step, i ) {
+					step.classList.toggle( 'is-active', i === index );
+					const toggle = step.querySelector( '.gs-step__toggle' );
+					if ( toggle ) {
+						toggle.setAttribute(
+							'aria-expanded',
+							i === index ? 'true' : 'false'
+						);
+					}
+				} );
+				images.forEach( function ( img, i ) {
+					img.classList.toggle( 'is-active', i === index );
+				} );
+			};
+
+			steps.forEach( function ( step, i ) {
+				const title = step.querySelector( '.gs-step__title' );
+				if ( ! title ) {
+					return;
+				}
+				const text = step.querySelector( '.gs-step__body p' );
+				const toggle = document.createElement( 'button' );
+				toggle.type = 'button';
+				toggle.className = 'gs-step__toggle';
+				toggle.textContent = title.textContent;
+				toggle.setAttribute(
+					'aria-expanded',
+					i === 0 ? 'true' : 'false'
+				);
+				if ( text ) {
+					text.id = text.id || 'gs-step-' + n + '-' + i;
+					toggle.setAttribute( 'aria-controls', text.id );
+				}
+				toggle.addEventListener( 'click', function () {
+					activate( i );
+				} );
+				if ( canHover ) {
+					step.addEventListener( 'mouseenter', function () {
+						activate( i );
+					} );
+				}
+				title.textContent = '';
+				title.appendChild( toggle );
+			} );
+		} );
+	}
+
 	initHeader();
 	initMarquees();
+	initSteppers();
 } )();

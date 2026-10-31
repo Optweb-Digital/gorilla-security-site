@@ -518,7 +518,7 @@ a[href^="tel:"] {
 	grid-template-columns: minmax(0, 1fr);
 }
 
-.gs-form .wpcf7-form > p {
+:where(.gs-form .wpcf7-form > p) {
 	margin: 0;
 }
 
@@ -2002,7 +2002,7 @@ body:not(.gs-has-hero) .gs-header::before {
 	grid-template-columns: repeat(6, minmax(0, 1fr));
 }
 
-.gs-quote-split .wpcf7-form > * {
+.gs-quote-split :where(.wpcf7-form) > * {
 	grid-column: 1 / -1;
 }
 
@@ -2357,5 +2357,155 @@ body:not(.gs-has-hero) .gs-header::before {
 
 	.gs-cta .gs-cta__badge {
 		font-size: var(--wp--preset--font-size--lead);
+	}
+}
+
+/* Testimonials — Figma 1:407 / 1:418. Heading row, then a full-bleed slider of review
+ * cards starting at the wide container's edge. */
+.gs-testimonials {
+	background: var(--wp--preset--color--white);
+	padding-block: var(--wp--preset--spacing--80);
+}
+
+.gs-testimonials__head {
+	align-items: flex-end !important; /* core columns only accept the alignment class */
+	gap: var(--wp--preset--spacing--60);
+	margin: 0;
+}
+
+.gs-testimonials__head .wp-block-column > * {
+	margin: 0;
+}
+
+.gs-testimonials__head .wp-block-heading {
+	letter-spacing: -0.03em;
+	line-height: 1.2;
+	margin-block-start: var(--wp--preset--spacing--30);
+}
+
+.gs-testimonials .gs-testimonials__aside > p:not(.is-style-eyebrow) {
+	color: var(--wp--preset--color--body);
+	line-height: 1.75;
+}
+
+.gs-testimonials__actions {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--40) var(--wp--preset--spacing--60);
+	justify-content: space-between;
+	margin-block-start: var(--wp--preset--spacing--40);
+}
+
+.gs-testimonials .gs-testimonials__actions > * {
+	margin: 0;
+}
+
+/* Slider track: scroll-snap row of cards, starting at the wide container edge (vw: the
+ * track is full-bleed, so % would resolve against the narrower section box). gorilla.js hides the scrollbar once the arrows
+ * work; without JS the row scrolls with its own scrollbar. */
+.gs-slider__track {
+	display: flex;
+	gap: var(--wp--preset--spacing--60);
+	margin-block-start: var(--wp--preset--spacing--60);
+	overflow-x: auto;
+	overscroll-behavior-x: contain;
+	padding-block-end: var(--wp--preset--spacing--20);
+	padding-inline: max(var(--wp--preset--spacing--40), calc(50vw - var(--wp--style--global--wide-size) / 2));
+	scroll-padding-inline: max(var(--wp--preset--spacing--40), calc(50vw - var(--wp--style--global--wide-size) / 2));
+	scroll-snap-type: x mandatory;
+}
+
+.gs-slider.is-enhanced .gs-slider__track {
+	scrollbar-width: none;
+}
+
+.gs-slider:not(.is-enhanced) .gs-arrows {
+	display: none;
+}
+
+.gs-slider .gs-slider__track > * {
+	margin: 0;
+}
+
+/* Card: photo under a dark shade, text at the bottom. Figma 348×423, radius 20. */
+.gs-testimonial {
+	aspect-ratio: 348 / 423;
+	border-radius: var(--gs-r-lg);
+	color: var(--wp--preset--color--white);
+	display: grid;
+	flex: 0 0 min(19.3em, 80%);
+	overflow: hidden;
+	scroll-snap-align: start;
+}
+
+.gs-testimonials .gs-testimonial > * {
+	grid-area: 1 / 1;
+	margin: 0;
+}
+
+.gs-testimonials .gs-testimonial > .wp-block-image img {
+	block-size: 100%;
+	display: block;
+	inline-size: 100%;
+	object-fit: cover;
+}
+
+.gs-testimonial > .gs-testimonial__body {
+	align-self: end;
+	background: var(--gs-grad-shade);
+	padding: var(--wp--preset--spacing--60) var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+}
+
+.gs-testimonials .gs-testimonial__body > * {
+	margin: 0;
+}
+
+/* Score pill: brand-500 → brand-900, light border. */
+.gs-testimonial .gs-testimonial__score {
+	align-items: center;
+	background: var(--gs-brand);
+	background: linear-gradient(to right, var(--gs-brand), var(--wp--preset--color--brand-900));
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: var(--gs-r-sm);
+	display: inline-flex;
+	font-size: var(--wp--preset--font-size--base);
+	font-weight: 500;
+	gap: var(--wp--preset--spacing--10);
+	padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--20);
+}
+
+.gs-testimonial__score .gs-rating {
+	font-size: var(--wp--preset--font-size--caption);
+}
+
+.gs-testimonial .gs-testimonial__meta {
+	align-items: baseline;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0 var(--wp--preset--spacing--20);
+	justify-content: space-between;
+	margin-block-start: var(--wp--preset--spacing--20);
+}
+
+.gs-testimonial__meta strong {
+	font-size: var(--wp--preset--font-size--lead);
+	font-weight: 600;
+}
+
+.gs-testimonial .gs-testimonial__text {
+	font-size: var(--wp--preset--font-size--small);
+	line-height: 1.6;
+	margin-block-start: var(--wp--preset--spacing--10);
+}
+
+@media (max-width: 1100px) {
+
+	.gs-testimonials__head {
+		flex-wrap: wrap !important;
+	}
+
+	.gs-testimonials__head > .wp-block-column {
+		flex-basis: 100% !important;
 	}
 }

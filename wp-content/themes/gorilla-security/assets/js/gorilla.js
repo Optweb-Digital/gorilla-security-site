@@ -354,8 +354,50 @@
 		} );
 	}
 
+	/**
+	 * Slider (Figma 1:418): the track is a scroll-snap row that works on its own; the round
+	 * arrows (gsec_arrows) scroll it by one card. The track becomes a labelled, focusable
+	 * region so keyboard users can scroll it with the arrow keys.
+	 */
+	function initSliders() {
+		document.querySelectorAll( '.gs-slider' ).forEach( function ( root ) {
+			const track = root.querySelector( '.gs-slider__track' );
+			if ( ! track || ! track.firstElementChild ) {
+				return;
+			}
+			const heading = root.querySelector( '.wp-block-heading' );
+			track.setAttribute( 'role', 'region' );
+			track.tabIndex = 0;
+			if ( heading ) {
+				heading.id = heading.id || track.id + '-label';
+				track.setAttribute( 'aria-labelledby', heading.id );
+			}
+			const rtl = window.getComputedStyle( track ).direction === 'rtl';
+			root.querySelectorAll( '.gs-arrow' ).forEach( function ( arrow ) {
+				arrow.addEventListener( 'click', function () {
+					const card = track.firstElementChild;
+					const gap = parseFloat(
+						window.getComputedStyle( track ).columnGap
+					);
+					const step =
+						( card.offsetWidth + ( gap || 0 ) ) *
+						( arrow.getAttribute( 'data-gs-dir' ) === 'prev'
+							? -1
+							: 1 ) *
+						( rtl ? -1 : 1 );
+					track.scrollBy( {
+						left: step,
+						behavior: reduceMotion.matches ? 'auto' : 'smooth',
+					} );
+				} );
+			} );
+			root.classList.add( 'is-enhanced' );
+		} );
+	}
+
 	initHeader();
 	initMarquee();
 	initSteps();
 	initTabs();
+	initSliders();
 } )();

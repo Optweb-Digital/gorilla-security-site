@@ -15,16 +15,26 @@
 $gorilla_bg     = gorilla_img( 'hero-bg' );
 $gorilla_social = array_filter( (array) gorilla_site( 'social' ) );
 
+// The real hero image (hero-bg.webp) is composited from Figma 1:69 + 20% dim 1:70 + cut-out 1:72,
+// so it needs no extra overlay. The SVG placeholder gets Figma's 20%; no image at all → solid night.
+if ( ! $gorilla_bg ) {
+	$gorilla_dim = 100;
+} elseif ( str_ends_with( $gorilla_bg, '.svg' ) ) {
+	$gorilla_dim = 20;
+} else {
+	$gorilla_dim = 0;
+}
+
 $gorilla_cover_attrs = array(
 	'url'                => $gorilla_bg,
-	'dimRatio'           => $gorilla_bg ? 20 : 100,
+	'dimRatio'           => $gorilla_dim,
 	'overlayColor'       => 'night',
 	'isUserOverlayColor' => true,
 	'align'              => 'full',
 	'className'          => 'gs-hero',
 	'layout'             => array( 'type' => 'default' ),
 );
-$gorilla_dim_class   = $gorilla_bg ? 'has-background-dim-20' : 'has-background-dim-100';
+$gorilla_dim_class   = 'has-background-dim-' . $gorilla_dim;
 
 $gorilla_trust = array_filter(
 	array(

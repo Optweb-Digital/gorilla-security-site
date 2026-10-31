@@ -222,6 +222,99 @@ function gorilla_img( $name ) {
 }
 
 /**
+ * Intrinsic size of a theme image (assets/images) from its URL, or null for other images.
+ *
+ * @param string $src Image URL.
+ * @return array{0:int,1:int}|null
+ */
+function gorilla_theme_image_size( $src ) {
+	static $cache = array();
+	$base         = get_template_directory_uri() . '/assets/images/';
+	if ( 0 !== strpos( $src, $base ) ) {
+		return null;
+	}
+	if ( isset( $cache[ $src ] ) ) {
+		return $cache[ $src ];
+	}
+	$file = get_template_directory() . '/assets/images/' . sanitize_file_name( wp_basename( wp_parse_url( $src, PHP_URL_PATH ) ) );
+	$size = null;
+	if ( is_readable( $file ) ) {
+		if ( str_ends_with( $file, '.svg' ) ) {
+			$svg = (string) file_get_contents( $file, false, null, 0, 600 ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- local theme file, header only.
+			if ( preg_match( '/width="(\d+)"[^>]*height="(\d+)"/', $svg, $m ) ) {
+				$size = array( (int) $m[1], (int) $m[2] );
+			}
+		} else {
+			$info = getimagesize( $file );
+			$size = $info ? array( (int) $info[0], (int) $info[1] ) : null;
+		}
+	}
+	$cache[ $src ] = $size;
+	return $size;
+}
+
+/**
+ * Theme images in image blocks: add width/height (no layout shift) and lazy loading.
+ *
+ * Core only lazy-loads images that already have dimensions, which pattern-built image blocks lack.
+ * Logos stay eager: they are tiny, sit near the top, and are sized "auto" from the loaded file (a lazy
+ * 0×0 image would never load). Media Library images are left to core.
+ *
+ * @param string $block_content Rendered block HTML.
+ * @return string
+ */
+function gorilla_optimize_theme_image( $block_content ) {
+	$tags = new WP_HTML_Tag_Processor( $block_content );
+	if ( ! $tags->next_tag( 'img' ) ) {
+		return $block_content;
+	}
+	$size = gorilla_theme_image_size( (string) $tags->get_attribute( 'src' ) );
+	if ( ! $size ) {
+		return $block_content;
+	}
+	if ( null === $tags->get_attribute( 'width' ) ) {
+		$tags->set_attribute( 'width', (string) $size[0] );
+		$tags->set_attribute( 'height', (string) $size[1] );
+	}
+	$is_logo = (bool) preg_match( '/gs-(header__logo|trust-strip__logo|marquee__logo|review-badge__source)/', $block_content );
+	if ( null === $tags->get_attribute( 'loading' ) && ! $is_logo ) {
+		$tags->set_attribute( 'loading', 'lazy' );
+	}
+	$tags->set_attribute( 'decoding', 'async' );
+	return $tags->get_updated_html();
+}
+add_filter( 'render_block_core/image', 'gorilla_optimize_theme_image' );
+
+/**
+ * The hero cover photo is the LCP image: give it dimensions and fetch priority.
+ *
+ * @param string $block_content Rendered block HTML.
+ * @return string
+ */
+function gorilla_prioritize_hero_image( $block_content ) {
+	if ( false === strpos( $block_content, 'gs-hero' ) ) {
+		return $block_content;
+	}
+	$tags = new WP_HTML_Tag_Processor( $block_content );
+	if ( $tags->next_tag(
+		array(
+			'tag_name'   => 'img',
+			'class_name' => 'wp-block-cover__image-background',
+		)
+	) ) {
+		$size = gorilla_theme_image_size( (string) $tags->get_attribute( 'src' ) );
+		if ( $size && null === $tags->get_attribute( 'width' ) ) {
+			$tags->set_attribute( 'width', (string) $size[0] );
+			$tags->set_attribute( 'height', (string) $size[1] );
+		}
+		$tags->set_attribute( 'fetchpriority', 'high' );
+		$tags->remove_attribute( 'loading' );
+	}
+	return $tags->get_updated_html();
+}
+add_filter( 'render_block_core/cover', 'gorilla_prioritize_hero_image' );
+
+/**
  * Site-wide business details used by patterns (header, footer, contact card).
  *
  * Values are intentionally empty until confirmed — see "Open decisions" in

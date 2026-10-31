@@ -557,28 +557,33 @@ mark.gs-accent {
 }
 
 /* ---------- FAQ (numbered) — Figma 1:339 ---------- */
+
+/* Container 1:342: white, glow, radius 37; rows inset 35px. */
 .gs-faq {
+	--gs-faq-num: 21.5%;
 	counter-reset: gs-faq;
-	padding: var(--wp--preset--spacing--40);
+	padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--50);
 	border-radius: var(--gs-r-2xl);
 	background-color: var(--wp--preset--color--white);
 	box-shadow: var(--wp--preset--shadow--glow);
 }
 
+/* Rows: 107px tall (35px line + 36px padding), 1px black-30% dividers between closed rows. */
 .wp-block-details.is-style-faq-numbered {
 	counter-increment: gs-faq;
 	margin: 0;
-	padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+	padding: var(--wp--preset--spacing--50) var(--wp--preset--spacing--40);
 	border-radius: var(--gs-r-2xl);
 	transition: background-color var(--gs-ease);
 }
 
 .wp-block-details.is-style-faq-numbered + .wp-block-details.is-style-faq-numbered:not([open]) {
-	border-block-start: 1px solid var(--wp--preset--color--border);
+	border-block-start: 1px solid color-mix(in srgb, var(--wp--preset--color--ink) 30%, transparent);
 	border-start-start-radius: 0;
 	border-start-end-radius: 0;
 }
 
+/* Open row 1:343: brand-100, radius 34 (→ 2xl). */
 .wp-block-details.is-style-faq-numbered[open] {
 	background-color: var(--wp--preset--color--brand-100);
 }
@@ -586,7 +591,6 @@ mark.gs-accent {
 .wp-block-details.is-style-faq-numbered > summary {
 	display: flex;
 	align-items: baseline;
-	gap: var(--wp--preset--spacing--40);
 	color: var(--wp--preset--color--muted);
 	font-size: var(--wp--preset--font-size--lead);
 	font-weight: 500;
@@ -600,25 +604,39 @@ mark.gs-accent {
 	display: none;
 }
 
+/* Number 1:401: 24px regular at 52%; the question starts 263px in (≈ 21.5% of the row). */
 .wp-block-details.is-style-faq-numbered > summary::before {
 	content: counter(gs-faq, decimal-leading-zero);
 	flex-shrink: 0;
-	min-inline-size: 2.5ch;
-	font-size: var(--wp--preset--font-size--lead);
+	inline-size: var(--gs-faq-num);
+	font-size: var(--wp--preset--font-size--card-title);
 	font-weight: 400;
 	opacity: 0.52;
 }
 
+/* Plus / close 1:346 / 1:374: grey plus at 52%, brand close when open. */
 .wp-block-details.is-style-faq-numbered > summary::after {
 	content: "";
 	flex-shrink: 0;
 	align-self: center;
 	inline-size: 1.2em;
 	block-size: 1.2em;
+	box-sizing: content-box;
 	margin-inline-start: auto;
+	padding-inline-start: var(--wp--preset--spacing--40);
 	background-color: currentcolor;
-	-webkit-mask: url(../icons/plus.svg) center / contain no-repeat;
-	mask: url(../icons/plus.svg) center / contain no-repeat;
+	opacity: 0.4;
+	-webkit-mask: url(../icons/plus.svg) right center / 1.2em no-repeat;
+	mask: url(../icons/plus.svg) right center / 1.2em no-repeat;
+}
+
+.wp-block-details.is-style-faq-numbered[open] > summary {
+	color: var(--wp--preset--color--brand-700);
+}
+
+.wp-block-details.is-style-faq-numbered[open] > summary::before,
+.wp-block-details.is-style-faq-numbered[open] > summary::after {
+	opacity: 1;
 }
 
 .wp-block-details.is-style-faq-numbered[open] > summary::after {
@@ -626,9 +644,36 @@ mark.gs-accent {
 	mask-image: url(../icons/close.svg);
 }
 
+/* Answer 1:345: 18px / 35px, aligned with the question, max 716px. */
 .wp-block-details.is-style-faq-numbered > :not(summary) {
-	margin-block-start: var(--wp--preset--spacing--20);
-	padding-inline-start: calc(2.5ch + var(--wp--preset--spacing--40));
+	box-sizing: content-box;
+	max-inline-size: 40em;
+	margin-block: var(--wp--preset--spacing--30) 0;
+	padding-inline-start: var(--gs-faq-num);
+	color: var(--wp--preset--color--body);
+	font-size: var(--wp--preset--font-size--medium);
+	letter-spacing: -0.03em;
+	line-height: 1.94;
+}
+
+@media (max-width: 781px) {
+
+	.gs-faq {
+		--gs-faq-num: 3.2ch;
+		padding-inline: var(--wp--preset--spacing--20);
+	}
+
+	.wp-block-details.is-style-faq-numbered {
+		padding: var(--wp--preset--spacing--40) var(--wp--preset--spacing--30);
+	}
+
+	.wp-block-details.is-style-faq-numbered > summary::before {
+		margin-inline-end: var(--wp--preset--spacing--20);
+	}
+
+	.wp-block-details.is-style-faq-numbered > :not(summary) {
+		padding-inline-start: calc(var(--gs-faq-num) + var(--wp--preset--spacing--20));
+	}
 }
 
 /* ---------- Social links · tint circles (matches footer contact circles, Figma 1:471) ---------- */
@@ -2647,5 +2692,68 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 	/* Wider cards on phones so the photo still shows above the review text. */
 	.gs-slider__track > .gs-testimonial.wp-block-group {
 		inline-size: min(80vw, 348px);
+	}
+}
+
+/* ---------- FAQ section — Figma 1:334 ---------- */
+
+/* Wash 1:335: surface-2 → white → pink, as on the tinted split. */
+.gs-faq-section.wp-block-group {
+	margin-block-start: 0;
+	padding-block: var(--wp--preset--spacing--60);
+	padding-inline: var(--wp--style--root--padding-left) var(--wp--style--root--padding-right);
+	background-color: var(--wp--preset--color--white);
+	background-image: linear-gradient(100deg, var(--wp--preset--color--surface-2), var(--wp--preset--color--white) 48%, color-mix(in srgb, var(--wp--preset--color--brand-500) 32%, var(--wp--preset--color--white)));
+}
+
+.gs-faq-section__head.wp-block-group {
+	gap: var(--wp--preset--spacing--40);
+	margin-block-end: var(--wp--preset--spacing--40);
+}
+
+/* Figma 1:336: the button lines up with the heading, below the eyebrow. */
+.gs-faq-section__head > .wp-block-buttons {
+	margin-block-start: var(--wp--preset--spacing--60);
+}
+
+.gs-faq-section__intro > * {
+	margin-block: 0;
+}
+
+.gs-faq-section__intro > .is-style-eyebrow {
+	margin-block-end: var(--wp--preset--spacing--30);
+}
+
+.gs-faq-section .gs-faq-section__intro > .wp-block-heading {
+	max-inline-size: 14.5em;
+	letter-spacing: -0.03em;
+	line-height: 1.22;
+}
+
+.gs-faq-section > .gs-faq.wp-block-group {
+	max-inline-size: 80%;
+	margin-inline: auto;
+}
+
+/* Open question 1:378: brand-700 → violet gradient text over a solid brand-700 fallback (rules-log 012). */
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+
+	.gs-faq .wp-block-details.is-style-faq-numbered[open] > summary {
+		background-image: linear-gradient(90deg, var(--wp--preset--color--brand-700), var(--wp--preset--color--brand-200) 60%);
+		-webkit-background-clip: text;
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+
+	.gs-faq .wp-block-details.is-style-faq-numbered[open] > summary::before,
+	.gs-faq .wp-block-details.is-style-faq-numbered[open] > summary::after {
+		-webkit-text-fill-color: var(--wp--preset--color--brand-700);
+	}
+}
+
+@media (max-width: 1100px) {
+
+	.gs-faq-section > .gs-faq.wp-block-group {
+		max-inline-size: none;
 	}
 }

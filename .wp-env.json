@@ -1,14 +1,15 @@
 {
-  "core": "WordPress/WordPress#6.8",
-  "phpVersion": "8.2",
+  "core": "https://wordpress.org/wordpress-7.1.4.zip",
+  "phpVersion": "8.3",
   "themes": ["./wp-content/themes/gorilla-security"],
   "mappings": {
     "wp-content/mu-plugins": "./wp-content/mu-plugins",
     "fixtures": "./fixtures"
   },
- "plugins": [
-  "https://downloads.wordpress.org/plugin/wordpress-importer.latest-stable.zip"
-],
+  "plugins": [
+    "https://downloads.wordpress.org/plugin/wordpress-importer.latest-stable.zip",
+    "https://downloads.wordpress.org/plugin/contact-form-7.6.2.4.1.zip"
+  ],
   "config": { "WP_DEBUG": true, "SCRIPT_DEBUG": true, "WP_DEVELOPMENT_MODE": "theme" },
   "lifecycleScripts": {
     "afterStart": "npx wp-env run cli wp theme activate gorilla-security && npx wp-env run cli wp rewrite structure /%postname%/ && npx wp-env run cli wp rewrite flush --hard"

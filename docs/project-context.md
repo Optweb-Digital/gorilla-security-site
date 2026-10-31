@@ -17,7 +17,7 @@
 | CSS namespace (`<CSS_NS>`) | `gs` (`.gs-block__el--mod`) |
 | Text domain (`<TEXT_DOMAIN>`) | `gorilla-security` |
 | mu-plugin | `wp-content/mu-plugins/gs-core/` |
-| Min versions | WP 6.6 · PHP 7.4 (target 8.2 on hosting) |
+| Min versions | **WP 7.1 · PHP 8.3** — required by Contact Form 7 6.2 (local/CI pinned to WP 7.1.4, PHP 8.3); theme PHP stays 7.4-compatible |
 
 ## Sources of truth
 - Figma: file `eRJbcaKkAEQSHYALSEbjWt`, page `0:1`, frame `1:4` (Home, 1920px)
@@ -27,7 +27,7 @@
 - Copy: `docs/copy/*.md` (owner: content writer)
 
 ## Plugins (approved list — anything else needs approval)
-- Forms: Contact Form 7 (patterns ship CF7 shortcode placeholders)
+- Forms: Contact Form 7 6.2.4.1 (installed in wp-env; form setup pending — see Open decisions)
 - Import (local/CI only): WordPress Importer — loads `fixtures/content.xml`
 - SEO: TBD (Yoast or Rank Math — see Open decisions)
 - Caching/image: TBD (depends on hosting — see Open decisions)
@@ -56,7 +56,7 @@
 ## Open decisions (agents must not guess these)
 - [ ] Service area (cities/regions) for audience and local SEO
 - [ ] SEO plugin: Yoast or Rank Math (then raise `categories:seo` in `tests/perf/lighthouserc.json` back to 0.95 — lowered to 0.9 because pages have no meta description yet)
-- [ ] Hosting provider, cache and image CDN; SSH/deploy access for staging
+- [ ] Hosting provider, cache and image CDN; SSH/deploy access for staging — **host must run PHP 8.3+ and WordPress 7.1+** (CF7)
 - [ ] Staging and production URLs
 - [ ] Names for tech lead, designer, developers, content writer
 - [ ] CTA target URL confirmed (`/contact-us/#quote`?)

@@ -8,18 +8,19 @@
  * Figma 1:522 — eyebrow, heading, step photos I1:522;1:4091–4101, track 1:4087/4088,
  * six steps (numbers 1:4057–4062 as a CSS counter, titles, dividers 1:4081–4086), Get A Quote.
  * Step 1 is active on load; gorilla.js turns each title into a button that shows its text and
- * photo. Without JS every description is visible. Copy for steps 02–06 is not in Figma yet.
+ * photo. Without JS every description is visible. Step copy comes from the Why us variants
+ * (1:4047, Variant2–6); Figma gives step 06 the same sentence as step 05.
  *
  * @package gorilla-security
  */
 
 $gorilla_steps = array(
 	array( __( 'Proven Experience', 'gorilla-security' ), __( 'With industry experience, our team understands security challenges and delivers solutions tailored to your needs.', 'gorilla-security' ) ),
-	array( __( 'Fast Response', 'gorilla-security' ), '[[TODO: copy]]' ),
-	array( __( 'Competitive Pricing', 'gorilla-security' ), '[[TODO: copy]]' ),
-	array( __( 'Mobile Service', 'gorilla-security' ), '[[TODO: copy]]' ),
-	array( __( 'Trusted & Reliable', 'gorilla-security' ), '[[TODO: copy]]' ),
-	array( __( '24/7 Support', 'gorilla-security' ), '[[TODO: copy]]' ),
+	array( __( 'Fast Response', 'gorilla-security' ), __( 'Quick response and dependable service when you need us, helping keep your property protected without unnecessary delays.', 'gorilla-security' ) ),
+	array( __( 'Competitive Pricing', 'gorilla-security' ), __( 'Quality security solutions at fair and transparent prices, giving you reliable protection without unnecessary costs.', 'gorilla-security' ) ),
+	array( __( 'Mobile Service', 'gorilla-security' ), __( 'Our fully mobile team brings professional security services directly to your home or business, wherever you need us.', 'gorilla-security' ) ),
+	array( __( 'Trusted & Reliable', 'gorilla-security' ), __( 'Honest advice, quality workmanship, and reliable solutions designed to give you confidence in your security system.', 'gorilla-security' ) ),
+	array( __( '24/7 Support', 'gorilla-security' ), __( 'Honest advice, quality workmanship, and reliable solutions designed to give you confidence in your security system.', 'gorilla-security' ) ),
 );
 
 // One photo per step (decorative: the text carries the meaning); none at all → no media frame.

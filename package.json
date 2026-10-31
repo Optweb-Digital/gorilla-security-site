@@ -9,7 +9,8 @@
     "fix:style": "wp-scripts lint-style \"wp-content/**/*.css\" --fix && wp-scripts lint-js \"wp-content/**/*.js\" --fix",
     "test:a11y": "pa11y-ci --config tests/a11y/.pa11yci.json",
     "test:perf": "lhci autorun --config=tests/perf/lighthouserc.json",
-    "check": "composer run lint:php && composer run lint:security && npm run lint:style && npm run test:a11y && npm run test:perf"
+    "check": "npm run test:fixtures && composer run lint:php && composer run lint:security && npm run lint:style && npm run test:a11y && npm run test:perf",
+    "test:fixtures": "node tests/fixtures-coverage.mjs"
   },
   "devDependencies": {
     "@wordpress/env": "^10",

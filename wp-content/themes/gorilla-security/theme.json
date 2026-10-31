@@ -74,16 +74,16 @@
 				{ "slug": "caption", "name": "Caption", "size": "13px", "fluid": false },
 				{ "slug": "small", "name": "Small", "size": "14px", "fluid": false },
 				{ "slug": "base", "name": "Base", "size": "16px", "fluid": false },
-				{ "slug": "medium", "name": "Medium (body)", "size": "18px", "fluid": { "min": "16px", "max": "18px" } },
-				{ "slug": "lead", "name": "Lead", "size": "20px", "fluid": { "min": "17px", "max": "20px" } },
-				{ "slug": "card-title", "name": "Card title", "size": "23px", "fluid": { "min": "19px", "max": "23px" } },
-				{ "slug": "h5", "name": "H5", "size": "32px", "fluid": { "min": "24px", "max": "32px" } },
-				{ "slug": "h4", "name": "H4", "size": "36px", "fluid": { "min": "26px", "max": "36px" } },
-				{ "slug": "h3", "name": "H3", "size": "42px", "fluid": { "min": "28px", "max": "42px" } },
-				{ "slug": "h2", "name": "H2", "size": "60px", "fluid": { "min": "34px", "max": "60px" } },
-				{ "slug": "h2-xl", "name": "H2 XL", "size": "70px", "fluid": { "min": "38px", "max": "70px" } },
-				{ "slug": "h1", "name": "H1", "size": "80px", "fluid": { "min": "40px", "max": "80px" } },
-				{ "slug": "display", "name": "Display", "size": "121px", "fluid": { "min": "46px", "max": "121px" } }
+				{ "slug": "medium", "name": "Medium (body)", "size": "clamp(16px, 0.9375vw, 18px)", "fluid": false },
+				{ "slug": "lead", "name": "Lead", "size": "clamp(16px, 1.0417vw, 20px)", "fluid": false },
+				{ "slug": "card-title", "name": "Card title", "size": "clamp(18px, 1.1979vw, 23px)", "fluid": false },
+				{ "slug": "h5", "name": "H5", "size": "clamp(24px, 1.6667vw, 32px)", "fluid": false },
+				{ "slug": "h4", "name": "H4", "size": "clamp(26px, 1.875vw, 36px)", "fluid": false },
+				{ "slug": "h3", "name": "H3", "size": "clamp(28px, 2.1875vw, 42px)", "fluid": false },
+				{ "slug": "h2", "name": "H2", "size": "clamp(34px, 3.125vw, 60px)", "fluid": false },
+				{ "slug": "h2-xl", "name": "H2 XL", "size": "clamp(38px, 3.6458vw, 70px)", "fluid": false },
+				{ "slug": "h1", "name": "H1", "size": "clamp(40px, 4.1667vw, 80px)", "fluid": false },
+				{ "slug": "display", "name": "Display", "size": "clamp(46px, 6.3021vw, 121px)", "fluid": false }
 			]
 		},
 		"spacing": {
@@ -106,7 +106,7 @@
 			"blur": { "glass": "35px" },
 			"duration": { "fast": "150ms", "base": "200ms", "slow": "400ms" },
 			"easing": { "standard": "cubic-bezier(0.2, 0, 0, 1)" },
-			"control": { "sm": "48px", "field": "56px", "md": "60px", "lg": "71px" }
+			"control": { "sm": "clamp(40px, 2.5vw, 48px)", "field": "clamp(44px, 2.9167vw, 56px)", "md": "clamp(48px, 3.125vw, 60px)", "lg": "clamp(56px, 3.6979vw, 71px)" }
 		}
 	},
 	"styles": {

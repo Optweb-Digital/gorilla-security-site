@@ -16,6 +16,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 add_filter( 'wpcf7_load_js', '__return_false' );
 add_filter( 'wpcf7_load_css', '__return_false' );
 
+// No automatic <p>/<br> around fields; the theme's .gs-form lays the fields out with CSS.
+add_filter( 'wpcf7_autop_or_not', '__return_false' );
+
 /**
  * Remember (or report) whether this request rendered a CF7 form.
  *
@@ -46,9 +49,12 @@ function gorilla_cf7_enqueue_assets() {
 /**
  * When a CF7 shortcode renders, record it; enqueue now if CF7's assets are already registered.
  *
+ * CF7 wraps its hidden inputs in a <fieldset> with no <legend> (a WCAG failure for a group with no
+ * visible fields); it is turned into a plain <div>.
+ *
  * @param string $output Shortcode output.
  * @param string $tag    Shortcode tag.
- * @return string Unchanged output.
+ * @return string Output with the hidden-fields fieldset replaced.
  */
 function gorilla_cf7_on_shortcode( $output, $tag ) {
 	if ( 'contact-form-7' !== $tag && 'contact-form' !== $tag ) {
@@ -58,7 +64,11 @@ function gorilla_cf7_on_shortcode( $output, $tag ) {
 	if ( did_action( 'wp_enqueue_scripts' ) ) {
 		gorilla_cf7_enqueue_assets();
 	}
-	return $output;
+	return (string) preg_replace(
+		'#<fieldset class="hidden-fields-container">(.*?)</fieldset>#s',
+		'<div class="hidden-fields-container">$1</div>',
+		$output
+	);
 }
 add_filter( 'do_shortcode_tag', 'gorilla_cf7_on_shortcode', 10, 2 );
 

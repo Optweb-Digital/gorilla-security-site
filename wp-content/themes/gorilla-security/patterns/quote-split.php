@@ -52,7 +52,7 @@ echo wp_kses_post( gorilla_paragraph( __( 'Let us know what service you are look
 <!-- wp:shortcode -->
 [contact-form-7 title="<?php echo esc_attr( $gorilla_form_title ); ?>"]
 <!-- /wp:shortcode -->
-<?php else : ?>
+<?php elseif ( current_user_can( 'edit_theme_options' ) ) : // Visitors see no placeholder when the form is missing. ?>
 <!-- wp:paragraph -->
 <p>[[TODO: quote form — Contact Form 7 form "<?php echo esc_html( $gorilla_form_title ); ?>" (name, email, phone, purpose, requirement, message; submit "Get A Quote")]]</p>
 <!-- /wp:paragraph -->

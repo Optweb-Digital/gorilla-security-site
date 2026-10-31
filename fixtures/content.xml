@@ -271,8 +271,30 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>[[Add one block per built pattern below, e.g. &lt;!-- wp:pattern {"slug":"gorilla-security/faq"} /--&gt;, plus a long-copy and an empty-field copy of it.]]</p>
-<!-- /wp:paragraph -->]]></content:encoded>
+<p>Every section pattern in Figma order (tests/fixtures-coverage.mjs keeps this list complete). The hero carries the page H1, so it is tested on the home page instead.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:pattern {"slug":"gorilla-security/about"} /-->
+
+<!-- wp:pattern {"slug":"gorilla-security/brands"} /-->
+
+<!-- wp:pattern {"slug":"gorilla-security/why-us"} /-->
+
+<!-- wp:pattern {"slug":"gorilla-security/services-tabs"} /-->
+
+<!-- wp:pattern {"slug":"gorilla-security/quote-split"} /-->
+
+<!-- wp:pattern {"slug":"gorilla-security/split-intro"} /-->
+
+<!-- wp:pattern {"slug":"gorilla-security/split-image-left"} /-->
+
+<!-- wp:pattern {"slug":"gorilla-security/split-icon-trio"} /-->
+
+<!-- wp:pattern {"slug":"gorilla-security/cta-dark"} /-->
+
+<!-- wp:pattern {"slug":"gorilla-security/testimonials"} /-->
+
+<!-- wp:pattern {"slug":"gorilla-security/faq"} /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>102</wp:post_id>
 		<wp:post_name><![CDATA[fixtures-stress-test]]></wp:post_name>

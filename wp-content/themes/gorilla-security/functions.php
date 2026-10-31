@@ -24,14 +24,14 @@ function gorilla_enqueue_assets() {
 	$uri = get_template_directory_uri();
 
 	wp_enqueue_style(
-		'gs-components',
+		'gorilla-components',
 		$uri . '/assets/css/components.css',
 		array(),
 		(string) filemtime( $dir . '/assets/css/components.css' )
 	);
 
 	wp_enqueue_script(
-		'gs-gorilla',
+		'gorilla-script',
 		$uri . '/assets/js/gorilla.js',
 		array(),
 		(string) filemtime( $dir . '/assets/js/gorilla.js' ),
@@ -42,7 +42,7 @@ function gorilla_enqueue_assets() {
 	);
 
 	wp_localize_script(
-		'gs-gorilla',
+		'gorilla-script',
 		'gorillaL10n',
 		array(
 			'pauseLogos' => __( 'Pause logo animation', 'gorilla-security' ),
@@ -68,29 +68,24 @@ function gorilla_disable_emoji() {
 }
 add_action( 'init', 'gorilla_disable_emoji' );
 
-// Contact Form 7: no automatic <p>/<br> around fields; .gs-form lays the fields out with CSS.
-add_filter( 'wpcf7_autop_or_not', '__return_false' );
-
 /**
  * Run shortcodes inside Shortcode blocks that come from patterns.
  *
  * Block templates run do_shortcode() before do_blocks(), so a [shortcode] inside a pattern
- * (e.g. the CF7 form in the quote card) would otherwise print as text.
- * CF7 wraps its hidden inputs in a <fieldset> with no <legend> (a WCAG failure for a group with no
- * visible fields); it is turned into a plain <div>.
+ * (e.g. the CF7 form in the quote card) would otherwise print as text. Post content is left to
+ * core's own do_shortcode() (the_content, priority 11) so shortcodes never run twice.
+ * The block's autop wraps the shortcode in <p>; around a <div> the browser splits that into empty
+ * <p>s that add layout gaps, so the wrapper is dropped.
  *
  * @param string $block_content Rendered block HTML.
  * @return string
  */
 function gorilla_render_shortcode_block( $block_content ) {
+	if ( doing_filter( 'the_content' ) ) {
+		return (string) preg_replace( '#^\s*<p>\s*(\[.*\])\s*</p>\s*$#s', '$1', $block_content );
+	}
 	$html = do_shortcode( $block_content );
-	// The block's autop wraps the shortcode in <p>; around a <div> the browser splits it into empty <p>s.
-	$html = (string) preg_replace( '#<p>\s*(<div\b.*</div>)\s*</p>#s', '$1', $html );
-	return (string) preg_replace(
-		'#<fieldset class="hidden-fields-container">(.*?)</fieldset>#s',
-		'<div class="hidden-fields-container">$1</div>',
-		$html
-	);
+	return (string) preg_replace( '#<p>\s*(<div\b.*</div>)\s*</p>#s', '$1', $html );
 }
 add_filter( 'render_block_core/shortcode', 'gorilla_render_shortcode_block' );
 

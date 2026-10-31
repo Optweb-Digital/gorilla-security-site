@@ -247,6 +247,20 @@
 				const section = track.closest( '.alignfull' );
 				const heading = section && section.querySelector( 'h2' );
 
+				// Figma's slider loops the reviews 4× (1:418); copies are decorative.
+				if ( track.classList.contains( 'gs-slider__track--repeat' ) ) {
+					const cards = Array.from( track.children );
+					for ( let copy = 0; copy < 3; copy++ ) {
+						cards.forEach( function ( card ) {
+							const clone = card.cloneNode( true );
+							clone.setAttribute( 'aria-hidden', 'true' );
+							clone.setAttribute( 'inert', '' );
+							clone.removeAttribute( 'id' );
+							track.appendChild( clone );
+						} );
+					}
+				}
+
 				track.setAttribute( 'role', 'region' );
 				track.setAttribute( 'tabindex', '0' );
 				if ( heading ) {

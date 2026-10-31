@@ -6,7 +6,8 @@
  * Keywords: testimonials, reviews, slider, customers
  *
  * Figma 1:407 — eyebrow 1:414, heading 1:408, copy 1:410, Get A Quote 1:411, arrows 1:419 and the
- * slider 1:418 (cards 1:4619, 1:4375, 1:4431, 1:4491, 1:4555; Figma repeats them 4× for the loop).
+ * slider 1:418 (cards 1:4619, 1:4375, 1:4431, 1:4491, 1:4555). Figma repeats them 4× (20 cards); gorilla.js
+ * adds the 3 extra copies as aria-hidden, inert clones, so the HTML keeps each review once.
  * Reviews are quoted as in Figma; whether they are genuine and the photos cleared is an open decision.
  * Without JS the track is a native horizontal scroller and the arrows are hidden.
  *
@@ -62,8 +63,8 @@ echo wp_kses_post( gorilla_arrows( $gorilla_track ) );
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"anchor":"<?php echo esc_attr( $gorilla_track ); ?>","className":"gs-slider__track","layout":{"type":"default"}} -->
-<div id="<?php echo esc_attr( $gorilla_track ); ?>" class="wp-block-group gs-slider__track">
+<!-- wp:group {"anchor":"<?php echo esc_attr( $gorilla_track ); ?>","className":"gs-slider__track gs-slider__track--repeat","layout":{"type":"default"}} -->
+<div id="<?php echo esc_attr( $gorilla_track ); ?>" class="wp-block-group gs-slider__track gs-slider__track--repeat">
 <?php foreach ( $gorilla_reviews as $gorilla_review ) : ?>
 	<?php
 	list( $gorilla_photo, $gorilla_name, $gorilla_when, $gorilla_lines, $gorilla_score ) = $gorilla_review;

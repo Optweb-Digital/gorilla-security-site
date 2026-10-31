@@ -43,7 +43,7 @@ echo wp_kses_post(
 <!-- wp:shortcode -->
 [contact-form-7 title="<?php echo esc_attr( $gorilla_form_title ); ?>"]
 <!-- /wp:shortcode -->
-<?php else : ?>
+<?php elseif ( current_user_can( 'edit_theme_options' ) ) : // Visitors see no placeholder when the form is missing. ?>
 <!-- wp:paragraph -->
 <p>[[TODO: quote form — Contact Form 7 form "<?php echo esc_html( $gorilla_form_title ); ?>" (fields: full name, phone, email, service, message; submit "Request a Quote")]]</p>
 <!-- /wp:paragraph -->

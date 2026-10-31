@@ -91,8 +91,10 @@ Poppins 400/500/600 only (the single Inter layer in the form note → Poppins). 
 `h2-xl` → `--…--h-2-xl`, radius `2xl` → `--wp--custom--radius--2-xl` (class `has-h-3-font-size`). The
 pattern helper `gorilla_slug_class()` handles classes; in CSS use the kebab name (lint enforces it, rules-log 005).
 
-Fluid sizes are computed by WP between 390px and 1920px viewports. Never set `px` font sizes
-in blocks; pick a slug.
+Desktop scales with the viewport like the 1920 design: font sizes (medium and up), control heights and
+spacing are `clamp(floor, Figma px ÷ 19.2 vw, Figma px)`, so 1920 matches Figma exactly and e.g. 1536 is
+Figma × 0.8; the floor keeps phones readable. New fixed sizes in CSS follow the same formula.
+Never set `px` font sizes in blocks; pick a slug.
 
 ### Spacing, radius, shadow
 - Spacing slugs `10…90`: 8, 12, 16, 24, 32, 48, 64, **96 (section padding)**, 128 — all clamp()ed.
@@ -279,8 +281,9 @@ pages = **Landing (no title)** template + `split-*`, `services-tabs`, `faq`, `ct
 
 - Only the home page at 1920px is designed — no tablet/mobile frames, hover/focus states, form
   error states or inner pages. Theme defines sensible defaults for all of these.
-- "Why us" steps 02–06 and FAQ answers 01, 03–08 have no copy in Figma; patterns use
+- FAQ answers 01, 03–08 have no copy anywhere in the Figma file (only 02, 1:345); patterns use
   `[[TODO: copy]]` until the content writer supplies it (AGENTS.md §9 — no invented copy).
+  "Why us" step copy lives in the component variants (1:4047 Variant2–6); step 06 repeats step 05's sentence.
 - Opening hours conflict: contact card 1:199 "Mon–Sat 8:00 AM–6:00 PM" vs footer 1:485
   "Mon to Fri 5:30am–7pm / Sat to Sun 5:30am–5pm". `gorilla_site('hours')` stays empty until confirmed.
 - Quote forms differ: hero card 1:97 has 5 fields (name, phone, email, service, message); quote-split

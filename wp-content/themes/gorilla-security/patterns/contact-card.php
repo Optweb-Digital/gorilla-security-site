@@ -14,7 +14,7 @@
 
 $gorilla_phone = gorilla_site( 'phone' );
 $gorilla_hours = (array) gorilla_site( 'hours' );
-$gorilla_first = $gorilla_hours ? reset( $gorilla_hours ) : null;
+$gorilla_first = gorilla_site( 'hours_card' ) ? gorilla_site( 'hours_card' ) : ( $gorilla_hours ? reset( $gorilla_hours ) : null );
 
 if ( ! $gorilla_phone && empty( $gorilla_first['days'] ) ) {
 	return;

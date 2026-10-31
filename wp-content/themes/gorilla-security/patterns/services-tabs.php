@@ -9,7 +9,7 @@
  * bar: CCTV 1:984 … Smart Home 1:550), background 1:985, feature card 1:1051, notes 1:616…,
  * arrows 1:1043. Anchor #services (About's "Know More").
  * Without JS the tab bar is a list of jump links to stacked panels; gorilla.js turns it into an
- * ARIA tablist (arrow keys, Home/End, prev/next buttons). "Know More" waits for service pages.
+ * ARIA tablist (arrow keys, Home/End, prev/next buttons). "Know More" goes to the contact page until service pages exist.
  *
  * @package gorilla-security
  */
@@ -165,7 +165,7 @@ foreach ( $gorilla_services as $gorilla_i => $gorilla_s ) :
 <!-- /wp:list -->
 
 <!-- wp:group {"className":"gs-service__actions","layout":{"type":"flex","flexWrap":"wrap","verticalAlignment":"center"}} -->
-<div class="wp-block-group gs-service__actions"><?php echo wp_kses_post( gorilla_buttons( array( gorilla_button( __( 'Get A Quote', 'gorilla-security' ), home_url( '/contact-us/#quote' ), 'outline' ) ) ) ); ?>
+<div class="wp-block-group gs-service__actions"><?php echo wp_kses_post( gorilla_buttons( array( gorilla_button( __( 'Know More', 'gorilla-security' ), home_url( '/contact-us/' ) ), gorilla_button( __( 'Get A Quote', 'gorilla-security' ), home_url( '/contact-us/#quote' ), 'outline' ) ) ) ); ?>
 
 	<?php echo wp_kses_post( gorilla_arrows( 'services' ) ); ?></div>
 <!-- /wp:group --></div>

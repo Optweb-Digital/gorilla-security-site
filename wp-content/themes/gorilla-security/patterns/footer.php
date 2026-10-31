@@ -10,8 +10,8 @@
  * Get A Quote 1:504, social 1:450 / 1:451, services 1:432, quick links 1:441, contact list 1:469,
  * hours 1:485, rule 1:499 and copyright 1:500.
  * Phone, email, address, hours and social come from gorilla_site(); each is only output once
- * confirmed (project-context). Blog and Area links wait for their pages; the badge is a
- * placeholder until it is approved.
+ * confirmed (project-context). Blog and Area link to /blog/ and /area/
+ * (pages still to be created).
  *
  * @package gorilla-security
  */
@@ -42,6 +42,8 @@ $gorilla_services = array(
 $gorilla_links = array(
 	array( __( 'Home', 'gorilla-security' ), home_url( '/' ) ),
 	array( __( 'About Us', 'gorilla-security' ), home_url( '/#about' ) ),
+	array( __( 'Blog', 'gorilla-security' ), home_url( '/blog/' ) ),
+	array( __( 'Area', 'gorilla-security' ), home_url( '/area/' ) ),
 	array( __( 'Contact Us', 'gorilla-security' ), home_url( '/contact-us/' ) ),
 	array( __( 'FAQs', 'gorilla-security' ), home_url( '/#faq' ) ),
 );

@@ -60,10 +60,11 @@
 - [ ] Staging and production URLs
 - [ ] Names for tech lead, designer, developers, content writer
 - [ ] CTA target URL confirmed (`/contact-us/#quote`?)
-- [ ] "Know More" targets (About and the three splits → `#services`; omitted in the service panels until service pages exist) · Figma copy fixes: "livinng" → "living" (1:39), "Intercoms Systems" → "Intercom Systems", "card, PIN biometric" → "card, PIN or biometric" (services)
+- [ ] "Know More" targets (About and the three splits → `#services`; service panels → `/contact-us/` until service pages exist) · Figma copy fixes: "livinng" → "living" (1:39), "Intercoms Systems" → "Intercom Systems", "card, PIN biometric" → "card, PIN or biometric" (services)
 - [ ] Quote form recipient email; options for the quote-split "purpose" and "requirement" dropdowns (hero "Service" uses the 6 footer services)
 - [ ] Copy for "Why us" steps 02–06 and FAQ answers 01, 03–08
 - [ ] Testimonials (Figma 1:418): confirm the 5 reviews are genuine customer reviews quoted verbatim, the reviewers consented, and the photos are theirs or licensed; card 5 repeats the name "Matt To’omua" with a different photo; "N years ago" dates go stale (switch to review dates?)
-- [ ] Partner/brand logo files supplied by partners
-- [ ] Site details for `gorilla_site()`: phone, email, address, opening hours, social URLs (Instagram, Facebook, X, LinkedIn — footer 1:451)
-- [ ] Footer: "Blog" and "Area" pages (links omitted until they exist); approval to use the ShowMeLocal badge (1:507, placeholder now)
+- [ ] Partner/brand logos, review mark and ShowMeLocal badge now use the files from Figma (user asked for the design as drawn, 2026-10-31) — confirm the client may use these third-party marks
+- [ ] Site details in `gorilla_site()` are Figma's (phone 0468 532 275, info@gorillasecurity.com.au, 110 Ruskin St Elwood) — confirm. Opening hours: Figma shows two (contact card "Mon–Sat 8:00 AM–6:00 PM" vs footer "Mon–Fri 5:30am–7pm / Sat–Sun 5:30am–5pm"); both are built as drawn until one is confirmed
+- [ ] Social URLs (Instagram, Facebook, X, LinkedIn — hero rail 1:83, footer 1:451): not in Figma, so the icons stay hidden until supplied
+- [ ] "Blog" and "Area" pages: header and footer link to `/blog/` and `/area/`, which don't exist yet

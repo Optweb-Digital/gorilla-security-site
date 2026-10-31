@@ -49,7 +49,7 @@ echo wp_kses_post( gorilla_heading( __( '[[Trusted by]] Melbourne. Chosen for Se
 
 <!-- wp:group {"className":"gs-testimonials__aside","layout":{"type":"default"}} -->
 <div class="wp-block-group gs-testimonials__aside">
-<?php echo wp_kses_post( gorilla_paragraph( __( 'Discover why homeowners and businesses across Melbourne trust Gorilla Security for dependable security solutions, professional installation, and responsive ongoing support.', 'gorilla-security' ), '', 'lead' ) ); ?>
+<?php echo wp_kses_post( gorilla_paragraph( __( 'Discover why homeowners and businesses across Melbourne trust Gorilla Security & Automation for dependable security solutions, professional installation, and responsive ongoing support.', 'gorilla-security' ), '', 'lead' ) ); ?>
 
 <!-- wp:group {"className":"gs-testimonials__actions","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"right"}} -->
 <div class="wp-block-group gs-testimonials__actions">

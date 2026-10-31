@@ -88,7 +88,7 @@ echo wp_kses_post(
 			)
 		)
 	);
-	echo wp_kses_post( gorilla_paragraph( $gorilla_feature[2], '', 'lead' ) );
+	echo wp_kses_post( gorilla_paragraph( $gorilla_feature[2], '', 'medium' ) );
 	?>
 </div>
 <!-- /wp:group --></div>

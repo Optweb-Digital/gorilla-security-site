@@ -226,10 +226,18 @@ mark.gs-accent {
 	filter: brightness(1.12);
 }
 
+/* Arrow buttons — Figma 1:233 / 1:230: 230 × 60, label 59px from the left, arrow 21px from the right. */
+.wp-block-button:not([class*="is-style-"]) > .wp-block-button__link,
+.wp-block-button.is-style-outline > .wp-block-button__link {
+	gap: var(--wp--preset--spacing--40);
+	padding-inline: calc(var(--wp--preset--spacing--70) - var(--wp--preset--spacing--10) / 2) var(--wp--preset--spacing--40);
+}
+
+/* Header 1:542: 184 × 48, label 27px in, arrow 17px from the right. */
 .wp-block-button.gs-btn-sm .wp-block-button__link {
 	min-block-size: var(--wp--custom--control--sm);
 	padding-block: var(--wp--preset--spacing--10);
-	padding-inline: var(--wp--preset--spacing--40);
+	padding-inline: var(--wp--preset--spacing--40) var(--wp--preset--spacing--30);
 }
 
 .wp-block-button.has-custom-font-size .wp-block-button__link,
@@ -270,6 +278,12 @@ mark.gs-accent {
 	background-color: currentcolor;
 	-webkit-mask: var(--gs-ico) center / contain no-repeat;
 	mask: var(--gs-ico) center / contain no-repeat;
+}
+
+/* Phone buttons — Figma 1:531 (198 × 48) / 1:302 (272 × 71): icon 17–40px in, tighter sides. */
+.wp-block-button.is-style-light-phone .wp-block-button__link.wp-element-button,
+.wp-block-button.is-style-glass-phone .wp-block-button__link.wp-element-button {
+	padding-inline: var(--wp--preset--spacing--40);
 }
 
 /* Light · phone — Figma 1:302: white, 2px brand-300 border, brand text. */
@@ -476,22 +490,21 @@ mark.gs-accent {
 	gap: var(--wp--preset--spacing--30);
 	min-block-size: var(--gs-check);
 	color: var(--gs-brand);
-	font-size: var(--wp--preset--font-size--lead);
+	font-size: var(--wp--preset--font-size--medium);
 	line-height: 1.5;
 }
 
-/* Circle: brand fill inside a brand-100 ring. */
+/* Circle: plain brand-100 disc (Figma 1:569). */
 .wp-block-list.is-style-checklist > li::before {
 	content: "";
 	flex-shrink: 0;
 	inline-size: var(--gs-check);
 	block-size: var(--gs-check);
 	border-radius: var(--gs-r-pill);
-	background-color: var(--gs-brand);
-	box-shadow: inset 0 0 0 7px var(--wp--preset--color--brand-100);
+	background-color: var(--wp--preset--color--brand-100);
 }
 
-/* White tick masked on top of the circle. */
+/* Brand tick masked on top of the circle. */
 .wp-block-list.is-style-checklist > li::after {
 	content: "";
 	position: absolute;
@@ -499,7 +512,7 @@ mark.gs-accent {
 	inset-inline-start: 0;
 	inline-size: var(--gs-check);
 	block-size: var(--gs-check);
-	background-color: var(--wp--preset--color--white);
+	background-color: var(--gs-brand);
 	-webkit-mask: url(../icons/check.svg) center / 40% no-repeat;
 	mask: url(../icons/check.svg) center / 40% no-repeat;
 }
@@ -510,8 +523,9 @@ mark.gs-accent {
 .wp-block-image.is-style-deco-frame-left,
 .wp-block-image.is-style-deco-frame-right {
 	position: relative;
+	--gs-deco-out: calc(var(--wp--preset--spacing--50) + var(--wp--preset--spacing--10) / 2);
 	isolation: isolate;
-	margin: var(--wp--preset--spacing--60);
+	margin: var(--gs-deco-out);
 }
 
 .wp-block-image.is-style-deco-frame-left img,
@@ -540,14 +554,14 @@ mark.gs-accent {
    bottom-left. "Left/right" only names the photo's column, so the two styles render alike. */
 .wp-block-image.is-style-deco-frame-left::before,
 .wp-block-image.is-style-deco-frame-right::before {
-	inset-block-start: calc(-1 * var(--wp--preset--spacing--60));
-	inset-inline-end: calc(-1 * var(--wp--preset--spacing--60));
+	inset-block-start: calc(-1 * var(--gs-deco-out));
+	inset-inline-end: calc(-1 * var(--gs-deco-out));
 }
 
 .wp-block-image.is-style-deco-frame-left::after,
 .wp-block-image.is-style-deco-frame-right::after {
-	inset-block-end: calc(-1 * var(--wp--preset--spacing--60));
-	inset-inline-start: calc(-1 * var(--wp--preset--spacing--60));
+	inset-block-end: calc(-1 * var(--gs-deco-out));
+	inset-inline-start: calc(-1 * var(--gs-deco-out));
 }
 
 /* No image → no decorative frame (AGENTS.md §6). */
@@ -708,9 +722,10 @@ body:has(.gs-hero-page) .wp-block-template-part:has(> .gs-header) {
 	padding-inline: var(--wp--preset--spacing--60);
 }
 
+/* Figma 1:524: 81px bar around a 75px logo, 24px side padding. */
 .gs-header__bar.is-style-glass-light {
 	gap: var(--wp--preset--spacing--40);
-	padding-block: var(--wp--preset--spacing--30);
+	padding-block: calc(var(--wp--preset--spacing--10) / 2);
 	padding-inline: var(--wp--preset--spacing--40);
 	border-color: var(--wp--preset--color--white);
 	background-color: var(--wp--preset--color--white);
@@ -727,7 +742,13 @@ body:has(.gs-hero-page) .gs-header:not(.gs-header--solid) .gs-header__bar {
 
 .gs-header__logo {
 	flex-shrink: 0;
+	justify-self: start;
 	margin: 0;
+	line-height: 0;
+}
+
+.gs-header .wp-block-image.gs-header__logo a {
+	display: block;
 }
 
 .gs-header .gs-header__logo img {
@@ -771,6 +792,41 @@ body .gs-header .gs-header__bar:has(.wp-block-navigation__responsive-container.i
 .gs-header__actions {
 	flex-shrink: 0;
 	gap: var(--wp--preset--spacing--30);
+}
+
+/* Figma centres the nav on the page (614–1307 → 960), not between logo and buttons. */
+@media (min-width: 1101px) {
+
+	.wp-block-group.gs-header__bar.is-style-glass-light {
+		display: grid;
+		grid-template-columns: 1fr auto 1fr;
+		align-items: center;
+	}
+
+	.gs-header__bar > .gs-header__actions {
+		justify-self: end;
+	}
+}
+
+/* Six links don't fit below 1101px: use the menu button there too (core only collapses below 600px). */
+@media (min-width: 600px) and (max-width: 1100px) {
+
+	.gs-header__nav .wp-block-navigation__responsive-container-open:not(.always-shown) {
+		display: flex;
+	}
+
+	.gs-header__nav .wp-block-navigation__responsive-container:not(.hidden-by-default):not(.is-menu-open) {
+		display: none;
+	}
+
+	.gs-header__nav {
+		flex: 0 0 auto;
+		order: 3;
+	}
+
+	.gs-header__bar > .gs-header__actions {
+		margin-inline-start: auto;
+	}
 }
 
 /* Glass phone on a solid bar needs a solid fill to stay readable. */
@@ -839,11 +895,13 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 
 .wp-block-cover.gs-hero {
 	align-items: stretch;
-	min-block-size: clamp(640px, 100svh, 1006px);
+	min-block-size: clamp(640px, 100svh, 986px);
 
-	/* Clear the fixed header (48px controls + bar padding), then Figma's gap above the H1. */
-	padding-block: calc(var(--wp--custom--control--sm) + var(--wp--preset--spacing--70) + var(--wp--preset--spacing--30)) var(--wp--preset--spacing--40);
-	padding-inline: clamp(16px, 4.7vw, 90px);
+	/* Clear the fixed header (48px controls + bar padding), then Figma's gap to the quote card (y 150). */
+	padding-block: calc(var(--wp--custom--control--sm) + var(--wp--preset--spacing--70) + var(--wp--preset--spacing--50)) var(--wp--preset--spacing--60);
+
+	/* Figma: H1 at x 90, quote card 35px from the right edge. */
+	padding-inline: clamp(16px, 4.7vw, 90px) clamp(16px, 1.8vw, 35px);
 
 	/* Solid night under the photo: fallback if it fails to load, and what contrast checkers measure. */
 	background-color: var(--wp--preset--color--night);
@@ -878,7 +936,9 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 	text-shadow: 0 0 4px color-mix(in srgb, var(--wp--preset--color--night) 53%, transparent);
 }
 
+/* Figma 1:71: the H1 starts above the quote card (y 117 vs 150). */
 .gs-hero__title.wp-block-heading {
+	margin-block-start: calc(-1 * var(--wp--preset--spacing--40));
 	color: var(--wp--preset--color--white);
 	font-weight: 400;
 	letter-spacing: -0.03em;
@@ -932,6 +992,7 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 
 /* Hero CTA — Figma 1:81: violet glass like the glass phone button, no icon. */
 .gs-hero .wp-block-button.gs-hero__cta a.wp-block-button__link {
+	padding-inline: calc(var(--wp--preset--spacing--50) + var(--wp--preset--spacing--20));
 	min-block-size: var(--wp--custom--control--sm);
 	border: 1px solid var(--wp--preset--color--surface);
 	background-image: linear-gradient(189.72deg, color-mix(in srgb, var(--wp--preset--color--brand-600) 50%, transparent) 20.7%, transparent 136%);
@@ -956,9 +1017,10 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 	color: var(--wp--preset--color--brand-700);
 }
 
-/* Trust strip — Figma 1:515/1:516. */
+/* Trust strip — Figma 1:515/1:516: pinned to the foot of the hero column (y 764). */
 .gs-trust-strip {
 	align-self: flex-start;
+	margin-block-start: auto;
 	gap: var(--wp--preset--spacing--50);
 	inline-size: min(100%, 741px);
 	padding-block: var(--wp--preset--spacing--30);
@@ -980,9 +1042,12 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 }
 
 /* Scroll cue — Figma 1:73: 86px violet glass circle. */
+
+/* Figma 1:73 (y 845) overlaps the foot of the columns by ~21px. */
 .gs-hero__scroll-wrap {
 	display: flex;
 	justify-content: center;
+	margin-block-start: calc(-1 * (var(--wp--preset--spacing--40) + var(--wp--preset--spacing--30)));
 }
 
 .gs-hero__scroll {
@@ -1016,6 +1081,10 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 	display: flex;
 	flex-direction: column;
 	gap: var(--wp--preset--spacing--20);
+}
+
+.gs-hero .wp-block-group.is-style-glass-dark.gs-quote-card {
+	padding-block-end: var(--wp--preset--spacing--60);
 }
 
 .gs-quote-card > * {
@@ -1064,7 +1133,13 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 }
 
 .gs-form :where(textarea) {
+	display: block;
 	min-block-size: calc(var(--wp--custom--control--field) * 1.45);
+}
+
+
+.gs-form > * {
+	margin-block: 0;
 }
 
 .gs-form--dark :where(input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]), select, textarea) {
@@ -1088,6 +1163,11 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 	color: var(--wp--preset--color--white);
 	font: inherit;
 	cursor: pointer;
+}
+
+/* Figma 1:101–1:109: 56px fields on a 66px pitch. */
+.gs-form--dark .wpcf7-form {
+	gap: var(--wp--preset--spacing--10);
 }
 
 .gs-form--dark > p {
@@ -1137,32 +1217,31 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 /* ---------- About — Figma 1:6 ---------- */
 .gs-about.wp-block-group {
 	margin-block-start: 0;
-	padding-block: var(--wp--preset--spacing--80);
+	padding-block: var(--wp--preset--spacing--80) calc(var(--wp--preset--spacing--80) - var(--wp--preset--spacing--20));
 	background-color: var(--wp--preset--color--white);
 	box-shadow: var(--wp--preset--shadow--soft);
 }
 
 .wp-block-columns.gs-about__cols {
-	gap: var(--wp--preset--spacing--40);
+	gap: var(--wp--preset--spacing--20);
 	margin-block: 0;
 }
 
-/* Figma columns 569 / 535 / 489 of 1621. */
+/* Figma columns 569 / 535 / 489 of 1621 (35.1 / 33 / 30.2%), ~12px apart. */
 .wp-block-columns.gs-about__cols > .wp-block-column.gs-about__intro {
 	display: flex;
-	flex: 1.1 1 0;
+	flex: 0 1 35.1%;
 	flex-direction: column;
 	gap: var(--wp--preset--spacing--40);
-	padding-inline-end: var(--wp--preset--spacing--30);
 }
 
 .wp-block-columns.gs-about__cols > .wp-block-column.gs-about__media {
-	flex: 1 1 0;
+	flex: 0 1 33%;
 }
 
 .wp-block-columns.gs-about__cols > .wp-block-column.gs-about__aside {
 	display: flex;
-	flex: 0.92 1 0;
+	flex: 0 1 30.2%;
 	flex-direction: column;
 	gap: var(--wp--preset--spacing--30);
 }
@@ -1175,6 +1254,11 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 	margin-block-start: var(--wp--preset--spacing--20);
 }
 
+/* 1:10: copy is 525px of the 569px column (7 lines). */
+.gs-about__intro > :where(p:not(.is-style-eyebrow)) {
+	max-inline-size: 92.3%;
+}
+
 .gs-about__intro .is-style-stats-with-dividers {
 	margin-block-start: var(--wp--preset--spacing--40);
 }
@@ -1184,12 +1268,19 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 	margin: 0;
 }
 
+/* 1:68: the portrait is 535 × 791 and sets the row height; card + van stretch to match. */
 .gs-about .gs-about__photo img {
 	display: block;
 	inline-size: 100%;
-	block-size: 100%;
+	block-size: auto;
+	aspect-ratio: 535 / 791;
 	border-radius: var(--gs-r-xl);
 	object-fit: cover;
+}
+
+.gs-about .gs-about__photo--van img {
+	block-size: 100%;
+	aspect-ratio: auto;
 }
 
 .gs-about .gs-about__photo--van {
@@ -1217,6 +1308,7 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 }
 
 .gs-feature + .gs-feature {
+	margin-block-start: 0;
 	border-block-start: 2px solid var(--wp--preset--color--border);
 }
 
@@ -1225,15 +1317,17 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 }
 
 .gs-feature__title.wp-block-heading {
-	margin-block-end: var(--wp--preset--spacing--10);
+	margin-block-end: 0;
 	color: var(--wp--preset--color--ink);
 	letter-spacing: -0.03em;
 	line-height: 1.5;
 }
 
+/* 1:29: 19px / 29px body under a 23px title. */
 .gs-feature__body p {
+	font-size: var(--wp--preset--font-size--medium);
 	letter-spacing: -0.03em;
-	line-height: 1.5;
+	line-height: 1.6;
 }
 
 @media (max-width: 1100px) {
@@ -1704,9 +1798,11 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 /* ---------- Services (tabs) — Figma 1:162 ---------- */
 
 /* Background 1:985: #EFEFEF → white 48% → #D5B4CE (brand-500 mixed with white ≈ 32%). */
+
+/* Figma 1:162: eyebrow 58px from the top, 108px under the photo. */
 .gs-services.wp-block-group {
 	margin-block-start: 0;
-	padding-block: var(--wp--preset--spacing--60) var(--wp--preset--spacing--80);
+	padding-block: calc(var(--wp--preset--spacing--60) + var(--wp--preset--spacing--20)) calc(var(--wp--preset--spacing--80) + var(--wp--preset--spacing--20));
 	background-image: linear-gradient(100deg, var(--wp--preset--color--surface-2), var(--wp--preset--color--white) 48%, color-mix(in srgb, var(--wp--preset--color--brand-500) 32%, var(--wp--preset--color--white)));
 }
 
@@ -1794,22 +1890,24 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 	display: none;
 }
 
+/* Figma: text 174–845 (672 = 41.5%), photo 894–1795 (901 = 55.6%). */
 .wp-block-columns.gs-service {
-	gap: var(--wp--preset--spacing--80);
-	align-items: center;
+	justify-content: space-between;
+	gap: var(--wp--preset--spacing--50);
+	align-items: flex-start;
 	margin: 0;
 }
 
 .wp-block-columns.gs-service > .wp-block-column.gs-service__text {
 	display: flex;
-	flex: 0.75 1 0;
+	flex: 0 1 41.5%;
 	flex-direction: column;
 	gap: var(--wp--preset--spacing--40);
 }
 
 .wp-block-columns.gs-service > .wp-block-column.gs-service__media {
 	position: relative;
-	flex: 1 1 0;
+	flex: 0 1 55.6%;
 }
 
 .gs-service__text > * {
@@ -1820,15 +1918,23 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 	letter-spacing: -0.03em;
 }
 
-/* Checklist in two columns (Figma 1:1001…). */
-.wp-block-list.is-style-checklist.gs-service__list {
-	grid-template-columns: repeat(2, minmax(0, 1fr));
-	column-gap: var(--wp--preset--spacing--40);
+/* 1:554: copy 525px of the 672px column, tracked -3% (four lines). */
+.gs-service__text > :where(p) {
+	max-inline-size: 78%;
+	letter-spacing: -0.03em;
 }
 
+/* Checklist in two columns (Figma 1:565…): second column starts 378px in; 45px under the copy. */
+.wp-block-list.is-style-checklist.gs-service__list {
+	grid-template-columns: 56% 1fr;
+	column-gap: 0;
+	margin-block-start: var(--wp--preset--spacing--20);
+}
+
+/* Buttons 77px under the list; 63px arrows inline after them (Figma 1:555 / 1:558 / 1:607). */
 .gs-service__actions {
-	gap: var(--wp--preset--spacing--40);
-	margin-block-start: var(--wp--preset--spacing--30);
+	gap: var(--wp--preset--spacing--50);
+	margin-block-start: calc(var(--wp--preset--spacing--60) - var(--wp--preset--spacing--10) / 2);
 }
 
 /* Photo — Figma 1:987: 901×563, r30. */
@@ -1951,6 +2057,12 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 	color: var(--wp--preset--color--white);
 }
 
+/* Services arrows — Figma 1:607: 63px. */
+.gs-service__actions .gs-arrows .gs-arrow {
+	inline-size: clamp(44px, 3.3vw, 63px);
+	block-size: clamp(44px, 3.3vw, 63px);
+}
+
 @media (max-width: 1100px) {
 
 	.gs-tabs__list {
@@ -2008,6 +2120,12 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 	background-color: var(--wp--preset--color--white);
 }
 
+/* Photo 1:170 starts at x 438 (22.8%) and is 1562px wide (81.35%), running past the right edge. */
+.gs-quote-split > .wp-block-cover__image-background {
+	inset-inline-start: 22.8%;
+	inline-size: 81.35%;
+}
+
 .wp-block-cover.gs-quote-split::before {
 	content: "";
 	position: absolute;
@@ -2032,8 +2150,15 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 	justify-content: space-between;
 }
 
+/* 1:178 wraps at ~500px. */
+.gs-quote-split__form > p.has-lead-font-size {
+	max-inline-size: 25em;
+}
+
+/* 1:172: the form block hangs from the top (heading 67px down); the contact card sits at the foot. */
 .gs-quote-split__form.wp-block-group {
 	display: flex;
+	align-self: flex-start;
 	flex: 0 1 797px;
 	flex-direction: column;
 	gap: var(--wp--preset--spacing--30);
@@ -2044,7 +2169,9 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 	margin-block: 0;
 }
 
+/* 1:176: near-black at 90% (≈ heading), not the body grey the form column uses. */
 .gs-quote-split__form .wp-block-heading {
+	color: var(--wp--preset--color--heading);
 	line-height: 1.13;
 }
 
@@ -2132,10 +2259,20 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 }
 
 /* ---------- Splits — Figma 1:220 / 1:238 / 1:253 ---------- */
+
+/* Bands: 1:220 has 110 / 123px around its content, 1:238 ~82px, 1:253 89 / 79px. */
 .gs-split.wp-block-group {
 	margin-block-start: 0;
-	padding-block: var(--wp--preset--spacing--80);
+	padding-block: calc(var(--wp--preset--spacing--80) + var(--wp--preset--spacing--30)) calc(var(--wp--preset--spacing--80) + var(--wp--preset--spacing--50));
 	background-color: var(--wp--preset--color--white);
+}
+
+.gs-split.gs-split--image-left.wp-block-group {
+	padding-block: calc(var(--wp--preset--spacing--80) - var(--wp--preset--spacing--20));
+}
+
+.gs-split.wp-block-group:has(.gs-icon-trio) {
+	padding-block: calc(var(--wp--preset--spacing--80) - var(--wp--preset--spacing--10)) calc(var(--wp--preset--spacing--80) - var(--wp--preset--spacing--30));
 }
 
 /* 1:239: same grey → white → pink band as Services. */
@@ -2143,27 +2280,37 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 	background-image: linear-gradient(100deg, var(--wp--preset--color--surface-2), var(--wp--preset--color--white) 48%, color-mix(in srgb, var(--wp--preset--color--brand-500) 32%, var(--wp--preset--color--white)));
 }
 
-.wp-block-columns.gs-split__cols {
-	gap: var(--wp--preset--spacing--90);
+/* Figma spans the full 133–1787 content box, not the 1620 wide size. */
+.gs-split > .wp-block-columns.gs-split__cols.alignwide {
+	justify-content: space-between;
+	gap: var(--wp--preset--spacing--50);
 	align-items: center;
+	max-inline-size: none;
 	margin: 0;
 }
 
-/* Figma: text ≈ 627–740px, photo 786px (+ deco overhang). */
+/* Figma 1:224 / 1:257: 627px text (37.9% of 1654); photo 786px + 36px deco overhang each side (51.9%). */
 .wp-block-columns.gs-split__cols > .wp-block-column.gs-split__text {
 	display: flex;
-	flex: 0.9 1 0;
+	flex: 0 1 37.9%;
 	flex-direction: column;
 	gap: var(--wp--preset--spacing--40);
 }
 
 .wp-block-columns.gs-split__cols > .wp-block-column.gs-split__media {
-	flex: 1 1 0;
+	flex: 0 1 51.9%;
 	min-inline-size: 0;
 }
 
+
 .gs-split__text > * {
 	margin-block: 0;
+}
+
+/* Figma body copy is tracked at -3% (1:225, 1:244, 1:258). */
+.gs-split .wp-block-column.gs-split__text > p:not(.is-style-eyebrow),
+.gs-split__text > ul {
+	letter-spacing: -0.03em;
 }
 
 .gs-split__text .wp-block-buttons {
@@ -2179,21 +2326,33 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 	aspect-ratio: 786 / 609;
 }
 
-/* 1:244 sets intro, sub-heads and bullets as one compact text block. */
+/* 1:243/1:244: 740px text (44.7%) running 36px past the content edge, set as one compact block. */
 .gs-split--image-left .wp-block-columns.gs-split__cols > .wp-block-column.gs-split__text {
-	flex-grow: 1.05;
-	gap: var(--wp--preset--spacing--20);
-	line-height: 1.6;
+	flex-basis: 44.7%;
+	gap: 0;
+	margin-inline-end: calc(-1 * (var(--wp--preset--spacing--50) + var(--wp--preset--spacing--10) / 2));
+	line-height: 1.75;
 }
 
+/* 1:244 is one 20/35 text block: intro, sub-heads and bullets run on with no gaps. */
 .gs-split--image-left .gs-split__text > .wp-block-heading {
-	margin-block-end: var(--wp--preset--spacing--20);
+	margin-block-end: var(--wp--preset--spacing--40);
 }
 
+.gs-split--image-left :where(.gs-split__text) > .wp-block-buttons {
+	margin-block-start: var(--wp--preset--spacing--50);
+}
+
+/* 1:244: bullets sit ~12px in, so each runs two lines at 740px. */
 .gs-split__list {
 	margin-block: 0;
-	padding-inline-start: 1.4em;
-	line-height: 1.6;
+	padding-inline-start: 1em;
+	line-height: 1.75;
+}
+
+/* 1:256: the trio heading box is 860px wide (two lines), wider than its 627px copy. */
+.gs-split__text:has(> .gs-icon-trio) > .wp-block-heading {
+	inline-size: 137%;
 }
 
 /* Icon trio — Figma 1:265: three 69px circles over 20px semibold labels, 1px dividers. */
@@ -2219,6 +2378,7 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 	margin: 0;
 	color: var(--wp--preset--color--ink);
 	font-size: var(--wp--preset--font-size--lead);
+	max-inline-size: 7.2em;
 	font-weight: 600;
 	letter-spacing: -0.03em;
 	line-height: 1.45;
@@ -2238,6 +2398,16 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 	/* Photo after the text on every split when stacked. */
 	.gs-split--image-left .gs-split__media {
 		order: 2;
+	}
+
+	/* Desktop-only Figma offsets: the wide trio heading and the photo-left text overhang. */
+	.gs-split--image-left .wp-block-columns.gs-split__cols > .wp-block-column.gs-split__text {
+		flex-basis: 100%;
+		margin-inline-end: 0;
+	}
+
+	.gs-split__text:has(> .gs-icon-trio) > .wp-block-heading {
+		inline-size: auto;
 	}
 }
 
@@ -2306,7 +2476,9 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 	flex: 1 1 0;
 	flex-direction: column;
 	align-self: center;
-	padding-block-end: var(--wp--preset--spacing--50);
+
+	/* Centred, then lifted so the eyebrow sits 132px down as in Figma 1:293. */
+	padding-block-end: var(--wp--preset--spacing--80);
 }
 
 .wp-block-columns.gs-cta__cols > .wp-block-column.gs-cta__media {
@@ -2349,7 +2521,7 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 
 .gs-cta .wp-block-buttons > .wp-block-button > .wp-block-button__link.wp-element-button {
 	min-block-size: var(--wp--custom--control--lg);
-	padding-inline: var(--wp--preset--spacing--60);
+	padding-inline: var(--wp--preset--spacing--60) var(--wp--preset--spacing--50);
 	font-size: var(--wp--preset--font-size--card-title);
 }
 
@@ -2481,9 +2653,11 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 }
 
 /* ---------- Testimonials — Figma 1:407 ---------- */
+
+/* Figma 1:407: eyebrow ~51px down, 81px under the cards (incl. the track's 12px). */
 .gs-testimonials.wp-block-group {
 	margin-block-start: 0;
-	padding-block: var(--wp--preset--spacing--60) var(--wp--preset--spacing--80);
+	padding-block: var(--wp--preset--spacing--60) var(--wp--preset--spacing--70);
 	background-color: var(--wp--preset--color--white);
 }
 
@@ -2527,15 +2701,17 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 	line-height: 1.75;
 }
 
+/* 1:411 / 1:419: the button + arrows row ends 44px before the copy's right edge. */
 .gs-testimonials__actions.wp-block-group {
-	gap: var(--wp--preset--spacing--60);
+	gap: var(--wp--preset--spacing--50);
 	align-items: center;
+	padding-inline-end: calc(var(--wp--preset--spacing--50) + var(--wp--preset--spacing--20));
 }
 
 /* Figma 1:419: 76px arrows; prev brand-100 with grey icon, next solid brand-600. */
 .gs-testimonials .gs-arrows .gs-arrow {
-	inline-size: clamp(48px, 4vw, 76px);
-	block-size: clamp(48px, 4vw, 76px);
+	inline-size: clamp(44px, 2.8vw, 54px);
+	block-size: clamp(44px, 2.8vw, 54px);
 	border-color: var(--wp--preset--color--brand-100);
 	background-color: var(--wp--preset--color--brand-100);
 	color: var(--wp--preset--color--body);

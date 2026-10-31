@@ -84,6 +84,8 @@ add_filter( 'wpcf7_autop_or_not', '__return_false' );
  */
 function gorilla_render_shortcode_block( $block_content ) {
 	$html = do_shortcode( $block_content );
+	// The block's autop wraps the shortcode in <p>; around a <div> the browser splits it into empty <p>s.
+	$html = (string) preg_replace( '#<p>\s*(<div\b.*</div>)\s*</p>#s', '$1', $html );
 	return (string) preg_replace(
 		'#<fieldset class="hidden-fields-container">(.*?)</fieldset>#s',
 		'<div class="hidden-fields-container">$1</div>',
@@ -324,22 +326,37 @@ add_filter( 'render_block_core/cover', 'gorilla_optimize_cover_image' );
 /**
  * Site-wide business details used by patterns (header, footer, contact card).
  *
- * Values are intentionally empty until confirmed — see "Open decisions" in
- * docs/project-context.md. Never invent phone numbers, emails or addresses.
+ * Values are the ones shown in Figma 1:4 (header 1:531, footer 1:469 / 1:485, contact card 1:199).
+ * Social URLs are not in Figma and stay empty until supplied. Figma shows two different opening
+ * hours (contact card vs footer); both are kept as designed until the client confirms one —
+ * see "Open decisions" in docs/project-context.md.
  *
- * @param string $key Optional key: phone, email, address, hours, social (service => URL).
+ * @param string $key Optional key: phone, email, address, hours, hours_card, social (service => URL).
  * @return array|string All details, or one value ('' when unknown).
  */
 function gorilla_site( $key = '' ) {
 	$site = apply_filters(
 		'gorilla/site',
 		array(
-			'name'    => 'Gorilla Security',
-			'phone'   => '',
-			'email'   => '',
-			'address' => '',
-			'hours'   => array(),
-			'social'  => array(
+			'name'       => 'Gorilla Security',
+			'phone'      => '0468 532 275',
+			'email'      => 'info@gorillasecurity.com.au',
+			'address'    => '110 Ruskin St, Elwood VIC 3184',
+			'hours'      => array(
+				array(
+					'days' => 'Mon to Fri',
+					'time' => '5:30am – 7pm',
+				),
+				array(
+					'days' => 'Sat to Sun',
+					'time' => '5:30am – 5pm',
+				),
+			),
+			'hours_card' => array(
+				'days' => 'Mon–Sat',
+				'time' => '8:00 AM–6:00 PM',
+			),
+			'social'     => array(
 				'instagram' => '',
 				'facebook'  => '',
 				'x'         => '',

@@ -23,7 +23,7 @@ $gorilla_cover_attrs = array(
 	'overlayColor'       => 'white',
 	'isUserOverlayColor' => true,
 	'focalPoint'         => array(
-		'x' => 1,
+		'x' => 0,
 		'y' => 0.5,
 	),
 	'align'              => 'full',
@@ -36,7 +36,7 @@ ob_start();
 ?>
 <div class="wp-block-cover alignfull gs-quote-split">
 <?php if ( $gorilla_photo ) : ?>
-<img class="wp-block-cover__image-background" alt="" src="<?php echo esc_url( $gorilla_photo ); ?>" style="object-position:100% 50%" data-object-fit="cover" data-object-position="100% 50%"/>
+<img class="wp-block-cover__image-background" alt="" src="<?php echo esc_url( $gorilla_photo ); ?>" style="object-position:0% 50%" data-object-fit="cover" data-object-position="0% 50%"/>
 <?php endif; ?>
 <span aria-hidden="true" class="wp-block-cover__background has-white-background-color has-background-dim-0 has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:group {"className":"gs-quote-split__inner","layout":{"type":"default"}} -->
 <div class="wp-block-group gs-quote-split__inner"><!-- wp:group {"anchor":"quote","className":"gs-quote-split__form","layout":{"type":"default"}} -->

@@ -41,6 +41,10 @@ echo wp_kses_post(
 		"\n\n",
 		array(
 			gorilla_nav_link( __( 'Home', 'gorilla-security' ), home_url( '/' ) ),
+			gorilla_nav_link( __( 'About Us', 'gorilla-security' ), home_url( '/#about' ) ),
+			gorilla_nav_link( __( 'Services', 'gorilla-security' ), home_url( '/#services' ) ),
+			gorilla_nav_link( __( 'Blog', 'gorilla-security' ), home_url( '/blog/' ), 'blog' ),
+			gorilla_nav_link( __( 'Area', 'gorilla-security' ), home_url( '/area/' ), 'area' ),
 			gorilla_nav_link( __( 'Contact Us', 'gorilla-security' ), home_url( '/contact-us/' ), 'contact-us' ),
 		)
 	)

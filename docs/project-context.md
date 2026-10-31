@@ -65,4 +65,5 @@
 - [ ] Copy for "Why us" steps 02–06 and FAQ answers 01, 03–08
 - [ ] Testimonials (Figma 1:418): confirm the 5 reviews are genuine customer reviews quoted verbatim, the reviewers consented, and the photos are theirs or licensed; card 5 repeats the name "Matt To’omua" with a different photo; "N years ago" dates go stale (switch to review dates?)
 - [ ] Partner/brand logo files supplied by partners
-- [ ] Site details for `gorilla_site()`: phone, email, address, opening hours
+- [ ] Site details for `gorilla_site()`: phone, email, address, opening hours, social URLs (Instagram, Facebook, X, LinkedIn — footer 1:451)
+- [ ] Footer: "Blog" and "Area" pages (links omitted until they exist); approval to use the ShowMeLocal badge (1:507, placeholder now)

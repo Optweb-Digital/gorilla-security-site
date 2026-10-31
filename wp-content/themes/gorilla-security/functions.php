@@ -276,7 +276,7 @@ function gorilla_optimize_theme_image( $block_content ) {
 		$tags->set_attribute( 'width', (string) $size[0] );
 		$tags->set_attribute( 'height', (string) $size[1] );
 	}
-	$is_logo = (bool) preg_match( '/gs-(header__logo|trust-strip__logo|marquee__logo|review-badge__source)/', $block_content );
+	$is_logo = (bool) preg_match( '/gs-(header__logo|footer__logo|trust-strip__logo|marquee__logo|review-badge__source)/', $block_content );
 	if ( null === $tags->get_attribute( 'loading' ) && ! $is_logo ) {
 		$tags->set_attribute( 'loading', 'lazy' );
 	}
@@ -342,6 +342,7 @@ function gorilla_site( $key = '' ) {
 			'social'  => array(
 				'instagram' => '',
 				'facebook'  => '',
+				'x'         => '',
 				'linkedin'  => '',
 			),
 		)

@@ -46,13 +46,29 @@ the layer styles.
 | `#F5F5F5` / `#EFEFEF` | `surface` / `surface-2` | tab bar, field borders |
 | `#0E0C1B`, `#141A24` | `night`, `night-2` | footer, dark glass |
 | `rgba(223,223,223,.9)` | `on-dark` | footer links |
+| `#990573` | `brand-500` | quote-card eyebrow 1:98 (near tint) |
+| `#E3E5F0` | `on-dark` | quote-card copy 1:100 (near tint) |
+| `rgba(20,26,36,.58)` | `night-2` at 58% via `color-mix()` | dark glass 1:97 (no new token) |
 
 Figma uses `rgba(…, .9)` text colors; they are flattened to solid hex over white. Keep it that way.
 
 ### Gradients
-`brand` (buttons/active tab) · `brand-text` (accent words, stat numbers) · `deco-block` (shapes
-behind photos) · `soft-section` (grey→white→pink section bg) · `glass` · `night-fade` (footer) ·
-`photo-shade` (testimonial cards) · `rule-fade` (stepper dividers).
+Synced from Figma 2026-10-31 (layer styles; Figma has no variables).
+
+| Slug | Figma source | Use |
+|---|---|---|
+| `brand` | 1:233, 1:299, 1:542 | buttons, active tab |
+| `brand-text` | 1:223 | accent words, stat numbers (solid `color` fallback first — rule 001) |
+| `deco-block` | 1:221 | shapes behind photos |
+| `soft-section` | 1:239 | grey→white→pink section bg |
+| `glass` | 1:524 | header glass (white .2 → 0) |
+| `night-fade` | 1:430 | footer overlay |
+| `photo-shade` | 1:4621 | testimonial cards |
+| `rule-fade` | I1:522;1:4081 | stepper dividers |
+
+**Not yet tokens (declined 2026-10-31, revisit when the section is built):** glass at .135 (1:314, 1:199),
+glass-phone gradient (1:532), rating badge brand-500→brand-900 (1:4626), brands panel fade (1:512),
+solid rule 1:317.
 
 ### Typography
 Poppins 400/500/600 only (the single Inter layer in the form note → Poppins). Headings 600,
@@ -80,8 +96,11 @@ in blocks; pick a slug.
 - Root side padding: `clamp(16px, 6.9vw, 133px)` (Figma content starts at x=133 on 1920).
 - Layout: `contentSize 1080px`, `wideSize 1620px` (Figma content width 162 → 1783).
 - Radius: `xs 6` fields · `sm 10` badges/tabs · `md 12` buttons, glass bar · `lg 20` testimonials,
-  glass cards · `xl 30` photos, cards · `2xl 37` FAQ container · `pill`.
-- Shadow: `soft` section · `glass` floating · `field` inputs · `badge` review chip · `glow` FAQ.
+  glass cards (incl. 22px quote card 1:97) · `xl 30` photos, cards · `2xl 37` FAQ container · `pill`.
+- Shadow: `glass` floating (1:524) · `field` inputs (1:179) · `badge` review chip (1:114) · `glow` FAQ (1:342).
+  `soft` is not defined — no Figma layer uses it yet.
+- Custom: `blur.glass` 35px · `control.sm/md/lg` 48/60/71px (button heights).
+  Motion (`duration`, `easing`) is not defined — Figma has no motion values; ask before adding.
 
 ---
 

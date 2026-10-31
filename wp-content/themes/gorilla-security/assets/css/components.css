@@ -17,6 +17,22 @@
 	--gs-r-xl: var(--wp--custom--radius--xl);
 	--gs-r-2xl: var(--wp--custom--radius--2xl);
 	--gs-r-pill: var(--wp--custom--radius--pill);
+	--gs-grad: var(--wp--preset--gradient--brand);
+	--gs-grad-text: var(--wp--preset--gradient--brand-text);
+	--gs-grad-deco: var(--wp--preset--gradient--deco-block);
+	--gs-grad-soft: var(--wp--preset--gradient--soft-section);
+	--gs-grad-glass: var(--wp--preset--gradient--glass);
+	--gs-grad-night: var(--wp--preset--gradient--night-fade);
+	--gs-grad-shade: var(--wp--preset--gradient--photo-shade);
+	--gs-grad-rule: var(--wp--preset--gradient--rule-fade);
+	--gs-shadow-glass: var(--wp--preset--shadow--glass);
+	--gs-shadow-field: var(--wp--preset--shadow--field);
+	--gs-shadow-badge: var(--wp--preset--shadow--badge);
+	--gs-shadow-glow: var(--wp--preset--shadow--glow);
+	--gs-blur: var(--wp--custom--blur--glass);
+	--gs-h-sm: var(--wp--custom--control--sm);
+	--gs-h-md: var(--wp--custom--control--md);
+	--gs-h-lg: var(--wp--custom--control--lg);
 }
 
 /* ---------- Base ---------- */

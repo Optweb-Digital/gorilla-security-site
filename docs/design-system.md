@@ -233,9 +233,12 @@ the editor's Patterns panel is the live component catalogue.
   classes (`.gs-block__element--modifier`)**. No inline hex values, no `!important` except
   where overriding core block inline styles.
 - Global styles: element styles (headings, links, buttons) in `theme.json → styles`.
-- Responsive: fluid type + clamp() spacing do most of the work; columns stack < 782px (WP
-  default); component CSS has targeted breakpoints at 1100 / 781 / 600px. Design is desktop-
-  only in Figma — mobile behaviour is defined in CSS, check it on real devices.
+- Responsive: proportional type + clamp() spacing do most of the work. Breakpoints:
+  **≤ 1100** tablet — every section stacks to one column (core only stacks < 782px, so sections
+  override it), the nav collapses to the menu button, the hero quote card goes full width, About
+  keeps photo + feature card side by side; **≤ 781** phone — light header bar over the hero, 2 × 2
+  trust strip; **≤ 600** small phone — About photo and card stack. Design is desktop-only in Figma;
+  check 390 / 768 / 1024 captures and the open menu before calling a section done.
 - Motion: tokens `--wp--custom--duration--*`, `--wp--custom--easing`; all animation disabled
   under `prefers-reduced-motion`.
 - Header: transparent glass on `.gs-hero-page` (front page + "Landing (no title)" template),

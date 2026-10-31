@@ -791,6 +791,17 @@ body:has(.gs-hero-page) .gs-header:not(.gs-header--solid) .gs-header__bar {
 	font-weight: 600;
 }
 
+/* Open mobile menu links (see the open-menu panel rules below). */
+.gs-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item__content {
+	color: var(--wp--preset--color--heading);
+	font-size: var(--wp--preset--font-size--h-5);
+	font-weight: 500;
+}
+
+.gs-header__nav .wp-block-navigation__responsive-container.is-menu-open .current-menu-item > .wp-block-navigation-item__content {
+	color: var(--gs-brand);
+}
+
 /* Over the hero: white links with Figma's soft shadow; the open mobile menu keeps dark text. */
 body:has(.gs-hero-page) .gs-header:not(.gs-header--solid) .wp-block-navigation__responsive-container:not(.is-menu-open) .wp-block-navigation-item__content:not(.current-menu-item > *),
 body:has(.gs-hero-page) .gs-header:not(.gs-header--solid) .wp-block-navigation__responsive-container-open {
@@ -849,6 +860,21 @@ body .gs-header .gs-header__bar:has(.wp-block-navigation__responsive-container.i
 	white-space: nowrap;
 }
 
+/* Open mobile menu: large brand links on white (no Figma frame; theme default per design-system §6). */
+.gs-header__nav .wp-block-navigation__responsive-container.is-menu-open {
+	padding: var(--wp--preset--spacing--60) var(--wp--preset--spacing--50);
+	background-color: var(--wp--preset--color--white);
+}
+
+.gs-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container {
+	gap: var(--wp--preset--spacing--40);
+}
+
+.gs-header__nav .wp-block-navigation__responsive-container-close svg {
+	inline-size: 32px;
+	block-size: 32px;
+}
+
 /* Glass phone on a solid bar needs a solid fill to stay readable. */
 .gs-header--solid .wp-block-button.gs-header__phone .wp-block-button__link,
 body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button__link {
@@ -867,6 +893,26 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 	.wp-block-button.gs-header__phone .wp-block-button__link::before {
 		inline-size: var(--wp--preset--font-size--lead);
 		block-size: var(--wp--preset--font-size--lead);
+	}
+
+	/* Phones: a light bar over the hero so the purple logo and menu icon stay readable. */
+	body:has(.gs-hero-page) .gs-header:not(.gs-header--solid) .gs-header__bar {
+		background-color: color-mix(in srgb, var(--wp--preset--color--white) 92%, transparent);
+	}
+
+	body:has(.gs-hero-page) .gs-header:not(.gs-header--solid) .wp-block-navigation__responsive-container-open {
+		color: var(--wp--preset--color--heading);
+	}
+
+	body:has(.gs-hero-page) .gs-header:not(.gs-header--solid) .wp-block-button.gs-header__phone .wp-block-button__link {
+		background-color: var(--wp--preset--color--brand-600);
+	}
+
+	/* Trust strip as a 2 × 2 grid. */
+	.gs-hero .gs-trust-strip.wp-block-group {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		justify-items: center;
 	}
 }
 
@@ -1197,14 +1243,23 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 
 @media (max-width: 1100px) {
 
-
 	.wp-block-columns.gs-hero__cols > .wp-block-column.gs-hero__main,
 	.wp-block-columns.gs-hero__cols > .wp-block-column.gs-hero__aside {
 		flex-basis: 100%;
 	}
 
 	.wp-block-columns.gs-hero__cols > .wp-block-column.gs-hero__aside {
-		max-inline-size: 560px;
+		max-inline-size: none;
+	}
+
+	/* Tablet: the strip spans the column so the four logos sit in one row. */
+	.gs-hero .gs-trust-strip.wp-block-group {
+		inline-size: 100%;
+	}
+
+	/* Stacked: the cue sits under the card instead of overlapping it. */
+	.gs-hero__scroll-wrap {
+		margin-block-start: var(--wp--preset--spacing--30);
 	}
 }
 
@@ -1347,18 +1402,24 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 
 @media (max-width: 1100px) {
 
-
 	.wp-block-columns.gs-about__cols > .wp-block-column.gs-about__intro {
 		flex-basis: 100%;
 		padding-inline-end: 0;
 	}
 
-	.wp-block-columns.gs-about__cols > .wp-block-column.gs-about__media {
-		max-block-size: 640px;
+	/* Photo and card side by side; core stacks columns below 782px with !important, hence the override. */
+	.wp-block-columns.gs-about__cols > .wp-block-column.gs-about__media,
+	.wp-block-columns.gs-about__cols > .wp-block-column.gs-about__aside {
+		flex-basis: calc(50% - var(--wp--preset--spacing--20) / 2) !important;
 	}
 }
 
 @media (max-width: 600px) {
+
+	.wp-block-columns.gs-about__cols > .wp-block-column.gs-about__media,
+	.wp-block-columns.gs-about__cols > .wp-block-column.gs-about__aside {
+		flex-basis: 100% !important;
+	}
 
 	.gs-about .gs-about__photo img {
 		block-size: auto;
@@ -1782,7 +1843,6 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 
 @media (max-width: 1100px) {
 
-
 	.wp-block-columns.gs-why__cols > .wp-block-column.gs-why__intro,
 	.wp-block-columns.gs-why__cols > .wp-block-column.gs-why__list {
 		flex-basis: 100%;
@@ -1791,13 +1851,13 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 	.gs-steps__media {
 		max-block-size: 520px;
 	}
-}
-
-@media (max-width: 600px) {
 
 	.gs-why__list > .wp-block-buttons {
 		justify-content: flex-start;
 	}
+}
+
+@media (max-width: 600px) {
 
 	.gs-step::before {
 		font-size: var(--wp--preset--font-size--h-4);
@@ -2087,6 +2147,10 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 		grid-template-columns: repeat(3, minmax(0, 1fr));
 	}
 
+
+	.gs-service__text > :where(p) {
+		max-inline-size: none;
+	}
 
 	.wp-block-columns.gs-service > .wp-block-column.gs-service__text,
 	.wp-block-columns.gs-service > .wp-block-column.gs-service__media {
@@ -2400,7 +2464,6 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 }
 
 @media (max-width: 1100px) {
-
 
 	.wp-block-columns.gs-split__cols > .wp-block-column.gs-split__text,
 	.wp-block-columns.gs-split__cols > .wp-block-column.gs-split__media {
@@ -2861,7 +2924,8 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 	line-height: 1.6;
 }
 
-@media (max-width: 781px) {
+/* Tablet: the intro copy, button and arrows run full width under the heading. */
+@media (max-width: 1100px) {
 
 	.gs-testimonials__aside.wp-block-group {
 		flex-basis: 100%;

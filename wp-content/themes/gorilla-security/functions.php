@@ -44,6 +44,23 @@ function gorilla_enqueue_assets() {
 add_action( 'wp_enqueue_scripts', 'gorilla_enqueue_assets' );
 
 /**
+ * Drop WordPress's emoji polyfill (twemoji + wp-emoji, ~13 KB): browsers render emoji natively,
+ * and the JS budget is 50 KB (AGENTS.md §7).
+ *
+ * @return void
+ */
+function gorilla_disable_emoji() {
+	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+	remove_action( 'wp_print_styles', 'print_emoji_styles' );
+	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+	remove_action( 'admin_print_styles', 'print_emoji_styles' );
+	remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+	remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
+	remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+}
+add_action( 'init', 'gorilla_disable_emoji' );
+
+/**
  * Load the component stylesheet in the block editor too, so patterns preview correctly.
  *
  * @return void

@@ -2186,6 +2186,7 @@ body:not(.gs-has-hero) .gs-header::before {
 /* CTA · dark — Figma 1:289. Dark photo cover; text column and a team member standing on a
  * glass panel with two badges. White text sits over the darkest part of the photo. */
 .gs-cta.wp-block-cover {
+	background-color: var(--wp--preset--color--night); /* under the photo: contrast checkers read this */
 	min-block-size: 0;
 	padding: var(--wp--preset--spacing--80) var(--wp--preset--spacing--40) 0;
 }
@@ -2349,6 +2350,11 @@ body:not(.gs-has-hero) .gs-header::before {
 
 	.gs-cta .gs-cta__body {
 		padding-block-end: 0;
+	}
+
+	/* Stacked, the text crosses the lit part of the photo: a stronger overlay keeps it AA. */
+	.gs-cta.wp-block-cover .wp-block-cover__background.has-background-dim.has-background-dim-40 {
+		opacity: 0.75;
 	}
 
 	.gs-cta__media {
@@ -2655,8 +2661,14 @@ body:not(.gs-has-hero) .gs-header::before {
 /* Footer — Figma 1:426. Dark photo cover (night-fade) with brand, link and contact
  * columns, then the copyright bar under a faint rule. */
 .gs-footer.wp-block-cover {
+	background-color: var(--wp--preset--color--night); /* under the photo: contrast checkers read this */
 	min-block-size: 0;
 	padding: var(--wp--preset--spacing--70) var(--wp--preset--spacing--40) 0;
+}
+
+/* Photo dimmed over the night background: its bright lights left the footer text below AA. */
+.gs-footer .wp-block-cover__image-background {
+	opacity: 0.35;
 }
 
 .gs-footer .wp-block-cover__inner-container {

@@ -141,8 +141,8 @@ Components are **core blocks + block styles + CSS classes + patterns**. No custo
 | Feature row | `gs-feature` group (icon circle + title + text) | 1:29 |
 | Stats | columns style **Stats with dividers**, `gs-stat__num` / `gs-stat__label` | 1:12 |
 | Checklist | list style **Checklist**: `brand-500` Lead text, 41px `brand-100` circle with a check (CSS, scales with the font). Two content-sized columns; one below 600px | 1:565… |
-| Icon trio | group `gs-icon-trio` | 1:265 |
-| Deco photo frame | image styles **Deco frame · left / right** | 1:240/1:241, 1:254/1:255 |
+| Icon trio | group `gs-icon-trio` › `gs-icon-trio__item` × 3 (icon circle + `gs-icon-trio__label`), divided by 1px `border` rules | 1:265 |
+| Deco photo frame | image styles **Deco frame · left / right**: two `deco-block` panels peek out at the top-end and bottom-start corners (both styles look the same in Figma; the name says which side the photo is on). Sections: `gs-split` (+ `--soft`) | 1:240/1:241, 1:254/1:255 |
 | Float card | group `gs-float-card` › optional Image (thumbnail) or icon circle `--sm`, then `gs-float-card__body` (h3 `gs-float-card__title`, `gs-float-card__text`, optional `gs-float-card__devices`). Modifiers: `--thumb` (no rule beside the body), `--pop` (thumbnail rises above the card); placement in `gs-service__media`: `--top`, `--start`, `--center` (default bottom-end). Figma's dashed connector lines are left out. Below 782px cards sit under the photo | 1:1051 |
 | Review badge | group `gs-review-badge` | 1:114 |
 | Trust strip | group `gs-trust-strip` | 1:515 |

@@ -150,6 +150,10 @@ a[href^="tel:"] {
 	--gs-ico: url(../icons/check.svg);
 }
 
+.gs-ico-gear {
+	--gs-ico: url(../icons/gear.svg);
+}
+
 .gs-ico-intercom {
 	--gs-ico: url(../icons/intercom.svg);
 }
@@ -180,6 +184,10 @@ a[href^="tel:"] {
 
 .gs-ico-video {
 	--gs-ico: url(../icons/video.svg);
+}
+
+.gs-ico-wrench {
+	--gs-ico: url(../icons/wrench.svg);
 }
 
 /* ---------- Components (block styles, shared by sections) ----------
@@ -990,6 +998,78 @@ a[href^="tel:"] {
 
 .gs-contact-card__lead a:hover {
 	text-decoration: underline;
+}
+
+/* Image — Deco frame · left / right. Figma 1:221–1:222, 1:240–1:241: two deco-block panels
+ * (52% × 56% of the frame) peek out at the top-end and bottom-start corners of the photo.
+ * Both styles look the same in Figma; "left"/"right" name the photo side. */
+:is(.is-style-deco-frame-left, .is-style-deco-frame-right) {
+	isolation: isolate;
+	padding: var(--wp--preset--spacing--50);
+	position: relative;
+}
+
+:is(.is-style-deco-frame-left, .is-style-deco-frame-right)::before,
+:is(.is-style-deco-frame-left, .is-style-deco-frame-right)::after {
+	background: var(--gs-grad-deco);
+	block-size: 56%;
+	border-radius: var(--gs-r-xl);
+	content: "";
+	inline-size: 52%;
+	position: absolute;
+	z-index: -1;
+}
+
+:is(.is-style-deco-frame-left, .is-style-deco-frame-right)::before {
+	inset-block-start: 0;
+	inset-inline-end: 0;
+}
+
+:is(.is-style-deco-frame-left, .is-style-deco-frame-right)::after {
+	inset-block-end: 0;
+	inset-inline-start: 0;
+}
+
+:is(.is-style-deco-frame-left, .is-style-deco-frame-right) img {
+	aspect-ratio: 786 / 609;
+	block-size: auto;
+	border-radius: var(--gs-r-xl);
+	display: block;
+	inline-size: 100%;
+	object-fit: cover;
+}
+
+/* Icon trio. Figma 1:265: three icon circles with a bold label, divided by thin rules. */
+.gs-icon-trio {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.gs-icon-trio__item {
+	align-items: center;
+	display: flex;
+	flex: 1 1 8em;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--30);
+	margin: 0;
+	padding-inline: var(--wp--preset--spacing--30);
+	text-align: center;
+}
+
+.gs-icon-trio__item + .gs-icon-trio__item {
+	border-inline-start: 1px solid var(--wp--preset--color--border);
+}
+
+.gs-icon-trio__item > * {
+	margin: 0;
+}
+
+.gs-icon-trio .gs-icon-trio__label {
+	color: var(--wp--preset--color--ink);
+	font-size: var(--wp--preset--font-size--lead);
+	font-weight: 600;
+	letter-spacing: -0.03em;
+	line-height: 1.45;
 }
 
 /* ---------- Sections (Figma order) ---------- */
@@ -2013,4 +2093,70 @@ body:not(.gs-has-hero) .gs-header::before {
 		margin: var(--wp--preset--spacing--30);
 		max-inline-size: calc(100% - 2 * var(--wp--preset--spacing--30));
 	}
+}
+
+/* Split sections — Figma 1:220, 1:238, 1:253. Text column and a framed photo.
+ * gs-split--media-start puts the photo first; gs-split--soft adds the soft-section bg. */
+.gs-split {
+	background: var(--wp--preset--color--white);
+	padding-block: var(--wp--preset--spacing--80);
+}
+
+.gs-split--soft {
+	background: var(--gs-grad-soft);
+}
+
+.gs-split__cols {
+	align-items: center !important; /* core columns only accept the alignment class */
+	gap: var(--wp--preset--spacing--70);
+	margin: 0;
+}
+
+.gs-split .gs-split__body > * {
+	margin: 0;
+}
+
+.gs-split .gs-split__body > * + * {
+	margin-block-start: var(--wp--preset--spacing--40);
+}
+
+.gs-split__body .wp-block-heading {
+	letter-spacing: -0.03em;
+	line-height: 1.2;
+}
+
+.gs-split .gs-split__body > p:not(.is-style-eyebrow),
+.gs-split .gs-split__body li {
+	color: var(--wp--preset--color--body);
+	line-height: 1.75;
+}
+
+.gs-split .gs-split__body > .wp-block-buttons {
+	margin-block-start: var(--wp--preset--spacing--60);
+}
+
+@media (max-width: 1100px) {
+
+	.gs-split__cols {
+		flex-wrap: wrap !important;
+	}
+
+	.gs-split__cols > .wp-block-column {
+		flex-basis: 100% !important;
+	}
+}
+
+.gs-split .gs-split__body > .gs-split__subhead {
+	color: var(--wp--preset--color--ink);
+	font-weight: 600;
+	margin-block-start: var(--wp--preset--spacing--30);
+}
+
+.gs-split .gs-split__body > .wp-block-list {
+	margin-block-start: var(--wp--preset--spacing--10);
+	padding-inline-start: 1.5em;
+}
+
+.gs-split .gs-split__body > .gs-icon-trio {
+	margin-block-start: var(--wp--preset--spacing--60);
 }

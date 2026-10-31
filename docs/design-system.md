@@ -60,7 +60,7 @@ Synced from Figma 2026-10-31 (layer styles; Figma has no variables).
 | Slug | Figma source | Use |
 |---|---|---|
 | `brand` | 1:233, 1:299, 1:542 | buttons, active tab |
-| `brand-text` | 1:223 | accent words, stat numbers (solid `color` fallback first — rule 001) |
+| `brand-text` | 1:223 | **not used for text** (2026-10-31): `background-clip: text` cost ~150–250ms main-thread work and failed the perf gate, so accent words and stat numbers use solid `brand-500`. Kept for non-text use |
 | `deco-block` | 1:221 | shapes behind photos |
 | `soft-section` | 1:239 | grey→white→pink section bg |
 | `glass` | 1:524 | header glass (white .2 → 0) |
@@ -130,7 +130,7 @@ Components are **core blocks + block styles + CSS classes + patterns**. No custo
 | Button — no icon (submit) | style **Fill · no icon** | 1:111 |
 | Button sizes | `gs-btn-sm` (48px) · default (60px) · font size `Lead` (71px) | — |
 | Eyebrow | paragraph style **Eyebrow** (on dark cards: `brand-100`, brand purple is ~1.4:1 there) | 1:24, 1:98 |
-| Accent heading words | select words → **Highlight** (renders `<mark>`) | gradient spans in every H2 |
+| Accent heading words | select words → **Highlight** (renders `<mark>`), solid `brand-500` (Figma's gradient dropped for performance) | gradient spans in every H2 |
 | Lead with bar | paragraph style **Lead with bar** | 1:76 |
 | Card / Card tint | group styles **Card**, **Card · tint** | 1:28 |
 | Glass light / dark / violet outline | group styles **Glass · light / dark / violet outline**. Glass · dark is translucent only inside a Cover (photo); elsewhere solid `night-2` | 1:524, 1:97, 1:314 |

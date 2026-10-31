@@ -29,6 +29,7 @@
 	--gs-grad-night: var(--wp--preset--gradient--night-fade);
 	--gs-grad-shade: var(--wp--preset--gradient--photo-shade);
 	--gs-grad-rule: var(--wp--preset--gradient--rule-fade);
+	--gs-shadow-soft: var(--wp--preset--shadow--soft);
 	--gs-shadow-glass: var(--wp--preset--shadow--glass);
 	--gs-shadow-field: var(--wp--preset--shadow--field);
 	--gs-shadow-badge: var(--wp--preset--shadow--badge);
@@ -46,7 +47,10 @@
 	outline-offset: 2px;
 }
 
-mark.gs-accent {
+/* Accent words and stat numbers: solid brand colour. Figma's gradient text (brand-text)
+ * cost ~150-250ms main-thread work and failed the perf gate (approved 2026-10-31). */
+mark.gs-accent,
+.gs-stat__num {
 	background: none;
 	color: var(--gs-brand);
 }
@@ -93,6 +97,18 @@ a[href^="tel:"] {
 
 .gs-ico-star {
 	--gs-ico: url(../icons/star.svg);
+}
+
+.gs-ico-shield {
+	--gs-ico: url(../icons/shield.svg);
+}
+
+.gs-ico-chip {
+	--gs-ico: url(../icons/chip.svg);
+}
+
+.gs-ico-map-pin {
+	--gs-ico: url(../icons/map-pin.svg);
 }
 
 /* ---------- Components (block styles, shared by sections) ----------
@@ -236,13 +252,127 @@ a[href^="tel:"] {
 	margin: 0;
 }
 
-/* Paragraph — Eyebrow. Figma 1:98 (the rule before it, 1:24, arrives with the about section). */
+/* Paragraph — Eyebrow. Figma 1:24: 40×3 rule, then regular uppercase text. */
 .is-style-eyebrow {
-	color: var(--gs-brand);
+	align-items: center;
+	color: var(--wp--preset--color--body);
+	display: flex;
 	font-size: var(--wp--preset--font-size--medium);
-	font-weight: 600;
+	font-weight: 400;
+	gap: var(--wp--preset--spacing--30);
 	letter-spacing: 0.13em;
 	text-transform: uppercase;
+}
+
+.is-style-eyebrow::before {
+	background: var(--wp--preset--color--brand-300);
+	block-size: 3px;
+	content: "";
+	flex: none;
+	inline-size: 40px;
+}
+
+/* Group — Card · tint. Figma 1:28. */
+.is-style-card-tint {
+	background: var(--wp--preset--color--brand-50);
+	border-radius: var(--gs-r-xl);
+	padding: var(--wp--preset--spacing--50);
+}
+
+/* Icon circle. Figma 1:33 (69px; sized control.lg). Icon via .gs-ico-{name}. */
+.gs-icon-circle {
+	align-items: center;
+	background: var(--wp--preset--color--brand-100);
+	block-size: var(--gs-h-lg);
+	border-radius: 50%;
+	color: var(--gs-brand);
+	display: flex;
+	flex: none;
+	inline-size: var(--gs-h-lg);
+	justify-content: center;
+}
+
+.gs-icon-circle::before {
+	background: currentcolor;
+	block-size: 48%;
+	content: "";
+	inline-size: 48%;
+	mask: var(--gs-ico) center / contain no-repeat;
+}
+
+/* Feature row. Figma 1:29: icon circle + title + text; rows divided by a 2px rule. */
+.gs-feature {
+	gap: var(--wp--preset--spacing--50);
+}
+
+.gs-feature + .gs-feature {
+	border-block-start: 2px solid var(--wp--preset--color--border);
+	margin-block-start: var(--wp--preset--spacing--40);
+	padding-block-start: var(--wp--preset--spacing--40);
+}
+
+.gs-feature__body > * {
+	margin: 0;
+}
+
+.gs-feature__title {
+	color: var(--wp--preset--color--ink);
+}
+
+.gs-feature__body p {
+	line-height: 1.6;
+}
+
+/* Columns — Stats with dividers. Figma 1:12. */
+.is-style-stats-with-dividers {
+	gap: 0;
+}
+
+/* Columns size to their content (never narrower than the longest word); core's equal
+ * widths plus word-break split "Businesses" on phones. */
+.is-style-stats-with-dividers > .wp-block-column {
+	flex: 1 1 auto;
+	min-inline-size: min-content;
+	padding-inline-end: var(--wp--preset--spacing--40);
+}
+
+.is-style-stats-with-dividers > .wp-block-column + .wp-block-column {
+	border-inline-start: 2px solid var(--wp--preset--color--border);
+	padding-inline-start: var(--wp--preset--spacing--40);
+}
+
+.is-style-stats-with-dividers > .wp-block-column:last-child {
+	padding-inline-end: 0;
+}
+
+.gs-stat__num {
+	font-weight: 600;
+	letter-spacing: -0.03em;
+	line-height: 1.3;
+	margin: 0;
+}
+
+.gs-stat__label {
+	letter-spacing: 0.04em;
+	line-height: 1.3;
+	margin: 0;
+	overflow-wrap: break-word;
+	word-break: normal;
+}
+
+@media (max-width: 600px) {
+
+	.is-style-stats-with-dividers > .wp-block-column {
+		padding-inline-end: var(--wp--preset--spacing--30);
+	}
+
+	.is-style-stats-with-dividers > .wp-block-column + .wp-block-column {
+		padding-inline-start: var(--wp--preset--spacing--30);
+	}
+
+	.gs-stat__label {
+		letter-spacing: 0;
+	}
 }
 
 /* Group — Glass · dark. Figma 1:97. Translucent only over a cover photo; solid elsewhere,
@@ -746,9 +876,15 @@ body:not(.gs-has-hero) .gs-header::before {
 	margin-block-start: var(--wp--preset--spacing--30);
 }
 
-/* Figma's purple eyebrow is ~1.4:1 on the dark card; brand-100 keeps the tint at AA. */
+/* Card eyebrow (1:98): semibold, no rule. Figma's purple is ~1.4:1 on the dark card;
+ * brand-100 keeps the tint at AA. */
 .gs-quote-card .is-style-eyebrow {
 	color: var(--wp--preset--color--brand-100);
+	font-weight: 600;
+}
+
+.gs-quote-card .is-style-eyebrow::before {
+	content: none;
 }
 
 .gs-quote-card__title {
@@ -757,4 +893,108 @@ body:not(.gs-has-hero) .gs-header::before {
 
 .gs-quote-card > p:not(.is-style-eyebrow) {
 	color: var(--wp--preset--color--on-dark);
+}
+
+/* Sections on the home page sit edge to edge (Figma has no gaps between them). */
+.gs-hero-page > .alignfull {
+	margin-block: 0;
+}
+
+/* About — Figma 1:6 (+ buttons 42:11497). */
+.gs-about {
+	background: var(--wp--preset--color--white);
+	box-shadow: var(--gs-shadow-soft);
+	padding-block: var(--wp--preset--spacing--80);
+	position: relative;
+}
+
+.gs-about__cols {
+	gap: var(--wp--preset--spacing--40);
+	margin-block: 0;
+}
+
+.gs-about__intro {
+	display: flex;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--40);
+}
+
+.gs-about__intro > * {
+	margin: 0;
+}
+
+.gs-about__intro .wp-block-heading {
+	margin-block-start: var(--wp--preset--spacing--10);
+}
+
+.gs-about__stats {
+	margin-block-start: auto;
+	padding-block-start: var(--wp--preset--spacing--40);
+}
+
+/* The portrait fills its column (Figma 535×791) instead of setting the section's height. */
+.gs-about__media {
+	position: relative;
+}
+
+.gs-about__media .wp-block-image {
+	inset: 0;
+	margin: 0;
+	position: absolute;
+}
+
+.gs-about__media .wp-block-image img {
+	block-size: 100%;
+}
+
+.gs-about .wp-block-image img {
+	border-radius: var(--gs-r-xl);
+	inline-size: 100%;
+	object-fit: cover;
+}
+
+.gs-about__aside {
+	display: flex;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--40);
+}
+
+/* No portrait (missing image): the card column takes its space. Beats core's (0,4,0)
+ * .wp-block-columns:not(.is-not-stacked-on-mobile) > .wp-block-column[style*=flex-basis] { flex-grow: 0 }. */
+.gs-about .gs-about__cols > .gs-about__intro + .wp-block-column.gs-about__aside {
+	flex-grow: 1;
+}
+
+.gs-about__aside > * {
+	margin: 0;
+}
+
+/* Intro full width, then portrait and feature card side by side.
+ * !important: core forces nowrap on columns from 782px and sets flex-basis inline. */
+@media (max-width: 1100px) {
+
+	.gs-about__cols {
+		flex-wrap: wrap !important;
+	}
+
+	.gs-about__cols > .gs-about__intro {
+		flex-basis: 100% !important;
+	}
+
+	.gs-about__cols > .gs-about__media,
+	.gs-about__cols > .gs-about__aside {
+		flex: 1 1 0 !important;
+	}
+}
+
+@media (max-width: 781px) {
+
+	.gs-about__media .wp-block-image {
+		position: static;
+	}
+
+	.gs-about__media .wp-block-image img {
+		aspect-ratio: 4 / 5;
+		block-size: auto;
+	}
 }

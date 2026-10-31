@@ -227,6 +227,45 @@ function gsec_render_shortcode_block( $content ) {
 add_filter( 'render_block_core/shortcode', 'gsec_render_shortcode_block' );
 
 /**
+ * Add width/height (and lazy loading) to Image blocks showing a theme fallback image.
+ *
+ * WordPress does this only for Media Library images; without dimensions the browser can't
+ * reserve space (Lighthouse "unsized-images", CLS). Front end only, so saved block
+ * markup — and editor validation — is unchanged. SVG placeholders are skipped.
+ *
+ * @param string $content Rendered image block.
+ * @return string
+ */
+function gsec_size_theme_images( $content ) {
+	$base = get_template_directory_uri() . '/assets/images/';
+	if ( false === strpos( $content, $base ) ) {
+		return $content;
+	}
+	$tags = new WP_HTML_Tag_Processor( $content );
+	if ( ! $tags->next_tag( 'img' ) || null !== $tags->get_attribute( 'width' ) ) {
+		return $content;
+	}
+	$src = (string) $tags->get_attribute( 'src' );
+	if ( 0 !== strpos( $src, $base ) ) {
+		return $content;
+	}
+	$file = get_template_directory() . '/assets/images/' . basename( wp_parse_url( $src, PHP_URL_PATH ) );
+	$size = file_exists( $file ) ? wp_getimagesize( $file ) : false;
+	if ( ! $size ) {
+		return $content;
+	}
+	$tags->set_attribute( 'width', (string) $size[0] );
+	$tags->set_attribute( 'height', (string) $size[1] );
+	// Theme photos in Image blocks sit below the hero (its photo is a Cover, not an Image block).
+	if ( null === $tags->get_attribute( 'loading' ) ) {
+		$tags->set_attribute( 'loading', 'lazy' );
+		$tags->set_attribute( 'decoding', 'async' );
+	}
+	return $tags->get_updated_html();
+}
+add_filter( 'render_block_core/image', 'gsec_size_theme_images' );
+
+/**
  * Site Logo fallback: use assets/images/logo.* until a logo is set in the editor.
  *
  * @param string $html Custom logo markup ('' when no logo is set).

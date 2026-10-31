@@ -150,8 +150,9 @@ function gsec_img( $name ) {
 /**
  * Site-wide business details used by patterns (header, footer, contact card).
  *
- * Values are intentionally empty until confirmed — see "Open decisions" in
- * docs/project-context.md. Never invent phone numbers, emails or addresses.
+ * Phone, email and address come from Figma frame 1:4 (approved 2026-10-31).
+ * Hours stay empty until the Figma conflict is resolved — see "Open decisions"
+ * in docs/project-context.md. Never invent phone numbers, emails or addresses.
  *
  * @param string $key Optional key: phone, email, address, hours.
  * @return array|string All details, or one value ('' when unknown).
@@ -161,9 +162,9 @@ function gsec_site( $key = '' ) {
 		'gsec/site',
 		array(
 			'name'    => 'Gorilla Security',
-			'phone'   => '',
-			'email'   => '',
-			'address' => '',
+			'phone'   => '0468 532 275',
+			'email'   => 'info@gorillasecurity.com.au',
+			'address' => '110 Ruskin St, Elwood VIC 3184',
 			'hours'   => array(),
 		)
 	);
@@ -173,3 +174,68 @@ function gsec_site( $key = '' ) {
 	}
 	return isset( $site[ $key ] ) ? $site[ $key ] : '';
 }
+
+/**
+ * Flag pages whose template opens with a full-bleed hero (main.gs-hero-page), so the
+ * header can float over it. A body class rather than CSS :has() keeps the header
+ * readable in browsers without :has().
+ *
+ * @param string[] $classes Body classes.
+ * @return string[]
+ */
+function gsec_body_class( $classes ) {
+	if ( is_front_page() || is_page_template( 'page-landing' ) ) {
+		$classes[] = 'gs-has-hero';
+	}
+	return $classes;
+}
+add_filter( 'body_class', 'gsec_body_class' );
+
+/**
+ * Site Logo fallback: use assets/images/logo.* until a logo is set in the editor.
+ *
+ * @param string $html Custom logo markup ('' when no logo is set).
+ * @return string
+ */
+function gsec_logo_fallback( $html ) {
+	if ( '' !== $html || has_custom_logo() ) {
+		return $html;
+	}
+	$src = gsec_img( 'logo' );
+	if ( '' === $src ) {
+		return $html;
+	}
+	return sprintf(
+		'<a href="%1$s" class="custom-logo-link" rel="home"><img src="%2$s" class="custom-logo" width="225" height="75" alt="%3$s" /></a>',
+		esc_url( home_url( '/' ) ),
+		esc_url( $src ),
+		esc_attr( gsec_site( 'name' ) )
+	);
+}
+add_filter( 'get_custom_logo', 'gsec_logo_fallback' );
+
+/**
+ * Mark custom navigation links that point at the current page with aria-current="page".
+ *
+ * Core only does this for links to posts/pages by ID; header links are custom URLs.
+ *
+ * @param string $content Rendered navigation-link block.
+ * @param array  $block   Parsed block.
+ * @return string
+ */
+function gsec_nav_current( $content, $block ) {
+	if ( empty( $block['attrs']['url'] ) || ! isset( $_SERVER['REQUEST_URI'] ) ) {
+		return $content;
+	}
+	$request = wp_parse_url( esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ), PHP_URL_PATH );
+	$target  = wp_parse_url( $block['attrs']['url'], PHP_URL_PATH );
+	if ( trailingslashit( (string) $request ) !== trailingslashit( (string) $target ) ) {
+		return $content;
+	}
+	$tags = new WP_HTML_Tag_Processor( $content );
+	if ( $tags->next_tag( 'a' ) ) {
+		$tags->set_attribute( 'aria-current', 'page' );
+	}
+	return $tags->get_updated_html();
+}
+add_filter( 'render_block_core/navigation-link', 'gsec_nav_current', 10, 2 );

@@ -60,6 +60,8 @@
 - [ ] Staging and production URLs
 - [ ] Names for tech lead, designer, developers, content writer
 - [ ] CTA target URL confirmed (`/contact-us/#quote`?)
+- [ ] Page URLs (no `sitemap.md` yet): header nav uses slugs from its labels — `/about-us/`, `/services/`, `/blog/`, `/area/`, `/contact-us/` (2026-10-31)
 - [ ] Copy for "Why us" steps 02–06 and FAQ answers 01, 03–08
 - [ ] Partner/brand logo files supplied by partners
-- [ ] Site details for `gsec_site()`: phone, email, address, opening hours
+- [x] Site details for `gsec_site()`: phone, email, address taken from Figma 1:4 (approved 2026-10-31)
+- [ ] Opening hours: Figma conflicts — contact card 1:199 "Mon-Sat 8:00 AM-6:00 PM" vs footer 1:485 "Mon to Fri 5:30am–7pm / Sat to Sun 5:30am–5pm"

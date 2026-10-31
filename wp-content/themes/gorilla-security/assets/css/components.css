@@ -22,6 +22,7 @@
 	--gs-grad-deco: var(--wp--preset--gradient--deco-block);
 	--gs-grad-soft: var(--wp--preset--gradient--soft-section);
 	--gs-grad-glass: var(--wp--preset--gradient--glass);
+	--gs-grad-glass-brand: var(--wp--preset--gradient--glass-brand);
 	--gs-grad-night: var(--wp--preset--gradient--night-fade);
 	--gs-grad-shade: var(--wp--preset--gradient--photo-shade);
 	--gs-grad-rule: var(--wp--preset--gradient--rule-fade);
@@ -30,6 +31,7 @@
 	--gs-shadow-badge: var(--wp--preset--shadow--badge);
 	--gs-shadow-glow: var(--wp--preset--shadow--glow);
 	--gs-blur: var(--wp--custom--blur--glass);
+	--gs-text-shadow: var(--wp--custom--text-shadow--on-photo);
 	--gs-h-sm: var(--wp--custom--control--sm);
 	--gs-h-md: var(--wp--custom--control--md);
 	--gs-h-lg: var(--wp--custom--control--lg);
@@ -50,6 +52,12 @@ mark.gs-accent {
 	overflow-wrap: anywhere;
 }
 
+/* Phone numbers stay left-to-right in RTL pages (digit groups would otherwise reorder). */
+a[href^="tel:"] {
+	direction: ltr;
+	unicode-bidi: isolate;
+}
+
 @media (prefers-reduced-motion: reduce) {
 
 	*,
@@ -62,4 +70,250 @@ mark.gs-accent {
 	}
 }
 
+/* ---------- Icons (CSS mask, inherit currentcolor) ---------- */
+.gs-ico-arrow-right {
+	--gs-ico: url(../icons/arrow-right.svg);
+}
+
+.gs-ico-phone {
+	--gs-ico: url(../icons/phone.svg);
+}
+
+/* ---------- Components (block styles, shared by sections) ----------
+ * Buttons are ordered by ascending specificity (stylelint no-descending-specificity). */
+
+/* Button — every style: 60px default height, room for an icon. */
+.wp-block-button__link {
+	align-items: center;
+	display: inline-flex;
+	gap: var(--wp--preset--spacing--30);
+	justify-content: center;
+	min-block-size: var(--gs-h-md);
+}
+
+/* Button — fill (default): brand gradient + arrow. Figma 1:233. */
+:where(.wp-block-button:not([class*="is-style-"]), .wp-block-button.is-style-fill) .wp-block-button__link {
+	background: var(--gs-grad);
+
+	/* Fallback for browsers without color-mix(). */
+	border: 1px solid transparent;
+	border: 1px solid color-mix(in srgb, var(--wp--preset--color--white) 25%, transparent);
+}
+
+.wp-block-button__link:hover {
+	filter: brightness(1.12);
+}
+
+/* Button size: small (48px). Figma 1:542, 1:531. */
+.gs-btn-sm .wp-block-button__link {
+	min-block-size: var(--gs-h-sm);
+	padding-block: 0;
+	padding-inline: var(--wp--preset--spacing--40);
+}
+
+/* Button — glass phone. Figma 1:531. */
+.wp-block-button.is-style-glass-phone .wp-block-button__link {
+	-webkit-backdrop-filter: blur(var(--gs-blur));
+	backdrop-filter: blur(var(--gs-blur));
+	background: var(--gs-grad-glass-brand);
+	border: 1px solid var(--wp--preset--color--white);
+	box-shadow: var(--gs-shadow-glass);
+	color: var(--wp--preset--color--white);
+}
+
+/* Button icons: arrow after fill buttons, phone before glass-phone buttons. */
+:where(.wp-block-button:not([class*="is-style-"]), .wp-block-button.is-style-fill) .wp-block-button__link::after,
+.wp-block-button.is-style-glass-phone .wp-block-button__link::before {
+	background: currentcolor;
+	block-size: 1.2em;
+	content: "";
+	flex: none;
+	inline-size: 1.2em;
+	mask: var(--gs-ico) center / contain no-repeat;
+}
+
+:where(.wp-block-button:not([class*="is-style-"]), .wp-block-button.is-style-fill) .wp-block-button__link::after {
+	--gs-ico: url(../icons/arrow-right.svg);
+}
+
+.wp-block-button.is-style-glass-phone .wp-block-button__link::before {
+	--gs-ico: url(../icons/phone.svg);
+}
+
+[dir="rtl"] :where(.wp-block-button:not([class*="is-style-"]), .wp-block-button.is-style-fill) .wp-block-button__link::after {
+	transform: scaleX(-1);
+}
+
+/* Group — Glass · light. Figma 1:524.
+ * Blur sits on ::before: backdrop-filter on the group itself would trap position:fixed
+ * descendants (e.g. the navigation overlay menu) inside it. */
+.is-style-glass-light {
+	border: 2px solid var(--wp--preset--color--white);
+	border-radius: var(--gs-r-md);
+	box-shadow: var(--gs-shadow-glass);
+	isolation: isolate;
+	position: relative;
+}
+
+.is-style-glass-light::before {
+	-webkit-backdrop-filter: blur(var(--gs-blur));
+	backdrop-filter: blur(var(--gs-blur));
+	background: var(--gs-grad-glass);
+	border-radius: inherit;
+	content: "";
+	inset: 0;
+	position: absolute;
+	z-index: -1;
+}
+
 /* ---------- Sections (Figma order) ---------- */
+
+/* Header — Figma 1:523.
+ * Floats over the hero on pages with body.gs-has-hero (fixed only when JS can make it solid on scroll);
+ * sticky and solid everywhere else.
+ * No :has() here: the solid state must work in browsers (and the pa11y Chromium) without it. */
+.wp-site-blocks > header {
+	inset-block-start: var(--wp-admin--admin-bar--height, 0);
+	padding-block-start: var(--wp--preset--spacing--20);
+	padding-inline: var(--wp--preset--spacing--60);
+	position: sticky;
+	z-index: 100;
+}
+
+.gs-has-hero .wp-site-blocks > header {
+	inset-inline: 0;
+	position: absolute;
+}
+
+.gs-js .gs-has-hero .wp-site-blocks > header {
+	position: fixed;
+}
+
+.gs-header {
+	color: var(--wp--preset--color--white);
+	gap: var(--wp--preset--spacing--40);
+	padding-block: 0;
+	padding-inline: var(--wp--preset--spacing--40);
+}
+
+.gs-header__logo img {
+	block-size: auto;
+	max-inline-size: 100%;
+}
+
+.gs-header__logo.wp-block-site-title a {
+	color: inherit;
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.gs-header__nav {
+	flex: 1 1 auto;
+	font-size: var(--wp--preset--font-size--medium);
+}
+
+.gs-header__nav .wp-block-navigation__container {
+	column-gap: var(--wp--preset--spacing--70);
+	justify-content: center;
+}
+
+.gs-header__nav .wp-block-navigation-item__content {
+	text-decoration: none;
+	text-shadow: var(--gs-text-shadow);
+}
+
+.gs-header__nav .wp-block-navigation-item__content:hover {
+	text-decoration: underline;
+	text-underline-offset: 0.3em;
+}
+
+/* Matches core's doubled .wp-block-navigation-item__content selector (color: inherit). */
+.gs-header__nav .wp-block-navigation-item__content.wp-block-navigation-item__content[aria-current="page"] {
+	color: var(--gs-brand);
+	font-weight: 600;
+	text-shadow: none;
+}
+
+.gs-header__nav .is-menu-open .wp-block-navigation-item__content {
+	text-shadow: none;
+}
+
+.gs-header .wp-block-buttons {
+	gap: var(--wp--preset--spacing--40);
+}
+
+/* Solid state: on scroll (JS) and on pages without a hero. Figma has no design; theme default. */
+.gs-header.gs-header--solid,
+body:not(.gs-has-hero) .gs-header {
+	background: var(--wp--preset--color--white);
+	color: var(--wp--preset--color--heading);
+}
+
+/* The glass layer is invisible on white; removing it also lets contrast checkers read the background. */
+.gs-header.gs-header--solid::before,
+body:not(.gs-has-hero) .gs-header::before {
+	content: none;
+}
+
+:is(.gs-header--solid, body:not(.gs-has-hero) .gs-header) .gs-header__nav .wp-block-navigation-item__content {
+	text-shadow: none;
+}
+
+/* Glass-brand on white fails contrast; switch the phone button to brand outline. */
+:is(.gs-header--solid, body:not(.gs-has-hero) .gs-header) .is-style-glass-phone .wp-block-button__link {
+	background: var(--wp--preset--color--white);
+	border-color: var(--gs-brand);
+	box-shadow: none;
+	color: var(--gs-brand);
+}
+
+@media (max-width: 1100px) {
+
+	.gs-header {
+		padding-block: var(--wp--preset--spacing--10);
+	}
+
+	.gs-header__nav {
+		flex-basis: 100%;
+		order: 3;
+	}
+}
+
+/* Phones: header scrolls away (a two-row sticky bar would eat the viewport); buttons share a row. */
+@media (max-width: 600px) {
+
+	.wp-site-blocks > header {
+		padding-inline: var(--wp--preset--spacing--30);
+		position: relative;
+	}
+
+	.gs-js .gs-has-hero .wp-site-blocks > header {
+		position: absolute;
+	}
+
+	.gs-header__logo {
+		max-inline-size: 55%;
+	}
+
+	.gs-header__nav {
+		flex-basis: auto;
+		order: 0;
+	}
+
+	.gs-header .wp-block-buttons {
+		flex-basis: 100%;
+		flex-wrap: nowrap;
+		gap: var(--wp--preset--spacing--20);
+	}
+
+	.gs-header .wp-block-button {
+		flex: 1 1 0;
+	}
+
+	.gs-header .wp-block-buttons .wp-block-button__link {
+		font-size: var(--wp--preset--font-size--small);
+		gap: var(--wp--preset--spacing--10);
+		inline-size: 100%;
+		padding-inline: var(--wp--preset--spacing--20);
+	}
+}

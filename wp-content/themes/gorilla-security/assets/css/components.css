@@ -138,6 +138,10 @@ a[href^="tel:"] {
 	--gs-ico: url(../icons/bulb.svg);
 }
 
+.gs-ico-building {
+	--gs-ico: url(../icons/building.svg);
+}
+
 .gs-ico-cctv {
 	--gs-ico: url(../icons/cctv.svg);
 }
@@ -152,6 +156,10 @@ a[href^="tel:"] {
 
 .gs-ico-gear {
 	--gs-ico: url(../icons/gear.svg);
+}
+
+.gs-ico-headset {
+	--gs-ico: url(../icons/headset.svg);
 }
 
 .gs-ico-intercom {
@@ -247,9 +255,17 @@ a[href^="tel:"] {
 	filter: none;
 }
 
+/* Button — light phone. Figma 1:302: white, 2px brand-300 border, brand text, phone icon. */
+.wp-block-buttons .wp-block-button.is-style-light-phone .wp-block-button__link {
+	background: var(--wp--preset--color--white);
+	border: 2px solid var(--wp--preset--color--brand-300);
+	color: var(--gs-brand);
+}
+
 /* Button icons: arrow after fill and outline buttons, phone before glass-phone buttons. */
 :where(.wp-block-button:not([class*="is-style-"]), .wp-block-button.is-style-fill, .wp-block-button.is-style-outline) .wp-block-button__link::after,
-.wp-block-button.is-style-glass-phone .wp-block-button__link::before {
+.wp-block-button.is-style-glass-phone .wp-block-button__link::before,
+.wp-block-button.is-style-light-phone .wp-block-button__link::before {
 	background: currentcolor;
 	block-size: 1.2em;
 	content: "";
@@ -262,7 +278,8 @@ a[href^="tel:"] {
 	--gs-ico: url(../icons/arrow-right.svg);
 }
 
-.wp-block-button.is-style-glass-phone .wp-block-button__link::before {
+.wp-block-button.is-style-glass-phone .wp-block-button__link::before,
+.wp-block-button.is-style-light-phone .wp-block-button__link::before {
 	--gs-ico: url(../icons/phone.svg);
 }
 
@@ -432,6 +449,7 @@ a[href^="tel:"] {
 .is-style-stats-with-dividers > .wp-block-column {
 	flex: 1 1 auto;
 	min-inline-size: min-content;
+	z-index: 1;
 	padding-inline-end: var(--wp--preset--spacing--40);
 }
 
@@ -2159,4 +2177,185 @@ body:not(.gs-has-hero) .gs-header::before {
 
 .gs-split .gs-split__body > .gs-icon-trio {
 	margin-block-start: var(--wp--preset--spacing--60);
+}
+
+/* CTA · dark — Figma 1:289. Dark photo cover; text column and a team member standing on a
+ * glass panel with two badges. White text sits over the darkest part of the photo. */
+.gs-cta.wp-block-cover {
+	min-block-size: 0;
+	padding: var(--wp--preset--spacing--80) var(--wp--preset--spacing--40) 0;
+}
+
+.gs-cta .wp-block-cover__inner-container {
+	color: var(--wp--preset--color--white);
+	margin-inline: auto;
+	max-inline-size: var(--wp--style--global--wide-size);
+	width: 100%;
+}
+
+.gs-cta__cols {
+	align-items: flex-end !important; /* core columns only accept the alignment class */
+	gap: var(--wp--preset--spacing--70);
+	margin: 0 auto;
+}
+
+.gs-cta .gs-cta__body {
+	align-self: center;
+	padding-block-end: var(--wp--preset--spacing--80);
+}
+
+.gs-cta .gs-cta__body > * {
+	margin: 0;
+}
+
+.gs-cta .gs-cta__body > * + * {
+	margin-block-start: var(--wp--preset--spacing--40);
+}
+
+.gs-cta .is-style-eyebrow {
+	color: var(--wp--preset--color--on-dark);
+}
+
+.gs-cta .gs-cta__title {
+	color: var(--wp--preset--color--white);
+	letter-spacing: -0.03em;
+	line-height: 1.09;
+}
+
+/* brand-500 is ~2:1 on the dark photo; brand-300 reads at large size. */
+.gs-cta .gs-cta__title mark.gs-accent {
+	color: var(--wp--preset--color--brand-300);
+}
+
+.gs-cta .gs-cta__body > p:not(.is-style-eyebrow) {
+	line-height: 1.75;
+}
+
+.gs-cta .gs-cta__body > .wp-block-buttons {
+	margin-block-start: var(--wp--preset--spacing--60);
+}
+
+/* Media: panel, photo and badges share one grid cell. Figma: panel 72% wide, 87% tall,
+ * centred under the photo; badges overlap its top-end and bottom-start edges. */
+.gs-cta__media {
+	align-items: end;
+	display: grid;
+	justify-items: center;
+}
+
+.gs-cta .gs-cta__media > * {
+	grid-area: 1 / 1;
+	margin: 0;
+}
+
+.gs-cta__panel {
+	align-self: end;
+	background: var(--gs-grad-glass);
+	block-size: 87%;
+	border: 2px solid var(--wp--preset--color--brand-200);
+	border-block-end: 0;
+	border-radius: var(--gs-r-2xl) var(--gs-r-2xl) 0 0;
+	box-shadow: var(--gs-shadow-glass);
+	justify-self: center;
+	opacity: 0.62;
+	width: 72%;
+}
+
+
+.gs-cta .gs-cta__media > .wp-block-image img {
+	block-size: auto;
+	display: block;
+	inline-size: 100%;
+}
+
+
+.gs-cta .gs-cta__media > .gs-cta__badge--top {
+	align-self: start;
+	justify-self: end;
+	margin-block-start: 20%;
+}
+
+.gs-cta .gs-cta__media > .gs-cta__badge--bottom {
+	align-self: end;
+	justify-self: start;
+	margin-block-end: var(--wp--preset--spacing--60);
+}
+
+/* Group — Glass · violet outline. Figma 1:314: brand-200 border, radius 20, glass shadow.
+ * No backdrop blur (performance); a translucent night fill keeps white text readable. */
+.is-style-glass-violet-outline {
+	background: var(--wp--preset--color--night-2);
+	background: color-mix(in srgb, var(--wp--preset--color--night-2) 70%, transparent);
+	border: 2px solid var(--wp--preset--color--brand-200);
+	border-radius: var(--gs-r-lg);
+	box-shadow: var(--gs-shadow-glass);
+	color: var(--wp--preset--color--white);
+}
+
+.gs-cta .gs-cta__badge {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	font-size: var(--wp--preset--font-size--h-5);
+	gap: var(--wp--preset--spacing--20);
+	inline-size: 6.7em;
+	min-inline-size: min-content;
+	padding: var(--wp--preset--spacing--40) var(--wp--preset--spacing--30);
+	text-align: center;
+}
+
+.gs-cta .gs-cta__badge > * {
+	margin: 0;
+}
+
+.gs-cta__badge-icon {
+	block-size: 1.65em;
+	color: var(--wp--preset--color--brand-100);
+	inline-size: 1.65em;
+}
+
+.gs-cta__badge-icon::before {
+	background: currentcolor;
+	block-size: 100%;
+	content: "";
+	display: block;
+	inline-size: 100%;
+	mask: var(--gs-ico) center / contain no-repeat;
+}
+
+.gs-cta .gs-cta__badge-text {
+	border-block-end: 3px solid transparent;
+	border-image: linear-gradient(to right, var(--wp--preset--color--brand-700), transparent) 1;
+	font-weight: 500;
+	letter-spacing: -0.03em;
+	line-height: 1.1;
+	overflow-wrap: normal;
+	padding-block-end: var(--wp--preset--spacing--20);
+}
+
+@media (max-width: 1100px) {
+
+	.gs-cta__cols {
+		flex-wrap: wrap !important;
+	}
+
+	.gs-cta__cols > .wp-block-column {
+		flex-basis: 100% !important;
+	}
+
+	.gs-cta .gs-cta__body {
+		padding-block-end: 0;
+	}
+
+	.gs-cta__media {
+		margin-inline: auto;
+		max-inline-size: 40em;
+	}
+}
+
+@media (max-width: 600px) {
+
+	.gs-cta .gs-cta__badge {
+		font-size: var(--wp--preset--font-size--lead);
+	}
 }

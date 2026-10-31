@@ -127,7 +127,7 @@ Components are **core blocks + block styles + CSS classes + patterns**. No custo
 |---|---|---|
 | Button — fill (gradient + arrow) | core/button, default style | `Submit — Request a Quote` (e.g. 1:233) |
 | Button — outline | button style **Outline**: 2px `brand-500` border and text, arrow; white fill (Figma: transparent) so it reads on gradient/photo backgrounds; hover `brand-50` | 1:558 |
-| Button — light phone | style **Light · phone** | 1:302 |
+| Button — light phone | style **Light · phone**: white, 2px `brand-300` border, brand text, phone icon | 1:302 |
 | Button — glass (no icon) | style **Glass** (added 2026-10-31 with the hero) | 1:80 |
 | Button — glass phone | style **Glass · phone** | 1:531 |
 | Button — no icon (submit) | style **Fill · no icon** | 1:111 |
@@ -136,7 +136,7 @@ Components are **core blocks + block styles + CSS classes + patterns**. No custo
 | Accent heading words | select words → **Highlight** (renders `<mark>`), solid `brand-500` (Figma's gradient dropped for performance) | gradient spans in every H2 |
 | Lead with bar | paragraph style **Lead with bar** | 1:76 |
 | Card / Card tint | group styles **Card**, **Card · tint** | 1:28 |
-| Glass light / dark / violet outline | group styles **Glass · light / dark / violet outline**. Glass · dark is translucent only inside a Cover (photo); elsewhere solid `night-2` | 1:524, 1:97, 1:314 |
+| Glass light / dark / violet outline | group styles **Glass · light / dark / violet outline** (violet outline: `brand-200` border, 70% `night-2` fill, no blur). Glass · dark is translucent only inside a Cover (photo); elsewhere solid `night-2` | 1:524, 1:97, 1:314 |
 | Icon circle | group with `gs-icon-circle gs-ico-{name}` (71px; `--sm` 48px built; `--md/--dark/--solid` not yet) | ellipses 1:33, 1:889, 1:1055 |
 | Feature row | `gs-feature` group (icon circle + title + text) | 1:29 |
 | Stats | columns style **Stats with dividers**, `gs-stat__num` / `gs-stat__label` | 1:12 |

@@ -35,5 +35,54 @@
 		update();
 	}
 
+	/**
+	 * Marquee: duplicate each track so it loops seamlessly, then let CSS scroll it.
+	 * Adds a pause/play button (WCAG 2.2.2). Skipped with reduced motion: rows stay static.
+	 */
+	function initMarquees() {
+		const marquees = document.querySelectorAll( '.gs-marquee' );
+		if (
+			! marquees.length ||
+			window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches
+		) {
+			return;
+		}
+		const l10n = window.gorillaL10n || {};
+
+		marquees.forEach( function ( marquee ) {
+			marquee
+				.querySelectorAll( '.gs-marquee__track' )
+				.forEach( function ( track ) {
+					Array.from( track.children ).forEach( function ( item ) {
+						const clone = item.cloneNode( true );
+						clone.setAttribute( 'aria-hidden', 'true' );
+						clone.setAttribute( 'inert', '' );
+						track.appendChild( clone );
+					} );
+				} );
+
+			const toggle = document.createElement( 'button' );
+			toggle.type = 'button';
+			toggle.className = 'gs-marquee__toggle gs-ico-pause';
+			toggle.setAttribute(
+				'aria-label',
+				l10n.pauseLogos || 'Pause logo animation'
+			);
+			toggle.setAttribute( 'aria-pressed', 'false' );
+			toggle.addEventListener( 'click', function () {
+				const paused = marquee.classList.toggle( 'is-paused' );
+				toggle.setAttribute(
+					'aria-pressed',
+					paused ? 'true' : 'false'
+				);
+				toggle.classList.toggle( 'gs-ico-pause', ! paused );
+				toggle.classList.toggle( 'gs-ico-play', paused );
+			} );
+			marquee.appendChild( toggle );
+			marquee.classList.add( 'is-animated' );
+		} );
+	}
+
 	initHeader();
+	initMarquees();
 } )();

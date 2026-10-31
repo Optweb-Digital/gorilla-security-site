@@ -40,6 +40,14 @@ function gorilla_enqueue_assets() {
 			'in_footer' => true,
 		)
 	);
+
+	wp_localize_script(
+		'gs-gorilla',
+		'gorillaL10n',
+		array(
+			'pauseLogos' => __( 'Pause logo animation', 'gorilla-security' ),
+		)
+	);
 }
 add_action( 'wp_enqueue_scripts', 'gorilla_enqueue_assets' );
 

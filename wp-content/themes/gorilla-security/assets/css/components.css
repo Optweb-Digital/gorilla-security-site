@@ -124,6 +124,8 @@ mark.gs-accent {
 
 .gs-ico-phone { --gs-ico: url(../icons/phone.svg); }
 
+.gs-ico-pause { --gs-ico: url(../icons/pause.svg); }
+
 .gs-ico-play { --gs-ico: url(../icons/play.svg); }
 
 .gs-ico-plus { --gs-ico: url(../icons/plus.svg); }
@@ -1296,4 +1298,159 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 
 .gs-form--dark .wpcf7-response-output {
 	color: var(--wp--preset--color--white);
+}
+
+/* ---------- Brands — Figma 1:508 ---------- */
+
+/* Panel and marquee share one grid cell: the fading title panel overlays the start of the logos. */
+.gs-brands.wp-block-group {
+	position: relative;
+	display: grid;
+	align-items: center;
+	margin-block-start: 0;
+	overflow: hidden;
+	background-color: var(--wp--preset--color--white);
+}
+
+.gs-brands > * {
+	grid-area: 1 / 1;
+	margin: 0;
+}
+
+/* Figma 1:512: #F1F1F1 → #F8F8F8 at 85% → transparent, 664px. */
+.gs-brands__panel {
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	align-self: stretch;
+	inline-size: min(664px, 42%);
+	padding-inline: var(--wp--preset--spacing--60) var(--wp--preset--spacing--80);
+	background-image: linear-gradient(90deg, var(--wp--preset--color--surface-2) 57.6%, color-mix(in srgb, var(--wp--preset--color--surface) 85%, transparent) 85.2%, transparent);
+}
+
+/* Figma 1:513: 42px Medium, brand-600 → brand-800 gradient; solid brand-600 fallback (rules-log 001). */
+.gs-brands__title.wp-block-heading {
+	max-inline-size: 520px;
+	margin: 0;
+	color: var(--wp--preset--color--brand-600);
+	font-weight: 500;
+	line-height: 1.36;
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+
+	.gs-brands__title.wp-block-heading {
+		background-image: linear-gradient(90deg, var(--wp--preset--color--brand-600), var(--wp--preset--color--brand-800));
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+	}
+}
+
+/* Logo rows — Figma 1:510: ~130px gaps, row 2 offset, logos 43–62px tall. */
+.gs-marquee {
+	--gs-marquee-gap: var(--wp--preset--spacing--90);
+	display: grid;
+	gap: var(--wp--preset--spacing--60);
+	padding-block: var(--wp--preset--spacing--50);
+	padding-inline-start: clamp(16px, 28vw, 534px);
+	overflow: hidden;
+}
+
+.gs-marquee__track.wp-block-group {
+	gap: var(--gs-marquee-gap);
+	align-items: center;
+	inline-size: max-content;
+	margin: 0;
+}
+
+.gs-marquee__track + .gs-marquee__track {
+	margin-inline-start: calc(var(--wp--preset--spacing--90) + var(--wp--preset--spacing--30));
+}
+
+.gs-marquee .gs-marquee__logo {
+	flex-shrink: 0;
+	margin: 0;
+}
+
+.gs-marquee .gs-marquee__logo img {
+	display: block;
+	inline-size: auto;
+	max-inline-size: 200px;
+	block-size: auto;
+	max-block-size: 62px;
+}
+
+/* Animated (gorilla.js duplicated the logos): the track scrolls by half its width. */
+.gs-marquee.is-animated {
+	padding-inline-start: 0;
+}
+
+.gs-marquee.is-animated .gs-marquee__track {
+	padding-inline-end: var(--gs-marquee-gap);
+	animation: gs-marquee 48s linear infinite;
+}
+
+.gs-marquee.is-animated .gs-marquee__track + .gs-marquee__track {
+	animation-direction: reverse;
+}
+
+.gs-marquee.is-paused .gs-marquee__track.wp-block-group,
+.gs-marquee:hover .gs-marquee__track.wp-block-group,
+.gs-marquee:focus-within .gs-marquee__track.wp-block-group {
+	animation-play-state: paused;
+}
+
+@keyframes gs-marquee {
+
+	to {
+		transform: translateX(-50%);
+	}
+}
+
+/* Pause / play (WCAG 2.2.2), added by gorilla.js. */
+.gs-marquee__toggle {
+	position: absolute;
+	inset-block-end: var(--wp--preset--spacing--20);
+	inset-inline-end: var(--wp--preset--spacing--40);
+	z-index: 2;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	inline-size: 34px;
+	block-size: 34px;
+	padding: 0;
+	border: 0;
+	border-radius: var(--gs-r-pill);
+	background-color: var(--wp--preset--color--brand-100);
+	color: var(--wp--preset--color--brand-700);
+	cursor: pointer;
+}
+
+.gs-marquee__toggle::before {
+	--gs-ico-size: 50%;
+}
+
+@media (max-width: 781px) {
+
+	.gs-brands > * {
+		grid-area: auto;
+	}
+
+	.gs-brands__panel {
+		inline-size: 100%;
+		padding-block: var(--wp--preset--spacing--50) 0;
+		padding-inline: var(--wp--preset--spacing--40);
+		background-image: none;
+	}
+
+	.gs-marquee {
+		padding-block-end: var(--wp--preset--spacing--70);
+		padding-inline-start: var(--wp--preset--spacing--40);
+	}
+
+	.gs-marquee .gs-marquee__logo img {
+		max-inline-size: 140px;
+		max-block-size: 44px;
+	}
 }

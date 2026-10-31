@@ -210,7 +210,7 @@ the editor's Patterns panel is the live component catalogue.
   (`cctv`, `bell`, `intercom`, `access-card`, `lock`, `smart-home`, `shield`, `gear`, `wrench`,
   `phone`, `mail`, `map-pin`, `clock`, `headset`, `check`, `star`, `plus`, `close`,
   `arrow-left/right/down`, `chevron-down`, `lightbulb`, `smartphone`, `laptop`, `building-shield`,
-  `chip`, `play`).
+  `chip`, `play`, `pause`).
 - Source: Lucide (`lucide-static` 1.65.0, ISC — `assets/icons/LICENSE-lucide.txt`), stroke set to 1.8.
   Renamed from Lucide: `intercom` = monitor-speaker · `access-card` = id-card · `smart-home` = house-wifi ·
   `gear` = settings · `close` = x · `building-shield` = building-2 · `chip` = cpu. Each SVG's first line names its source.

@@ -126,7 +126,7 @@ Components are **core blocks + block styles + CSS classes + patterns**. No custo
 | Component | How to use | Figma node |
 |---|---|---|
 | Button — fill (gradient + arrow) | core/button, default style | `Submit — Request a Quote` (e.g. 1:233) |
-| Button — outline | button style **Outline** | 1:558 |
+| Button — outline | button style **Outline**: 2px `brand-500` border and text, arrow; white fill (Figma: transparent) so it reads on gradient/photo backgrounds; hover `brand-50` | 1:558 |
 | Button — light phone | style **Light · phone** | 1:302 |
 | Button — glass (no icon) | style **Glass** (added 2026-10-31 with the hero) | 1:80 |
 | Button — glass phone | style **Glass · phone** | 1:531 |
@@ -137,17 +137,17 @@ Components are **core blocks + block styles + CSS classes + patterns**. No custo
 | Lead with bar | paragraph style **Lead with bar** | 1:76 |
 | Card / Card tint | group styles **Card**, **Card · tint** | 1:28 |
 | Glass light / dark / violet outline | group styles **Glass · light / dark / violet outline**. Glass · dark is translucent only inside a Cover (photo); elsewhere solid `night-2` | 1:524, 1:97, 1:314 |
-| Icon circle | group with `gs-icon-circle gs-ico-{name}` (+ `--sm/--md/--dark/--solid`) | ellipses 1:33 etc. |
+| Icon circle | group with `gs-icon-circle gs-ico-{name}` (71px; `--sm` 48px built; `--md/--dark/--solid` not yet) | ellipses 1:33, 1:889, 1:1055 |
 | Feature row | `gs-feature` group (icon circle + title + text) | 1:29 |
 | Stats | columns style **Stats with dividers**, `gs-stat__num` / `gs-stat__label` | 1:12 |
-| Checklist | list style **Checklist** | 1:565… |
+| Checklist | list style **Checklist**: `brand-500` Lead text, 41px `brand-100` circle with a check (CSS, scales with the font). Two content-sized columns; one below 600px | 1:565… |
 | Icon trio | group `gs-icon-trio` | 1:265 |
 | Deco photo frame | image styles **Deco frame · left / right** | 1:240/1:241, 1:254/1:255 |
-| Float card | group `gs-float-card` | 1:1051 |
+| Float card | group `gs-float-card` › optional Image (thumbnail) or icon circle `--sm`, then `gs-float-card__body` (h3 `gs-float-card__title`, `gs-float-card__text`, optional `gs-float-card__devices`). Modifiers: `--thumb` (no rule beside the body), `--pop` (thumbnail rises above the card); placement in `gs-service__media`: `--top`, `--start`, `--center` (default bottom-end). Figma's dashed connector lines are left out. Below 782px cards sit under the photo | 1:1051 |
 | Review badge | group `gs-review-badge` | 1:114 |
 | Trust strip | group `gs-trust-strip` | 1:515 |
-| Round arrows | `gsec_arrows()` helper (core/html buttons) | 1:607 |
-| Tabs | `gs-tabs` › `gs-tabs__nav` (buttons, `gs-ico-*`) + `gs-tabs__panel` × n | 1:162 |
+| Round arrows | `gsec_arrows( $controls_id )` helper (core/html buttons, 60px): prev `brand-100` tint, next solid `brand-700`. In tabs they step through the tabs; hidden without JS | 1:607 |
+| Tabs | `gs-tabs` › `gs-tabs__nav` (List block of jump links `#panel-id`; icon class `gs-ico-*` on each List item) + `gs-tabs__panel` groups with that anchor. gorilla.js makes them WAI-ARIA tabs (arrow keys, Home/End, automatic activation; a `#panel-id` URL opens that tab); the tablist is labelled by the eyebrow. Without JS the bar jumps to the panels and all panels show. The bar scrolls sideways when the tabs do not fit | 1:162 |
 | Stepper | `gs-steps` › `gs-steps__media` (Image blocks) + `gs-steps__list` › `gs-step` (h3 `gs-step__title` + `gs-step__text`) × n. Numbers are CSS counters (decorative). gorilla.js: titles become buttons (aria-expanded), one open at a time with its photo, track + marker, auto-advance every `duration.step` with a pause button (stops on hover/focus/off-screen, and when a reason is chosen); none with reduced motion. Without JS all reasons open, first photo | 1:522 |
 | Marquee | `gs-marquee` › `gs-marquee__track` › `gs-marquee__row` (Image blocks). gorilla.js clones each row once (aria-hidden) and adds a pause button (WCAG 2.2.2); no motion without JS or with reduced motion (rows wrap). Speed: `duration.marquee` | 1:510 |
 | Slider | `gs-slider` › arrows + `gs-slider__track` (scroll-snap) | 1:418 |
@@ -282,5 +282,8 @@ pages = **Landing (no title)** template + `split-*`, `services-tabs`, `faq`, `ct
 - Section copy says "Gorilla Security **& Locksmith**" once (1:244) vs "& Automation"
   everywhere else; the pattern uses "Gorilla Security".
 - Header "Get A Quote" and other CTAs link to `/contact-us/#quote` — confirm the target.
+- Services (1:162): "Know More" has no target page yet — links to `/services/`. Copy kept verbatim:
+  title "Intercoms Systems" and card text "card, PIN biometric access" (missing "&") — confirm.
+  The 9–15% black photo overlays (1:1050, 1:974, 1:800) are dropped; cards carry the `soft` shadow instead.
 - Partner/brand logos and the review-source mark are third-party marks: use the files the
   partners supply under their brand guidelines.

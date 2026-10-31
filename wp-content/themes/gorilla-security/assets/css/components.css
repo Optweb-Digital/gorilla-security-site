@@ -122,6 +122,62 @@ a[href^="tel:"] {
 	--gs-ico: url(../icons/map-pin.svg);
 }
 
+.gs-ico-access {
+	--gs-ico: url(../icons/access.svg);
+}
+
+.gs-ico-arrow-left {
+	--gs-ico: url(../icons/arrow-left.svg);
+}
+
+.gs-ico-bell {
+	--gs-ico: url(../icons/bell.svg);
+}
+
+.gs-ico-bulb {
+	--gs-ico: url(../icons/bulb.svg);
+}
+
+.gs-ico-cctv {
+	--gs-ico: url(../icons/cctv.svg);
+}
+
+.gs-ico-check {
+	--gs-ico: url(../icons/check.svg);
+}
+
+.gs-ico-intercom {
+	--gs-ico: url(../icons/intercom.svg);
+}
+
+.gs-ico-laptop {
+	--gs-ico: url(../icons/laptop.svg);
+}
+
+.gs-ico-lock {
+	--gs-ico: url(../icons/lock.svg);
+}
+
+.gs-ico-mobile {
+	--gs-ico: url(../icons/mobile.svg);
+}
+
+.gs-ico-smart-home {
+	--gs-ico: url(../icons/smart-home.svg);
+}
+
+.gs-ico-tablet {
+	--gs-ico: url(../icons/tablet.svg);
+}
+
+.gs-ico-users {
+	--gs-ico: url(../icons/users.svg);
+}
+
+.gs-ico-video {
+	--gs-ico: url(../icons/video.svg);
+}
+
 /* ---------- Components (block styles, shared by sections) ----------
  * Buttons are ordered by ascending specificity (stylelint no-descending-specificity). */
 
@@ -165,8 +221,22 @@ a[href^="tel:"] {
 	color: var(--wp--preset--color--white);
 }
 
-/* Button icons: arrow after fill buttons, phone before glass-phone buttons. */
-:where(.wp-block-button:not([class*="is-style-"]), .wp-block-button.is-style-fill) .wp-block-button__link::after,
+/* Button — outline. Figma 1:558: 2px brand border, brand text, arrow. A white fill (Figma:
+ * transparent) keeps it readable on gradient and photo backgrounds. Beats core's
+ * .wp-block-button.is-style-outline > .wp-block-button__link:not(.has-text-color). */
+.wp-block-buttons .wp-block-button.is-style-outline .wp-block-button__link {
+	background: var(--wp--preset--color--white);
+	border: 2px solid var(--gs-brand);
+	color: var(--gs-brand);
+}
+
+.wp-block-button.is-style-outline .wp-block-button__link:hover {
+	background: var(--wp--preset--color--brand-50);
+	filter: none;
+}
+
+/* Button icons: arrow after fill and outline buttons, phone before glass-phone buttons. */
+:where(.wp-block-button:not([class*="is-style-"]), .wp-block-button.is-style-fill, .wp-block-button.is-style-outline) .wp-block-button__link::after,
 .wp-block-button.is-style-glass-phone .wp-block-button__link::before {
 	background: currentcolor;
 	block-size: 1.2em;
@@ -176,7 +246,7 @@ a[href^="tel:"] {
 	mask: var(--gs-ico) center / contain no-repeat;
 }
 
-:where(.wp-block-button:not([class*="is-style-"]), .wp-block-button.is-style-fill) .wp-block-button__link::after {
+:where(.wp-block-button:not([class*="is-style-"]), .wp-block-button.is-style-fill, .wp-block-button.is-style-outline) .wp-block-button__link::after {
 	--gs-ico: url(../icons/arrow-right.svg);
 }
 
@@ -184,7 +254,7 @@ a[href^="tel:"] {
 	--gs-ico: url(../icons/phone.svg);
 }
 
-[dir="rtl"] :where(.wp-block-button:not([class*="is-style-"]), .wp-block-button.is-style-fill) .wp-block-button__link::after {
+[dir="rtl"] :where(.wp-block-button:not([class*="is-style-"]), .wp-block-button.is-style-fill, .wp-block-button.is-style-outline) .wp-block-button__link::after {
 	transform: scaleX(-1);
 }
 
@@ -309,6 +379,12 @@ a[href^="tel:"] {
 	content: "";
 	inline-size: 48%;
 	mask: var(--gs-ico) center / contain no-repeat;
+}
+
+/* Icon circle — small (48px): float cards, device rows. Figma 1:889 (53px), 1:1055 (50px). */
+.gs-icon-circle--sm {
+	block-size: var(--gs-h-sm);
+	inline-size: var(--gs-h-sm);
 }
 
 /* Feature row. Figma 1:29: icon circle + title + text; rows divided by a 2px rule. */
@@ -598,6 +674,275 @@ a[href^="tel:"] {
 
 .gs-play-toggle.is-paused::before {
 	--gs-ico: url(../icons/play.svg);
+}
+
+/* List — Checklist. Figma 1:565: brand text, 41px brand-100 circle with a check.
+ * Two columns sized to their content; one column on phones. */
+.is-style-checklist {
+	color: var(--gs-brand);
+	display: grid;
+	font-size: var(--wp--preset--font-size--lead);
+	gap: var(--wp--preset--spacing--30) var(--wp--preset--spacing--70);
+	grid-template-columns: repeat(2, minmax(0, max-content));
+	letter-spacing: -0.03em;
+	list-style: none;
+	padding: 0;
+}
+
+.is-style-checklist > li {
+	align-items: center;
+	display: flex;
+	gap: var(--wp--preset--spacing--30);
+	line-height: 1.4;
+	margin: 0;
+	position: relative;
+}
+
+/* Circle (::before), then the check masked over its centre (::after). */
+.is-style-checklist > li::before {
+	background: var(--wp--preset--color--brand-100);
+	block-size: 2.05em;
+	border-radius: 50%;
+	content: "";
+	flex: none;
+	inline-size: 2.05em;
+}
+
+.is-style-checklist > li::after {
+	background: currentcolor;
+	block-size: 1em;
+	content: "";
+	inline-size: 1em;
+	inset-block-start: 50%;
+	inset-inline-start: 0.525em;
+	mask: url(../icons/check.svg) center / contain no-repeat;
+	position: absolute;
+	transform: translateY(-50%);
+}
+
+@media (max-width: 600px) {
+
+	.is-style-checklist {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
+/* Float card. Figma 1:1051: white, radius 30, over a photo. Optional thumbnail or icon,
+ * then a body (title, text, device icons) behind a fading brand rule. */
+.gs-float-card {
+	align-items: center;
+	background: var(--wp--preset--color--white);
+	border-radius: var(--gs-r-xl);
+	box-shadow: var(--gs-shadow-soft);
+	display: flex;
+	gap: var(--wp--preset--spacing--30);
+	padding: var(--wp--preset--spacing--30);
+}
+
+.gs-float-card > * {
+	margin: 0;
+}
+
+.gs-float-card > .wp-block-image {
+	flex: 0 1 min(20em, 50%);
+}
+
+.gs-float-card img {
+	block-size: auto;
+	border-radius: var(--gs-r-lg);
+	display: block;
+	inline-size: 100%;
+}
+
+.gs-float-card__body {
+	border-inline-start: 2px solid transparent;
+	border-image: linear-gradient(var(--wp--preset--color--brand-300), transparent) 1;
+	flex: 1 1 auto;
+	min-inline-size: 0;
+	padding-inline-start: var(--wp--preset--spacing--30);
+}
+
+.gs-float-card--thumb .gs-float-card__body {
+	border: 0;
+	padding-inline-start: 0;
+}
+
+.gs-float-card__body > * {
+	margin: 0;
+	max-inline-size: 15em;
+}
+
+.gs-float-card__title {
+	color: var(--wp--preset--color--ink);
+	font-weight: 600;
+	letter-spacing: -0.03em;
+	line-height: 1.5;
+}
+
+.gs-float-card__text {
+	color: var(--wp--preset--color--body);
+	line-height: 1.6;
+}
+
+.gs-float-card__devices {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--30);
+	margin-block-start: var(--wp--preset--spacing--30);
+}
+
+.gs-float-card__devices > * {
+	margin: 0;
+}
+
+/* Pop: the thumbnail (alarm phone, Figma 1:983) rises above the card and sits on its edge. */
+.gs-float-card--pop {
+	align-items: flex-end;
+	padding-block: 0;
+}
+
+.gs-float-card--pop > .wp-block-image {
+	flex-basis: 15em;
+	margin-block-start: calc(-1 * var(--wp--preset--spacing--60));
+}
+
+.gs-float-card--pop img {
+	border-radius: 0;
+}
+
+.gs-float-card--pop .gs-float-card__body {
+	align-self: center;
+	padding-block: var(--wp--preset--spacing--40);
+}
+
+/* Round arrows (gsec_arrows()). Figma 1:607: 59px circles; prev tint, next solid. */
+.gs-arrows {
+	display: flex;
+	gap: var(--wp--preset--spacing--30);
+}
+
+.gs-arrow {
+	align-items: center;
+	background: var(--wp--preset--color--brand-100);
+	block-size: var(--gs-h-md);
+	border: 1px solid var(--gs-brand);
+	border-radius: 50%;
+	color: var(--gs-brand);
+	cursor: pointer;
+	display: flex;
+	flex: none;
+	inline-size: var(--gs-h-md);
+	justify-content: center;
+	padding: 0;
+}
+
+.gs-arrow + .gs-arrow {
+	background: var(--gs-brand-deep);
+	border-color: var(--gs-brand-deep);
+	color: var(--wp--preset--color--white);
+}
+
+.gs-arrow::before {
+	background: currentcolor;
+	block-size: 40%;
+	content: "";
+	inline-size: 40%;
+	mask: var(--gs-ico) center / contain no-repeat;
+}
+
+.gs-arrow:hover {
+	filter: brightness(1.12);
+}
+
+[dir="rtl"] .gs-arrow::before {
+	transform: scaleX(-1);
+}
+
+/* Tabs. Figma 1:1079: surface bar, radius 10; the active tab is a brand-gradient pill with
+ * a notch pointing at its panel. Without JS the tabs are jump links (gorilla.js adds the
+ * ARIA roles). The bar scrolls sideways when the tabs don't fit; its end padding holds the
+ * notch. */
+.gs-tabs__nav {
+	display: flex;
+	isolation: isolate;
+	list-style: none;
+	margin: 0;
+	overflow-x: auto;
+	padding: 0 0 var(--wp--preset--spacing--10);
+	scrollbar-width: thin;
+}
+
+.gs-tabs__nav > li {
+	background: var(--wp--preset--color--surface);
+	display: flex;
+	flex: 1 0 auto;
+	margin: 0;
+}
+
+.gs-tabs__nav > li:first-child {
+	border-end-start-radius: var(--gs-r-sm);
+	border-start-start-radius: var(--gs-r-sm);
+}
+
+.gs-tabs__nav > li:last-child {
+	border-end-end-radius: var(--gs-r-sm);
+	border-start-end-radius: var(--gs-r-sm);
+}
+
+.gs-tabs__nav a {
+	align-items: center;
+	border-radius: var(--gs-r-sm);
+	color: var(--wp--preset--color--heading);
+	display: flex;
+	flex: 1 0 auto;
+	font-size: var(--wp--preset--font-size--medium);
+	gap: var(--wp--preset--spacing--20);
+	justify-content: center;
+	min-block-size: var(--gs-h-lg);
+	padding-inline: var(--wp--preset--spacing--40);
+	position: relative;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.gs-tabs__nav a::before {
+	background: currentcolor;
+	block-size: 1.4em;
+	content: "";
+	flex: none;
+	inline-size: 1.4em;
+	mask: var(--gs-ico) center / contain no-repeat;
+}
+
+.gs-tabs__nav a:hover {
+	color: var(--gs-brand);
+}
+
+.gs-tabs__nav a[aria-selected="true"] {
+	background: var(--gs-grad);
+	color: var(--wp--preset--color--white);
+}
+
+/* Notch: a rotated square under the active tab, in the gradient's middle colour. */
+.gs-tabs__nav a[aria-selected="true"]::after {
+	background: var(--wp--preset--color--brand-600);
+	block-size: var(--wp--preset--spacing--30);
+	content: "";
+	inline-size: var(--wp--preset--spacing--30);
+	inset-block-end: calc(-0.5 * var(--wp--preset--spacing--30));
+	inset-inline-start: calc(50% - 0.5 * var(--wp--preset--spacing--30));
+	position: absolute;
+	transform: rotate(45deg);
+	z-index: -1;
+}
+
+.gs-tabs__panel[hidden] {
+	display: none;
+}
+
+/* Prev/next arrows only work with gorilla.js. */
+.gs-tabs:not(.is-enhanced) .gs-arrows {
+	display: none;
 }
 
 /* ---------- Sections (Figma order) ---------- */
@@ -1320,4 +1665,150 @@ body:not(.gs-has-hero) .gs-header::before {
 .gs-steps__toggle {
 	margin-block-start: var(--wp--preset--spacing--40);
 	margin-inline-start: calc(8px + var(--wp--preset--spacing--60));
+}
+
+/* Services — Figma 1:162. Tab bar, then one panel per service: text column and a photo
+ * with floating cards. Without JS every panel shows, one after another. */
+.gs-services {
+	background: var(--gs-grad-soft);
+	padding-block: var(--wp--preset--spacing--70) var(--wp--preset--spacing--80);
+}
+
+.gs-services__inner > * {
+	margin: 0;
+}
+
+.gs-services__inner > .gs-tabs__nav {
+	margin-block-start: var(--wp--preset--spacing--40);
+}
+
+.gs-services__inner > .gs-tabs__panel {
+	margin-block-start: var(--wp--preset--spacing--50);
+}
+
+.gs-services:not(.is-enhanced) .gs-tabs__panel + .gs-tabs__panel {
+	margin-block-start: var(--wp--preset--spacing--80);
+}
+
+.gs-service__cols {
+	gap: var(--wp--preset--spacing--60);
+	margin: 0;
+}
+
+.gs-service__body {
+	display: flex;
+	flex-direction: column;
+}
+
+.gs-service__body > * {
+	margin: 0;
+}
+
+.gs-service__title {
+	letter-spacing: -0.03em;
+	line-height: 1.2;
+}
+
+.gs-service .gs-service__body > p {
+	color: var(--wp--preset--color--body);
+	line-height: 1.75;
+	margin-block-start: var(--wp--preset--spacing--30);
+	max-inline-size: 33em;
+}
+
+.gs-service__body > .is-style-checklist {
+	margin-block-start: var(--wp--preset--spacing--60);
+}
+
+.gs-service__actions {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--40) var(--wp--preset--spacing--50);
+	margin-block-start: auto;
+	padding-block-start: var(--wp--preset--spacing--60);
+}
+
+.gs-service__actions > * {
+	margin: 0;
+}
+
+/* Photo (Figma 901×563) and cards share one grid cell; cards sit in a corner. The photo
+ * grows taller when a card needs more room than its aspect ratio gives. */
+.gs-service__media {
+	display: grid;
+}
+
+.gs-service__media > * {
+	grid-area: 1 / 1;
+	margin: 0;
+}
+
+.gs-service__media > .wp-block-image img {
+	aspect-ratio: 901 / 563;
+	block-size: 100%;
+	border-radius: var(--gs-r-xl);
+	display: block;
+	inline-size: 100%;
+	object-fit: cover;
+}
+
+.gs-service__media > .gs-float-card {
+	align-self: end;
+	justify-self: end;
+	margin: var(--wp--preset--spacing--40);
+	max-inline-size: calc(100% - 2 * var(--wp--preset--spacing--40));
+}
+
+.gs-service__media > .gs-float-card--top {
+	align-self: start;
+}
+
+.gs-service__media > .gs-float-card--start {
+	justify-self: start;
+}
+
+.gs-service__media > .gs-float-card--center {
+	justify-self: center;
+}
+
+/* Text above the photo, both full width.
+ * !important: core forces nowrap on columns from 782px and sets flex-basis inline. */
+@media (max-width: 1100px) {
+
+	.gs-service__cols {
+		flex-wrap: wrap !important;
+	}
+
+	.gs-service__cols > .wp-block-column {
+		flex-basis: 100% !important;
+	}
+}
+
+/* Phones: cards below the photo instead of over it. */
+@media (max-width: 781px) {
+
+	.gs-service__media {
+		display: flex;
+		flex-direction: column;
+		gap: var(--wp--preset--spacing--30);
+	}
+
+	.gs-service__media > .gs-float-card {
+		align-self: stretch;
+		margin: 0;
+		max-inline-size: none;
+	}
+
+	.gs-service__media > .gs-float-card--thumb {
+		flex-wrap: wrap;
+	}
+
+	.gs-service__media > .gs-float-card--thumb > .wp-block-image {
+		flex-basis: 100%;
+	}
+
+	.gs-service__media > .gs-float-card--pop > .wp-block-image {
+		margin-block-start: 0;
+	}
 }

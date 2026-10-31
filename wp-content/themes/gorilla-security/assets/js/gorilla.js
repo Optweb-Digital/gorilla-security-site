@@ -258,7 +258,104 @@
 		} );
 	}
 
+	/**
+	 * Tabs (Figma 1:162), WAI-ARIA tabs pattern with automatic activation. The bar is a list
+	 * of jump links to the panels; here the links become tabs (arrow keys, Home, End) and
+	 * only the chosen panel shows. Prev/next arrows (gsec_arrows) in the panels step
+	 * through the tabs. A #panel-id in the URL opens that tab.
+	 */
+	function initTabs() {
+		document.querySelectorAll( '.gs-tabs' ).forEach( function ( root, n ) {
+			const list = root.querySelector( '.gs-tabs__nav' );
+			if ( ! list ) {
+				return;
+			}
+			const tabs = Array.from( list.querySelectorAll( 'a[href^="#"]' ) );
+			const panels = tabs.map( function ( tab ) {
+				return document.getElementById( tab.hash.slice( 1 ) );
+			} );
+			if ( tabs.length < 2 || panels.indexOf( null ) !== -1 ) {
+				return;
+			}
+			let current = 0;
+
+			const activate = function ( index, focus ) {
+				current = ( index + tabs.length ) % tabs.length;
+				tabs.forEach( function ( tab, i ) {
+					const on = i === current;
+					tab.setAttribute( 'aria-selected', String( on ) );
+					tab.tabIndex = on ? 0 : -1;
+					panels[ i ].hidden = ! on;
+				} );
+				if ( focus ) {
+					tabs[ current ].focus();
+				}
+			};
+
+			const label = root.querySelector( '.is-style-eyebrow' );
+			if ( label ) {
+				label.id = label.id || 'gs-tabs-' + n + '-label';
+				list.setAttribute( 'aria-labelledby', label.id );
+			}
+			list.setAttribute( 'role', 'tablist' );
+			tabs.forEach( function ( tab, i ) {
+				tab.parentElement.setAttribute( 'role', 'presentation' );
+				tab.id = tab.id || 'gs-tab-' + n + '-' + i;
+				tab.setAttribute( 'role', 'tab' );
+				tab.setAttribute( 'aria-controls', panels[ i ].id );
+				panels[ i ].setAttribute( 'role', 'tabpanel' );
+				panels[ i ].setAttribute( 'aria-labelledby', tab.id );
+				tab.addEventListener( 'click', function ( event ) {
+					event.preventDefault();
+					activate( i );
+				} );
+			} );
+
+			list.addEventListener( 'keydown', function ( event ) {
+				const rtl =
+					window.getComputedStyle( list ).direction === 'rtl'
+						? -1
+						: 1;
+				const step = {
+					ArrowRight: rtl,
+					ArrowLeft: -rtl,
+				}[ event.key ];
+				if ( step ) {
+					activate( current + step, true );
+				} else if ( event.key === 'Home' ) {
+					activate( 0, true );
+				} else if ( event.key === 'End' ) {
+					activate( tabs.length - 1, true );
+				} else {
+					return;
+				}
+				event.preventDefault();
+			} );
+
+			// Arrows live inside the panels: keep focus on the same arrow in the new panel.
+			root.querySelectorAll( '.gs-arrow' ).forEach( function ( arrow ) {
+				arrow.addEventListener( 'click', function () {
+					const dir = arrow.getAttribute( 'data-gs-dir' );
+					activate( current + ( dir === 'prev' ? -1 : 1 ) );
+					const next = panels[ current ].querySelector(
+						'.gs-arrow[data-gs-dir="' + dir + '"]'
+					);
+					if ( next ) {
+						next.focus();
+					}
+				} );
+			} );
+
+			const start = panels.findIndex( function ( panel ) {
+				return '#' + panel.id === window.location.hash;
+			} );
+			activate( Math.max( start, 0 ) );
+			root.classList.add( 'is-enhanced' );
+		} );
+	}
+
 	initHeader();
 	initMarquee();
 	initSteps();
+	initTabs();
 } )();

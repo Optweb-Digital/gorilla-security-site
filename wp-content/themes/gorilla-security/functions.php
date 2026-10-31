@@ -48,6 +48,8 @@ function gsec_enqueue_assets() {
 			array(
 				'pauseLogos' => __( 'Pause the moving logos', 'gorilla-security' ),
 				'playLogos'  => __( 'Play the moving logos', 'gorilla-security' ),
+				'pauseSteps' => __( 'Pause the reasons slideshow', 'gorilla-security' ),
+				'playSteps'  => __( 'Play the reasons slideshow', 'gorilla-security' ),
 			)
 		) . ';',
 		'before'

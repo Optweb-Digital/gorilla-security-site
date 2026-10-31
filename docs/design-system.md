@@ -148,7 +148,7 @@ Components are **core blocks + block styles + CSS classes + patterns**. No custo
 | Trust strip | group `gs-trust-strip` | 1:515 |
 | Round arrows | `gsec_arrows()` helper (core/html buttons) | 1:607 |
 | Tabs | `gs-tabs` › `gs-tabs__nav` (buttons, `gs-ico-*`) + `gs-tabs__panel` × n | 1:162 |
-| Stepper | `gs-steps` › `gs-steps__media` (images) + `gs-steps__list` › `gs-step` × n | 1:522 |
+| Stepper | `gs-steps` › `gs-steps__media` (Image blocks) + `gs-steps__list` › `gs-step` (h3 `gs-step__title` + `gs-step__text`) × n. Numbers are CSS counters (decorative). gorilla.js: titles become buttons (aria-expanded), one open at a time with its photo, track + marker, auto-advance every `duration.step` with a pause button (stops on hover/focus/off-screen, and when a reason is chosen); none with reduced motion. Without JS all reasons open, first photo | 1:522 |
 | Marquee | `gs-marquee` › `gs-marquee__track` › `gs-marquee__row` (Image blocks). gorilla.js clones each row once (aria-hidden) and adds a pause button (WCAG 2.2.2); no motion without JS or with reduced motion (rows wrap). Speed: `duration.marquee` | 1:510 |
 | Slider | `gs-slider` › arrows + `gs-slider__track` (scroll-snap) | 1:418 |
 | Testimonial card | cover `gs-testimonial` + `gs-rating`, `gs-testimonial__*` | 1:4619 |

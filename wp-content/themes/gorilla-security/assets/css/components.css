@@ -15,6 +15,7 @@
 	--gs-grad-cue: var(--wp--preset--gradient--scroll-cue);
 	--gs-grad-surface-fade: var(--wp--preset--gradient--surface-fade);
 	--gs-marquee-duration: var(--wp--custom--duration--marquee);
+	--gs-step-duration: var(--wp--custom--duration--step);
 	--gs-r-xs: var(--wp--custom--radius--xs);
 	--gs-r-sm: var(--wp--custom--radius--sm);
 	--gs-r-md: var(--wp--custom--radius--md);
@@ -571,6 +572,34 @@ a[href^="tel:"] {
 	border-color: var(--wp--preset--color--white);
 }
 
+/* Pause / play button (added by gorilla.js to anything that moves on its own; WCAG 2.2.2). */
+.gs-play-toggle {
+	align-items: center;
+	background: var(--wp--preset--color--white);
+	block-size: var(--gs-h-sm);
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: 50%;
+	color: var(--wp--preset--color--heading);
+	cursor: pointer;
+	display: flex;
+	inline-size: var(--gs-h-sm);
+	justify-content: center;
+	padding: 0;
+}
+
+.gs-play-toggle::before {
+	--gs-ico: url(../icons/pause.svg);
+	background: currentcolor;
+	block-size: 50%;
+	content: "";
+	inline-size: 50%;
+	mask: var(--gs-ico) center / contain no-repeat;
+}
+
+.gs-play-toggle.is-paused::before {
+	--gs-ico: url(../icons/play.svg);
+}
+
 /* ---------- Sections (Figma order) ---------- */
 
 /* Header — Figma 1:523.
@@ -1111,36 +1140,12 @@ body:not(.gs-has-hero) .gs-header::before {
 	}
 }
 
-/* Pause / play (added by gorilla.js): bottom-left, under the heading, clear of the logos. */
+/* Marquee pause button: bottom-left, under the heading, clear of the logos. */
 .gs-marquee__toggle {
-	align-items: center;
-	background: var(--wp--preset--color--white);
-	block-size: var(--gs-h-sm);
-	border: 1px solid var(--wp--preset--color--border);
-	border-radius: 50%;
-	color: var(--wp--preset--color--heading);
-	cursor: pointer;
-	display: flex;
-	inline-size: var(--gs-h-sm);
 	inset-block-end: var(--wp--preset--spacing--30);
 	inset-inline-start: var(--wp--preset--spacing--70);
-	justify-content: center;
-	padding: 0;
 	position: absolute;
 	z-index: 2;
-}
-
-.gs-marquee__toggle::before {
-	--gs-ico: url(../icons/pause.svg);
-	background: currentcolor;
-	block-size: 50%;
-	content: "";
-	inline-size: 50%;
-	mask: var(--gs-ico) center / contain no-repeat;
-}
-
-.gs-marquee.is-paused .gs-marquee__toggle::before {
-	--gs-ico: url(../icons/play.svg);
 }
 
 /* Narrow screens: heading above the logos, no fade overlap. */
@@ -1169,4 +1174,150 @@ body:not(.gs-has-hero) .gs-header::before {
 	.gs-marquee__toggle {
 		inset-inline-start: var(--wp--preset--spacing--40);
 	}
+}
+
+/* Why us — Figma 1:522. A photo per reason and six numbered reasons on a vertical track.
+ * Without JS every reason is open and the first photo shows; gorilla.js (.is-enhanced) opens
+ * one at a time, swaps the photo and moves the marker. */
+.gs-why {
+	background: var(--wp--preset--color--white);
+	padding-block: var(--wp--preset--spacing--60) var(--wp--preset--spacing--80);
+}
+
+.gs-why__cols {
+	gap: var(--wp--preset--spacing--70);
+	margin-block: 0;
+}
+
+.gs-why__intro > *,
+.gs-why__steps > * {
+	margin: 0;
+}
+
+.gs-why__intro .wp-block-heading {
+	margin-block: var(--wp--preset--spacing--40);
+}
+
+.gs-why__steps > .wp-block-buttons {
+	justify-content: flex-end;
+}
+
+/* Photos: Figma 647×563, cropped to Figma's framing. */
+.gs-steps__media > .wp-block-image {
+	margin: 0;
+}
+
+.gs-steps__media .wp-block-image img {
+	aspect-ratio: 647 / 563;
+	block-size: auto;
+	border-radius: var(--gs-r-xl);
+	inline-size: 100%;
+	object-fit: cover;
+}
+
+.gs-steps__media > .wp-block-image + .wp-block-image {
+	display: none;
+}
+
+.gs-steps.is-enhanced .gs-steps__media > .wp-block-image.is-active {
+	display: block;
+}
+
+.gs-steps.is-enhanced .gs-steps__media > .wp-block-image:first-child:not(.is-active) {
+	display: none;
+}
+
+/* List and track (8px brand-100 bar; marker = active step, brand-500). */
+.gs-steps__list {
+	counter-reset: gs-step;
+	padding-inline-start: calc(8px + var(--wp--preset--spacing--60));
+	position: relative;
+}
+
+/* Track and marker are spans added by gorilla.js (not pseudo-elements, which would stop
+ * contrast checkers from reading the steps' background). */
+.gs-steps__track {
+	background: var(--wp--preset--color--brand-100);
+	border-radius: var(--gs-r-pill);
+	inline-size: 8px;
+	inset-block: 0;
+	inset-inline-start: 0;
+	margin: 0;
+	position: absolute;
+}
+
+.gs-steps__marker {
+	background: var(--gs-brand);
+	block-size: var(--gs-step-h, 0);
+	border-radius: inherit;
+	inset-block-start: var(--gs-step-top, 0);
+	inset-inline: 0;
+	position: absolute;
+}
+
+/* A step: decorative CSS counter number, then title and text. Steps sit edge to edge,
+ * divided by the rule (no block gap). */
+.gs-step {
+	border-block-end: 3px solid transparent;
+	border-image: var(--gs-grad-rule) 1;
+	counter-increment: gs-step;
+	display: grid;
+	grid-template-columns: auto 1fr;
+	margin-block: 0;
+	padding-block: var(--wp--preset--spacing--30);
+}
+
+.gs-step > * {
+	margin: 0;
+}
+
+.gs-step::before {
+	color: var(--gs-brand);
+	content: counter(gs-step, decimal-leading-zero);
+	font-size: var(--wp--preset--font-size--h-2);
+	font-weight: 600;
+	grid-row: 1 / span 2;
+	inline-size: 1.75em;
+	letter-spacing: -0.03em;
+	line-height: 1.2;
+}
+
+.gs-steps.is-enhanced .gs-step:not(.is-active)::before {
+	color: var(--wp--preset--color--brand-100);
+}
+
+/* Title centred on the number's first line. */
+.gs-step__title {
+	align-items: center;
+	color: var(--wp--preset--color--ink);
+	display: flex;
+	min-block-size: calc(1.2 * var(--wp--preset--font-size--h-2));
+}
+
+.gs-step.is-active .gs-step__title {
+	color: var(--gs-brand);
+}
+
+.gs-step__toggle {
+	background: none;
+	border: 0;
+	color: inherit;
+	cursor: pointer;
+	font: inherit;
+	inline-size: 100%;
+	letter-spacing: inherit;
+	padding: 0;
+	text-align: start;
+}
+
+.gs-step__text {
+	color: var(--wp--preset--color--body);
+	grid-column: 2;
+	line-height: 1.5;
+	padding-block-end: var(--wp--preset--spacing--20);
+}
+
+.gs-steps__toggle {
+	margin-block-start: var(--wp--preset--spacing--40);
+	margin-inline-start: calc(8px + var(--wp--preset--spacing--60));
 }

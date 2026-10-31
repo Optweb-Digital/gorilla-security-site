@@ -61,7 +61,7 @@
 - [ ] Names for tech lead, designer, developers, content writer
 - [ ] CTA target URL confirmed (`/contact-us/#quote`?)
 - [ ] Page URLs (no `sitemap.md` yet): header nav uses slugs from its labels — `/about-us/`, `/services/`, `/blog/`, `/area/`, `/contact-us/` (2026-10-31)
-- [ ] Copy for "Why us" steps 02–06 and FAQ answers 01, 03–08
+- [ ] Copy for "Why us" step 06 (Figma's variant repeats step 05; steps 02–05 come from the 1:522 variants) and FAQ answers 01, 03–08
 - [ ] Partner/brand logo files supplied by partners (hero trust strip: Victoria Police licence, Afterpay, warranty badge, Hikvision; Google review mark — labelled placeholders until then). Brands marquee: Axis, HiLook, Uniview, Hikvision, Paradox, Dahua, Aiphone, Hills, Inner Range, Bosch — low-res exports from Figma until official files arrive
 - [ ] Social profile URLs (Instagram, Facebook, LinkedIn) — hero social rail stays hidden until set
 - [x] Site details for `gsec_site()`: phone, email, address taken from Figma 1:4 (approved 2026-10-31)

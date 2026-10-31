@@ -1,0 +1,17 @@
+name: Claude
+# Needs repo secret ANTHROPIC_API_KEY (or run /install-github-app in Claude Code).
+# Review job only for now; add an @claude mention job once the team trusts it.
+on:
+  pull_request: { types: [opened, synchronize] }
+permissions: { contents: read, pull-requests: write, issues: write, id-token: write }
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: "${{ secrets.ANTHROPIC_API_KEY }}"
+          prompt: |
+            Run the review-pass skill in .claude/skills/review-pass/SKILL.md against this PR.
+            Post findings as one PR comment grouped by AGENTS.md section. Do not push commits.

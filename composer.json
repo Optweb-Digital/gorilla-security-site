@@ -1,0 +1,17 @@
+{
+  "name": "gorilla/site",
+  "description": "Gorilla Security WordPress site — theme and mu-plugins",
+  "type": "project",
+  "license": "proprietary",
+  "require-dev": {
+    "wp-coding-standards/wpcs": "^3.1",
+    "phpcompatibility/phpcompatibility-wp": "*",
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.0"
+  },
+  "config": { "allow-plugins": { "dealerdirect/phpcodesniffer-composer-installer": true } },
+  "scripts": {
+    "lint:php": "phpcs --standard=phpcs.xml.dist",
+    "lint:security": "phpcs --standard=phpcs-security.xml.dist",
+    "fix:php": "phpcbf --standard=phpcs.xml.dist"
+  }
+}

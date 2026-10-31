@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": ["Bash(npm run *)", "Bash(composer run *)", "Bash(npx wp-env *)", "Bash(git status)", "Bash(git diff *)", "Bash(git checkout -b *)", "Bash(git add *)", "Bash(git commit *)"],
+    "ask": ["Bash(git push *)", "Bash(npm install *)", "Bash(composer require *)"],
+    "deny": ["Read(./.env)", "Read(./**/wp-config.php)", "Bash(git push * main)", "Bash(git push * develop)", "Bash(ssh *)", "Bash(rsync *)"]
+  }
+}

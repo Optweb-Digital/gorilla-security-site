@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -e
+STAGED_PHP=$(git diff --cached --name-only --diff-filter=ACM | grep '\.php$' || true)
+STAGED_CSS=$(git diff --cached --name-only --diff-filter=ACM | grep '\.css$' || true)
+if [ -n "$STAGED_PHP" ]; then
+  [ -x vendor/bin/phpcs ] || { echo "pre-commit: run 'composer install' first (vendor/bin/phpcs missing)"; exit 1; }
+  vendor/bin/phpcs --standard=phpcs.xml.dist $STAGED_PHP
+  vendor/bin/phpcs --standard=phpcs-security.xml.dist $STAGED_PHP
+fi
+if [ -n "$STAGED_CSS" ]; then
+  npx wp-scripts lint-style $STAGED_CSS --allow-empty-input
+fi
+if command -v gitleaks >/dev/null; then
+  gitleaks protect --staged --no-banner
+fi
+echo "pre-commit: standards, security, style OK (a11y + perf run in CI)"

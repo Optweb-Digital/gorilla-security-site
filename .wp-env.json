@@ -1,0 +1,17 @@
+{
+  "core": "WordPress/WordPress#7.1.4",
+  "phpVersion": "8.3",
+  "themes": ["./wp-content/themes/gorilla-security"],
+  "mappings": {
+    "wp-content/mu-plugins": "./wp-content/mu-plugins",
+    "fixtures": "./fixtures"
+  },
+  "plugins": [
+    "https://downloads.wordpress.org/plugin/contact-form-7.6.2.4.1.zip",
+    "https://downloads.wordpress.org/plugin/wordpress-importer.0.9.7.zip"
+  ],
+  "config": { "WP_DEBUG": true, "SCRIPT_DEBUG": true },
+  "lifecycleScripts": {
+    "afterStart": "npx wp-env run cli wp theme activate gorilla-security && npx wp-env run cli wp rewrite structure '/%postname%/'"
+  }
+}

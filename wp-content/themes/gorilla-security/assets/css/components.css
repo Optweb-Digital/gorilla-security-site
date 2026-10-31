@@ -1,0 +1,49 @@
+/**
+ * Gorilla Security — component layer.
+ *
+ * Order: :root aliases → base → sections in Figma order (appended by /build-section).
+ * Tokens come from theme.json. The :root block holds aliases only — never new raw values.
+ */
+
+/* ---------- Aliases (reference theme.json tokens only) ---------- */
+:root {
+	--gs-brand: var(--wp--preset--color--brand-500);
+	--gs-brand-deep: var(--wp--preset--color--brand-700);
+	--gs-focus: var(--wp--preset--color--brand-300);
+	--gs-r-xs: var(--wp--custom--radius--xs);
+	--gs-r-sm: var(--wp--custom--radius--sm);
+	--gs-r-md: var(--wp--custom--radius--md);
+	--gs-r-lg: var(--wp--custom--radius--lg);
+	--gs-r-xl: var(--wp--custom--radius--xl);
+	--gs-r-2xl: var(--wp--custom--radius--2xl);
+	--gs-r-pill: var(--wp--custom--radius--pill);
+}
+
+/* ---------- Base ---------- */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+	outline: 2px solid var(--gs-focus);
+	outline-offset: 2px;
+}
+
+mark.gs-accent {
+	background: none;
+	color: var(--gs-brand);
+}
+
+:where(p, li, dd, figcaption) {
+	overflow-wrap: anywhere;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms;
+		animation-iteration-count: 1;
+		scroll-behavior: auto;
+		transition-duration: 0.01ms;
+	}
+}
+
+/* ---------- Sections (Figma order) ---------- */

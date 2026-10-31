@@ -154,7 +154,7 @@ Components are **core blocks + block styles + CSS classes + patterns**. No custo
 | Testimonial card | group `gs-testimonial` (photo + `gs-testimonial__body` on the `photo-shade` gradient: `__score` pill with `gs-rating`, `__meta` name + age, `__text`) | 1:4375 |
 | FAQ | group `gs-faq` › `gs-faq__list` card › Details blocks, style **FAQ (numbered)**: CSS counter number, plus/close icon, open item on a `brand-100` panel; native `<details>`, no JS | 1:339 |
 | Forms | wrap plugin form in group `gs-form` (light) or `gs-form gs-form--dark`. CF7 fields use floating labels: `<p class="gs-field">[field … placeholder "Label"]<label for=…>Label</label></p>` — templates in `docs/forms/` | 1:97, 1:172 |
-| Contact card / list / hours | pattern `contact-card` (group `gs-contact-card` + Glass · dark: phone and hours items from `gsec_site()`, each only when set; hours hidden until the Figma conflict is resolved), footer `gs-contact-list`, `gs-hours` | 1:199, 1:469, 1:485 |
+| Contact card / list / hours | pattern `contact-card` (group `gs-contact-card` + Glass · dark: phone and hours items from `gsec_site()`, each only when set; hours hidden until the Figma conflict is resolved). Footer: List `gs-contact-list` (icon class per item, brand-100 circles) and group `gs-hours` + Glass · violet outline (hours item only when set; 24/7 support item) | 1:199, 1:469, 1:485 |
 
 ### Patterns (`patterns/*.php`, inserter → *Gorilla · Sections / Components*)
 `header` · `hero` · `quote-card` · `about` · `brands` · `why-us` · `services-tabs` ·

@@ -118,6 +118,10 @@ a[href^="tel:"] {
 	--gs-ico: url(../icons/chip.svg);
 }
 
+.gs-ico-mail {
+	--gs-ico: url(../icons/mail.svg);
+}
+
 .gs-ico-map-pin {
 	--gs-ico: url(../icons/map-pin.svg);
 }
@@ -2645,5 +2649,193 @@ body:not(.gs-has-hero) .gs-header::before {
 
 	.is-style-faq-numbered > :not(summary) {
 		margin-inline-start: 0;
+	}
+}
+
+/* Footer — Figma 1:426. Dark photo cover (night-fade) with brand, link and contact
+ * columns, then the copyright bar under a faint rule. */
+.gs-footer.wp-block-cover {
+	min-block-size: 0;
+	padding: var(--wp--preset--spacing--70) var(--wp--preset--spacing--40) 0;
+}
+
+.gs-footer .wp-block-cover__inner-container {
+	color: var(--wp--preset--color--on-dark);
+	margin-inline: auto;
+	max-inline-size: var(--wp--style--global--wide-size);
+	width: 100%;
+}
+
+.gs-footer .gs-footer__cols {
+	gap: var(--wp--preset--spacing--60);
+	margin: 0;
+}
+
+.gs-footer .wp-block-column > * {
+	margin: 0;
+}
+
+.gs-footer .wp-block-column > * + * {
+	margin-block-start: var(--wp--preset--spacing--40);
+}
+
+/* Logo on a white tile (Figma 273×100, radius 14) and the award badge beside it. */
+.gs-footer__logos {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--30);
+}
+
+.gs-footer .gs-footer__logos > * {
+	margin: 0;
+}
+
+.gs-footer .gs-footer__logo {
+	background: var(--wp--preset--color--white);
+	border-radius: var(--gs-r-md);
+	padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--30);
+}
+
+.gs-footer .gs-footer__brand > p:not(.is-style-eyebrow) {
+	color: var(--wp--preset--color--white);
+	font-size: var(--wp--preset--font-size--base);
+	line-height: 1.7;
+	max-inline-size: 20em;
+}
+
+/* Column title with a 160px fading brand rule. */
+.gs-footer .gs-footer__title {
+	color: var(--wp--preset--color--white);
+	font-weight: 500;
+	letter-spacing: -0.03em;
+	padding-block-end: var(--wp--preset--spacing--20);
+	position: relative;
+}
+
+.gs-footer .gs-footer__title::after {
+	background: linear-gradient(to right, var(--wp--preset--color--brand-700), transparent);
+	block-size: 3px;
+	content: "";
+	inline-size: min(160px, 100%);
+	inset-block-end: 0;
+	inset-inline-start: 0;
+	position: absolute;
+}
+
+.gs-footer .gs-footer__links {
+	display: grid;
+	font-size: var(--wp--preset--font-size--base);
+	gap: var(--wp--preset--spacing--20);
+	list-style: none;
+	padding: 0;
+}
+
+.gs-footer .wp-block-cover__inner-container a:not(.wp-element-button) {
+	color: inherit;
+	text-decoration: none;
+}
+
+.gs-footer .wp-block-cover__inner-container a:not(.wp-element-button):hover {
+	color: var(--wp--preset--color--white);
+	text-decoration: underline;
+}
+
+/* Contact list: brand-100 icon circle (Figma 34px) before each line. */
+.gs-contact-list {
+	color: var(--wp--preset--color--white);
+	display: grid;
+	font-size: var(--wp--preset--font-size--lead);
+	font-weight: 500;
+	gap: var(--wp--preset--spacing--30);
+	list-style: none;
+	padding: 0;
+}
+
+.gs-footer .gs-contact-list > li {
+	align-items: center;
+	display: flex;
+	gap: var(--wp--preset--spacing--30);
+	position: relative;
+}
+
+/* Circle (::before) with the brand icon masked over it (::after). */
+.gs-contact-list > li::before {
+	background: var(--wp--preset--color--brand-100);
+	block-size: 1.7em;
+	border-radius: 50%;
+	content: "";
+	flex: none;
+	inline-size: 1.7em;
+}
+
+.gs-contact-list > li::after {
+	background: var(--gs-brand);
+	block-size: 0.95em;
+	content: "";
+	inline-size: 0.95em;
+	inset-inline-start: 0.375em;
+	mask: var(--gs-ico) center / contain no-repeat;
+	position: absolute;
+}
+
+
+/* Hours box: Glass · violet outline, items divided by a faint rule. */
+.gs-footer .gs-hours {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+	padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+	width: fit-content;
+}
+
+.gs-hours .gs-hours__item {
+	align-items: center;
+	display: flex;
+	font-size: var(--wp--preset--font-size--base);
+	gap: var(--wp--preset--spacing--20);
+	line-height: 1.75;
+	margin: 0;
+}
+
+.gs-hours .gs-hours__item::before {
+	background: currentcolor;
+	block-size: 1.6em;
+	content: "";
+	flex: none;
+	inline-size: 1.6em;
+	mask: var(--gs-ico) center / contain no-repeat;
+}
+
+.gs-hours .gs-hours__item + .gs-hours__item {
+	border-inline-start: 2px solid transparent;
+	border-inline-start: 2px solid color-mix(in srgb, var(--wp--preset--color--on-dark) 30%, transparent);
+	padding-inline-start: var(--wp--preset--spacing--40);
+}
+
+/* Copyright bar. */
+.gs-footer .wp-block-cover__inner-container > p:not(.is-style-eyebrow) {
+	border-block-start: 1px solid transparent;
+	border-block-start: 1px solid color-mix(in srgb, var(--wp--preset--color--brand-200) 40%, transparent);
+	margin: var(--wp--preset--spacing--60) calc(50% - 50vw) 0;
+	padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+	text-align: center;
+}
+
+@media (max-width: 1100px) {
+
+	.gs-footer .gs-footer__cols {
+		flex-wrap: wrap !important;
+	}
+
+	.gs-footer .gs-footer__cols > .wp-block-column {
+		flex: 1 1 calc(50% - var(--wp--preset--spacing--60)) !important;
+	}
+}
+
+@media (max-width: 600px) {
+
+	.gs-footer .gs-footer__cols > .wp-block-column {
+		flex-basis: 100% !important;
 	}
 }

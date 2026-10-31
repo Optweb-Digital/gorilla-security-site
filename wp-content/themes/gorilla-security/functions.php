@@ -44,6 +44,26 @@ function gsec_enqueue_assets() {
 add_action( 'wp_enqueue_scripts', 'gsec_enqueue_assets' );
 
 /**
+ * Preload the Poppins files declared in theme.json. Without this they are only requested
+ * once text renders, and the late swap from the fallback font shifts the layout (CLS).
+ *
+ * @param array $resources Resources to preload.
+ * @return array
+ */
+function gsec_preload_fonts( $resources ) {
+	foreach ( array( '400', '500', '600' ) as $weight ) {
+		$resources[] = array(
+			'href'        => get_template_directory_uri() . '/assets/fonts/poppins-' . $weight . '.woff2',
+			'as'          => 'font',
+			'type'        => 'font/woff2',
+			'crossorigin' => 'anonymous',
+		);
+	}
+	return $resources;
+}
+add_filter( 'wp_preload_resources', 'gsec_preload_fonts' );
+
+/**
  * Load the component stylesheet in the block editor too, so patterns preview correctly.
  *
  * @return void

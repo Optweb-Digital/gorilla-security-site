@@ -69,11 +69,12 @@ Synced from Figma 2026-10-31 (layer styles; Figma has no variables).
 | `photo-shade` | 1:4621 | testimonial cards |
 | `rule-fade` | I1:522;1:4081 | stepper dividers |
 | `hero-scrim` | 1:70 (deviation) | hero overlay: `night` 62% → 20% left to right. Figma's flat 20% (1:70) fails AA under the lead (2.29:1); approved 2026-10-31. ≤781px: flat `night` 60% |
+| `surface-fade` | 1:512 | brands heading panel: `#F1F1F1` → white 85% → transparent (added 2026-10-31) |
 | `trust-strip` | 1:516 | hero trust strip (white → `#D9D9D9` → white 63%) |
 | `scroll-cue` | 1:73 | hero scroll-down circle (`#890C6C` → `#BA7AAB` → `#D5C6D2`, 57%); sized `control.lg` (Figma 86px) |
 
 **Not yet tokens (declined 2026-10-31, revisit when the section is built):** glass at .135 (1:314, 1:199),
-rating badge brand-500→brand-900 (1:4626), brands panel fade (1:512),
+rating badge brand-500→brand-900 (1:4626),
 solid rule 1:317.
 
 ### Typography
@@ -112,7 +113,8 @@ in blocks; pick a slug.
   `text-shadow.on-photo` `0 0 4px rgba(0,0,0,.53)` (white nav text over photos, 1:526).
 - Off-scale Figma spacing snaps to the nearest slug (approved 2026-10-31): header nav gap 60 → `70`,
   header button gap 20 → `40`, header side inset 42 → `60`.
-  Motion (`duration`, `easing`) is not defined — Figma has no motion values; ask before adding.
+  Motion: `duration.marquee` 40s per logo loop (brands, added 2026-10-31; Figma has no motion values).
+  No `easing` token yet; ask before adding motion tokens.
 
 ---
 

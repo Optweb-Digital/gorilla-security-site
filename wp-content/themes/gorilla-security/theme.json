@@ -44,6 +44,7 @@
 				{ "slug": "night-fade", "name": "Night fade", "gradient": "linear-gradient(184.44deg, rgba(11, 13, 22, 0) 9.14%, #0E0C1B 59.58%)" },
 				{ "slug": "photo-shade", "name": "Photo shade", "gradient": "linear-gradient(180deg, rgba(23, 21, 21, 0) 27.07%, #0D0D0D 85.23%)" },
 				{ "slug": "rule-fade", "name": "Rule fade", "gradient": "linear-gradient(90deg, rgba(135, 12, 107, 0.39) 0%, rgba(97, 16, 122, 0) 100%)" },
+				{ "slug": "surface-fade", "name": "Surface fade", "gradient": "linear-gradient(90deg, #F1F1F1 57.6%, rgba(248, 248, 248, 0.85) 85.16%, rgba(223, 223, 223, 0) 100%)" },
 				{ "slug": "trust-strip", "name": "Trust strip", "gradient": "linear-gradient(90deg, #FFFFFF 0%, #D9D9D9 50%, rgba(255, 255, 255, 0.63) 100%)" },
 				{ "slug": "hero-scrim", "name": "Hero scrim", "gradient": "linear-gradient(90deg, rgba(14, 12, 27, 0.62) 0%, rgba(14, 12, 27, 0.6) 35%, rgba(14, 12, 27, 0.45) 62%, rgba(14, 12, 27, 0.2) 80%)" },
 				{ "slug": "scroll-cue", "name": "Scroll cue", "gradient": "linear-gradient(135deg, rgba(137, 12, 108, 0.57) 0%, rgba(186, 122, 171, 0.57) 47.6%, rgba(213, 198, 210, 0.57) 100%)" }
@@ -110,7 +111,8 @@
 			"radius": { "xs": "6px", "sm": "10px", "md": "12px", "lg": "20px", "xl": "30px", "2xl": "37px", "pill": "9999px" },
 			"blur": { "glass": "35px" },
 			"text-shadow": { "on-photo": "0 0 4px rgba(0, 0, 0, 0.53)" },
-			"control": { "sm": "48px", "md": "60px", "lg": "71px" }
+			"control": { "sm": "48px", "md": "60px", "lg": "71px" },
+			"duration": { "marquee": "40s" }
 		}
 	},
 	"styles": {

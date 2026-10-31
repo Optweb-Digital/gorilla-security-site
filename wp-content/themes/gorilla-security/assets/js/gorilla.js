@@ -144,7 +144,8 @@
 
 	/**
 	 * Tabs (services): jump links become a WAI-ARIA tablist with automatic activation.
-	 * Arrow keys / Home / End move between tabs; .gs-arrow buttons step prev/next.
+	 * Hover or click selects a tab; arrow keys / Home / End move between tabs;
+	 * .gs-arrow buttons step prev/next.
 	 * Without JS the links jump to stacked panels.
 	 */
 	function initTabs() {
@@ -187,6 +188,12 @@
 				tab.addEventListener( 'click', function ( event ) {
 					event.preventDefault();
 					select( i, false );
+				} );
+				// Mouse users switch on hover; touch keeps tap-to-select.
+				tab.addEventListener( 'mouseenter', function () {
+					if ( window.matchMedia( '(hover: hover)' ).matches ) {
+						select( i, false );
+					}
 				} );
 				tab.addEventListener( 'keydown', function ( event ) {
 					const keys = {

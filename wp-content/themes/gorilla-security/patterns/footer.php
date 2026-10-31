@@ -163,7 +163,7 @@ echo gsec_paragraph(
 		$gsec_site['name']
 	),
 	'',
-	'small'
+	'base'
 );
 // phpcs:enable
 ?>

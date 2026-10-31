@@ -30,14 +30,14 @@ $gsec_van      = gsec_image( 'about-van', __( 'Gorilla Security service van', 'g
 <div class="wp-block-columns alignwide gs-about__cols"><!-- wp:column {"width":"35%","className":"gs-about__intro"} -->
 <div class="wp-block-column gs-about__intro" style="flex-basis:35%">
 <?php
-echo wp_kses_post( gsec_eyebrow( __( 'About Gorilla Security', 'gorilla-security' ) ) );
+echo wp_kses_post( gsec_eyebrow( __( 'ABOUT GORILLA SECURITY', 'gorilla-security' ) ) );
 echo wp_kses_post( gsec_heading( __( 'Security Build [[Around]] You.', 'gorilla-security' ) ) );
 echo wp_kses_post( gsec_paragraph( __( 'Gorilla Security & Automation delivers professional security and smart technology solutions for Melbourne homes and businesses. From CCTV and alarms to intercoms, access control, digital locks and smart home automation, we design and install tailored systems that make your space safer, smarter and more connected.', 'gorilla-security' ), '', 'lead' ) );
 echo wp_kses_post(
 	gsec_buttons(
 		array(
 			gsec_button( __( 'Know More', 'gorilla-security' ), home_url( '/about-us/' ) ),
-			gsec_button( __( 'Get A Quote', 'gorilla-security' ), home_url( '/contact-us/#quote' ) ),
+			gsec_button( __( 'Get A Quote', 'gorilla-security' ), home_url( '/contact-us/#quote' ), 'outline' ),
 		)
 	)
 );

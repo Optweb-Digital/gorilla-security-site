@@ -235,7 +235,7 @@ ob_start();
 <!-- wp:group {"tagName":"section","anchor":"services","align":"full","className":"gs-services gs-tabs","layout":{"type":"constrained"}} -->
 <section class="wp-block-group alignfull gs-services gs-tabs" id="services"><!-- wp:group {"align":"wide","className":"gs-services__inner","layout":{"type":"default"}} -->
 <div class="wp-block-group alignwide gs-services__inner">
-<?php echo gsec_eyebrow( __( 'Our Security Solutions', 'gorilla-security' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- buffered; escaped with wp_kses_post() below. ?>
+<?php echo gsec_eyebrow( __( 'OUR SECURITY SOLUTIONS', 'gorilla-security' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- buffered; escaped with wp_kses_post() below. ?>
 
 <!-- wp:list {"className":"gs-tabs__nav"} -->
 <ul class="wp-block-list gs-tabs__nav">

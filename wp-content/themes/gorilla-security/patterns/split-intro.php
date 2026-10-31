@@ -15,8 +15,8 @@ ob_start();
 ?>
 <!-- wp:group {"tagName":"section","align":"full","className":"gs-split","layout":{"type":"constrained"}} -->
 <section class="wp-block-group alignfull gs-split"><!-- wp:columns {"align":"wide","className":"gs-split__cols"} -->
-<div class="wp-block-columns alignwide gs-split__cols"><!-- wp:column {"width":"45%","className":"gs-split__body"} -->
-<div class="wp-block-column gs-split__body" style="flex-basis:45%">
+<div class="wp-block-columns alignwide gs-split__cols"><!-- wp:column {"width":"50%","className":"gs-split__body"} -->
+<div class="wp-block-column gs-split__body" style="flex-basis:50%">
 <?php
 // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped -- buffered; escaped with wp_kses_post() below.
 echo gsec_eyebrow( __( 'Security Solutions', 'gorilla-security' ) );
@@ -33,8 +33,8 @@ echo gsec_buttons(
 </div>
 <!-- /wp:column -->
 
-<!-- wp:column {"width":"55%","className":"gs-split__media"} -->
-<div class="wp-block-column gs-split__media" style="flex-basis:55%">
+<!-- wp:column {"width":"50%","className":"gs-split__media"} -->
+<div class="wp-block-column gs-split__media" style="flex-basis:50%">
 <?php echo gsec_image( 'split-intro', __( 'Gorilla Security technician fitting a video intercom beside a front door', 'gorilla-security' ), 'deco-frame-right' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- buffered; escaped with wp_kses_post() below. ?>
 </div>
 <!-- /wp:column --></div>

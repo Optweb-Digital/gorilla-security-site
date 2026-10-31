@@ -16,7 +16,7 @@ $gsec_has_form = function_exists( 'wpcf7_get_contact_form_by_title' ) && wpcf7_g
 <!-- wp:group {"anchor":"quote","className":"gs-quote-card gs-form gs-form--dark is-style-glass-dark","layout":{"type":"default"}} -->
 <div class="wp-block-group gs-quote-card gs-form gs-form--dark is-style-glass-dark" id="quote">
 <?php
-echo wp_kses_post( gsec_eyebrow( __( 'Request a Quote', 'gorilla-security' ) ) );
+echo wp_kses_post( gsec_eyebrow( __( 'REQUEST A QUOTE', 'gorilla-security' ) ) );
 echo wp_kses_post(
 	gsec_heading(
 		__( 'Get a Free Quote', 'gorilla-security' ),

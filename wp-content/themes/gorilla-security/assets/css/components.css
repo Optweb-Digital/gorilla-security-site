@@ -212,6 +212,12 @@ a[href^="tel:"] {
 	gap: var(--wp--preset--spacing--30);
 	justify-content: center;
 	min-block-size: var(--gs-h-md);
+	padding-inline: var(--wp--preset--spacing--50);
+}
+
+/* Figma buttons sit 25px apart. */
+.wp-block-buttons {
+	gap: var(--wp--preset--spacing--40);
 }
 
 /* Button — fill (default): brand gradient + arrow. Figma 1:233. */
@@ -375,7 +381,6 @@ a[href^="tel:"] {
 	font-weight: 400;
 	gap: var(--wp--preset--spacing--30);
 	letter-spacing: 0.13em;
-	text-transform: uppercase;
 }
 
 .is-style-eyebrow::before {
@@ -1862,7 +1867,7 @@ body:not(.gs-has-hero) .gs-header::before {
 	color: var(--wp--preset--color--body);
 	line-height: 1.75;
 	margin-block-start: var(--wp--preset--spacing--30);
-	max-inline-size: 33em;
+	max-inline-size: 27em;
 }
 
 .gs-service__body > .is-style-checklist {
@@ -1873,7 +1878,7 @@ body:not(.gs-has-hero) .gs-header::before {
 	align-items: center;
 	display: flex;
 	flex-wrap: wrap;
-	gap: var(--wp--preset--spacing--40) var(--wp--preset--spacing--50);
+	gap: var(--wp--preset--spacing--40);
 	margin-block-start: auto;
 	padding-block-start: var(--wp--preset--spacing--60);
 }
@@ -1987,6 +1992,7 @@ body:not(.gs-has-hero) .gs-header::before {
 .gs-quote-split__body .wp-block-heading {
 	letter-spacing: -0.03em;
 	line-height: 1.13;
+	max-inline-size: 13.3em;
 }
 
 .gs-quote-split .gs-quote-split__body > p {
@@ -2149,6 +2155,15 @@ body:not(.gs-has-hero) .gs-header::before {
 	line-height: 1.75;
 }
 
+/* Figma text widths: 627px (intro, icon trio), 740px (image left). */
+.gs-split .gs-split__body > p:not(.is-style-eyebrow) {
+	max-inline-size: 31.5em;
+}
+
+.gs-split--soft .gs-split__body > p:not(.is-style-eyebrow) {
+	max-inline-size: 37em;
+}
+
 .gs-split .gs-split__body > .wp-block-buttons {
 	margin-block-start: var(--wp--preset--spacing--60);
 }
@@ -2219,6 +2234,7 @@ body:not(.gs-has-hero) .gs-header::before {
 
 .gs-cta .gs-cta__title {
 	color: var(--wp--preset--color--white);
+	max-inline-size: 8.6em;
 	letter-spacing: -0.03em;
 	line-height: 1.09;
 }
@@ -2234,6 +2250,12 @@ body:not(.gs-has-hero) .gs-header::before {
 
 .gs-cta .gs-cta__body > .wp-block-buttons {
 	margin-block-start: var(--wp--preset--spacing--60);
+}
+
+/* Large buttons: Button sizes → font size Lead (71px). */
+.gs-cta .gs-cta__body .wp-block-buttons .wp-block-button .wp-block-button__link {
+	font-size: var(--wp--preset--font-size--lead);
+	min-block-size: var(--gs-h-lg);
 }
 
 /* Media: panel, photo and badges share one grid cell. Figma: panel 72% wide, 87% tall,
@@ -2398,8 +2420,8 @@ body:not(.gs-has-hero) .gs-header::before {
 	align-items: center;
 	display: flex;
 	flex-wrap: wrap;
-	gap: var(--wp--preset--spacing--40) var(--wp--preset--spacing--60);
-	justify-content: space-between;
+	gap: var(--wp--preset--spacing--40) var(--wp--preset--spacing--50);
+	justify-content: flex-end;
 	margin-block-start: var(--wp--preset--spacing--40);
 }
 
@@ -2659,7 +2681,7 @@ body:not(.gs-has-hero) .gs-header::before {
 .gs-footer.wp-block-cover {
 	background-color: var(--wp--preset--color--night); /* under the photo: contrast checkers read this */
 	min-block-size: 0;
-	padding: var(--wp--preset--spacing--70) var(--wp--preset--spacing--40) 0;
+	padding: var(--wp--preset--spacing--80) var(--wp--preset--spacing--40) 0;
 }
 
 /* Photo dimmed over the night background: its bright lights left the footer text below AA. */
@@ -2825,8 +2847,8 @@ body:not(.gs-has-hero) .gs-header::before {
 .gs-footer .wp-block-cover__inner-container > p:not(.is-style-eyebrow) {
 	border-block-start: 1px solid transparent;
 	border-block-start: 1px solid color-mix(in srgb, var(--wp--preset--color--brand-200) 40%, transparent);
-	margin: var(--wp--preset--spacing--60) calc(50% - 50vw) 0;
-	padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+	margin: var(--wp--preset--spacing--70) calc(50% - 50vw) 0;
+	padding: var(--wp--preset--spacing--40);
 	text-align: center;
 }
 

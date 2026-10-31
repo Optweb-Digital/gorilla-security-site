@@ -243,5 +243,139 @@ This email is a receipt for your contact form submission on our website ([_site_
     <wp:meta_value><![CDATA[fb13396fee01ea4d7a48c6fa74d15e82717abee0d3ca7b0f7fd13bb8c6f4b466]]></wp:meta_value>
   </wp:postmeta>
 </item>
+
+	<!-- Contact Form 7 form embedded by the quote-split pattern (by title). Template: docs/forms/quote-band.md -->
+<item>
+  <title><![CDATA[Quote request (band)]]></title>
+  <link>http://localhost:8888/?post_type=wpcf7_contact_form&amp;p=107</link>
+  <pubDate>Sat, 31 Oct 2026 08:30:00 +0000</pubDate>
+  <dc:creator/>
+  <guid isPermaLink="false">http://localhost:8888/?post_type=wpcf7_contact_form&amp;p=107</guid>
+  <description/>
+  <content:encoded><![CDATA[<p class="gs-field gs-field--third">[text* full-name id:gs-band-name autocomplete:name placeholder "Name *"]<label for="gs-band-name">Name *</label></p>
+<p class="gs-field gs-field--third">[email* email id:gs-band-email autocomplete:email placeholder "Email *"]<label for="gs-band-email">Email *</label></p>
+<p class="gs-field gs-field--third">[tel* phone id:gs-band-phone autocomplete:tel placeholder "Phone *"]<label for="gs-band-phone">Phone *</label></p>
+<p class="gs-field gs-field--select gs-field--half">[select* purpose id:gs-band-purpose first_as_label "Choose the purpose of your services ? *" "Residential" "Business"]<label for="gs-band-purpose">Choose the purpose of your services ? *</label></p>
+<p class="gs-field gs-field--select gs-field--half">[select* service id:gs-band-service first_as_label "Choose what is required ? *" "CCTV Systems" "Alarm System" "Intercom System" "Access Control System" "Smart Lock Installation" "Smart Home Installation"]<label for="gs-band-service">Choose what is required ? *</label></p>
+<p class="gs-field gs-field--textarea">[textarea message id:gs-band-message x3 placeholder "Message"]<label for="gs-band-message">Message</label></p>
+<p class="gs-form__submit">[submit "Get A Quote"]</p>
+
+[_site_title] quote request from [full-name]
+[_site_title] <wordpress@[_site_domain]>
+Name: [full-name]
+Phone: [phone]
+Email: [email]
+Purpose: [purpose]
+Service: [service]
+
+[message]
+
+-- 
+Sent from [_site_url] (quote band)
+[_site_admin_email]
+Reply-To: [email]
+
+0
+0
+
+[_site_title] "[your-subject]"
+[_site_title] <wordpress@example.com>
+Message Body:
+[your-message]
+
+-- 
+This email is a receipt for your contact form submission on our website ([_site_title] [_site_url]) in which your email address was used. If that was not you, please ignore this message.
+[your-email]
+Reply-To: [_site_admin_email]
+
+0
+0
+Thank you for your message. It has been sent.
+There was an error trying to send your message. Please try again later.
+One or more fields have an error. Please check and try again.
+There was an error trying to send your message. Please try again later.
+You must accept the terms and conditions before sending your message.
+Please fill out this field.
+This field has a too long input.
+This field has a too short input.
+There was an unknown error uploading the file.
+You are not allowed to upload files of this type.
+The uploaded file is too large.
+There was an error uploading the file.
+Please enter a date in YYYY-MM-DD format.
+This field has a too early date.
+This field has a too late date.
+Please enter a number.
+This field has a too small number.
+This field has a too large number.
+The answer to the quiz is incorrect.
+Your entered code is incorrect.
+Please enter an email address.
+Please enter a URL.
+Please enter a telephone number.]]></content:encoded>
+  <excerpt:encoded><![CDATA[]]></excerpt:encoded>
+  <wp:post_id>107</wp:post_id>
+  <wp:post_date>2026-10-31 10:55:14</wp:post_date>
+  <wp:post_date_gmt>2026-10-31 10:55:14</wp:post_date_gmt>
+  <wp:post_modified>2026-10-31 10:55:14</wp:post_modified>
+  <wp:post_modified_gmt>2026-10-31 10:55:14</wp:post_modified_gmt>
+  <wp:comment_status>closed</wp:comment_status>
+  <wp:ping_status>closed</wp:ping_status>
+  <wp:post_name>quote-request-band</wp:post_name>
+  <wp:status>publish</wp:status>
+  <wp:post_parent>0</wp:post_parent>
+  <wp:menu_order>0</wp:menu_order>
+  <wp:post_type>wpcf7_contact_form</wp:post_type>
+  <wp:post_password/>
+  <wp:is_sticky>0</wp:is_sticky>
+  <wp:postmeta>
+    <wp:meta_key>_form</wp:meta_key>
+    <wp:meta_value><![CDATA[<p class="gs-field gs-field--third">[text* full-name id:gs-band-name autocomplete:name placeholder "Name *"]<label for="gs-band-name">Name *</label></p>
+<p class="gs-field gs-field--third">[email* email id:gs-band-email autocomplete:email placeholder "Email *"]<label for="gs-band-email">Email *</label></p>
+<p class="gs-field gs-field--third">[tel* phone id:gs-band-phone autocomplete:tel placeholder "Phone *"]<label for="gs-band-phone">Phone *</label></p>
+<p class="gs-field gs-field--select gs-field--half">[select* purpose id:gs-band-purpose first_as_label "Choose the purpose of your services ? *" "Residential" "Business"]<label for="gs-band-purpose">Choose the purpose of your services ? *</label></p>
+<p class="gs-field gs-field--select gs-field--half">[select* service id:gs-band-service first_as_label "Choose what is required ? *" "CCTV Systems" "Alarm System" "Intercom System" "Access Control System" "Smart Lock Installation" "Smart Home Installation"]<label for="gs-band-service">Choose what is required ? *</label></p>
+<p class="gs-field gs-field--textarea">[textarea message id:gs-band-message x3 placeholder "Message"]<label for="gs-band-message">Message</label></p>
+<p class="gs-form__submit">[submit "Get A Quote"]</p>
+]]></wp:meta_value>
+  </wp:postmeta>
+  <wp:postmeta>
+    <wp:meta_key>_mail</wp:meta_key>
+    <wp:meta_value><![CDATA[a:8:{s:7:"subject";s:44:"[_site_title] quote request from [full-name]";s:6:"sender";s:40:"[_site_title] <wordpress@[_site_domain]>";s:4:"body";s:136:"Name: [full-name]
+Phone: [phone]
+Email: [email]
+Purpose: [purpose]
+Service: [service]
+
+[message]
+
+-- 
+Sent from [_site_url] (quote band)";s:9:"recipient";s:19:"[_site_admin_email]";s:18:"additional_headers";s:17:"Reply-To: [email]";s:11:"attachments";s:0:"";s:8:"use_html";i:0;s:13:"exclude_blank";i:0;}]]></wp:meta_value>
+  </wp:postmeta>
+  <wp:postmeta>
+    <wp:meta_key>_mail_2</wp:meta_key>
+    <wp:meta_value><![CDATA[a:9:{s:6:"active";b:0;s:7:"subject";s:30:"[_site_title] "[your-subject]"";s:6:"sender";s:37:"[_site_title] <wordpress@example.com>";s:4:"body";s:220:"Message Body:
+[your-message]
+
+-- 
+This email is a receipt for your contact form submission on our website ([_site_title] [_site_url]) in which your email address was used. If that was not you, please ignore this message.";s:9:"recipient";s:12:"[your-email]";s:18:"additional_headers";s:29:"Reply-To: [_site_admin_email]";s:11:"attachments";s:0:"";s:8:"use_html";i:0;s:13:"exclude_blank";i:0;}]]></wp:meta_value>
+  </wp:postmeta>
+  <wp:postmeta>
+    <wp:meta_key>_messages</wp:meta_key>
+    <wp:meta_value><![CDATA[a:23:{s:12:"mail_sent_ok";s:45:"Thank you for your message. It has been sent.";s:12:"mail_sent_ng";s:71:"There was an error trying to send your message. Please try again later.";s:16:"validation_error";s:61:"One or more fields have an error. Please check and try again.";s:4:"spam";s:71:"There was an error trying to send your message. Please try again later.";s:12:"accept_terms";s:69:"You must accept the terms and conditions before sending your message.";s:16:"invalid_required";s:27:"Please fill out this field.";s:16:"invalid_too_long";s:32:"This field has a too long input.";s:17:"invalid_too_short";s:33:"This field has a too short input.";s:13:"upload_failed";s:46:"There was an unknown error uploading the file.";s:24:"upload_file_type_invalid";s:49:"You are not allowed to upload files of this type.";s:21:"upload_file_too_large";s:31:"The uploaded file is too large.";s:23:"upload_failed_php_error";s:38:"There was an error uploading the file.";s:12:"invalid_date";s:41:"Please enter a date in YYYY-MM-DD format.";s:14:"date_too_early";s:32:"This field has a too early date.";s:13:"date_too_late";s:31:"This field has a too late date.";s:14:"invalid_number";s:22:"Please enter a number.";s:16:"number_too_small";s:34:"This field has a too small number.";s:16:"number_too_large";s:34:"This field has a too large number.";s:23:"quiz_answer_not_correct";s:36:"The answer to the quiz is incorrect.";s:17:"captcha_not_match";s:31:"Your entered code is incorrect.";s:13:"invalid_email";s:30:"Please enter an email address.";s:11:"invalid_url";s:19:"Please enter a URL.";s:11:"invalid_tel";s:32:"Please enter a telephone number.";}]]></wp:meta_value>
+  </wp:postmeta>
+  <wp:postmeta>
+    <wp:meta_key>_additional_settings</wp:meta_key>
+    <wp:meta_value><![CDATA[]]></wp:meta_value>
+  </wp:postmeta>
+  <wp:postmeta>
+    <wp:meta_key>_locale</wp:meta_key>
+    <wp:meta_value><![CDATA[en_US]]></wp:meta_value>
+  </wp:postmeta>
+  <wp:postmeta>
+    <wp:meta_key>_hash</wp:meta_key>
+    <wp:meta_value><![CDATA[b7a2fdd916ab2bf004b8201fa61a3c872f110a3d70641e64efe8a9ecc0c180ab]]></wp:meta_value>
+  </wp:postmeta>
+</item>
 </channel>
 </rss>

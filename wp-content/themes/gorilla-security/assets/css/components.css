@@ -142,6 +142,10 @@ a[href^="tel:"] {
 	--gs-ico: url(../icons/cctv.svg);
 }
 
+.gs-ico-clock {
+	--gs-ico: url(../icons/clock.svg);
+}
+
 .gs-ico-check {
 	--gs-ico: url(../icons/check.svg);
 }
@@ -943,6 +947,49 @@ a[href^="tel:"] {
 /* Prev/next arrows only work with gorilla.js. */
 .gs-tabs:not(.is-enhanced) .gs-arrows {
 	display: none;
+}
+
+/* Contact card (pattern contact-card). Figma 1:199: glass card, icon circle + bold first
+ * line + second line per item, items divided by a faint rule. Use with Glass · dark. */
+.gs-contact-card {
+	border-radius: var(--gs-r-md);
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--30) var(--wp--preset--spacing--60);
+	padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+}
+
+.gs-contact-card__item {
+	align-items: center;
+	display: flex;
+	gap: var(--wp--preset--spacing--20);
+	margin: 0;
+}
+
+.gs-contact-card__item + .gs-contact-card__item {
+	border-inline-start: 2px solid transparent;
+	border-inline-start: 2px solid color-mix(in srgb, var(--wp--preset--color--white) 20%, transparent);
+	padding-inline-start: var(--wp--preset--spacing--60);
+}
+
+.gs-contact-card__body > * {
+	font-size: var(--wp--preset--font-size--medium);
+	line-height: 1.4;
+	margin: 0;
+}
+
+.gs-contact-card__body > .gs-contact-card__lead {
+	font-size: var(--wp--preset--font-size--lead);
+	font-weight: 600;
+}
+
+.gs-contact-card .gs-contact-card__lead a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.gs-contact-card__lead a:hover {
+	text-decoration: underline;
 }
 
 /* ---------- Sections (Figma order) ---------- */
@@ -1810,5 +1857,160 @@ body:not(.gs-has-hero) .gs-header::before {
 
 	.gs-service__media > .gs-float-card--pop > .wp-block-image {
 		margin-block-start: 0;
+	}
+}
+
+/* Quote split — Figma 1:169. Text and form on white; photo on the other half, fading into
+ * the white, with the contact card over it. The text column lines up with the wide
+ * container (padding: 50% of the row minus half of wideSize). */
+.gs-quote-split {
+	background: var(--wp--preset--color--white);
+	overflow: hidden;
+}
+
+.gs-quote-split__cols {
+	gap: 0;
+	margin: 0;
+}
+
+.gs-quote-split__body {
+	padding-block: var(--wp--preset--spacing--70);
+	padding-inline: max(var(--wp--preset--spacing--40), calc(50% - var(--wp--style--global--wide-size) / 2)) var(--wp--preset--spacing--60);
+}
+
+.gs-quote-split__body > * {
+	margin: 0;
+}
+
+.gs-quote-split__body .wp-block-heading {
+	letter-spacing: -0.03em;
+	line-height: 1.13;
+}
+
+.gs-quote-split .gs-quote-split__body > p {
+	color: var(--wp--preset--color--body);
+	line-height: 1.75;
+	margin-block-start: var(--wp--preset--spacing--30);
+	max-inline-size: 30em;
+}
+
+.gs-quote-split__body > .wpcf7 {
+	margin-block-start: var(--wp--preset--spacing--50);
+}
+
+/* Form rows: three fields, two selects, then message and submit full width. */
+.gs-quote-split .wpcf7-form {
+	gap: var(--wp--preset--spacing--40) var(--wp--preset--spacing--30);
+	grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.gs-quote-split .wpcf7-form > * {
+	grid-column: 1 / -1;
+}
+
+.gs-quote-split .wpcf7-form > .gs-field--third {
+	grid-column: span 2;
+}
+
+.gs-quote-split .wpcf7-form > .gs-field--half {
+	grid-column: span 3;
+}
+
+/* Fields: Figma 1:179 — white, surface border, 6px radius, field shadow, 48px. */
+.gs-quote-split .gs-form :is(input:not([type="submit"]), select, textarea) {
+	background: var(--wp--preset--color--white);
+	border-color: var(--wp--preset--color--surface);
+	border-radius: var(--gs-r-xs);
+	box-shadow: var(--gs-shadow-field);
+	color: var(--wp--preset--color--heading);
+	min-block-size: var(--gs-h-sm);
+}
+
+.gs-quote-split .gs-field > label {
+	color: var(--wp--preset--color--body);
+}
+
+/* Photo fills its column; the white fade on its inner edge joins it to the text column. */
+.gs-quote-split__media {
+	display: grid;
+	position: relative;
+}
+
+.gs-quote-split .gs-quote-split__media > * {
+	grid-area: 1 / 1;
+	margin: 0;
+}
+
+.gs-quote-split__media > .wp-block-image img {
+	block-size: 100%;
+	display: block;
+	inline-size: 100%;
+	object-fit: cover;
+	object-position: 60% 50%;
+}
+
+.gs-quote-split__media::before {
+	background: linear-gradient(to right, var(--wp--preset--color--white), transparent);
+	content: "";
+	inline-size: 25%;
+	inset-block: 0;
+	inset-inline-start: 0;
+	pointer-events: none;
+	position: absolute;
+	z-index: 1;
+}
+
+[dir="rtl"] .gs-quote-split__media::before {
+	background: linear-gradient(to left, var(--wp--preset--color--white), transparent);
+}
+
+.gs-quote-split__media > .gs-contact-card {
+	align-self: end;
+	justify-self: center;
+	margin: var(--wp--preset--spacing--50);
+	max-inline-size: calc(100% - 2 * var(--wp--preset--spacing--50));
+	z-index: 2;
+}
+
+/* Over the photo the card is translucent, like Glass · dark inside a Cover. */
+.gs-quote-split__media > .is-style-glass-dark {
+	background: color-mix(in srgb, var(--wp--preset--color--night-2) 58%, transparent);
+}
+
+/* Text above the photo, both full width.
+ * !important: core forces nowrap on columns from 782px and sets flex-basis inline. */
+@media (max-width: 1100px) {
+
+	.gs-quote-split__cols {
+		flex-wrap: wrap !important;
+	}
+
+	.gs-quote-split__cols > .wp-block-column {
+		flex-basis: 100% !important;
+	}
+
+	.gs-quote-split__body {
+		padding-inline: var(--wp--preset--spacing--40);
+	}
+
+	.gs-quote-split__media::before {
+		content: none;
+	}
+
+	.gs-quote-split__media > .wp-block-image img {
+		aspect-ratio: 16 / 10;
+	}
+}
+
+@media (max-width: 600px) {
+
+	.gs-quote-split .wpcf7-form > .gs-field--third,
+	.gs-quote-split .wpcf7-form > .gs-field--half {
+		grid-column: 1 / -1;
+	}
+
+	.gs-quote-split__media > .gs-contact-card {
+		margin: var(--wp--preset--spacing--30);
+		max-inline-size: calc(100% - 2 * var(--wp--preset--spacing--30));
 	}
 }

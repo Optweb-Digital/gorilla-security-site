@@ -154,7 +154,7 @@ Components are **core blocks + block styles + CSS classes + patterns**. No custo
 | Testimonial card | cover `gs-testimonial` + `gs-rating`, `gs-testimonial__*` | 1:4619 |
 | FAQ | group `gs-faq` › details style **FAQ (numbered)** | 1:339 |
 | Forms | wrap plugin form in group `gs-form` (light) or `gs-form gs-form--dark`. CF7 fields use floating labels: `<p class="gs-field">[field … placeholder "Label"]<label for=…>Label</label></p>` — templates in `docs/forms/` | 1:97, 1:172 |
-| Contact card / list / hours | patterns `contact-card`, footer `gs-contact-list`, `gs-hours` | 1:199, 1:469, 1:485 |
+| Contact card / list / hours | pattern `contact-card` (group `gs-contact-card` + Glass · dark: phone and hours items from `gsec_site()`, each only when set; hours hidden until the Figma conflict is resolved), footer `gs-contact-list`, `gs-hours` | 1:199, 1:469, 1:485 |
 
 ### Patterns (`patterns/*.php`, inserter → *Gorilla · Sections / Components*)
 `header` · `hero` · `quote-card` · `about` · `brands` · `why-us` · `services-tabs` ·

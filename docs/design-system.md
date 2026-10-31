@@ -62,12 +62,13 @@ Synced from Figma 2026-10-31 (layer styles; Figma has no variables).
 | `deco-block` | 1:221 | shapes behind photos |
 | `soft-section` | 1:239 | grey→white→pink section bg |
 | `glass` | 1:524 | header glass (white .2 → 0) |
+| `glass-brand` | 1:532 | **Glass · phone** button (added 2026-10-31 with the header) |
 | `night-fade` | 1:430 | footer overlay |
 | `photo-shade` | 1:4621 | testimonial cards |
 | `rule-fade` | I1:522;1:4081 | stepper dividers |
 
 **Not yet tokens (declined 2026-10-31, revisit when the section is built):** glass at .135 (1:314, 1:199),
-glass-phone gradient (1:532), rating badge brand-500→brand-900 (1:4626), brands panel fade (1:512),
+rating badge brand-500→brand-900 (1:4626), brands panel fade (1:512),
 solid rule 1:317.
 
 ### Typography
@@ -99,7 +100,10 @@ in blocks; pick a slug.
   glass cards (incl. 22px quote card 1:97) · `xl 30` photos, cards · `2xl 37` FAQ container · `pill`.
 - Shadow: `glass` floating (1:524) · `field` inputs (1:179) · `badge` review chip (1:114) · `glow` FAQ (1:342).
   `soft` is not defined — no Figma layer uses it yet.
-- Custom: `blur.glass` 35px · `control.sm/md/lg` 48/60/71px (button heights).
+- Custom: `blur.glass` 35px · `control.sm/md/lg` 48/60/71px (button heights) ·
+  `text-shadow.on-photo` `0 0 4px rgba(0,0,0,.53)` (white nav text over photos, 1:526).
+- Off-scale Figma spacing snaps to the nearest slug (approved 2026-10-31): header nav gap 60 → `70`,
+  header button gap 20 → `40`, header side inset 42 → `60`.
   Motion (`duration`, `easing`) is not defined — Figma has no motion values; ask before adding.
 
 ---

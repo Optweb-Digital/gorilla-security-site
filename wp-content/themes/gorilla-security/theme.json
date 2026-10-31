@@ -31,6 +31,7 @@
 				{ "slug": "night", "name": "Night", "color": "#0E0C1B" },
 				{ "slug": "night-2", "name": "Night 2", "color": "#141A24" },
 				{ "slug": "on-dark", "name": "On dark", "color": "#DFDFDF" },
+				{ "slug": "rating", "name": "Rating", "color": "#F29603" },
 				{ "slug": "white", "name": "White", "color": "#FFFFFF" }
 			],
 			"gradients": [
@@ -42,7 +43,10 @@
 				{ "slug": "glass-brand", "name": "Glass brand", "gradient": "linear-gradient(189.72deg, rgba(121, 7, 96, 0.5) 20.71%, rgba(128, 128, 128, 0) 136.24%)" },
 				{ "slug": "night-fade", "name": "Night fade", "gradient": "linear-gradient(184.44deg, rgba(11, 13, 22, 0) 9.14%, #0E0C1B 59.58%)" },
 				{ "slug": "photo-shade", "name": "Photo shade", "gradient": "linear-gradient(180deg, rgba(23, 21, 21, 0) 27.07%, #0D0D0D 85.23%)" },
-				{ "slug": "rule-fade", "name": "Rule fade", "gradient": "linear-gradient(90deg, rgba(135, 12, 107, 0.39) 0%, rgba(97, 16, 122, 0) 100%)" }
+				{ "slug": "rule-fade", "name": "Rule fade", "gradient": "linear-gradient(90deg, rgba(135, 12, 107, 0.39) 0%, rgba(97, 16, 122, 0) 100%)" },
+				{ "slug": "trust-strip", "name": "Trust strip", "gradient": "linear-gradient(90deg, #FFFFFF 0%, #D9D9D9 50%, rgba(255, 255, 255, 0.63) 100%)" },
+				{ "slug": "hero-scrim", "name": "Hero scrim", "gradient": "linear-gradient(90deg, rgba(14, 12, 27, 0.62) 0%, rgba(14, 12, 27, 0.6) 35%, rgba(14, 12, 27, 0.45) 62%, rgba(14, 12, 27, 0.2) 80%)" },
+				{ "slug": "scroll-cue", "name": "Scroll cue", "gradient": "linear-gradient(135deg, rgba(137, 12, 108, 0.57) 0%, rgba(186, 122, 171, 0.57) 47.6%, rgba(213, 198, 210, 0.57) 100%)" }
 			]
 		},
 		"shadow": {

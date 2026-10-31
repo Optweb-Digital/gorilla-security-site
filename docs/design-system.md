@@ -46,6 +46,8 @@ the layer styles.
 | `#F5F5F5` / `#EFEFEF` | `surface` / `surface-2` | tab bar, field borders |
 | `#0E0C1B`, `#141A24` | `night`, `night-2` | footer, dark glass |
 | `rgba(223,223,223,.9)` | `on-dark` | footer links |
+| `#F29603` | `rating` | review stars (1:118, added 2026-10-31 with the hero) |
+| hero overlay black 20% (1:70) | gradient `hero-scrim` (see Gradients) | contrast fix |
 | `#990573` | `brand-500` | quote-card eyebrow 1:98 (near tint) |
 | `#E3E5F0` | `on-dark` | quote-card copy 1:100 (near tint) |
 | `rgba(20,26,36,.58)` | `night-2` at 58% via `color-mix()` | dark glass 1:97 (no new token) |
@@ -66,6 +68,9 @@ Synced from Figma 2026-10-31 (layer styles; Figma has no variables).
 | `night-fade` | 1:430 | footer overlay |
 | `photo-shade` | 1:4621 | testimonial cards |
 | `rule-fade` | I1:522;1:4081 | stepper dividers |
+| `hero-scrim` | 1:70 (deviation) | hero overlay: `night` 62% → 20% left to right. Figma's flat 20% (1:70) fails AA under the lead (2.29:1); approved 2026-10-31. ≤781px: flat `night` 60% |
+| `trust-strip` | 1:516 | hero trust strip (white → `#D9D9D9` → white 63%) |
+| `scroll-cue` | 1:73 | hero scroll-down circle (`#890C6C` → `#BA7AAB` → `#D5C6D2`, 57%); sized `control.lg` (Figma 86px) |
 
 **Not yet tokens (declined 2026-10-31, revisit when the section is built):** glass at .135 (1:314, 1:199),
 rating badge brand-500→brand-900 (1:4626), brands panel fade (1:512),
@@ -100,7 +105,10 @@ in blocks; pick a slug.
   glass cards (incl. 22px quote card 1:97) · `xl 30` photos, cards · `2xl 37` FAQ container · `pill`.
 - Shadow: `glass` floating (1:524) · `field` inputs (1:179) · `badge` review chip (1:114) · `glow` FAQ (1:342).
   `soft` is not defined — no Figma layer uses it yet.
-- Custom: `blur.glass` 35px · `control.sm/md/lg` 48/60/71px (button heights) ·
+- Custom: `blur.glass` 35px — used only by **Glass · light** (the header bar). Glass buttons, the
+  hero scroll cue and social rail keep their glass tint without blur: over the hero photo the
+  blur cost ~250ms main-thread work and failed the perf gate (approved 2026-10-31) ·
+  `control.sm/md/lg` 48/60/71px (button heights) ·
   `text-shadow.on-photo` `0 0 4px rgba(0,0,0,.53)` (white nav text over photos, 1:526).
 - Off-scale Figma spacing snaps to the nearest slug (approved 2026-10-31): header nav gap 60 → `70`,
   header button gap 20 → `40`, header side inset 42 → `60`.
@@ -117,6 +125,7 @@ Components are **core blocks + block styles + CSS classes + patterns**. No custo
 | Button — fill (gradient + arrow) | core/button, default style | `Submit — Request a Quote` (e.g. 1:233) |
 | Button — outline | button style **Outline** | 1:558 |
 | Button — light phone | style **Light · phone** | 1:302 |
+| Button — glass (no icon) | style **Glass** (added 2026-10-31 with the hero) | 1:80 |
 | Button — glass phone | style **Glass · phone** | 1:531 |
 | Button — no icon (submit) | style **Fill · no icon** | 1:111 |
 | Button sizes | `gs-btn-sm` (48px) · default (60px) · font size `Lead` (71px) | — |
@@ -217,7 +226,8 @@ the editor's Patterns panel is the live component catalogue.
   where overriding core block inline styles.
 - Global styles: element styles (headings, links, buttons) in `theme.json → styles`.
 - Responsive: fluid type + clamp() spacing do most of the work; columns stack < 782px (WP
-  default); component CSS has targeted breakpoints at 1100 / 781 / 600px. Design is desktop-
+  default); component CSS has targeted breakpoints at 1400 / 1100 / 781 / 600px. 1400 (added
+  2026-10-31): the header switches to two rows; its one-row layout needs ~1420px in Poppins. Design is desktop-
   only in Figma — mobile behaviour is defined in CSS, check it on real devices.
 - Motion: tokens `--wp--custom--duration--*`, `--wp--custom--easing`; all animation disabled
   under `prefers-reduced-motion`.

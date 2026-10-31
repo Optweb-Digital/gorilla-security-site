@@ -1,0 +1,3110 @@
+/**
+ * Gorilla Security — component layer.
+ *
+ * Order: :root aliases → base → sections in Figma order (appended by /build-section).
+ * Tokens come from theme.json. The :root block holds aliases only — never new raw values.
+ */
+
+/* ---------- Aliases (reference theme.json tokens only) ---------- */
+:root {
+	--gs-header-h: 92px; /* header bar 81 + top inset 11 */
+	--gs-brand: var(--wp--preset--color--brand-500);
+	--gs-brand-deep: var(--wp--preset--color--brand-700);
+	--gs-focus: var(--wp--preset--color--brand-300);
+	--gs-r-xs: var(--wp--custom--radius--xs);
+	--gs-r-sm: var(--wp--custom--radius--sm);
+	--gs-r-md: var(--wp--custom--radius--md);
+	--gs-r-lg: var(--wp--custom--radius--lg);
+	--gs-r-xl: var(--wp--custom--radius--xl);
+	--gs-r-2xl: var(--wp--custom--radius--2-xl);
+	--gs-r-pill: var(--wp--custom--radius--pill);
+}
+
+/* ---------- Base ---------- */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+	outline: 2px solid var(--gs-focus);
+	outline-offset: 2px;
+}
+
+:where(p, li, dd, figcaption) {
+	overflow-wrap: anywhere;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms;
+		animation-iteration-count: 1;
+		scroll-behavior: auto;
+		transition-duration: 0.01ms;
+	}
+}
+
+/* ---------- Icons (CSS mask, inherit currentColor) — assets/icons/*.svg ---------- */
+[class^="gs-ico-"]::before,
+[class*=" gs-ico-"]::before {
+	background-color: currentcolor;
+	block-size: var(--gs-icon-size, 1em);
+	content: "";
+	display: inline-block;
+	flex: none;
+	inline-size: var(--gs-icon-size, 1em);
+	mask: var(--gs-icon) center / contain no-repeat;
+}
+
+.gs-ico-star {
+	--gs-icon: url(../icons/star.svg);
+}
+
+.gs-ico-arrow-down {
+	--gs-icon: url(../icons/arrow-down.svg);
+}
+
+.gs-ico-arrow-left { --gs-icon: url(../icons/arrow-left.svg); }
+
+.gs-ico-arrow-right { --gs-icon: url(../icons/arrow-right.svg); }
+
+.gs-ico-access-card { --gs-icon: url(../icons/access-card.svg); }
+
+.gs-ico-bell { --gs-icon: url(../icons/bell.svg); }
+
+.gs-ico-building-shield { --gs-icon: url(../icons/building-shield.svg); }
+
+.gs-ico-cctv { --gs-icon: url(../icons/cctv.svg); }
+
+.gs-ico-check { --gs-icon: url(../icons/check.svg); }
+
+.gs-ico-chevron-down { --gs-icon: url(../icons/chevron-down.svg); }
+
+.gs-ico-chip { --gs-icon: url(../icons/chip.svg); }
+
+.gs-ico-clock { --gs-icon: url(../icons/clock.svg); }
+
+.gs-ico-close { --gs-icon: url(../icons/close.svg); }
+
+.gs-ico-gear { --gs-icon: url(../icons/gear.svg); }
+
+.gs-ico-headset { --gs-icon: url(../icons/headset.svg); }
+
+.gs-ico-home-shield { --gs-icon: url(../icons/home-shield.svg); }
+
+.gs-ico-intercom { --gs-icon: url(../icons/intercom.svg); }
+
+.gs-ico-laptop { --gs-icon: url(../icons/laptop.svg); }
+
+.gs-ico-lightbulb { --gs-icon: url(../icons/lightbulb.svg); }
+
+.gs-ico-lock { --gs-icon: url(../icons/lock.svg); }
+
+.gs-ico-mail { --gs-icon: url(../icons/mail.svg); }
+
+.gs-ico-map-pin { --gs-icon: url(../icons/map-pin.svg); }
+
+.gs-ico-phone { --gs-icon: url(../icons/phone.svg); }
+
+.gs-ico-pause { --gs-icon: url(../icons/pause.svg); }
+
+.gs-ico-phone-call { --gs-icon: url(../icons/phone-call.svg); }
+
+.gs-ico-play { --gs-icon: url(../icons/play.svg); }
+
+.gs-ico-plus { --gs-icon: url(../icons/plus.svg); }
+
+.gs-ico-shield { --gs-icon: url(../icons/shield.svg); }
+
+.gs-ico-smart-home { --gs-icon: url(../icons/smart-home.svg); }
+
+.gs-ico-social-facebook { --gs-icon: url(../icons/social-facebook.svg); }
+
+.gs-ico-social-instagram { --gs-icon: url(../icons/social-instagram.svg); }
+
+.gs-ico-social-linkedin { --gs-icon: url(../icons/social-linkedin.svg); }
+
+.gs-ico-social-x { --gs-icon: url(../icons/social-x.svg); }
+
+.gs-ico-smartphone { --gs-icon: url(../icons/smartphone.svg); }
+
+.gs-ico-speech { --gs-icon: url(../icons/speech.svg); }
+
+.gs-ico-tablet { --gs-icon: url(../icons/tablet.svg); }
+
+.gs-ico-users { --gs-icon: url(../icons/users.svg); }
+
+.gs-ico-wrench { --gs-icon: url(../icons/wrench.svg); }
+
+/* ---------- Shared components ---------- */
+
+/* Accent words in headings (editor "Highlight" → <mark>). Solid fallback first (rules-log #001 / #003). */
+mark.gs-accent {
+	background: none;
+	color: var(--gs-brand);
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+
+	mark.gs-accent {
+		background-image: var(--wp--preset--gradient--brand-text);
+		-webkit-background-clip: text;
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+
+	/* On dark sections the dark end of the gradient would vanish: keep the accent light (>= 3:1 large text). */
+	.gs-on-dark mark.gs-accent {
+		background-image: linear-gradient(90deg, var(--wp--preset--color--brand-300), var(--wp--preset--color--brand-100));
+	}
+}
+
+/* Sections */
+.gs-section {
+	padding-block: var(--wp--preset--spacing--80);
+}
+
+.gs-section .wp-block-heading {
+	margin-block: 0;
+}
+
+.gs-on-dark,
+.gs-on-dark .wp-block-heading {
+	color: var(--wp--preset--color--white);
+}
+
+/* Eyebrow (paragraph style "Eyebrow", Figma 1:24): 40×3 rule + tracked label */
+.is-style-eyebrow {
+	align-items: center;
+	color: var(--wp--preset--color--body);
+	display: flex;
+	font-size: var(--wp--preset--font-size--medium);
+	font-weight: 400;
+	gap: var(--wp--preset--spacing--30);
+	letter-spacing: 0.13em;
+	line-height: 1.9;
+}
+
+.is-style-eyebrow::before {
+	background-color: var(--wp--preset--color--brand-300);
+	block-size: 3px;
+	content: "";
+	flex: none;
+	inline-size: 40px;
+}
+
+.gs-on-dark .is-style-eyebrow {
+	color: var(--wp--preset--color--white);
+}
+
+/* Buttons (Figma "Submit — Request a Quote"): fill = brand gradient + arrow; sizes 48 / 60 / 71 */
+.wp-block-button .wp-block-button__link {
+	align-items: center;
+	background-image: var(--wp--preset--gradient--brand);
+	border: 1px solid color-mix(in srgb, var(--wp--preset--color--white) 25%, transparent);
+	color: var(--wp--preset--color--white);
+	display: inline-flex;
+	font-weight: 400;
+	gap: var(--wp--preset--spacing--40);
+	justify-content: center;
+	line-height: 1.2;
+	min-block-size: 60px;
+	padding-block: var(--wp--preset--spacing--10);
+	padding-inline: var(--wp--preset--spacing--50);
+	text-align: center;
+	transition: filter var(--wp--custom--duration--fast) var(--wp--custom--easing), background-color var(--wp--custom--duration--fast) var(--wp--custom--easing);
+}
+
+.wp-block-button .wp-block-button__link:hover {
+	filter: brightness(1.12);
+}
+
+.wp-block-button:not(.is-style-glass, .is-style-fill-no-icon, .is-style-glass-phone, .is-style-light-phone) .wp-block-button__link::after {
+	background-color: currentcolor;
+	block-size: 1em;
+	content: "";
+	flex: none;
+	inline-size: 1.1em;
+	mask: url(../icons/arrow-right.svg) center / contain no-repeat;
+}
+
+.wp-block-button.is-style-outline .wp-block-button__link {
+	background: transparent;
+	border: 2px solid var(--wp--preset--color--brand-500);
+	color: var(--wp--preset--color--brand-500);
+	font-weight: 500;
+}
+
+.wp-block-button.is-style-glass-phone .wp-block-button__link,
+.wp-block-button.is-style-light-phone .wp-block-button__link {
+	gap: var(--wp--preset--spacing--20);
+}
+
+.wp-block-button.is-style-glass-phone .wp-block-button__link::before,
+.wp-block-button.is-style-light-phone .wp-block-button__link::before {
+	background-color: currentcolor;
+	block-size: 1.15em;
+	content: "";
+	flex: none;
+	inline-size: 1.15em;
+	mask: url(../icons/phone.svg) center / contain no-repeat;
+}
+
+.wp-block-button.is-style-glass-phone .wp-block-button__link {
+	backdrop-filter: blur(var(--wp--custom--blur--glass));
+	background-color: transparent;
+	background-image: var(--wp--preset--gradient--glass);
+	border-color: var(--wp--preset--color--surface);
+	box-shadow: var(--wp--preset--shadow--glass);
+}
+
+.wp-block-button.is-style-light-phone .wp-block-button__link {
+	background: var(--wp--preset--color--white);
+	border: 2px solid var(--wp--preset--color--brand-300);
+	color: var(--wp--preset--color--brand-500);
+	font-weight: 500;
+}
+
+.wp-block-button.is-style-light-phone .wp-block-button__link::before {
+	background-color: var(--wp--preset--color--brand-300);
+}
+
+.wp-block-button.gs-btn-lg .wp-block-button__link {
+	font-size: var(--wp--preset--font-size--card-title);
+	min-block-size: 71px; /* Figma large CTA */
+	padding-inline: var(--wp--preset--spacing--60);
+}
+
+.wp-block-buttons {
+	gap: var(--wp--preset--spacing--40);
+}
+
+/* Cards, photos, icon circles, feature rows */
+.wp-block-group.is-style-card-tint {
+	background-color: var(--wp--preset--color--brand-50);
+	border-radius: var(--wp--custom--radius--xl);
+	padding: var(--wp--preset--spacing--50);
+}
+
+.wp-block-image.gs-photo {
+	margin: 0;
+}
+
+:where(.wp-block-image.gs-photo) img {
+	block-size: 100%;
+	border-radius: var(--wp--custom--radius--xl);
+	inline-size: 100%;
+	object-fit: cover;
+}
+
+.gs-icon-circle {
+	align-items: center;
+	aspect-ratio: 1;
+	background-color: var(--wp--preset--color--brand-100);
+	border-radius: var(--wp--custom--radius--pill);
+	color: var(--wp--preset--color--brand-500);
+	display: flex;
+	flex: none;
+	--gs-icon-size: 34px; /* circle is 69px (Figma 1:33) */
+	inline-size: 69px;
+	justify-content: center;
+}
+
+.gs-icon-circle--sm {
+	--gs-icon-size: 22px;
+	inline-size: 46px;
+}
+
+.gs-icon-circle--md {
+	--gs-icon-size: 26px;
+	inline-size: 53px;
+}
+
+.gs-feature {
+	align-items: flex-start;
+	gap: var(--wp--preset--spacing--50);
+}
+
+.gs-feature + .gs-feature {
+	border-block-start: 2px solid var(--wp--preset--color--border);
+	margin-block-start: var(--wp--preset--spacing--40);
+	padding-block-start: var(--wp--preset--spacing--50);
+}
+
+.gs-feature__text > * {
+	margin-block: 0;
+}
+
+.gs-feature__title {
+	color: var(--wp--preset--color--ink);
+	letter-spacing: -0.03em;
+	line-height: 1.5;
+}
+
+.gs-feature__desc {
+	color: var(--wp--preset--color--body);
+	font-size: var(--wp--preset--font-size--medium);
+	letter-spacing: -0.03em;
+	line-height: 1.55;
+}
+
+/* `gs-pending` marks markup built from unconfirmed content (only rendered where GS_SHOW_PENDING is on —
+   local QA). It is a marker for review tooling only and has no visual style: the design is shown as in Figma. */
+
+/* ---------- Sections (Figma order) ---------- */
+
+/* ---------- Header (Figma 1:523) ---------- */
+.wp-site-blocks > header.wp-block-template-part {
+	padding-block-start: var(--wp--preset--spacing--20);
+	padding-inline: var(--wp--preset--spacing--60);
+	position: sticky;
+	top: 0;
+	z-index: 100;
+}
+
+/* Over the photo hero the bar floats on the image; the hero reserves the space. */
+.wp-site-blocks:has(> main.gs-hero-page) > header.wp-block-template-part {
+	margin-block-end: calc(-1 * var(--gs-header-h));
+}
+
+.wp-site-blocks:has(> main.gs-hero-page) > main {
+	margin-block-start: 0;
+}
+
+.gs-header {
+	align-items: center;
+	backdrop-filter: blur(var(--wp--custom--blur--glass));
+	background-color: var(--wp--preset--color--night-2); /* solid on pages without a photo hero (design-system §6) */
+	background-image: var(--wp--preset--gradient--glass-light);
+	border: 2px solid var(--wp--preset--color--white);
+	border-radius: var(--wp--custom--radius--md);
+	box-shadow: var(--wp--preset--shadow--glass);
+	color: var(--wp--preset--color--white);
+	gap: var(--wp--preset--spacing--40);
+	min-block-size: 81px;
+	padding-block: 3px;
+	padding-inline: var(--wp--preset--spacing--40) var(--wp--preset--spacing--60);
+	transition: background-color var(--wp--custom--duration--fast) var(--wp--custom--easing);
+	--gs-focus: var(--wp--preset--color--white);
+}
+
+/* Over the hero photo: light glass (white tint + blur), as in Figma 1:523, so the logo stands out. */
+:where(.wp-site-blocks:has(> main.gs-hero-page)) .gs-header:not(.is-scrolled) {
+	background-color: color-mix(in srgb, var(--wp--preset--color--white) 8%, transparent); /* 8%: white nav stays >= 4.5:1 over the brightest photo area (14% measured 4.41:1) */
+}
+
+/* Scrolled over light sections: tinted just enough for the white nav (≥ 7:1 over white), still see-through. */
+:where(.wp-site-blocks:has(> main.gs-hero-page)) .gs-header.is-scrolled {
+	background-color: color-mix(in srgb, var(--wp--preset--color--night-2) 72%, transparent);
+}
+
+.gs-header__logo {
+	flex: none;
+	margin: 0;
+}
+
+.gs-header__logo img {
+	aspect-ratio: 3;
+	block-size: auto;
+
+	/* Soft light halo so the magenta wordmark reads on the dark glass; the image and its colours are unchanged. */
+	filter:
+		drop-shadow(0 0 1px color-mix(in srgb, var(--wp--preset--color--white) 90%, transparent))
+		drop-shadow(0 0 10px color-mix(in srgb, var(--wp--preset--color--white) 45%, transparent));
+	inline-size: clamp(140px, 11.7vw, 225px);
+}
+
+.gs-header__nav {
+	font-size: var(--wp--preset--font-size--medium);
+}
+
+.gs-header__nav .wp-block-navigation__container {
+	gap: var(--wp--preset--spacing--70);
+}
+
+.gs-header .gs-header__nav .wp-block-navigation-item__content {
+	color: inherit;
+	text-shadow: 0 0 4px rgba(0, 0, 0, 0.53);
+}
+
+.gs-header__nav .wp-block-navigation-item__content:hover {
+	text-decoration: underline;
+	text-underline-offset: 0.3em;
+}
+
+/* Current page: Figma shows brand-500, which fails contrast on the glass; brand-100 + weight keeps the cue. */
+.gs-header__nav [aria-current="page"] {
+	color: var(--wp--preset--color--brand-100);
+	font-weight: 600;
+	text-decoration: underline;
+	text-decoration-color: var(--wp--preset--color--brand-300);
+	text-decoration-thickness: 3px;
+	text-underline-offset: 0.45em;
+}
+
+.gs-header .wp-block-navigation__responsive-container-open {
+	color: var(--wp--preset--color--white);
+}
+
+.gs-header .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item__content {
+	font-size: var(--wp--preset--font-size--h-5);
+	text-shadow: none;
+}
+
+.gs-header > .wp-block-buttons {
+	flex: none;
+	flex-wrap: nowrap;
+	gap: var(--wp--preset--spacing--30);
+}
+
+@media (max-width: 1100px) {
+
+	:root {
+		--gs-header-h: 76px;
+	}
+
+	.gs-header {
+		min-block-size: 64px;
+		padding-inline: var(--wp--preset--spacing--30);
+	}
+
+	/* Core switches to the overlay menu at 600px; six links + two buttons need it from 1100px. */
+	.gs-header .wp-block-navigation .wp-block-navigation__responsive-container-open:not(.always-shown) {
+		display: flex;
+	}
+
+	.gs-header .wp-block-navigation .wp-block-navigation__responsive-container:not(.hidden-by-default):not(.is-menu-open) {
+		display: none;
+	}
+
+	.gs-header__nav {
+		margin-inline-start: auto;
+		order: 3;
+	}
+}
+
+@media (max-width: 600px) {
+
+	.wp-site-blocks > header.wp-block-template-part {
+		padding-inline: var(--wp--preset--spacing--20);
+	}
+
+	.gs-header {
+		gap: var(--wp--preset--spacing--20);
+		padding-inline: var(--wp--preset--spacing--20);
+	}
+
+	.gs-header__logo img {
+		inline-size: 116px;
+	}
+
+	/* Phone button shrinks to its icon; the number stays the accessible name. */
+	.gs-header__phone .wp-block-button__link {
+		font-size: 0;
+		padding-inline: var(--wp--preset--spacing--20);
+	}
+
+	.wp-block-button.is-style-glass-phone.gs-header__phone .wp-block-button__link::before {
+		block-size: 20px;
+		inline-size: 20px;
+	}
+
+	.gs-header > .wp-block-buttons .wp-block-button:not(.gs-header__phone) .wp-block-button__link {
+		font-size: var(--wp--preset--font-size--small);
+		padding-inline: var(--wp--preset--spacing--30);
+	}
+
+	.gs-header > .wp-block-buttons .wp-block-button:not(.gs-header__phone) .wp-block-button__link::after {
+		display: none;
+	}
+}
+
+@media (max-width: 480px) {
+
+	/* The hero's own "Get A Quote" sits directly below; keep the bar to logo + phone + menu. */
+	.gs-header > .wp-block-buttons .wp-block-button:not(.gs-header__phone) {
+		display: none;
+	}
+}
+
+/* No JS: the overlay toggle can't work, so list the links inline instead. */
+html:not(.gs-js) .gs-header {
+	flex-wrap: wrap;
+}
+
+html:not(.gs-js) .gs-header .wp-block-navigation .wp-block-navigation__responsive-container-open {
+	display: none;
+}
+
+html:not(.gs-js) .gs-header .wp-block-navigation .wp-block-navigation__responsive-container:not(.hidden-by-default):not(.is-menu-open) {
+	display: block;
+	position: static;
+}
+
+html:not(.gs-js) .gs-header__nav {
+	flex-basis: 100%;
+	order: 4;
+}
+
+html:not(.gs-js) .gs-header__nav .wp-block-navigation__container {
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--20) var(--wp--preset--spacing--40);
+}
+
+/* ---------- Hero (Figma 1:69) ---------- */
+.gs-hero,
+.gs-form--dark {
+	--gs-focus: var(--wp--preset--color--white); /* brand-300 ring is only 2.08:1 on the dark glass */
+}
+
+.wp-block-cover.gs-hero {
+	background-color: var(--wp--preset--color--night); /* solid fallback under white text if the photo fails (rules-log #001) */
+	color: var(--wp--preset--color--white);
+	padding-block: calc(var(--gs-header-h) + var(--wp--preset--spacing--50)) var(--wp--preset--spacing--60); /* clears the floating header */
+
+	/* core/cover only pads 1em; align the content with the rest of the page (root padding) */
+	padding-inline: var(--wp--style--root--padding-left) var(--wp--style--root--padding-right);
+}
+
+.wp-block-columns.gs-hero__grid {
+	gap: var(--wp--preset--spacing--60);
+}
+
+.wp-block-columns.gs-hero__grid > .gs-hero__aside {
+	flex: 0 1 29rem; /* Figma card 465px */
+}
+
+.gs-hero__main {
+	container-type: inline-size; /* the H1 scales to its column (below) */
+}
+
+.gs-hero__title {
+	color: var(--wp--preset--color--white);
+	font-weight: 400;
+	line-height: 1.12;
+	margin-block: 0 var(--wp--preset--spacing--60);
+}
+
+/* "Smarter Security." is ~8em wide in Poppins 400: cap the size so it stays on one line in the column at every
+   width (two-line design: "Smarter Security." / "Safer Spaces."); the display token stays the maximum.
+   !important: core's preset class .has-display-font-size sets font-size with !important. */
+.gs-hero__main .gs-hero__title {
+	font-size: min(var(--wp--preset--font-size--display), 11.5cqi) !important;
+}
+
+/* Order: heading → description → badge + Get A Quote on their own row underneath. Scoped under .gs-hero to
+   beat core's flex-layout container class (row). */
+.gs-hero .gs-hero__intro {
+	align-items: flex-start;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--50);
+}
+
+/* Review badge + Get A Quote: side by side, vertically centred, same height (Figma 1:114 / 1:80); they wrap
+   only where both can't fit (small phones). */
+.gs-hero__intro > .gs-hero__actions {
+	gap: var(--wp--preset--spacing--40);
+	margin: 0;
+	max-inline-size: 100%;
+}
+
+.gs-hero__actions > * {
+	margin: 0;
+}
+
+/* Lead with bar (paragraph style, Figma 1:76) */
+.is-style-lead-with-bar {
+	font-size: var(--wp--preset--font-size--lead);
+	letter-spacing: -0.03em;
+	line-height: 1.75;
+	padding-inline-start: calc(5px + var(--wp--preset--spacing--30));
+	position: relative;
+}
+
+.is-style-lead-with-bar::before {
+	background: linear-gradient(to bottom, var(--wp--preset--color--brand-500), transparent);
+	content: "";
+	inline-size: 5px;
+	inset-block: 0.25em 0;
+	inset-inline-start: 0;
+	position: absolute;
+}
+
+.gs-hero__intro .is-style-lead-with-bar {
+	max-inline-size: 21em; /* Figma 420px @ 20px */
+}
+
+/* Button sizes */
+.wp-block-button.gs-btn-sm .wp-block-button__link {
+	min-block-size: 48px; /* Figma small button */
+	padding-block: var(--wp--preset--spacing--10);
+	padding-inline: var(--wp--preset--spacing--60);
+}
+
+/* Glass button (button style "Glass", Figma 1:80) */
+.wp-block-button.is-style-glass .wp-block-button__link {
+	backdrop-filter: blur(var(--wp--custom--blur--glass));
+	background-color: transparent;
+	background-image: var(--wp--preset--gradient--glass);
+	border: 1px solid var(--wp--preset--color--surface);
+	box-shadow: var(--wp--preset--shadow--glass);
+	color: var(--wp--preset--color--white);
+	font-weight: 400;
+	transition: background-color var(--wp--custom--duration--fast) var(--wp--custom--easing);
+}
+
+.wp-block-button.is-style-glass .wp-block-button__link:hover,
+.wp-block-button.is-style-glass .wp-block-button__link:focus-visible {
+	background-color: color-mix(in srgb, var(--wp--preset--color--brand-500) 35%, transparent);
+}
+
+/* Scroll cue (Figma 1:73) */
+.gs-scroll-cue {
+	align-items: center;
+	backdrop-filter: blur(var(--wp--custom--blur--glass));
+	aspect-ratio: 1;
+	background-image: var(--wp--preset--gradient--glass);
+	border: 1px solid var(--wp--custom--glass--border);
+	border-radius: var(--wp--custom--radius--pill);
+	color: var(--wp--preset--color--white);
+	display: flex;
+	font-size: var(--wp--preset--font-size--h-5);
+	inline-size: 86px; /* Figma 1:73 */
+	justify-content: center;
+	margin-block-start: var(--wp--preset--spacing--60);
+	margin-inline: auto;
+	transition: transform var(--wp--custom--duration--fast) var(--wp--custom--easing);
+}
+
+.gs-scroll-cue:hover {
+	transform: translateY(4px);
+}
+
+/* Review badge (Figma 1:114) — output only once the claim is confirmed */
+.gs-review-badge {
+	align-items: center;
+	background-color: var(--wp--preset--color--white);
+	border-radius: var(--wp--custom--radius--sm);
+	box-shadow: var(--wp--preset--shadow--badge);
+	color: var(--wp--preset--color--brand-500);
+	display: inline-flex;
+	font-size: var(--wp--preset--font-size--small);
+	gap: var(--wp--preset--spacing--10);
+	line-height: 1.2;
+	min-block-size: 48px; /* same height as the small Get A Quote button beside it */
+	padding-block: var(--wp--preset--spacing--10);
+	padding-inline: var(--wp--preset--spacing--10) var(--wp--preset--spacing--30);
+	box-sizing: border-box;
+}
+
+.gs-review-badge img {
+	block-size: auto;
+	inline-size: 30px;
+}
+
+.gs-rating {
+	color: var(--wp--preset--color--rating);
+	display: inline-flex;
+	font-size: var(--wp--preset--font-size--small);
+}
+
+/* Glass rail (social-links style, Figma 1:83) — output only once URLs are confirmed */
+.wp-block-social-links.is-style-glass-rail {
+	backdrop-filter: blur(var(--wp--custom--blur--glass));
+	background-image: var(--wp--preset--gradient--glass);
+	border: 1px solid var(--wp--custom--glass--border);
+	border-radius: var(--wp--custom--radius--md);
+	box-shadow: var(--wp--preset--shadow--glass);
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--20);
+	inline-size: max-content;
+	padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--10);
+}
+
+.wp-block-social-links.is-style-glass-rail li.wp-social-link {
+	background-color: var(--wp--preset--color--white);
+	color: var(--wp--preset--color--brand-500);
+}
+
+:where(.wp-block-social-links.is-style-glass-rail li.wp-social-link) a {
+	color: inherit;
+}
+
+/* Social icons (gs_social_links()): glass rail in the hero (Figma 1:83), white circles in the footer (1:426) */
+.gs-social {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--20);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.gs-social__icon {
+	--gs-icon-size: 22px;
+	align-items: center;
+	aspect-ratio: 1;
+	background-color: var(--wp--preset--color--white);
+	border-radius: var(--wp--custom--radius--pill);
+	color: var(--wp--preset--color--brand-500);
+	display: flex;
+	inline-size: 40px;
+	justify-content: center;
+	transition: background-color var(--wp--custom--duration--fast) var(--wp--custom--easing), color var(--wp--custom--duration--fast) var(--wp--custom--easing);
+}
+
+a.gs-social__icon:hover,
+a.gs-social__icon:focus-visible {
+	background-color: var(--wp--preset--color--brand-500);
+	color: var(--wp--preset--color--white);
+}
+
+.gs-social--rail {
+	backdrop-filter: blur(var(--wp--custom--blur--glass));
+	background-image: var(--wp--preset--gradient--glass);
+	border: 1px solid var(--wp--custom--glass--border);
+	border-radius: var(--wp--custom--radius--md);
+	box-shadow: var(--wp--preset--shadow--glass);
+	flex-direction: column;
+	inline-size: max-content;
+	padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--10);
+}
+
+.gs-social--footer .gs-social__icon {
+	background-color: var(--wp--preset--color--brand-100);
+	color: var(--wp--preset--color--brand-600);
+	inline-size: 42px;
+}
+
+/* Trust strip (Figma 1:515) — output only once the claims are confirmed */
+.gs-trust-strip {
+	align-items: center;
+	background-image: var(--wp--preset--gradient--trust-strip);
+	border-radius: var(--wp--custom--radius--md);
+	display: grid;
+	gap: var(--wp--preset--spacing--50);
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	justify-items: center;
+	padding: var(--wp--preset--spacing--40) var(--wp--preset--spacing--50);
+}
+
+.gs-trust-strip .wp-block-image {
+	margin: 0;
+}
+
+.gs-trust-strip img {
+	block-size: auto;
+	max-block-size: 60px; /* Figma tallest logo */
+	max-inline-size: 100%;
+	object-fit: contain;
+}
+
+/* Social rail and trust strip sit under the intro row, left-aligned (Figma 1:83, 1:515) */
+.gs-hero__main > .gs-social--rail,
+.gs-hero__main > .gs-trust-strip {
+	margin-block: var(--wp--preset--spacing--60) 0;
+}
+
+.gs-hero__main > .gs-trust-strip {
+	max-inline-size: 55.5rem; /* Figma 1:515: 888px */
+}
+
+/* ---------- Quote card (Figma 1:97) — group style "Glass · dark" + gs-form gs-form--dark ---------- */
+.wp-block-group.is-style-glass-dark {
+	backdrop-filter: blur(var(--wp--custom--blur--glass));
+	background-color: color-mix(in srgb, var(--wp--preset--color--night-2) 58%, transparent);
+	border: 1px solid var(--wp--custom--glass--border);
+	border-radius: var(--wp--custom--radius--lg);
+	color: var(--wp--preset--color--white);
+	padding: var(--wp--preset--spacing--50);
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+
+	.wp-block-group.is-style-glass-dark {
+		background-color: var(--wp--preset--color--night-2);
+	}
+}
+
+.gs-form--dark {
+	color-scheme: dark; /* native select arrow and date pickers render light-on-dark */
+	scroll-margin-block-start: var(--wp--preset--spacing--60);
+}
+
+.gs-form--dark > * {
+	margin-block: 0;
+}
+
+.gs-form--dark > * + * {
+	margin-block-start: var(--wp--preset--spacing--20);
+}
+
+/* Form eyebrow (Figma 1:98): no rule, white, uppercase, heavier tracking */
+.gs-form--dark .is-style-eyebrow {
+	color: var(--wp--preset--color--white);
+	font-weight: 600;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+}
+
+.gs-form--dark .is-style-eyebrow::before {
+	display: none;
+}
+
+.gs-form--dark .gs-form__title {
+	color: var(--wp--preset--color--white);
+}
+
+.gs-form__intro,
+.gs-form__note,
+.gs-form__required {
+	color: var(--wp--preset--color--on-dark);
+	font-size: var(--wp--preset--font-size--base);
+	line-height: 1.45;
+}
+
+.gs-form__required {
+	font-size: var(--wp--preset--font-size--small);
+	margin-block: 0 var(--wp--preset--spacing--20);
+}
+
+.gs-form .gs-field {
+	margin-block-end: var(--wp--preset--spacing--20);
+}
+
+/* CF7 auto-paragraphs wrap the label + control in a <p>. */
+.gs-form .gs-field,
+.gs-form .gs-field > p {
+	display: grid;
+	gap: var(--wp--preset--spacing--10);
+}
+
+.gs-form .gs-field > p,
+.gs-form .wpcf7-form > p {
+	margin-block: 0;
+}
+
+.gs-form .wpcf7-form > .gs-form__required {
+	margin-block-end: var(--wp--preset--spacing--30);
+}
+
+.gs-form .wpcf7-form-control-wrap {
+	display: block;
+}
+
+.gs-form .gs-field label {
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 500;
+}
+
+.gs-form--dark .gs-field label {
+	color: var(--wp--preset--color--white);
+}
+
+.gs-form--dark :is(input:not([type="submit"]), select, textarea) {
+	background-color: var(--wp--custom--glass--field);
+	border: 1px solid var(--wp--custom--glass--border);
+	border-radius: var(--wp--custom--radius--md);
+	box-sizing: border-box;
+	color: var(--wp--preset--color--white);
+	font: inherit;
+	font-size: var(--wp--preset--font-size--small);
+	inline-size: 100%;
+	min-block-size: var(--wp--custom--control--field);
+	padding-inline: var(--wp--preset--spacing--40);
+}
+
+.gs-form--dark textarea {
+	min-block-size: calc(var(--wp--custom--control--field) * 1.5);
+	padding-block: var(--wp--preset--spacing--20);
+	resize: vertical;
+}
+
+.gs-form--dark select option {
+	background-color: var(--wp--preset--color--night-2);
+	color: var(--wp--preset--color--white);
+}
+
+.gs-form--dark [aria-invalid="true"] {
+	border-color: var(--wp--preset--color--white);
+	border-width: 2px;
+}
+
+.gs-form--dark .wpcf7-not-valid-tip,
+.gs-form--dark .wpcf7-response-output {
+	color: var(--wp--preset--color--white);
+	font-size: var(--wp--preset--font-size--small);
+}
+
+/* CF7's status message: design border instead of the plugin's blue / green / red / amber ones (the text states
+   the status, so colour carries no extra meaning). Same specificity as CF7's rules; this file loads after it. */
+.gs-form .wpcf7 form .wpcf7-response-output {
+	border: 1px solid var(--wp--custom--glass--border);
+	border-radius: var(--wp--custom--radius--md);
+	margin: var(--wp--preset--spacing--30) 0 0;
+	padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--30);
+}
+
+.gs-form:not(.gs-form--dark) .wpcf7 form .wpcf7-response-output {
+	border-color: var(--wp--preset--color--brand-500);
+}
+
+.gs-hero .wpcf7-contact-form-not-found {
+	color: var(--wp--preset--color--white);
+}
+
+.gs-form .wpcf7-submit {
+	background-image: var(--wp--preset--gradient--brand);
+	border: 1px solid var(--wp--custom--glass--border);
+	border-radius: var(--wp--custom--radius--md);
+	color: var(--wp--preset--color--white);
+	cursor: pointer;
+	font: inherit;
+	font-size: var(--wp--preset--font-size--medium);
+	inline-size: 100%;
+	min-block-size: 60px; /* Figma default button */
+	transition: filter var(--wp--custom--duration--fast) var(--wp--custom--easing);
+}
+
+.gs-form .wpcf7-submit:hover {
+	filter: brightness(1.15);
+}
+
+.gs-form form:not(.submitting) .wpcf7-spinner {
+	display: none;
+}
+
+/* Quote dialog (gorilla.js initQuoteDialog): the hero quote card shown in a centred modal */
+html.gs-dialog-open {
+	overflow: hidden; /* no background scrolling while the dialog is open */
+}
+
+.gs-quote-dialog {
+	background: transparent;
+	border: 0;
+	box-sizing: border-box;
+	color: var(--wp--preset--color--white);
+	inline-size: min(100% - 2 * var(--wp--style--root--padding-left), 52rem);
+	max-block-size: calc(100dvh - 2 * var(--wp--preset--spacing--40));
+	max-inline-size: none;
+	overflow: auto; /* tall forms scroll inside the dialog */
+	overscroll-behavior: contain;
+	scrollbar-width: none; /* scrolls by wheel / touch / keyboard; no visible bar */
+	padding: 0;
+}
+
+.gs-quote-dialog::-webkit-scrollbar {
+	display: none;
+}
+
+.gs-quote-dialog::backdrop {
+	background-color: color-mix(in srgb, var(--wp--preset--color--night) 80%, transparent);
+}
+
+.gs-quote-dialog__body > .gs-form--dark {
+	background-color: var(--wp--preset--color--night-2); /* solid: no photo behind it here */
+	padding: var(--wp--preset--spacing--60);
+}
+
+.gs-quote-dialog__close {
+	--gs-icon-size: 20px;
+	align-items: center;
+	background-color: color-mix(in srgb, var(--wp--preset--color--white) 12%, transparent);
+	border: 1px solid var(--wp--custom--glass--border);
+	border-radius: var(--wp--custom--radius--pill);
+	color: var(--wp--preset--color--white);
+	cursor: pointer;
+	display: flex;
+	inline-size: 44px;
+	block-size: 44px;
+	inset-block-start: var(--wp--preset--spacing--30);
+	inset-inline-end: var(--wp--preset--spacing--30);
+	justify-content: center;
+	position: absolute;
+	z-index: 1;
+}
+
+.gs-quote-dialog__close:hover {
+	background-color: color-mix(in srgb, var(--wp--preset--color--white) 24%, transparent);
+}
+
+/* Two-column grid: name | phone, email | service; message, submit and messages span both columns. */
+.gs-quote-dialog .wpcf7-form {
+	column-gap: var(--wp--preset--spacing--40);
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.gs-quote-dialog :where(.wpcf7-form > *) {
+	grid-column: 1 / -1;
+}
+
+.gs-quote-dialog :where(.wpcf7-form > .gs-field:not(:has(textarea))) {
+	grid-column: auto;
+}
+
+.gs-quote-dialog :where(.wpcf7-form > .hidden-fields-container) {
+	display: none; /* hidden inputs still submit */
+}
+
+@media (prefers-reduced-motion: no-preference) {
+
+	.gs-quote-dialog[open] {
+		animation: gs-dialog-in var(--wp--custom--duration--fast) var(--wp--custom--easing);
+	}
+
+	@keyframes gs-dialog-in {
+
+		from {
+			opacity: 0;
+			transform: translateY(12px);
+		}
+	}
+}
+
+@media (max-width: 600px) {
+
+	.gs-quote-dialog .wpcf7-form {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.gs-quote-dialog__body > .gs-form--dark {
+		padding: var(--wp--preset--spacing--50) var(--wp--preset--spacing--40);
+	}
+}
+
+@media (max-width: 1100px) {
+
+	.wp-block-columns.gs-hero__grid {
+		flex-wrap: wrap !important; /* core forces nowrap >= 782px; the form drops below the copy here. */
+	}
+
+	.wp-block-columns.gs-hero__grid > .wp-block-column {
+		flex-basis: 100%;
+	}
+
+	.wp-block-columns.gs-hero__grid > .gs-hero__aside {
+		max-inline-size: 40rem;
+	}
+
+	/* Stacked: the copy spans the full width, so the side-weighted scrim becomes an even one in both
+	   directions (RTL measured 2.73:1 with the gradient; >= 6:1 with this). */
+	.gs-hero .wp-block-cover__background {
+		background: color-mix(in srgb, var(--wp--preset--color--night) 65%, transparent) !important; /* core's .has-*-gradient-background preset class is !important */
+	}
+
+	/* The stacked hero is tall, so cover shows a narrow slice of the wide photo: centre it between the camera
+	   (~40%) and the installer's face (~70%) instead of the empty middle. */
+	.gs-hero .wp-block-cover__image-background {
+		object-position: 64% 50%;
+	}
+}
+
+/* Cover gradients (hero scrim, quote fade) darken/lighten the side where the copy sits, which is the
+   other side in RTL: mirror the overlay (vertical gradients are unaffected). Measured on the RTL stress hero. */
+.wp-block-cover:dir(rtl) > .wp-block-cover__gradient-background {
+	transform: scaleX(-1);
+}
+
+@media (max-width: 781px) {
+
+	.gs-scroll-cue {
+		display: none;
+	}
+
+	.wp-block-social-links.is-style-glass-rail,
+	.gs-social--rail {
+		flex-direction: row;
+	}
+
+	.gs-trust-strip {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+
+/* ---------- About (Figma 1:6) ---------- */
+.gs-about {
+	background-color: var(--wp--preset--color--white);
+	box-shadow: var(--wp--preset--shadow--soft);
+	position: relative;
+}
+
+.wp-block-columns.gs-about__grid {
+	align-items: stretch;
+	gap: var(--wp--preset--spacing--40);
+}
+
+.gs-about__text {
+	display: flex;
+	flex-direction: column;
+}
+
+.gs-about__text > * {
+	margin-block: 0;
+}
+
+.gs-about__text > * + * {
+	margin-block-start: var(--wp--preset--spacing--50);
+}
+
+.gs-about__text > .is-style-stats-with-dividers {
+	margin-block-start: auto;
+	padding-block-start: var(--wp--preset--spacing--60);
+}
+
+.gs-about__text .has-lead-font-size {
+	letter-spacing: -0.03em;
+	line-height: 1.75;
+}
+
+.gs-about__portrait {
+	block-size: 100%;
+}
+
+.gs-about__portrait img {
+	min-block-size: 480px;
+}
+
+.gs-about__aside {
+	display: flex;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--40);
+}
+
+.gs-about__aside > * {
+	margin-block: 0;
+}
+
+.gs-about__van img {
+	aspect-ratio: 489 / 314;
+}
+
+@media (min-width: 1101px) {
+
+	.wp-block-columns.gs-about__grid > .gs-about__text {
+		flex: 0 1 569px;
+	}
+
+	.wp-block-columns.gs-about__grid > .gs-about__media {
+		flex: 0 1 535px;
+	}
+
+	.wp-block-columns.gs-about__grid > .gs-about__aside {
+		flex: 0 1 489px;
+	}
+}
+
+@media (min-width: 782px) {
+
+	/* Portrait and van both fill the row height so their bottom edges line up (Figma 1:68 / 1:67),
+	   whichever column (text or feature card) is tallest at this width. */
+	.gs-about__portrait img {
+		block-size: 100%;
+		object-fit: cover;
+	}
+
+	.gs-about__van {
+		flex: 1 1 auto;
+	}
+
+	.gs-about__van img {
+		aspect-ratio: auto;
+		block-size: 100%;
+		object-fit: cover;
+	}
+}
+
+@media (max-width: 1100px) {
+
+	.wp-block-columns.gs-about__grid {
+		flex-wrap: wrap !important; /* core forces nowrap >= 782px; text goes full width above the images */
+	}
+
+	.wp-block-columns.gs-about__grid > .gs-about__text {
+		flex-basis: 100%;
+	}
+
+	.wp-block-columns.gs-about__grid > .gs-about__media,
+	.wp-block-columns.gs-about__grid > .gs-about__aside {
+		flex: 1 1 calc(50% - var(--wp--preset--spacing--40));
+	}
+}
+
+@media (max-width: 781px) {
+
+	.gs-about__portrait img {
+		aspect-ratio: 4 / 5;
+		min-block-size: 0;
+	}
+}
+
+/* ---------- Brands (Figma 1:508) — logos only render once confirmed (gs-pending) ---------- */
+.gs-brands {
+	align-items: center;
+	background-color: var(--wp--preset--color--white);
+	display: grid;
+	grid-template-columns: min(664px, 40%) minmax(0, 1fr);
+	position: relative;
+}
+
+.gs-brands__panel {
+	align-self: stretch;
+	background-image: var(--wp--preset--gradient--brands-fade);
+	display: flex;
+	align-items: center;
+	grid-column: 1;
+	grid-row: 1;
+	padding-block: var(--wp--preset--spacing--50);
+	padding-inline: var(--wp--preset--spacing--70) var(--wp--preset--spacing--80);
+	position: relative;
+	z-index: 1;
+}
+
+.gs-brands__title {
+	color: var(--wp--preset--color--brand-600);
+	font-weight: 500;
+	line-height: 1.36;
+	margin: 0;
+	max-inline-size: 12.5em;
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+
+	.gs-brands__title {
+		background-image: var(--wp--preset--gradient--brand-deep);
+		-webkit-background-clip: text;
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
+		width: fit-content;
+	}
+}
+
+.gs-marquee {
+	display: flex;
+	grid-column: 1 / -1;
+	grid-row: 1;
+	overflow-x: auto; /* no JS: scroll through the logos */
+	padding-block: var(--wp--preset--spacing--50);
+	padding-inline-start: min(600px, 38%);
+}
+
+.gs-marquee.is-animated {
+	overflow: hidden;
+	padding-inline-start: 0;
+}
+
+.gs-marquee > .gs-marquee__track {
+	align-items: center;
+	column-gap: var(--wp--preset--spacing--80);
+	display: grid;
+	flex: none;
+	grid-auto-flow: column;
+	grid-template-rows: auto auto;
+	margin: 0;
+	padding-inline-end: var(--wp--preset--spacing--80);
+	row-gap: var(--wp--preset--spacing--50);
+}
+
+.gs-marquee__track > :nth-child(even) {
+	transform: translateX(50%); /* second row staggered as in Figma */
+}
+
+.gs-marquee__track .wp-block-image {
+	margin: 0;
+}
+
+.gs-marquee__track img {
+	block-size: 50px;
+	inline-size: auto;
+	max-inline-size: 200px;
+	object-fit: contain;
+}
+
+.gs-marquee.is-animated > .gs-marquee__track {
+	animation: gs-marquee 45s linear infinite;
+}
+
+.gs-marquee.is-paused > .gs-marquee__track,
+.gs-marquee:hover > .gs-marquee__track,
+.gs-marquee:focus-within > .gs-marquee__track {
+	animation-play-state: paused;
+}
+
+@keyframes gs-marquee {
+
+	to {
+		transform: translateX(-100%);
+	}
+}
+
+.gs-marquee__toggle {
+	background-color: var(--wp--preset--color--white);
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: var(--wp--custom--radius--pill);
+	color: var(--wp--preset--color--ink);
+	cursor: pointer;
+	font: inherit;
+	font-size: var(--wp--preset--font-size--caption);
+	inset-block-end: var(--wp--preset--spacing--10);
+	inset-inline-end: var(--wp--preset--spacing--40);
+	padding: 2px var(--wp--preset--spacing--20);
+	position: absolute;
+	z-index: 2;
+}
+
+@media (max-width: 781px) {
+
+	.gs-brands {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.gs-brands__panel {
+		background: var(--wp--preset--color--surface-2);
+		padding-inline: var(--wp--style--root--padding-left) var(--wp--style--root--padding-right);
+	}
+
+	.gs-marquee {
+		grid-row: 2;
+		padding-inline-start: var(--wp--style--root--padding-left);
+	}
+}
+
+/* ---------- Why us (Figma 1:522) — stepper ---------- */
+.wp-block-columns.gs-why__grid {
+	gap: var(--wp--preset--spacing--70);
+}
+
+@media (min-width: 1101px) {
+
+	/* Figma: intro + photo 647px, track + steps ~990px (≈ 38 : 62). */
+	.wp-block-columns.gs-why__grid > .gs-why__intro {
+		flex: 0 0 38%;
+	}
+}
+
+.gs-why__intro > *,
+.gs-why__list > * {
+	margin-block: 0;
+}
+
+.gs-why__intro > * + * {
+	margin-block-start: var(--wp--preset--spacing--40);
+}
+
+.gs-why__intro > .gs-steps__media {
+	margin-block-start: var(--wp--preset--spacing--60);
+}
+
+.gs-steps__media .wp-block-image {
+	aspect-ratio: 647 / 563;
+}
+
+/* The photo fills its figure at every width (stacked: the 647:563 box; ≥ 782px: the column height). */
+.gs-steps__media :where(.wp-block-image) img {
+	block-size: 100%;
+	inline-size: 100%;
+	object-fit: cover;
+	object-position: 75% 50%; /* keep the subject (right of frame in the Figma crops) in view */
+}
+
+.gs-steps__media > :not(:first-child),
+.gs-steps.is-enhanced .gs-steps__media > :not(.is-active) {
+	display: none;
+}
+
+.gs-steps.is-enhanced .gs-steps__media > .is-active {
+	display: block;
+}
+
+.gs-why__list > .wp-block-buttons {
+	justify-content: flex-end;
+	margin-block-end: var(--wp--preset--spacing--50);
+}
+
+.gs-steps__list {
+	padding-inline-start: calc(8px + var(--wp--preset--spacing--60));
+	position: relative;
+}
+
+.gs-steps__list::before {
+	background-color: var(--wp--preset--color--brand-100);
+	border-radius: var(--wp--custom--radius--pill);
+	content: "";
+	inline-size: 8px;
+	inset-block: 0;
+	inset-inline-start: 0;
+	position: absolute;
+}
+
+.gs-step {
+	column-gap: var(--wp--preset--spacing--50);
+	display: grid;
+	grid-template-columns: 6.5rem minmax(0, 1fr); /* Figma number column 105px */
+	padding-block: var(--wp--preset--spacing--40);
+	position: relative;
+}
+
+.gs-step > * {
+	grid-column: 2;
+	margin: 0;
+}
+
+.gs-step::after {
+	background-image: var(--wp--preset--gradient--rule-fade);
+	block-size: 3px;
+	content: "";
+	inset-block-end: 0;
+	inset-inline: 0;
+	position: absolute;
+}
+
+/* Active-step thumb on the track (Figma #BDBDBD ≈ border token). */
+.gs-steps.is-enhanced .gs-step.is-active::before {
+	background-color: var(--wp--preset--color--border);
+	border-radius: var(--wp--custom--radius--pill);
+	content: "";
+	inline-size: 8px;
+	inset-block: 0;
+	inset-inline-start: calc(-8px - var(--wp--preset--spacing--60));
+	position: absolute;
+}
+
+.gs-step__num {
+	color: var(--gs-brand);
+	font-size: var(--wp--preset--font-size--h-2);
+	font-weight: 600;
+	grid-column: 1;
+	grid-row: 1 / span 2;
+	letter-spacing: -0.03em;
+	line-height: 1.2;
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+
+	.gs-step__num {
+		background-image: var(--wp--preset--gradient--brand-text);
+		-webkit-background-clip: text;
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
+		width: fit-content;
+	}
+}
+
+.gs-steps.is-enhanced .gs-step:not(.is-active) .gs-step__num {
+	opacity: 0.25;
+}
+
+.gs-step__title {
+	align-self: center;
+	color: var(--wp--preset--color--ink);
+	letter-spacing: -0.03em;
+	line-height: 1.5;
+}
+
+.gs-step.is-active .gs-step__title {
+	color: var(--gs-brand);
+}
+
+.gs-step__toggle {
+	background: none;
+	border: 0;
+	color: inherit;
+	cursor: pointer;
+	font: inherit;
+	letter-spacing: inherit;
+	padding: 0;
+	text-align: start;
+	inline-size: 100%;
+}
+
+.gs-step__body {
+	color: var(--wp--preset--color--body);
+	font-size: var(--wp--preset--font-size--medium);
+	letter-spacing: -0.03em;
+	line-height: 1.55;
+	margin-block-start: var(--wp--preset--spacing--10);
+	max-inline-size: 48em;
+}
+
+.gs-steps.is-enhanced .gs-step:not(.is-active) .gs-step__body {
+	display: none;
+}
+
+/* Collapsed step: title centred on the number (Figma 1:522). */
+.gs-steps.is-enhanced .gs-step:not(.is-active) .gs-step__title {
+	grid-row: 1 / span 2;
+}
+
+@media (min-width: 782px) {
+
+	/* Photo fills the intro column down to the end of the step list (Figma 1:522). */
+	.gs-why__intro {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.gs-why__intro > .gs-steps__media {
+		flex: 1 1 auto;
+		min-block-size: 360px;
+	}
+
+	.gs-steps__media > .wp-block-image {
+		aspect-ratio: auto;
+		block-size: 100%;
+	}
+}
+
+@media (max-width: 781px) {
+
+	.gs-why__list > .wp-block-buttons {
+		justify-content: flex-start;
+	}
+
+	.gs-step {
+		grid-template-columns: 3rem minmax(0, 1fr);
+	}
+
+	.gs-step__num {
+		font-size: var(--wp--preset--font-size--h-4);
+	}
+}
+
+/* ---------- Services tabs (Figma 1:162) ---------- */
+.gs-services {
+	background-image: var(--wp--preset--gradient--soft-section);
+}
+
+.gs-services > .is-style-eyebrow,
+.gs-services > .gs-tabs {
+	margin-block: 0;
+}
+
+.gs-services > .is-style-eyebrow {
+	max-inline-size: var(--wp--style--global--wide-size); /* aligns with the wide tab bar */
+}
+
+.gs-tabs__nav {
+	display: none; /* without JS every panel shows; the bar only appears once tabs work */
+}
+
+.gs-tabs.is-enhanced .gs-tabs__nav {
+	background-color: var(--wp--preset--color--surface);
+	border-radius: var(--wp--custom--radius--sm);
+	display: flex;
+	margin-block: var(--wp--preset--spacing--50) var(--wp--preset--spacing--60);
+}
+
+.gs-tabs__tab {
+	align-items: center;
+	background: none;
+	border: 0;
+	border-radius: var(--wp--custom--radius--sm);
+	color: var(--wp--preset--color--ink);
+	cursor: pointer;
+	display: flex;
+	flex: 1 0 auto;
+	font: inherit;
+	font-size: var(--wp--preset--font-size--medium);
+	gap: var(--wp--preset--spacing--20);
+	justify-content: center;
+	min-block-size: 68px;
+	padding-inline: var(--wp--preset--spacing--40);
+	position: relative;
+	white-space: nowrap;
+}
+
+.gs-tabs__tab::before {
+	font-size: 1.5em;
+}
+
+.gs-tabs__tab[aria-selected="true"] {
+	background-image: var(--wp--preset--gradient--brand);
+	color: var(--wp--preset--color--white);
+}
+
+/* Caret under the active tab (Figma 1:162 active pill) */
+.gs-tabs__tab[aria-selected="true"]::after {
+	border-block-start: 8px solid var(--wp--preset--color--brand-600);
+	border-inline: 8px solid transparent;
+	content: "";
+	inset-block-start: 100%;
+	inset-inline-start: calc(50% - 8px);
+	position: absolute;
+}
+
+.gs-tabs__panel + .gs-tabs__panel {
+	margin-block-start: var(--wp--preset--spacing--80); /* no-JS stacked panels */
+}
+
+.gs-tabs.is-enhanced .gs-tabs__panel + .gs-tabs__panel {
+	margin-block-start: 0;
+}
+
+.gs-tabs__panel[hidden] {
+	display: none;
+}
+
+.wp-block-columns.gs-service {
+	align-items: center;
+	gap: var(--wp--preset--spacing--60);
+	margin: 0;
+}
+
+.gs-service__text > * {
+	margin-block: 0;
+}
+
+.gs-service__text > * + * {
+	margin-block-start: var(--wp--preset--spacing--50);
+}
+
+.gs-service__text .has-lead-font-size {
+	letter-spacing: -0.03em;
+	line-height: 1.75;
+	max-inline-size: 26em;
+}
+
+.gs-service__actions {
+	gap: var(--wp--preset--spacing--40) var(--wp--preset--spacing--60);
+}
+
+.gs-service__actions > * {
+	margin: 0;
+}
+
+.gs-service__title {
+	letter-spacing: -0.03em;
+	line-height: 1.05;
+}
+
+/* Checklist (list style, Figma 1:565) */
+.wp-block-list.is-style-checklist {
+	color: var(--gs-brand);
+	display: grid;
+	font-size: var(--wp--preset--font-size--lead);
+	gap: var(--wp--preset--spacing--30) var(--wp--preset--spacing--50);
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	letter-spacing: -0.03em;
+	list-style: none;
+	padding: 0;
+}
+
+:where(.wp-block-list.is-style-checklist) li {
+	align-items: center;
+	display: flex;
+	gap: var(--wp--preset--spacing--30);
+	line-height: 1.4;
+	position: relative;
+}
+
+:where(.wp-block-list.is-style-checklist) li::after {
+	background-color: var(--gs-brand);
+	block-size: 21px;
+	content: "";
+	inline-size: 21px;
+	inset-block-start: calc(50% - 10.5px);
+	inset-inline-start: 10px;
+	mask: url(../icons/check.svg) center / contain no-repeat;
+	position: absolute;
+}
+
+:where(.wp-block-list.is-style-checklist) li::before {
+	background-color: var(--wp--preset--color--brand-100);
+	border-radius: var(--wp--custom--radius--pill);
+	content: "";
+	flex: none;
+	block-size: 41px;
+	inline-size: 41px;
+}
+
+/* Media column: photo with float cards overlaid (CSS grid, no absolute positioning) */
+.gs-service__media {
+	display: grid;
+	grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+}
+
+.gs-service__media > * {
+	grid-area: 1 / 1;
+	margin: 0;
+}
+
+.gs-service__photo {
+	aspect-ratio: 901 / 563;
+}
+
+.gs-float-card {
+	align-items: center;
+	background-color: var(--wp--preset--color--white);
+	border-radius: var(--wp--custom--radius--xl);
+	box-shadow: var(--wp--preset--shadow--soft);
+	display: flex;
+	gap: var(--wp--preset--spacing--30);
+	margin: var(--wp--preset--spacing--40);
+	max-inline-size: calc(100% - 2 * var(--wp--preset--spacing--40));
+	padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+	z-index: 1;
+}
+
+.gs-float-card--sm {
+	inline-size: 291px;
+}
+
+.gs-float-card--lg {
+	inline-size: 595px;
+}
+
+.gs-float-card--tr { align-self: start; justify-self: end; }
+
+.gs-float-card--br { align-self: end; justify-self: end; }
+
+.gs-float-card--bl { align-self: end; justify-self: start; }
+
+.gs-float-card--bc { align-self: end; justify-self: center; }
+
+.gs-float-card__media {
+	flex: 0 1 50%;
+	margin: 0;
+}
+
+.gs-float-card__media img {
+	border-radius: var(--wp--custom--radius--md);
+	display: block;
+	inline-size: 100%;
+}
+
+.gs-float-card__text {
+	border-inline-start: 2px solid transparent;
+	border-image: var(--wp--preset--gradient--rule-fade-vertical) 1;
+	color: var(--wp--preset--color--body);
+	font-size: var(--wp--preset--font-size--base);
+	line-height: 1.6;
+	padding-inline-start: var(--wp--preset--spacing--30);
+}
+
+.gs-float-card__text > * {
+	margin: 0;
+}
+
+.gs-float-card__title {
+	color: var(--wp--preset--color--ink);
+	font-size: var(--wp--preset--font-size--card-title);
+	font-weight: 600;
+	line-height: 1.5;
+}
+
+.gs-float-card .gs-icon-circle {
+	color: var(--wp--preset--color--brand-700);
+}
+
+.gs-float-card__devices {
+	gap: var(--wp--preset--spacing--30);
+	margin-block-start: var(--wp--preset--spacing--20);
+}
+
+@media (max-width: 1100px) {
+
+	/* All six tabs stay visible: a 3-up grid, 2-up on phones (no hidden, scrolled-away tabs). */
+	.gs-tabs.is-enhanced .gs-tabs__nav {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
+	.gs-tabs__tab {
+		min-block-size: 56px;
+		padding-inline: var(--wp--preset--spacing--20);
+		white-space: normal;
+	}
+
+	.gs-tabs__tab[aria-selected="true"]::after {
+		display: none;
+	}
+
+	.gs-float-card--lg {
+		inline-size: auto;
+	}
+}
+
+@media (max-width: 781px) {
+
+	.gs-tabs.is-enhanced .gs-tabs__nav {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.gs-tabs__tab {
+		font-size: var(--wp--preset--font-size--base);
+	}
+
+	.wp-block-list.is-style-checklist {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	/* Cards drop below the photo instead of covering it on small screens. */
+	.gs-service__media {
+		gap: var(--wp--preset--spacing--30);
+		grid-template: none;
+	}
+
+	.gs-service__media > * {
+		grid-area: auto;
+	}
+
+	.gs-float-card {
+		box-shadow: var(--wp--preset--shadow--field);
+		inline-size: auto;
+		justify-self: stretch;
+		margin: 0;
+		max-inline-size: none;
+	}
+
+	.gs-float-card__media {
+		display: none;
+	}
+}
+
+/* ---------- Quote split (Figma 1:169) + contact card (1:199) ---------- */
+.wp-block-cover.gs-quote-split {
+	align-items: stretch;
+	background-color: var(--wp--preset--color--white);
+	color: var(--wp--preset--color--heading);
+	padding-block: var(--wp--preset--spacing--70) var(--wp--preset--spacing--60);
+	padding-inline: var(--wp--style--root--padding-left) var(--wp--style--root--padding-right);
+}
+
+.gs-quote-split .wp-block-cover__image-background {
+	object-position: 100% 50%;
+}
+
+.wp-block-columns.gs-quote-split__grid {
+	align-items: stretch;
+	gap: var(--wp--preset--spacing--60);
+}
+
+.gs-quote-split__form {
+	max-inline-size: 50rem;
+}
+
+.gs-quote-split__form > * {
+	margin-block: 0;
+}
+
+.gs-quote-split__form > * + * {
+	margin-block-start: var(--wp--preset--spacing--40);
+}
+
+.gs-quote-split__form .has-lead-font-size {
+	color: var(--wp--preset--color--muted); /* body grey was 3.56:1 where the lead reaches the photo at ~1440px; muted ≥ 6.8:1 */
+	letter-spacing: -0.03em;
+	max-inline-size: 26em;
+}
+
+.gs-quote-split__contact {
+	align-items: flex-end;
+	display: flex;
+	justify-content: flex-end;
+}
+
+/* Light form (Figma 1:172) */
+.gs-form .gs-form__row {
+	display: grid;
+	gap: 0 var(--wp--preset--spacing--30);
+}
+
+.gs-form .gs-form__row--3 {
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.gs-form .gs-form__row--2 {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.gs-form .gs-form__row > p {
+	display: contents; /* CF7 auto-paragraphs */
+}
+
+.gs-form:not(.gs-form--dark) :is(input:not([type="submit"]), select, textarea) {
+	background-color: var(--wp--preset--color--white);
+	border: 1px solid var(--wp--preset--color--surface);
+	border-radius: var(--wp--custom--radius--xs);
+	box-shadow: var(--wp--preset--shadow--field);
+	box-sizing: border-box;
+	color: var(--wp--preset--color--ink);
+	font: inherit;
+	font-size: var(--wp--preset--font-size--small);
+	inline-size: 100%;
+	min-block-size: 48px;
+	padding-inline: var(--wp--preset--spacing--30);
+}
+
+.gs-form:not(.gs-form--dark) textarea {
+	min-block-size: 99px;
+	padding-block: var(--wp--preset--spacing--20);
+	resize: vertical;
+}
+
+.gs-form:not(.gs-form--dark) .gs-field label {
+	color: var(--wp--preset--color--ink);
+}
+
+.gs-form:not(.gs-form--dark) .gs-form__required {
+	color: var(--wp--preset--color--body);
+}
+
+.gs-form:not(.gs-form--dark) [aria-invalid="true"] {
+	border-color: var(--wp--preset--color--brand-400);
+	border-width: 2px;
+}
+
+.gs-form:not(.gs-form--dark) .wpcf7-not-valid-tip {
+	color: var(--wp--preset--color--brand-400);
+	font-size: var(--wp--preset--font-size--small);
+}
+
+/* Contact card: glass over the photo, dark tint underneath so white text holds contrast */
+.gs-contact-card {
+	backdrop-filter: blur(var(--wp--custom--blur--glass));
+	background-color: color-mix(in srgb, var(--wp--preset--color--night) 78%, transparent); /* >= 4.5:1 for the white text over the photo (measured) */
+	background-image: var(--wp--preset--gradient--glass-light);
+	border: 2px solid var(--wp--preset--color--white);
+	border-radius: var(--wp--custom--radius--md);
+	box-shadow: var(--wp--preset--shadow--glass);
+	color: var(--wp--preset--color--white);
+	gap: 0;
+	padding-block: var(--wp--preset--spacing--40);
+	--gs-focus: var(--wp--preset--color--white);
+}
+
+.gs-contact-card__item {
+	align-items: center;
+	gap: var(--wp--preset--spacing--20);
+	padding-inline: var(--wp--preset--spacing--40);
+}
+
+.gs-contact-card__item + .gs-contact-card__item {
+	border-inline-start: 2px solid color-mix(in srgb, var(--wp--preset--color--border) 20%, transparent);
+}
+
+.gs-contact-card .gs-icon-circle {
+	color: var(--wp--preset--color--brand-300);
+}
+
+.gs-contact-card__text > * {
+	margin: 0;
+}
+
+.gs-contact-card__value {
+	font-size: var(--wp--preset--font-size--lead);
+	font-weight: 600;
+	line-height: 1.3;
+}
+
+:where(.gs-contact-card__value) a {
+	color: inherit;
+	text-decoration: none;
+}
+
+:where(.gs-contact-card__value) a:hover {
+	text-decoration: underline;
+}
+
+.gs-contact-card__label {
+	font-size: var(--wp--preset--font-size--medium);
+	line-height: 1.4;
+}
+
+@media (max-width: 1100px) {
+
+	.gs-quote-split .wp-block-cover__background {
+		background: color-mix(in srgb, var(--wp--preset--color--white) 88%, transparent) !important; /* core preset class is !important; copy needs a calm base once the photo sits behind it */
+	}
+
+	.wp-block-columns.gs-quote-split__grid {
+		flex-wrap: wrap !important; /* core forces nowrap >= 782px */
+	}
+
+	.wp-block-columns.gs-quote-split__grid > .wp-block-column {
+		flex-basis: 100%;
+	}
+
+	.gs-quote-split__contact {
+		justify-content: flex-start;
+	}
+}
+
+@media (max-width: 600px) {
+
+	.gs-form .gs-form__row--3,
+	.gs-form .gs-form__row--2 {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.gs-contact-card__item + .gs-contact-card__item {
+		border-block-start: 2px solid color-mix(in srgb, var(--wp--preset--color--border) 20%, transparent);
+		border-inline-start: 0;
+		margin-block-start: var(--wp--preset--spacing--20);
+		padding-block-start: var(--wp--preset--spacing--20);
+	}
+}
+
+/* ---------- Split sections (Figma 1:220 / 1:238 / 1:253) ---------- */
+.wp-block-columns.gs-split__grid {
+	align-items: center;
+	gap: var(--wp--preset--spacing--90);
+}
+
+.gs-split-feature {
+	background-image: var(--wp--preset--gradient--soft-section);
+}
+
+.gs-split__text > * {
+	margin-block: 0;
+}
+
+.gs-split__text > * + * {
+	margin-block-start: var(--wp--preset--spacing--40);
+}
+
+.gs-split__text > .wp-block-buttons {
+	margin-block-start: var(--wp--preset--spacing--60);
+}
+
+.gs-split__title {
+	letter-spacing: -0.03em;
+	line-height: 1.2;
+}
+
+.gs-split__text .has-lead-font-size,
+.gs-split__list {
+	color: var(--wp--preset--color--body);
+	font-size: var(--wp--preset--font-size--lead);
+	letter-spacing: -0.03em;
+	line-height: 1.75;
+	max-inline-size: 37em;
+}
+
+/* Body grey is 3.7:1 on the pink end (#D5B4CE) of the soft-section gradient; muted is 7:1+ (measured). */
+.gs-split-feature .gs-split__list {
+	color: var(--wp--preset--color--muted);
+}
+
+.gs-split__subhead {
+	color: var(--wp--preset--color--heading);
+	font-weight: 500;
+	line-height: 1.75;
+}
+
+.gs-split__text > .gs-split__list {
+	margin-block-start: 0;
+	padding-inline-start: 1.5em;
+}
+
+/* Deco frame (image styles "Deco frame · left / right"): two gradient blocks behind the photo corners */
+.wp-block-image:is(.is-style-deco-frame-right, .is-style-deco-frame-left) {
+	isolation: isolate;
+	margin: var(--wp--preset--spacing--50);
+	position: relative;
+}
+
+.wp-block-image:is(.is-style-deco-frame-right, .is-style-deco-frame-left)::before,
+.wp-block-image:is(.is-style-deco-frame-right, .is-style-deco-frame-left)::after {
+	aspect-ratio: 412 / 344;
+	background-image: var(--wp--preset--gradient--deco-block);
+	border-radius: var(--wp--custom--radius--xl);
+	content: "";
+	inline-size: 52%;
+	position: absolute;
+	z-index: -1;
+}
+
+.wp-block-image:is(.is-style-deco-frame-right, .is-style-deco-frame-left)::before {
+	inset-block-start: -39px;
+	inset-inline-end: -35px;
+}
+
+.wp-block-image:is(.is-style-deco-frame-right, .is-style-deco-frame-left)::after {
+	inset-block-end: -39px;
+	inset-inline-start: -38px;
+}
+
+.wp-block-image:where(.is-style-deco-frame-right, .is-style-deco-frame-left) img {
+	aspect-ratio: 786 / 609;
+	border-radius: var(--wp--custom--radius--xl);
+	display: block;
+	inline-size: 100%;
+	object-fit: cover;
+}
+
+/* Icon trio (Figma 1:265): icon in a tint circle above each label, thin dividers */
+.wp-block-list.gs-icon-trio {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	list-style: none;
+	margin-block-start: var(--wp--preset--spacing--50);
+	max-inline-size: 37rem;
+	padding: 0;
+}
+
+.gs-icon-trio li {
+	align-items: center;
+	color: var(--wp--preset--color--ink);
+	display: flex;
+	flex-direction: column;
+	font-size: var(--wp--preset--font-size--lead);
+	font-weight: 600;
+	gap: var(--wp--preset--spacing--20);
+	letter-spacing: -0.03em;
+	line-height: 1.45;
+	padding-inline: var(--wp--preset--spacing--30);
+	position: relative;
+	text-align: center;
+}
+
+.gs-icon-trio li + li {
+	border-inline-start: 1px solid color-mix(in srgb, var(--wp--preset--color--night) 20%, transparent);
+}
+
+.gs-icon-trio li::before {
+	background-color: var(--wp--preset--color--brand-100);
+	block-size: 69px;
+	border-radius: var(--wp--custom--radius--pill);
+	inline-size: 69px;
+	mask: none;
+}
+
+.gs-icon-trio li::after {
+	background-color: var(--wp--preset--color--brand-500);
+	block-size: 34px;
+	content: "";
+	inline-size: 34px;
+	inset-block-start: 17.5px;
+	inset-inline-start: calc(50% - 17px);
+	mask: var(--gs-icon) center / contain no-repeat;
+	position: absolute;
+}
+
+@media (max-width: 1100px) {
+
+	.wp-block-columns.gs-split__grid {
+		gap: var(--wp--preset--spacing--70);
+	}
+}
+
+@media (max-width: 781px) {
+
+	/* Photo first on mobile for the image-left variant keeps the reading order text → photo for the others */
+	.gs-split--photo-left .gs-split__media {
+		order: 2;
+	}
+
+	.gs-icon-trio li {
+		font-size: var(--wp--preset--font-size--base);
+		padding-inline: var(--wp--preset--spacing--10);
+	}
+}
+
+/* ---------- CTA — dark (Figma 1:289) ---------- */
+.wp-block-cover.gs-cta {
+	align-items: stretch;
+	background-color: var(--wp--preset--color--night);
+	padding-block: var(--wp--preset--spacing--90) 0;
+	padding-inline: var(--wp--style--root--padding-left) var(--wp--style--root--padding-right);
+}
+
+.wp-block-columns.gs-cta__grid {
+	align-items: stretch;
+	gap: var(--wp--preset--spacing--70);
+}
+
+.gs-cta__text {
+	padding-block-end: var(--wp--preset--spacing--90);
+}
+
+.gs-cta__text > * {
+	margin-block: 0;
+}
+
+.gs-cta__text > * + * {
+	margin-block-start: var(--wp--preset--spacing--40);
+}
+
+.gs-cta__text > .wp-block-buttons {
+	margin-block-start: var(--wp--preset--spacing--50);
+}
+
+.gs-cta__title {
+	letter-spacing: -0.03em;
+	line-height: 1.09;
+}
+
+.gs-cta__text .has-lead-font-size {
+	letter-spacing: -0.03em;
+	line-height: 1.75;
+	max-inline-size: 34em;
+}
+
+@media (min-width: 1101px) {
+
+	/* Figma 1:289: copy ≈ 40% of the row, the visual (card | person | card) the rest. */
+	.wp-block-columns.gs-cta__grid > .gs-cta__text {
+		flex: 0 0 40%;
+	}
+}
+
+/* Visual column (Figma 1:289): three tracks — card | person | card (≈ 168 : 480 : 161). The person spans all
+   rows; "24/7 Support" sits in the right track beside the head, "Homes & Businesses" in the left track at the
+   lower left. The cards scale with the column (container units), so they never reach the face. */
+.gs-cta__visual {
+	container-type: inline-size;
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 2.9fr) minmax(0, 1fr);
+	grid-template-rows: auto minmax(0, 1fr) auto;
+	isolation: isolate;
+}
+
+.gs-cta__visual > * {
+	margin: 0;
+}
+
+.gs-cta__visual > .gs-cta__model {
+	align-self: stretch;
+	grid-column: 2;
+	grid-row: 1 / -1;
+	position: relative;
+}
+
+/* Glass panel behind the person (Figma: ~6% wider than the photo, starting below the head). */
+.gs-cta__model::before {
+	backdrop-filter: blur(var(--wp--custom--blur--glass));
+	background-image: var(--wp--preset--gradient--glass-light);
+	border: 2px solid var(--wp--preset--color--brand-200);
+	border-block-end: 0;
+	border-radius: var(--wp--custom--radius--2-xl) var(--wp--custom--radius--2-xl) 0 0;
+	content: "";
+	inset: 8cqi -6% 0; /* top: just below the head (the photo is top-anchored, so this tracks the width) */
+	opacity: 0.62;
+	position: absolute;
+	z-index: -1;
+}
+
+/* The photo fills the column height (top-anchored crop, never stretched). Minimum = the Figma 3:4 crop of the
+   middle track (2.9 / 4.9 of the visual × 4/3 ≈ 79cqi), which also reserves the box before the lazy image loads. */
+.gs-cta__model img {
+	block-size: 100%;
+	display: block;
+	inline-size: 100%;
+	min-block-size: 79cqi;
+	object-fit: cover;
+	object-position: 50% 0;
+}
+
+.gs-glass-stat {
+	align-items: center;
+	backdrop-filter: blur(var(--wp--custom--blur--glass));
+	background-image: var(--wp--preset--gradient--glass-light);
+	background-color: color-mix(in srgb, var(--wp--preset--color--night) 72%, transparent); /* keeps white text >= 3:1 over the model photo */
+	border: 2px solid var(--wp--preset--color--brand-200);
+	border-radius: var(--wp--custom--radius--lg);
+	box-shadow: var(--wp--preset--shadow--glass);
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	font-size: min(var(--wp--preset--font-size--h-5), 3.5cqi);
+	font-weight: 500;
+	gap: var(--wp--preset--spacing--20);
+	inline-size: clamp(9.5rem, 24cqi, 214px); /* Figma card 216px; may overlap the photo edge slightly, as in Figma */
+	justify-content: center;
+	letter-spacing: -0.03em;
+	line-height: 1.1;
+	padding: var(--wp--preset--spacing--40) var(--wp--preset--spacing--30);
+	text-align: center;
+	z-index: 1;
+}
+
+.gs-glass-stat::before {
+	--gs-icon-size: clamp(32px, 6cqi, 54px);
+	color: var(--wp--preset--color--brand-100);
+}
+
+.gs-glass-stat::after {
+	background-image: linear-gradient(90deg, var(--wp--preset--color--brand-700), transparent);
+	block-size: 3px;
+	content: "";
+	inline-size: 80%;
+}
+
+/* Scoped to the visual so these beat `.gs-cta__visual > * { margin: 0 }`. */
+.gs-cta__visual > .gs-glass-stat--top {
+	align-self: start;
+	grid-column: 3;
+	grid-row: 1;
+	justify-self: end;
+	margin-block-start: var(--wp--preset--spacing--90); /* level with the head (Figma 1:289) */
+}
+
+.gs-cta__visual > .gs-glass-stat--bottom {
+	align-self: end;
+	grid-column: 1;
+	grid-row: 3;
+	justify-self: start;
+	margin-block-end: var(--wp--preset--spacing--60);
+}
+
+@media (max-width: 1100px) {
+
+	.wp-block-columns.gs-cta__grid {
+		flex-wrap: wrap !important; /* core forces nowrap >= 782px */
+	}
+
+	.wp-block-columns.gs-cta__grid > .wp-block-column {
+		flex-basis: 100%;
+	}
+
+	.gs-cta__text {
+		padding-block-end: 0;
+	}
+
+	/* Stacked: keep the person at a sensible size, centred with the cards either side. */
+	.gs-cta__visual {
+		margin-inline: auto;
+		max-inline-size: 52rem;
+		inline-size: 100%;
+	}
+}
+
+@media (max-width: 600px) {
+
+	/* Too narrow for cards beside the person: photo first, the two cards side by side below it. */
+	.gs-cta__visual {
+		gap: var(--wp--preset--spacing--30);
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		grid-template-rows: auto auto;
+		padding-block-end: var(--wp--preset--spacing--60);
+	}
+
+	.gs-cta__visual > .gs-cta__model {
+		grid-column: 1 / -1;
+		grid-row: 1;
+		inline-size: min(100%, 22rem);
+		justify-self: center;
+	}
+
+	.gs-cta__model img {
+		aspect-ratio: 3 / 4;
+		block-size: auto;
+		min-block-size: 0;
+	}
+
+	.gs-cta__model::before {
+		inset: 10% 0 0;
+	}
+
+	.gs-cta__visual > .gs-glass-stat--top,
+	.gs-cta__visual > .gs-glass-stat--bottom {
+		align-self: stretch;
+		font-size: var(--wp--preset--font-size--card-title);
+		grid-row: 2;
+		inline-size: auto;
+		justify-self: stretch;
+		margin: 0;
+		padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--20);
+	}
+
+	.gs-cta__visual > .gs-glass-stat--top {
+		grid-column: 2;
+	}
+
+	.gs-cta__visual > .gs-glass-stat--bottom {
+		grid-column: 1;
+	}
+}
+
+/* ---------- Testimonials (Figma 1:407) — only output once reviews are confirmed (gs-pending) ---------- */
+.wp-block-columns.gs-testimonials__head {
+	align-items: flex-end;
+	gap: var(--wp--preset--spacing--60);
+	margin-block-end: var(--wp--preset--spacing--60);
+}
+
+.gs-testimonials__intro > *,
+.gs-testimonials__aside > * {
+	margin-block: 0;
+}
+
+.gs-testimonials__intro > * + *,
+.gs-testimonials__aside > * + * {
+	margin-block-start: var(--wp--preset--spacing--30);
+}
+
+.gs-testimonials__aside .has-lead-font-size {
+	color: var(--wp--preset--color--body);
+	letter-spacing: -0.03em;
+	line-height: 1.75;
+}
+
+.gs-testimonials__actions {
+	gap: var(--wp--preset--spacing--60);
+}
+
+.gs-arrows {
+	display: flex;
+	gap: var(--wp--preset--spacing--30);
+}
+
+/* Slider arrows do nothing without JS (gorilla.js reveals them) */
+html:not(.gs-js) .gs-arrows {
+	display: none;
+}
+
+.gs-arrow {
+	align-items: center;
+	background-color: var(--wp--preset--color--brand-100);
+	block-size: 54px;
+	border: 0;
+	border-radius: var(--wp--custom--radius--pill);
+	color: var(--wp--preset--color--body);
+	cursor: pointer;
+	display: inline-flex;
+	--gs-icon-size: 22px;
+	inline-size: 54px;
+	justify-content: center;
+}
+
+.gs-arrow[data-gs-dir="next"] {
+	background-color: var(--wp--preset--color--brand-600);
+	color: var(--wp--preset--color--white);
+}
+
+.gs-arrow[hidden] {
+	display: none;
+}
+
+/* Slideshow pause / play (gorilla.js initSlider) — same circle as the arrows */
+.gs-slider__toggle {
+	--gs-icon-size: 18px;
+}
+
+/* Not shown visually (design request). Kept for WCAG 2.2.2 (a way to pause auto-moving content): it appears
+   only while focused from the keyboard — like a skip link — and screen readers announce it. */
+.gs-slider__toggle:not(:focus-visible) {
+	block-size: 1px;
+	border: 0;
+	clip-path: inset(50%);
+	inline-size: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	white-space: nowrap;
+}
+
+.gs-arrow:disabled {
+	cursor: default;
+	opacity: 0.45;
+}
+
+/* Whole cards only: the track spans the content width and each card is 1/n of it (gaps included), so every
+   snap position shows exactly n complete cards — 4 above 1100px, 2 from 600px, 1 below. */
+.gs-slider {
+	--gs-per-view: 4;
+	--gs-slide-gap: var(--wp--preset--spacing--60);
+	padding-inline: max(var(--wp--style--root--padding-left), calc((100% - var(--wp--style--global--wide-size)) / 2));
+}
+
+@media (max-width: 1100px) {
+
+	.gs-slider {
+		--gs-per-view: 2;
+	}
+}
+
+@media (max-width: 599px) {
+
+	.gs-slider {
+		--gs-per-view: 1;
+	}
+}
+
+.gs-slider__track {
+	display: flex;
+	gap: var(--gs-slide-gap);
+	overflow-x: auto;
+	overscroll-behavior-x: contain;
+	padding-block-end: var(--wp--preset--spacing--20);
+	scroll-padding-inline-start: 0;
+	scroll-snap-type: x mandatory;
+	scrollbar-width: none; /* swipe, arrows, pause and keyboard scrolling remain; no visible bar (Figma) */
+}
+
+.gs-slider__track::-webkit-scrollbar {
+	display: none;
+}
+
+.gs-slider__track > * {
+	margin: 0;
+}
+
+.gs-testimonial {
+	position: relative;
+	grid-template: minmax(423px, auto) / minmax(0, 1fr); /* min Figma height; long quotes grow the card */
+	background-color: var(--wp--preset--color--night); /* white text stays readable if the photo is missing (rules-log 009) */
+	border-radius: var(--wp--custom--radius--lg);
+	color: var(--wp--preset--color--white);
+	display: grid;
+	flex: 0 0 calc((100% - (var(--gs-per-view) - 1) * var(--gs-slide-gap)) / var(--gs-per-view));
+	overflow: hidden;
+	scroll-snap-align: start;
+}
+
+.gs-testimonial > * {
+	grid-area: 1 / 1;
+	margin: 0;
+}
+
+.gs-testimonial__photo {
+	align-self: stretch;
+	min-block-size: 0;
+}
+
+.gs-testimonial__photo img {
+	block-size: 100%;
+	position: absolute;
+	inset: 0;
+	inline-size: 100%;
+	object-fit: cover;
+}
+
+.gs-testimonial__body {
+	align-self: end;
+
+	/* Same shade as the photo-shade token, but 80% opaque where the text starts (the token's 27%→85% ramp
+	   left the name at ~3:1 over bright photos; measured ≥7:1 with this ramp). */
+	background-image:
+		linear-gradient(
+			180deg,
+			transparent 0,
+			color-mix(in srgb, var(--wp--preset--color--night) 80%, transparent) var(--wp--preset--spacing--80),
+			var(--wp--preset--color--night) 100%
+		);
+	padding: var(--wp--preset--spacing--80) var(--wp--preset--spacing--40) var(--wp--preset--spacing--40);
+	position: relative; /* paint above the absolutely positioned photo */
+}
+
+.gs-testimonial__body > * {
+	margin-block: 0;
+}
+
+.gs-testimonial__body > * + * {
+	margin-block-start: var(--wp--preset--spacing--20);
+}
+
+.gs-rating-pill {
+	align-items: center;
+	background-image: var(--wp--preset--gradient--rating-pill);
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: var(--wp--custom--radius--sm);
+	display: inline-flex;
+	font-size: var(--wp--preset--font-size--base);
+	font-weight: 500;
+	gap: var(--wp--preset--spacing--10);
+	padding: 2px var(--wp--preset--spacing--20);
+}
+
+.gs-stars {
+	background-color: currentcolor;
+	block-size: 11px;
+	display: inline-block;
+	inline-size: 60px;
+	mask: url(../icons/star.svg) 0 50% / 12px 12px repeat-x;
+}
+
+.gs-testimonial__meta {
+	align-items: baseline;
+	gap: var(--wp--preset--spacing--10);
+}
+
+.gs-testimonial__meta > * {
+	margin: 0;
+}
+
+.gs-testimonial__name {
+	font-size: var(--wp--preset--font-size--lead);
+	font-weight: 600;
+}
+
+.gs-testimonial__date {
+	font-size: var(--wp--preset--font-size--base);
+}
+
+.wp-block-quote.gs-testimonial__quote {
+	border: 0;
+	font-size: var(--wp--preset--font-size--small);
+	line-height: 1.6;
+	margin: 0;
+	padding: 0;
+}
+
+.wp-block-quote.gs-testimonial__quote p {
+	margin: 0;
+}
+
+/* ---------- FAQ (Figma 1:334) — core/details style "FAQ (numbered)" ---------- */
+.gs-faq-section {
+	background-image: var(--wp--preset--gradient--soft-section);
+}
+
+.wp-block-columns.gs-faq-section__head {
+	align-items: flex-end;
+	margin-block-end: var(--wp--preset--spacing--50);
+}
+
+.gs-faq-section__intro > * {
+	margin-block: 0;
+}
+
+.gs-faq-section__intro > * + * {
+	margin-block-start: var(--wp--preset--spacing--20);
+}
+
+.gs-faq-section__action .wp-block-buttons {
+	justify-content: flex-end;
+}
+
+.gs-faq {
+	background-color: var(--wp--preset--color--white);
+	border-radius: var(--wp--custom--radius--2-xl);
+	box-shadow: var(--wp--preset--shadow--glow);
+	counter-reset: gs-faq;
+	margin-inline: auto;
+	max-inline-size: 1328px;
+	padding: var(--wp--preset--spacing--60) var(--wp--preset--spacing--50);
+}
+
+.gs-faq > * {
+	margin: 0;
+}
+
+.wp-block-details.is-style-faq-numbered {
+	border-radius: 34px;
+	counter-increment: gs-faq;
+	padding: var(--wp--preset--spacing--50) var(--wp--preset--spacing--40);
+}
+
+.wp-block-details.is-style-faq-numbered + .wp-block-details.is-style-faq-numbered:not([open]) {
+	border-block-start: 1px solid var(--wp--preset--color--border);
+	border-radius: 0;
+}
+
+.wp-block-details.is-style-faq-numbered[open] {
+	background-color: var(--wp--preset--color--brand-100);
+}
+
+.wp-block-details.is-style-faq-numbered[open] + .wp-block-details.is-style-faq-numbered {
+	border-block-start: 0;
+}
+
+.wp-block-details.is-style-faq-numbered summary {
+	align-items: baseline;
+	color: var(--wp--preset--color--muted);
+	cursor: pointer;
+	display: grid;
+	font-size: var(--wp--preset--font-size--lead);
+	font-weight: 500;
+	gap: var(--wp--preset--spacing--40);
+	grid-template-columns: clamp(3rem, 13vw, 16rem) minmax(0, 1fr) 1.5rem;
+	letter-spacing: -0.03em;
+	line-height: 1.75;
+	list-style: none;
+}
+
+.wp-block-details.is-style-faq-numbered summary::-webkit-details-marker {
+	display: none;
+}
+
+.wp-block-details.is-style-faq-numbered summary::before {
+	color: color-mix(in srgb, var(--wp--preset--color--muted) 60%, transparent);
+	content: counter(gs-faq, decimal-leading-zero);
+	font-size: var(--wp--preset--font-size--card-title);
+	font-weight: 400;
+	padding-inline-start: var(--wp--preset--spacing--30);
+}
+
+.wp-block-details.is-style-faq-numbered summary::after {
+	align-self: center;
+	background-color: var(--wp--preset--color--body);
+	block-size: 20px;
+	content: "";
+	inline-size: 20px;
+	mask: url(../icons/plus.svg) center / contain no-repeat;
+}
+
+.wp-block-details.is-style-faq-numbered[open] summary {
+	color: var(--wp--preset--color--brand-700);
+}
+
+.wp-block-details.is-style-faq-numbered[open] summary::before {
+	color: var(--wp--preset--color--brand-700);
+}
+
+.wp-block-details.is-style-faq-numbered[open] summary::after {
+	background-color: var(--wp--preset--color--brand-700);
+	mask-image: url(../icons/close.svg);
+}
+
+.wp-block-details.is-style-faq-numbered > :not(summary) {
+	color: var(--wp--preset--color--body);
+	font-size: var(--wp--preset--font-size--medium);
+	letter-spacing: -0.03em;
+	line-height: 1.9;
+	margin-block: var(--wp--preset--spacing--20) 0;
+	margin-inline-start: calc(clamp(3rem, 13vw, 16rem) + var(--wp--preset--spacing--40));
+	max-inline-size: 40em;
+}
+
+@media (max-width: 781px) {
+
+	.gs-faq-section__action .wp-block-buttons {
+		justify-content: flex-start;
+	}
+
+	.gs-faq {
+		padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--10);
+	}
+
+	.wp-block-details.is-style-faq-numbered summary {
+		font-size: var(--wp--preset--font-size--medium);
+		grid-template-columns: 2.5rem minmax(0, 1fr) 1.25rem;
+	}
+
+	.wp-block-details.is-style-faq-numbered summary::before {
+		font-size: var(--wp--preset--font-size--medium);
+		padding-inline-start: 0;
+	}
+
+	.wp-block-details.is-style-faq-numbered > :not(summary) {
+		margin-inline-start: calc(2.5rem + var(--wp--preset--spacing--40));
+	}
+}
+
+/* ---------- Footer (Figma 1:426) ---------- */
+.wp-site-blocks > footer.wp-block-template-part {
+	margin-block-start: 0;
+}
+
+.wp-block-cover.gs-footer {
+	align-items: stretch;
+	background-color: var(--wp--preset--color--night);
+	padding-block: var(--wp--preset--spacing--70) var(--wp--preset--spacing--40);
+	padding-inline: 0; /* outside <main> the inner container already carries the root padding */
+	--gs-focus: var(--wp--preset--color--white);
+}
+
+.gs-footer .wp-block-cover__image-background {
+	inset-inline: auto 0;
+	inline-size: 66%;
+	object-position: 100% 0;
+	opacity: 0.5; /* dims the bright camera behind the contact column (>= 4.5:1, measured) */
+}
+
+.gs-footer::before {
+	background-image: var(--wp--preset--gradient--night-fade);
+	content: "";
+	inset: 0;
+	position: absolute;
+	z-index: 1;
+}
+
+.wp-block-columns.gs-footer__grid {
+	gap: var(--wp--preset--spacing--60);
+}
+
+.gs-footer :where(.gs-footer__grid > .wp-block-column) > * {
+	margin-block: 0;
+}
+
+.gs-footer :where(.gs-footer__grid > .wp-block-column) > * + * {
+	margin-block-start: var(--wp--preset--spacing--30);
+}
+
+.gs-footer__badges {
+	gap: var(--wp--preset--spacing--30);
+}
+
+.gs-footer__logo {
+	background-color: var(--wp--preset--color--white);
+	border-radius: var(--wp--custom--radius--md);
+	margin: 0;
+	padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--30);
+}
+
+.gs-footer__logo img {
+	aspect-ratio: 3;
+	display: block;
+	inline-size: clamp(160px, 12.4vw, 237px);
+}
+
+.gs-footer__badge {
+	margin: 0;
+}
+
+.gs-footer__badge img {
+	block-size: 100px;
+	display: block;
+	inline-size: 100px;
+}
+
+.gs-footer__tagline {
+	color: var(--wp--preset--color--on-dark);
+	font-size: var(--wp--preset--font-size--medium);
+	line-height: 1.7;
+	max-inline-size: 20em;
+}
+
+.gs-footer__follow {
+	color: var(--wp--preset--color--white);
+	font-size: var(--wp--preset--font-size--lead);
+	padding-block-start: var(--wp--preset--spacing--30);
+}
+
+.gs-footer__heading {
+	font-weight: 500;
+	padding-block-end: var(--wp--preset--spacing--20);
+	position: relative;
+}
+
+.gs-footer__heading::after {
+	background-image: linear-gradient(90deg, var(--wp--preset--color--brand-700), transparent);
+	block-size: 3px;
+	content: "";
+	inline-size: 160px;
+	inset-block-end: 0;
+	inset-inline-start: 0;
+	position: absolute;
+}
+
+.gs-footer__links,
+.gs-contact-list {
+	list-style: none;
+	padding: 0;
+}
+
+.gs-footer__links li + li {
+	margin-block-start: var(--wp--preset--spacing--20);
+}
+
+.gs-footer a {
+	color: var(--wp--preset--color--on-dark);
+	text-decoration: none;
+}
+
+.gs-footer a:hover {
+	color: var(--wp--preset--color--white);
+	text-decoration: underline;
+}
+
+.gs-footer .gs-contact-list li {
+	align-items: center;
+	display: flex;
+	font-size: var(--wp--preset--font-size--lead);
+	font-weight: 500;
+	gap: var(--wp--preset--spacing--30);
+	overflow-wrap: anywhere;
+	position: relative;
+}
+
+.gs-footer .gs-contact-list li + li {
+	margin-block-start: var(--wp--preset--spacing--30);
+}
+
+.gs-footer .gs-contact-list li::before {
+	background-color: var(--wp--preset--color--brand-100);
+	block-size: 34px;
+	border-radius: var(--wp--custom--radius--pill);
+	inline-size: 34px;
+	mask: none;
+}
+
+.gs-footer .gs-contact-list li::after {
+	background-color: var(--wp--preset--color--brand-700);
+	block-size: 16px;
+	content: "";
+	inline-size: 16px;
+	inset-block-start: calc(50% - 8px);
+	inset-inline-start: 9px;
+	mask: var(--gs-icon) center / contain no-repeat;
+	position: absolute;
+}
+
+.gs-hours {
+	backdrop-filter: blur(var(--wp--custom--blur--glass));
+	background-image: var(--wp--preset--gradient--glass-light);
+	border: 1px solid var(--wp--preset--color--brand-200);
+	border-radius: var(--wp--custom--radius--lg);
+	color: var(--wp--preset--color--on-dark);
+	container-type: inline-size; /* the divider below appears only when both cells fit on one row */
+	gap: var(--wp--preset--spacing--40);
+	padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+}
+
+.gs-hours > * {
+	margin: 0;
+}
+
+/* Figma 1:426: two cells in one row — clock + hours | headset + support — with a divider. */
+.gs-hours__times,
+.gs-hours__support {
+	--gs-icon-size: 26px;
+	align-items: center;
+	display: flex;
+	font-size: var(--wp--preset--font-size--base);
+	gap: var(--wp--preset--spacing--20);
+	line-height: 1.8;
+	list-style: none;
+	padding: 0;
+}
+
+.gs-hours__times {
+	flex: 0 0 auto;
+	padding-inline-start: calc(var(--gs-icon-size) + var(--wp--preset--spacing--20));
+	position: relative;
+	display: block;
+}
+
+.gs-hours__support {
+	box-sizing: border-box; /* the 9em basis includes the divider padding below */
+	flex: 1 1 9em;
+}
+
+.gs-hours__times::before {
+	inset-block-start: 50%;
+	inset-inline-start: 0;
+	position: absolute;
+	transform: translateY(-50%);
+}
+
+.gs-hours__times::before,
+.gs-hours__support::before {
+	color: var(--wp--preset--color--border);
+}
+
+/* 26rem ≈ hours cell (~243px) + gap + the support cell's 9em basis, measured with the Figma copy. */
+@container (min-width: 26rem) {
+
+	.gs-hours__support {
+		border-inline-start: 1px solid color-mix(in srgb, var(--wp--preset--color--brand-200) 60%, transparent);
+		padding-inline-start: var(--wp--preset--spacing--40);
+	}
+}
+
+.gs-footer__copyright {
+	border-block-start: 2px solid color-mix(in srgb, var(--wp--preset--color--brand-300) 30%, transparent);
+	color: var(--wp--preset--color--on-dark);
+	font-size: var(--wp--preset--font-size--base);
+	margin-block: var(--wp--preset--spacing--60) 0;
+	max-inline-size: none;
+	padding-block-start: var(--wp--preset--spacing--40);
+	text-align: center;
+}
+
+@media (min-width: 1101px) {
+
+	.wp-block-columns.gs-footer__grid > .gs-footer__brand { flex: 0 1 28%; }
+
+	.wp-block-columns.gs-footer__grid > .gs-footer__col { flex: 0 1 19%; }
+
+	.wp-block-columns.gs-footer__grid > .gs-footer__contact { flex: 0 1 31%; }
+}
+
+@media (max-width: 1100px) {
+
+	.wp-block-columns.gs-footer__grid {
+		flex-wrap: wrap !important; /* core forces nowrap >= 782px */
+	}
+
+	.wp-block-columns.gs-footer__grid > .wp-block-column {
+		flex: 1 1 calc(50% - var(--wp--preset--spacing--60));
+	}
+
+	.gs-footer .wp-block-cover__image-background {
+		inline-size: 100%;
+		opacity: 0.35;
+	}
+}
+
+/* ---------- Stats (Figma 1:12) — columns style "Stats with dividers" ---------- */
+
+/*
+ * Each item draws its divider in the middle of the column gap before it. The row clips
+ * overflow, so on the first item of each line (incl. after wrapping and in RTL) the
+ * divider falls outside the row and is hidden. No margins are touched, so the row keeps
+ * the parent layout's alignment (centred in constrained containers).
+ */
+.wp-block-columns.is-style-stats-with-dividers {
+	--gs-stat-space: var(--wp--preset--spacing--60);
+	column-gap: calc(2 * var(--gs-stat-space) + 2px);
+	flex-wrap: wrap !important; /* core forces nowrap on .is-not-stacked-on-mobile; 12 items or long labels must wrap. */
+	justify-content: flex-start;
+	overflow: hidden;
+	row-gap: var(--wp--preset--spacing--40);
+}
+
+.wp-block-columns.is-style-stats-with-dividers > .wp-block-column {
+	flex: 0 1 auto;
+	position: relative;
+}
+
+.wp-block-columns.is-style-stats-with-dividers > .wp-block-column::before {
+	border-inline-start: 2px solid var(--wp--preset--color--border);
+	content: "";
+	inset-block: 0;
+	inset-inline-start: calc(-1 * var(--gs-stat-space) - 2px);
+	position: absolute;
+}
+
+.gs-stat > * {
+	margin-block: 0;
+}
+
+.gs-stat__num {
+	color: var(--wp--preset--color--brand-500); /* solid fallback (rules-log #001) */
+	font-size: var(--wp--preset--font-size--h-3); /* slug "h3" — WP kebab-cases it to h-3 */
+	font-weight: 600;
+	letter-spacing: -0.03em;
+	line-height: 1.2;
+	max-width: 100%;
+	width: fit-content;
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+
+	.gs-stat__num {
+		background: var(--wp--preset--gradient--brand-text);
+		-webkit-background-clip: text;
+		background-clip: text;
+		-webkit-text-fill-color: transparent; /* keeps `color` solid so contrast checks and forced-colors read brand-500 */
+	}
+}
+
+.gs-stat__label {
+	color: var(--wp--preset--color--body);
+	font-size: var(--wp--preset--font-size--lead);
+	hyphens: auto; /* long words in the narrow label break at syllables, not mid-letter */
+	letter-spacing: 0.04em;
+	line-height: 1.3;
+	max-inline-size: 7em; /* two-line labels as in Figma (138px text box @ 20px) */
+}
+
+@media (max-width: 600px) {
+
+	.wp-block-columns.is-style-stats-with-dividers {
+		--gs-stat-space: var(--wp--preset--spacing--40);
+	}
+}
+
+/* About keeps the three stats on one line in its 569px column (Figma 1:12 inside 1:6). */
+.gs-about__text .wp-block-columns.is-style-stats-with-dividers {
+	--gs-stat-space: var(--wp--preset--spacing--50); /* three stats fit the 569px column as in Figma */
+}
+
+/* Outline button hover — last so it wins over every button size/style rule above. */
+.wp-block-button.is-style-outline .wp-block-button__link:hover {
+	background-color: var(--wp--preset--color--brand-100);
+	filter: none;
+}

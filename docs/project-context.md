@@ -27,7 +27,7 @@
 - Copy: `docs/copy/*.md` (owner: content writer)
 
 ## Plugins (approved list — anything else needs approval)
-- Forms: Contact Form 7 6.2.4.1 (installed in wp-env; form setup pending — see Open decisions)
+- Forms: Contact Form 7 6.2.4.1 — forms "Hero quote form" and "Quote split form" ship in `fixtures/content.xml`; patterns find them by title. Mail goes to the site admin email until a recipient is confirmed
 - Import (local/CI only): WordPress Importer — loads `fixtures/content.xml`
 - SEO: TBD (Yoast or Rank Math — see Open decisions)
 - Caching/image: TBD (depends on hosting — see Open decisions)
@@ -61,6 +61,7 @@
 - [ ] Names for tech lead, designer, developers, content writer
 - [ ] CTA target URL confirmed (`/contact-us/#quote`?)
 - [ ] "Know More" targets (About links to `#services` for now) · Figma typo "livinng" (1:39) built as "living"
+- [ ] Quote form recipient email; options for the quote-split "purpose" and "requirement" dropdowns (hero "Service" uses the 6 footer services)
 - [ ] Copy for "Why us" steps 02–06 and FAQ answers 01, 03–08
 - [ ] Partner/brand logo files supplied by partners
 - [ ] Site details for `gorilla_site()`: phone, email, address, opening hours

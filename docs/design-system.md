@@ -151,7 +151,7 @@ Components are **core blocks + block styles + CSS classes + patterns**. No custo
 | Slider | `gs-slider` › arrows + `gs-slider__track` (scroll-snap) | 1:418 |
 | Testimonial card | cover `gs-testimonial` + `gs-rating`, `gs-testimonial__*` | 1:4619 |
 | FAQ | group `gs-faq` › details style **FAQ (numbered)** | 1:339 |
-| Forms | wrap plugin form in group `gs-form` (light) or `gs-form gs-form--dark` | 1:97, 1:172 |
+| Forms | Contact Form 7 in a Shortcode block inside group `gs-form` (light) or `gs-form gs-form--dark`; hidden `<label>` per field + Figma placeholder; `gs-form__row` for side-by-side fields | 1:97, 1:172 |
 | Contact card / list / hours | patterns `contact-card`, footer `gs-contact-list`, `gs-hours` | 1:199, 1:469, 1:485 |
 
 ### Patterns (`patterns/*.php`, inserter → *Gorilla · Sections / Components*)

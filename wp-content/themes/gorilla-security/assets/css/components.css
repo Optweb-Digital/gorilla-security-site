@@ -25,6 +25,20 @@
 
 /* ---------- Base ---------- */
 
+/* WordPress's visually-hidden utility (form labels, icon-only controls); block themes don't ship it. */
+.screen-reader-text {
+	position: absolute;
+	inline-size: 1px;
+	block-size: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip-path: inset(50%);
+	border: 0;
+	white-space: nowrap;
+	overflow-wrap: normal;
+}
+
 /* In-page anchors (#about, #services, #quote) land below the fixed/sticky header. */
 html {
 	scroll-padding-block-start: calc(var(--wp--custom--control--sm) + var(--wp--preset--spacing--70) + var(--wp--preset--spacing--30));
@@ -1205,4 +1219,81 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 	.gs-feature .gs-icon-circle {
 		--gs-circle: 46px;
 	}
+}
+
+/* ---------- Contact Form 7 inside .gs-form (hero card 1:97, quote split 1:172) ---------- */
+.gs-form .wpcf7-form {
+	position: relative;
+	display: grid;
+	gap: var(--wp--preset--spacing--20);
+}
+
+.gs-form .hidden-fields-container {
+	display: none;
+}
+
+.gs-form label,
+.gs-form .wpcf7-form-control-wrap {
+	display: block;
+}
+
+/* Quote split: three, then two fields per row (Figma 1:172); one per row on phones. */
+.gs-form__row {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+	gap: var(--wp--preset--spacing--20);
+}
+
+.gs-form :where(select) {
+	cursor: pointer;
+}
+
+.gs-form--dark :where(select) {
+	color-scheme: dark;
+}
+
+/* Figma message box: 80px (dark card) / 99px (quote split). */
+.gs-form--dark :where(textarea) {
+	min-block-size: 80px;
+	block-size: 80px;
+	resize: vertical;
+}
+
+.gs-form .wpcf7-submit {
+	margin-block-start: var(--wp--preset--spacing--10);
+}
+
+/* Spinner sits over the submit button's right edge instead of taking a row of its own. */
+.gs-form .wpcf7-spinner {
+	position: absolute;
+	inset-block-end: calc(var(--wp--custom--control--md) / 2 - 12px);
+	inset-inline-end: var(--wp--preset--spacing--30);
+	margin: 0;
+}
+
+/* Error states are not in Figma — theme defaults (design-system §6). */
+.gs-form .wpcf7-not-valid-tip {
+	margin-block-start: var(--wp--preset--spacing--10);
+	color: var(--gs-brand);
+	font-size: var(--wp--preset--font-size--caption);
+}
+
+.gs-form--dark .wpcf7-not-valid-tip {
+	color: var(--wp--preset--color--brand-100);
+}
+
+.gs-form .wpcf7-not-valid {
+	border-color: var(--wp--preset--color--brand-300);
+}
+
+.gs-form .wpcf7-response-output {
+	margin: 0;
+	padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--30);
+	border: 1px solid var(--wp--preset--color--brand-300);
+	border-radius: var(--gs-r-md);
+	font-size: var(--wp--preset--font-size--small);
+}
+
+.gs-form--dark .wpcf7-response-output {
+	color: var(--wp--preset--color--white);
 }

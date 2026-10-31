@@ -37,7 +37,7 @@
 				{ "slug": "brand", "name": "Brand", "gradient": "linear-gradient(90deg, #61107A 0%, #6A0D71 39.42%, #6D0D60 67.79%, #9F0B57 100%)" },
 				{ "slug": "brand-text", "name": "Brand text", "gradient": "linear-gradient(90deg, rgba(187, 14, 181, 0.9) 0%, rgba(26, 0, 31, 0.9) 100%)" },
 				{ "slug": "deco-block", "name": "Deco block", "gradient": "linear-gradient(250.59deg, #930274 6.97%, #A90279 34.28%, #80026F 64.07%, #7F016E 93.03%)" },
-				{ "slug": "soft-section", "name": "Soft section", "gradient": "linear-gradient(-70.91deg, rgba(255, 255, 255, 0) 34.85%, #FDF9FF 70.52%)" },
+				{ "slug": "soft-section", "name": "Soft section", "gradient": "linear-gradient(109.09deg, #FDF9FF 29.48%, rgba(255, 255, 255, 0) 65.15%)" },
 				{ "slug": "glass", "name": "Glass", "gradient": "linear-gradient(180deg, rgba(255, 255, 255, 0.2) 2.36%, rgba(255, 255, 255, 0) 118.39%)" },
 				{ "slug": "night-fade", "name": "Night fade", "gradient": "linear-gradient(235.5deg, rgba(11, 13, 22, 0) 12.7%, #0E0C1B 53.69%)" },
 				{ "slug": "photo-shade", "name": "Photo shade", "gradient": "linear-gradient(180deg, rgba(23, 21, 21, 0) 27.07%, #0D0D0D 85.23%)" },

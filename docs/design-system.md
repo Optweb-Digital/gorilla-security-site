@@ -57,7 +57,7 @@ Figma uses `rgba(…, .9)` text colors; they are flattened to solid hex over whi
 | `brand` | fill buttons, active tab | 1:233 (also 1:111, 1:542) | `90deg, #61107A 0%, #6A0D71 39.42%, #6D0D60 67.79%, #9F0B57 100%` |
 | `brand-text` | accent words, stat numbers (solid fallback per rules-log 001) | 1:9 | `90deg, rgba(187,14,181,.9) → rgba(26,0,31,.9)` |
 | `deco-block` | shapes behind photos | 1:240 | `250.59deg, #930274 6.97%, #A90279 34.28%, #80026F 64.07%, #7F016E 93.03%` |
-| `soft-section` | white → lilac wash over quote-split photo | 1:171 | `-70.91deg, transparent 34.85% → #FDF9FF 70.52%` |
+| `soft-section` | lilac-white wash over the left of the quote-split photo | 1:171 | `109.09deg, #FDF9FF 29.48% → transparent 65.15%` (Figma exports `-70.91deg` with stops reversed; that renders mirrored in CSS — checked visually) |
 | `glass` | glass bar / light glass cards | 1:524 | `180deg, rgba(255,255,255,.2) 2.36% → transparent 118.39%` |
 | `night-fade` | footer / dark overlays | 1:429 | `235.5deg, rgba(11,13,22,0) 12.7% → #0E0C1B 53.69%` |
 | `photo-shade` | testimonial card photo | 1:4621 | `180deg, rgba(23,21,21,0) 27.07% → #0D0D0D 85.23%` |

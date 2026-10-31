@@ -142,7 +142,94 @@
 		} );
 	}
 
+	/**
+	 * Tabs (services): jump links become a WAI-ARIA tablist with automatic activation.
+	 * Arrow keys / Home / End move between tabs; .gs-arrow buttons step prev/next.
+	 * Without JS the links jump to stacked panels.
+	 */
+	function initTabs() {
+		document.querySelectorAll( '.gs-tabs__nav' ).forEach( function ( nav ) {
+			const section = nav.parentElement;
+			const list = nav.querySelector( '.gs-tabs__list' );
+			const tabs = Array.from( nav.querySelectorAll( '.gs-tabs__tab' ) );
+			const panels = tabs.map( function ( tab ) {
+				return document.getElementById(
+					tab.getAttribute( 'href' ).slice( 1 )
+				);
+			} );
+			if ( ! list || panels.includes( null ) ) {
+				return;
+			}
+			let current = 0;
+
+			const select = function ( index, focus ) {
+				current = ( index + tabs.length ) % tabs.length;
+				tabs.forEach( function ( tab, i ) {
+					const on = i === current;
+					tab.classList.toggle( 'is-active', on );
+					tab.setAttribute( 'aria-selected', on ? 'true' : 'false' );
+					tab.tabIndex = on ? 0 : -1;
+					panels[ i ].classList.toggle( 'is-active', on );
+				} );
+				if ( focus ) {
+					tabs[ current ].focus();
+				}
+			};
+
+			list.setAttribute( 'role', 'tablist' );
+			tabs.forEach( function ( tab, i ) {
+				tab.parentElement.setAttribute( 'role', 'presentation' );
+				tab.setAttribute( 'role', 'tab' );
+				tab.id = tab.id || panels[ i ].id + '-tab';
+				tab.setAttribute( 'aria-controls', panels[ i ].id );
+				panels[ i ].setAttribute( 'role', 'tabpanel' );
+				panels[ i ].setAttribute( 'aria-labelledby', tab.id );
+				tab.addEventListener( 'click', function ( event ) {
+					event.preventDefault();
+					select( i, false );
+				} );
+				tab.addEventListener( 'keydown', function ( event ) {
+					const keys = {
+						ArrowRight: current + 1,
+						ArrowLeft: current - 1,
+						Home: 0,
+						End: tabs.length - 1,
+					};
+					if ( event.key in keys ) {
+						event.preventDefault();
+						select( keys[ event.key ], true );
+					}
+				} );
+			} );
+
+			section
+				.querySelectorAll( '.gs-arrow' )
+				.forEach( function ( arrow ) {
+					arrow.addEventListener( 'click', function () {
+						select(
+							current +
+								( 'prev' === arrow.dataset.gsDir ? -1 : 1 ),
+							false
+						);
+					} );
+				} );
+
+			const fromHash = function () {
+				return panels.findIndex( function ( panel ) {
+					return '#' + panel.id === window.location.hash;
+				} );
+			};
+			select( Math.max( fromHash(), 0 ), false );
+			window.addEventListener( 'hashchange', function () {
+				if ( fromHash() > -1 ) {
+					select( fromHash(), false );
+				}
+			} );
+		} );
+	}
+
 	initHeader();
 	initMarquees();
 	initSteppers();
+	initTabs();
 } )();

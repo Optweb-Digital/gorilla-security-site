@@ -1655,3 +1655,298 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 		font-size: var(--wp--preset--font-size--h-4);
 	}
 }
+
+/* ---------- Services (tabs) — Figma 1:162 ---------- */
+
+/* Background 1:985: #EFEFEF → white 48% → #D5B4CE (brand-500 mixed with white ≈ 32%). */
+.gs-services.wp-block-group {
+	margin-block-start: 0;
+	padding-block: var(--wp--preset--spacing--60) var(--wp--preset--spacing--80);
+	background-image: linear-gradient(100deg, var(--wp--preset--color--surface-2), var(--wp--preset--color--white) 48%, color-mix(in srgb, var(--wp--preset--color--brand-500) 32%, var(--wp--preset--color--white)));
+}
+
+.gs-services > * {
+	margin-block: 0;
+}
+
+/* Eyebrow lines up with the wide tab bar (constrained layout would centre it at content width). */
+.gs-services > .is-style-eyebrow {
+	max-inline-size: var(--wp--style--global--wide-size);
+}
+
+/* Tab bar — Figma 1:1080: surface, r10, 68px; 6 equal tabs. */
+.gs-tabs__nav {
+	margin-block: var(--wp--preset--spacing--40) var(--wp--preset--spacing--60);
+}
+
+.gs-tabs__list {
+	display: grid;
+	grid-template-columns: repeat(6, minmax(0, 1fr));
+	margin: 0;
+	padding: 0;
+	border-radius: var(--gs-r-sm);
+	background-color: var(--wp--preset--color--surface);
+	list-style: none;
+}
+
+.gs-tabs__tab {
+	position: relative;
+	display: flex;
+	gap: var(--wp--preset--spacing--10);
+	align-items: center;
+	justify-content: center;
+	min-block-size: 68px;
+	padding-inline: var(--wp--preset--spacing--20);
+	border: 0;
+	border-radius: var(--gs-r-sm);
+	background: none;
+	color: var(--wp--preset--color--ink);
+	font: inherit;
+	font-size: var(--wp--preset--font-size--medium);
+	line-height: 1.3;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.gs-tabs__tab::before {
+	--gs-ico-size: 24px;
+}
+
+.gs-tabs__tab:hover {
+	color: var(--gs-brand);
+}
+
+/* Active tab — Figma 1:1081: brand gradient with a pointer underneath. */
+.gs-tabs__tab.is-active {
+	background-image: var(--gs-grad);
+	color: var(--wp--preset--color--white);
+}
+
+.gs-tabs__tab.is-active::after {
+	content: "";
+	position: absolute;
+	inset-block-start: 100%;
+	inset-inline-start: 50%;
+	inline-size: 16px;
+	block-size: 8px;
+	background-color: var(--wp--preset--color--brand-600);
+	clip-path: polygon(0 0, 100% 0, 50% 100%);
+	transform: translateX(-50%);
+}
+
+/* Panels: stacked without JS; with JS only the active one shows. */
+.gs-tabs__panels {
+	display: grid;
+	gap: var(--wp--preset--spacing--80);
+}
+
+.gs-tabs__panel {
+	margin: 0;
+}
+
+.gs-js .gs-tabs__panel:not(.is-active) {
+	display: none;
+}
+
+.wp-block-columns.gs-service {
+	gap: var(--wp--preset--spacing--80);
+	align-items: center;
+	margin: 0;
+}
+
+.wp-block-columns.gs-service > .wp-block-column.gs-service__text {
+	display: flex;
+	flex: 0.75 1 0;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--40);
+}
+
+.wp-block-columns.gs-service > .wp-block-column.gs-service__media {
+	position: relative;
+	flex: 1 1 0;
+}
+
+.gs-service__text > * {
+	margin-block: 0;
+}
+
+.gs-service__title.wp-block-heading {
+	letter-spacing: -0.03em;
+}
+
+/* Checklist in two columns (Figma 1:1001…). */
+.wp-block-list.is-style-checklist.gs-service__list {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	column-gap: var(--wp--preset--spacing--40);
+}
+
+.gs-service__actions {
+	gap: var(--wp--preset--spacing--40);
+	margin-block-start: var(--wp--preset--spacing--30);
+}
+
+/* Photo — Figma 1:987: 901×563, r30. */
+.gs-service .gs-service__photo {
+	margin: 0;
+}
+
+.gs-service .gs-service__photo img {
+	display: block;
+	inline-size: 100%;
+	block-size: auto;
+	border-radius: var(--gs-r-xl);
+	aspect-ratio: 901 / 563;
+	object-fit: cover;
+}
+
+/* Feature card — Figma 1:1051: white, r30, photo r16 + title, text, device icons. */
+.gs-service-card {
+	position: absolute;
+	inset-block-end: 4%;
+	inset-inline-end: 2%;
+	gap: var(--wp--preset--spacing--30);
+	inline-size: min(66%, 595px);
+	padding: var(--wp--preset--spacing--20);
+	border-radius: var(--gs-r-xl);
+	background-color: var(--wp--preset--color--white);
+	box-shadow: var(--wp--preset--shadow--soft);
+}
+
+.gs-service-card .gs-service-card__photo {
+	flex: 0 0 54%;
+	margin: 0;
+}
+
+.gs-service-card .gs-service-card__photo img {
+	display: block;
+	inline-size: 100%;
+	block-size: auto;
+	border-radius: var(--gs-r-lg);
+	aspect-ratio: 319 / 183;
+	object-fit: cover;
+}
+
+.gs-service-card__body > *,
+.gs-service-note__body > * {
+	margin-block: 0;
+}
+
+.gs-service-card__body .wp-block-heading,
+.gs-service-note__title.wp-block-heading {
+	color: var(--wp--preset--color--ink);
+	line-height: 1.5;
+}
+
+.gs-services .gs-service .gs-service-card .gs-service-card__body p,
+.gs-services .gs-service .gs-service-note .gs-service-note__body p {
+	line-height: 1.5;
+}
+
+.gs-service-card__icons {
+	gap: var(--wp--preset--spacing--20);
+	margin-block-start: var(--wp--preset--spacing--20);
+}
+
+/* Notes — Figma 1:616: white, r30, icon + 2px brand-300 rule + text. */
+.gs-service-note {
+	position: absolute;
+	gap: var(--wp--preset--spacing--30);
+	inline-size: min(48%, 291px);
+	padding: var(--wp--preset--spacing--30);
+	border-radius: var(--gs-r-xl);
+	background-color: var(--wp--preset--color--white);
+	box-shadow: var(--wp--preset--shadow--soft);
+}
+
+.gs-service-note:nth-of-type(1) {
+	inset-block-start: 9%;
+	inset-inline-end: 7%;
+}
+
+.gs-service-note:nth-of-type(2) {
+	inset-block-end: 6%;
+	inset-inline-start: 22%;
+}
+
+.gs-service-note__body {
+	padding-inline-start: var(--wp--preset--spacing--20);
+	border-inline-start: 2px solid;
+	border-image: linear-gradient(180deg, var(--wp--preset--color--brand-300), transparent) 1;
+}
+
+/* Round arrows (prev/next) — Figma 1:1043, 83px; only useful with JS. */
+.gs-arrows {
+	display: none;
+	gap: var(--wp--preset--spacing--20);
+}
+
+.gs-js .gs-arrows {
+	display: flex;
+}
+
+.gs-arrow {
+	--gs-ico-size: 36%;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	inline-size: clamp(48px, 4.3vw, 83px);
+	block-size: clamp(48px, 4.3vw, 83px);
+	padding: 0;
+	border: 2px solid var(--wp--preset--color--brand-100);
+	border-radius: var(--gs-r-pill);
+	background-color: var(--wp--preset--color--white);
+	color: var(--gs-brand);
+	cursor: pointer;
+}
+
+.gs-arrow + .gs-arrow {
+	border-color: transparent;
+	background-image: var(--gs-grad);
+	color: var(--wp--preset--color--white);
+}
+
+@media (max-width: 1100px) {
+
+	.gs-tabs__list {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
+	.wp-block-columns.gs-service {
+		flex-wrap: wrap !important; /* core forces nowrap from 782px */
+	}
+
+	.wp-block-columns.gs-service > .wp-block-column.gs-service__text,
+	.wp-block-columns.gs-service > .wp-block-column.gs-service__media {
+		flex-basis: 100%;
+	}
+}
+
+@media (max-width: 600px) {
+
+	.gs-tabs__list {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.gs-tabs__tab.is-active::after {
+		content: none;
+	}
+
+	.wp-block-list.is-style-checklist.gs-service__list {
+		grid-template-columns: 1fr;
+	}
+
+	/* Cards drop below the photo instead of covering it. */
+	.gs-service-card,
+	.gs-service-note,
+	.gs-service-note:nth-of-type(1),
+	.gs-service-note:nth-of-type(2) {
+		position: static;
+		inline-size: auto;
+		margin-block-start: var(--wp--preset--spacing--30);
+	}
+
+	.gs-service-card {
+		flex-wrap: wrap;
+	}
+}

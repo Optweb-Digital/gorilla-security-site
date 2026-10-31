@@ -60,7 +60,7 @@
 - [ ] Staging and production URLs
 - [ ] Names for tech lead, designer, developers, content writer
 - [ ] CTA target URL confirmed (`/contact-us/#quote`?)
-- [ ] "Know More" targets (About links to `#services` for now) · Figma typo "livinng" (1:39) built as "living"
+- [ ] "Know More" targets (About → `#services`; omitted in the service panels until service pages exist) · Figma copy fixes: "livinng" → "living" (1:39), "Intercoms Systems" → "Intercom Systems", "card, PIN biometric" → "card, PIN or biometric" (services)
 - [ ] Quote form recipient email; options for the quote-split "purpose" and "requirement" dropdowns (hero "Service" uses the 6 footer services)
 - [ ] Copy for "Why us" steps 02–06 and FAQ answers 01, 03–08
 - [ ] Partner/brand logo files supplied by partners

@@ -1024,7 +1024,7 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 /* Review badge — Figma 1:114. */
 .gs-review-badge {
 	gap: var(--wp--preset--spacing--10);
-	min-block-size: var(--wp--custom--control--sm);
+	min-block-size: var(--wp--custom--control--field);
 	padding-block: var(--wp--preset--spacing--10);
 	padding-inline: var(--wp--preset--spacing--10) var(--wp--preset--spacing--30);
 	border-radius: var(--gs-r-sm);
@@ -1147,10 +1147,6 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 	display: flex;
 	flex-direction: column;
 	gap: var(--wp--preset--spacing--20);
-}
-
-.gs-hero .wp-block-group.is-style-glass-dark.gs-quote-card {
-	padding-block-end: var(--wp--preset--spacing--60);
 }
 
 .gs-quote-card > * {
@@ -3145,7 +3141,7 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 	flex-direction: column;
 	gap: var(--wp--preset--spacing--20);
 	padding: 0;
-	font-size: var(--wp--preset--font-size--medium);
+	font-size: clamp(14px, 0.8854vw, 17px);
 	letter-spacing: -0.03em;
 	line-height: 1.75;
 	list-style: none;
@@ -3175,11 +3171,14 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 	list-style: none;
 }
 
-/* Circle drawn behind the masked icon: 34px brand-100 disc at the start of the row. */
+/* Circle drawn behind the masked icon: a 34px brand-100 disc (scaled) at the start of the row;
+   the row is at least as tall as the disc so it is never clipped into a lozenge. */
 .wp-block-list.gs-contact-list > li {
-	--gs-ico-size: 16px;
+	--gs-ico-size: clamp(13px, 0.8333vw, 16px);
+	--gs-disc: clamp(28px, 1.7708vw, 34px);
 	display: flex;
-	background: radial-gradient(circle at 17px 50%, var(--wp--preset--color--brand-100) 16.5px, transparent 17px) no-repeat;
+	min-block-size: var(--gs-disc);
+	background: radial-gradient(circle at calc(var(--gs-disc) / 2) 50%, var(--wp--preset--color--brand-100) calc(var(--gs-disc) / 2 - 0.5px), transparent calc(var(--gs-disc) / 2)) no-repeat;
 	gap: var(--wp--preset--spacing--30);
 	align-items: center;
 	color: color-mix(in srgb, var(--wp--preset--color--white) 90%, transparent);
@@ -3187,7 +3186,7 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 }
 
 .wp-block-list.gs-contact-list > li::before {
-	margin-inline: 9px;
+	margin-inline: calc((var(--gs-disc) - var(--gs-ico-size)) / 2);
 	background-color: var(--wp--preset--color--brand-700);
 }
 
@@ -3206,11 +3205,11 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 }
 
 .gs-hours__item.wp-block-group {
-	--gs-ico-size: 28px;
+	--gs-ico-size: clamp(22px, 1.4583vw, 28px);
 	gap: var(--wp--preset--spacing--30);
 	align-items: center;
 	color: var(--wp--preset--color--on-dark);
-	font-size: var(--wp--preset--font-size--medium);
+	font-size: clamp(14px, 0.8854vw, 17px);
 	letter-spacing: -0.03em;
 	line-height: 1.75;
 }
@@ -3221,6 +3220,14 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 
 .gs-footer .gs-hours .gs-hours__item.wp-block-group p {
 	margin: 0;
+}
+
+/* Desktop: clock | divider | headset on one row, as in Figma 1:485. */
+@media (min-width: 1101px) {
+
+	.gs-footer .wp-block-group.is-style-glass-violet-outline.gs-hours {
+		flex-wrap: nowrap;
+	}
 }
 
 .gs-hours__item + .gs-hours__item {
@@ -3271,5 +3278,263 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 
 	.gs-footer__main.wp-block-group {
 		grid-template-columns: 1fr;
+	}
+}
+
+/* ---------- Quote card — Figma 1:97 at full detail (scaled: Figma px ÷ 19.2 vw, with floors) ---------- */
+
+/* No background blur in Figma 1:97: just the 58% fill and 32% border. */
+.gs-hero .wp-block-group.is-style-glass-dark.gs-quote-card {
+	gap: 0;
+	-webkit-backdrop-filter: none;
+	backdrop-filter: none;
+	padding: clamp(24px, 1.8229vw, 35px) clamp(20px, 1.7708vw, 34px) clamp(28px, 2.7083vw, 52px);
+}
+
+/* 1:98: 19px semibold, 3px tracking. Figma's #990573 is ~2.4:1 on the glass, so a lighter magenta (≥ 4.5:1). */
+.gs-hero .gs-quote-card > p.gs-quote-card__eyebrow {
+	color: color-mix(in srgb, var(--wp--preset--color--brand-300) 65%, var(--wp--preset--color--white));
+	font-size: clamp(14px, 0.9896vw, 19px);
+	letter-spacing: 0.16em;
+	line-height: 1.2;
+}
+
+/* 1:99: 36px semibold, 11px under the eyebrow. */
+.gs-hero .gs-quote-card > .gs-quote-card__title.wp-block-heading {
+	margin-block-start: clamp(6px, 0.5729vw, 11px);
+	font-size: clamp(24px, 1.875vw, 36px);
+	line-height: 1.3;
+}
+
+/* 1:100: 15px, two lines (breaks after "our team"). */
+.gs-hero .gs-quote-card > p.gs-quote-card__text {
+	max-inline-size: 24.5em;
+	margin-block-start: clamp(4px, 0.3125vw, 6px);
+	color: var(--wp--preset--color--on-dark);
+	font-size: clamp(12px, 0.7813vw, 15px);
+	line-height: 1.5;
+}
+
+.gs-hero .gs-quote-card > .wp-block-group.gs-form {
+	margin-block-start: clamp(12px, 0.8854vw, 17px);
+}
+
+/* 1:101–1:110: 56px fields on a 66px pitch, 14px white text 23px in, no dropdown arrow, 80px message. */
+.gs-hero .gs-quote-card .gs-form--dark .wpcf7-form {
+	gap: clamp(8px, 0.5208vw, 10px);
+}
+
+.gs-hero .gs-quote-card .gs-form--dark .wpcf7-form :where(input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]), select, textarea) {
+	block-size: var(--wp--custom--control--field);
+	min-block-size: 0;
+	padding-block: 0;
+	padding-inline: clamp(16px, 1.1979vw, 23px);
+	color: var(--wp--preset--color--white);
+	font-size: clamp(12px, 0.7292vw, 14px);
+	font-weight: 400;
+	line-height: 1.5;
+}
+
+.gs-hero .gs-quote-card .gs-form--dark .wpcf7-form :where(input, textarea)::placeholder {
+	color: var(--wp--preset--color--white);
+	opacity: 1;
+}
+
+.gs-hero .gs-quote-card .gs-form--dark .wpcf7-form :where(select) {
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+.gs-hero .gs-quote-card .gs-form--dark .wpcf7-form :where(textarea) {
+	block-size: clamp(64px, 4.1667vw, 80px);
+	padding-block: clamp(8px, 0.5208vw, 10px);
+	resize: none;
+}
+
+/* 1:111: 60px button, 18px label, 18px under the message box. */
+.gs-hero .gs-quote-card .gs-form--dark .wpcf7-form .wpcf7-submit {
+	min-block-size: var(--wp--custom--control--md);
+	margin-block-start: clamp(6px, 0.4167vw, 8px);
+	font-size: clamp(15px, 0.9375vw, 18px);
+}
+
+/* 1:113: 16px note, 10px under the button. */
+.gs-hero .gs-quote-card > p.gs-quote-card__note {
+	margin-block-start: clamp(8px, 0.5208vw, 10px);
+	color: var(--wp--preset--color--on-dark);
+	font-size: clamp(12px, 0.8333vw, 16px);
+	line-height: 1.4;
+}
+
+/* Review badge 1:114 (233 × 56, 29px mark, 14px text) and hero CTA 1:80 (198 × 48, 18px), scaled. */
+.gs-hero .gs-review-badge .gs-review-badge__source img {
+	inline-size: clamp(24px, 1.5104vw, 29px);
+	block-size: clamp(24px, 1.5104vw, 29px);
+}
+
+.gs-hero .gs-review-badge p.gs-review-badge__text {
+	font-size: clamp(12px, 0.7292vw, 14px);
+}
+
+/* Violet glass — Figma 1:532 (header call), 1:81 (hero CTA): #790760 at 50% fading to transparent,
+   194.7deg from the top centre, 35px background blur, 1px light border. No solid button fill under it. */
+.gs-hero .wp-block-button.gs-hero__cta a.wp-block-button__link.wp-element-button {
+	background-color: transparent;
+	font-size: clamp(15px, 0.9375vw, 18px);
+	background-image: linear-gradient(194.7deg, color-mix(in srgb, color-mix(in srgb, var(--wp--preset--color--brand-500), var(--wp--preset--color--brand-600)) 50%, transparent) 26%, transparent 123%);
+}
+
+/* Header call button: glass only on the transparent bar over the hero; the solid/white bar (scrolled,
+   other pages, phones) keeps its brand-600 fill so the white label stays readable. */
+@media (min-width: 782px) {
+
+	body:has(.gs-hero-page) .gs-header:not(.gs-header--solid) .wp-block-button.is-style-glass-phone .wp-block-button__link.wp-element-button {
+		background-color: transparent;
+		background-image: linear-gradient(194.7deg, color-mix(in srgb, color-mix(in srgb, var(--wp--preset--color--brand-500), var(--wp--preset--color--brand-600)) 50%, transparent) 26%, transparent 123%);
+	}
+}
+
+/* ---------- Service photo overlays — Figma 1:548 variants, placed as % of the 901 × 563 photo ---------- */
+.gs-service-line {
+	display: none;
+}
+
+@media (min-width: 601px) {
+
+	/* Notes 291 × 118 with a 53px icon circle (Figma 1:616). */
+	.gs-service .gs-service__media .gs-service-note.wp-block-group {
+		z-index: 1;
+		align-items: center;
+		min-block-size: 21%;
+		padding: var(--wp--preset--spacing--40);
+		inline-size: 32.3%;
+		inset-block-end: auto;
+		inset-inline-end: auto;
+	}
+
+	.gs-service-note .gs-icon-circle.gs-icon-circle--md {
+		--gs-circle: clamp(40px, 2.7604vw, 53px);
+	}
+
+	/* Smart Home 1:616 / 1:624. */
+	.gs-service--home .gs-service__media .gs-service-note.wp-block-group:nth-of-type(1) {
+		inset-block-start: 11.9%;
+		inset-inline-start: 60.4%;
+	}
+
+	.gs-service--home .gs-service__media .gs-service-note.wp-block-group:nth-of-type(2) {
+		inset-block-start: 72.5%;
+		inset-inline-start: 41.5%;
+	}
+
+	/* Smart Locks 1:708 / 1:716. */
+	.gs-service--locks .gs-service__media .gs-service-note.wp-block-group:nth-of-type(1) {
+		inset-block-start: 9.2%;
+		inset-inline-start: 60.2%;
+	}
+
+	.gs-service--locks .gs-service__media .gs-service-note.wp-block-group:nth-of-type(2) {
+		inset-block-start: 76.7%;
+		inset-inline-start: 21.6%;
+	}
+
+	/* Intercoms 1:883 / 1:894. */
+	.gs-service--intercom .gs-service__media .gs-service-note.wp-block-group:nth-of-type(1) {
+		inset-block-start: 3.4%;
+		inset-inline-start: 44.6%;
+	}
+
+	.gs-service--intercom .gs-service__media .gs-service-note.wp-block-group:nth-of-type(2) {
+		inset-block-start: 74.6%;
+		inset-inline-start: 50.8%;
+	}
+
+	/* Connector lines: 3px white elbows from the device to each note. */
+	.gs-service__media .gs-service-line.wp-block-group {
+		display: block;
+		position: absolute;
+		margin: 0;
+		background: no-repeat center / 100% 100%;
+		pointer-events: none;
+	}
+
+	.gs-service--intercom .gs-service-line--1.wp-block-group {
+		inset-block-start: 24.3%;
+		inset-inline-start: 32.5%;
+		inline-size: 17.8%;
+		block-size: 33.6%;
+		background-image: url(../images/service-line-intercom-1.svg);
+	}
+
+	.gs-service--intercom .gs-service-line--2.wp-block-group {
+		inset-block-start: 61.1%;
+		inset-inline-start: 40.8%;
+		inline-size: 15%;
+		block-size: 13.7%;
+		background-image: url(../images/service-line-intercom-2.svg);
+	}
+
+	.gs-service--locks .gs-service-line--1.wp-block-group {
+		inset-block-start: 29.8%;
+		inset-inline-start: 54.5%;
+		inline-size: 11%;
+		block-size: 31.8%;
+		background-image: url(../images/service-line-locks-1.svg);
+	}
+
+	.gs-service--locks .gs-service-line--2.wp-block-group {
+		inset-block-start: 72.6%;
+		inset-inline-start: 54.1%;
+		inline-size: 15.9%;
+		block-size: 15.5%;
+		background-image: url(../images/service-line-locks-2.svg);
+	}
+
+	/* Alarm 1:975 and Access 1:801: wide white cards at the bottom left with a brand rule before the text. */
+	.gs-service__media .gs-service-card.gs-service-card--alarm,
+	.gs-service__media .gs-service-card.gs-service-card--access {
+		align-items: center;
+		inset-block-end: 3.7%;
+		inset-inline-start: 3.2%;
+		inset-inline-end: auto;
+		padding: var(--wp--preset--spacing--40) var(--wp--preset--spacing--50);
+	}
+
+	.gs-service__media .gs-service-card.gs-service-card--alarm {
+		gap: var(--wp--preset--spacing--50);
+		inline-size: 66%;
+		padding-block: 0 var(--wp--preset--spacing--40);
+	}
+
+	.gs-service__media .gs-service-card.gs-service-card--access {
+		gap: var(--wp--preset--spacing--60);
+		inline-size: 51.3%;
+		inset-block-end: 3.5%;
+	}
+
+	/* The phone (245 × 273) rises 59px above the card and sits on its bottom edge. */
+	.gs-service-card--alarm .gs-service-card__photo.wp-block-image {
+		flex: 0 0 41.2%;
+		align-self: flex-end;
+		margin-block-start: -10%;
+	}
+
+	.gs-service-card--alarm .gs-service-card__photo.wp-block-image img {
+		border-radius: 0;
+		aspect-ratio: 245 / 273;
+		object-fit: contain;
+	}
+
+	/* 84px lock circle. */
+	.gs-service-card--access .gs-icon-circle {
+		--gs-circle: clamp(56px, 4.375vw, 84px);
+		flex-shrink: 0;
+	}
+
+	.gs-service-card--alarm .gs-service-card__body.wp-block-group,
+	.gs-service-card--access .gs-service-card__body.wp-block-group {
+		padding-inline-start: var(--wp--preset--spacing--40);
+		border-inline-start: 3px solid;
+		border-image: linear-gradient(180deg, var(--wp--preset--color--brand-300), transparent) 1;
 	}
 }

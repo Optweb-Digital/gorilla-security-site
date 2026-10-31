@@ -36,7 +36,11 @@ $gorilla_services = array(
 		'title' => __( '[[Alarm]] Systems', 'gorilla-security' ),
 		'text'  => __( 'Get instant protection with professionally installed alarm systems for homes and businesses. Our solutions help detect intrusions, alert you immediately and keep your property and loved ones safe.', 'gorilla-security' ),
 		'list'  => array( __( '24/7 Monitoring Options', 'gorilla-security' ), __( 'Professional Installation', 'gorilla-security' ), __( 'Intrusion Detection', 'gorilla-security' ), __( 'Mobile App Control', 'gorilla-security' ), __( 'Reliable & Secure', 'gorilla-security' ), __( 'Instant Alerts', 'gorilla-security' ) ),
-		'notes' => array( array( 'bell', __( 'Instant Alerts', 'gorilla-security' ), __( 'Get real-time notifications on your phone, wherever you are.', 'gorilla-security' ) ) ),
+		'card'  => array(
+			'image' => 'service-alarm-phone',
+			'title' => __( 'Instant Alerts', 'gorilla-security' ),
+			'text'  => __( 'Get real-time notifications on your phone, wherever you are.', 'gorilla-security' ),
+		),
 	),
 	array(
 		'slug'  => 'intercom',
@@ -46,6 +50,7 @@ $gorilla_services = array(
 		'text'  => __( 'See, speak and grant access to visitors with modern intercom systems for homes and businesses. Our solutions offer clear communication, enhanced security and greater peace of mind.', 'gorilla-security' ),
 		'list'  => array( __( 'Video & Audio Communication', 'gorilla-security' ), __( 'Mobile App Integration', 'gorilla-security' ), __( 'Professional Installation', 'gorilla-security' ), __( 'HD Video Clarity', 'gorilla-security' ), __( 'Remote Door Access', 'gorilla-security' ), __( 'Reliable & Secure', 'gorilla-security' ) ),
 		'notes' => array( array( 'smartphone', '', __( 'Talk to visitors in real time from anywhere', 'gorilla-security' ) ), array( 'lock', '', __( 'Unlock the door remotely with just a tap', 'gorilla-security' ) ) ),
+		'lines' => 2,
 	),
 	array(
 		'slug'  => 'access',
@@ -54,7 +59,11 @@ $gorilla_services = array(
 		'title' => __( '[[Access]] Control', 'gorilla-security' ),
 		'text'  => __( 'Manage and control access to your property with modern access control systems for homes and businesses. Our solutions provide secure, convenient and flexible entry management.', 'gorilla-security' ),
 		'list'  => array( __( 'Secure Entry Management', 'gorilla-security' ), __( 'Professional Installation', 'gorilla-security' ), __( 'Card, PIN & Biometric Access', 'gorilla-security' ), __( 'Remote Management', 'gorilla-security' ), __( 'Custom Access Permissions', 'gorilla-security' ), __( 'Reliable & Secure', 'gorilla-security' ) ),
-		'notes' => array( array( 'access-card', __( 'Secure Access', 'gorilla-security' ), __( 'Control who enters your property with card, PIN or biometric access', 'gorilla-security' ) ) ),
+		'card'  => array(
+			'icon'  => 'lock',
+			'title' => __( 'Secure Access', 'gorilla-security' ),
+			'text'  => __( 'Control who enters your property with card, PIN or biometric access', 'gorilla-security' ),
+		),
 	),
 	array(
 		'slug'  => 'locks',
@@ -64,6 +73,7 @@ $gorilla_services = array(
 		'text'  => __( 'Upgrade your security with smart locks that offer keyless, convenient and secure access for your home or business. Control and monitor your doors from anywhere, anytime.', 'gorilla-security' ),
 		'list'  => array( __( 'Keyless Entry', 'gorilla-security' ), __( 'Access Logs & Monitoring', 'gorilla-security' ), __( 'Remote Lock & Unlock', 'gorilla-security' ), __( 'Multiple User Access', 'gorilla-security' ), __( 'Mobile App Control', 'gorilla-security' ), __( 'Reliable & Secure', 'gorilla-security' ) ),
 		'notes' => array( array( 'access-card', '', __( 'Give access to family, staff or guests with ease.', 'gorilla-security' ) ), array( 'lock', '', __( 'Control your doors from anywhere, anytime.', 'gorilla-security' ) ) ),
+		'lines' => 2,
 	),
 	array(
 		'slug'  => 'home',
@@ -94,7 +104,7 @@ $gorilla_note = static function ( $note ) {
 	return "<!-- wp:group {\"className\":\"gs-service-note\",\"layout\":{\"type\":\"flex\",\"flexWrap\":\"nowrap\"}} -->\n"
 		. '<div class="wp-block-group gs-service-note">' . gorilla_icon( $note[0], 'md' ) . "\n\n"
 		. "<!-- wp:group {\"className\":\"gs-service-note__body\",\"layout\":{\"type\":\"default\"}} -->\n"
-		. '<div class="wp-block-group gs-service-note__body">' . $title . "\n" . gorilla_paragraph( $note[2], '', 'small' ) . "</div>\n<!-- /wp:group --></div>\n<!-- /wp:group -->";
+		. '<div class="wp-block-group gs-service-note__body">' . $title . "\n" . gorilla_paragraph( $note[2] ) . "</div>\n<!-- /wp:group --></div>\n<!-- /wp:group -->";
 };
 ?>
 <!-- wp:group {"anchor":"services","align":"full","className":"gs-services","layout":{"type":"constrained"}} -->
@@ -116,22 +126,34 @@ foreach ( $gorilla_services as $gorilla_i => $gorilla_s ) :
 	$gorilla_photo = gorilla_image( 'service-' . $gorilla_s['slug'], '', '', array( 'class' => 'gs-service__photo' ) );
 	$gorilla_extra = '';
 	if ( ! empty( $gorilla_s['card'] ) ) {
-		$gorilla_card_icons = implode( "\n\n", array_map( 'gorilla_icon', $gorilla_s['card']['icons'], array_fill( 0, count( $gorilla_s['card']['icons'] ), 'md' ) ) );
-		$gorilla_extra      = "<!-- wp:group {\"className\":\"gs-service-card\",\"layout\":{\"type\":\"flex\",\"flexWrap\":\"nowrap\"}} -->\n"
-			. '<div class="wp-block-group gs-service-card">' . gorilla_image( $gorilla_s['card']['image'], '', '', array( 'class' => 'gs-service-card__photo' ) ) . "\n\n"
+		// Card: a photo (CCTV, alarm phone) or an icon circle (access), title, text, optional device icons.
+		$gorilla_c          = $gorilla_s['card'];
+		$gorilla_card_class = 'gs-service-card gs-service-card--' . $gorilla_s['slug'];
+		$gorilla_card_media = empty( $gorilla_c['icon'] ) ? gorilla_image( $gorilla_c['image'], '', '', array( 'class' => 'gs-service-card__photo' ) ) : gorilla_icon( $gorilla_c['icon'] );
+		$gorilla_card_icons = '';
+		if ( ! empty( $gorilla_c['icons'] ) ) {
+			$gorilla_card_icons = "\n<!-- wp:group {\"className\":\"gs-service-card__icons\",\"layout\":{\"type\":\"flex\",\"flexWrap\":\"nowrap\"}} -->\n"
+				. '<div class="wp-block-group gs-service-card__icons">' . implode( "\n\n", array_map( 'gorilla_icon', $gorilla_c['icons'], array_fill( 0, count( $gorilla_c['icons'] ), 'md' ) ) ) . "</div>\n<!-- /wp:group -->";
+		}
+		$gorilla_extra = '<!-- wp:group {"className":"' . $gorilla_card_class . '","layout":{"type":"flex","flexWrap":"nowrap"}} -->' . "\n"
+			. '<div class="wp-block-group ' . $gorilla_card_class . '">' . $gorilla_card_media . "\n\n"
 			. "<!-- wp:group {\"className\":\"gs-service-card__body\",\"layout\":{\"type\":\"default\"}} -->\n"
 			. '<div class="wp-block-group gs-service-card__body">'
 			. gorilla_heading(
-				$gorilla_s['card']['title'],
+				$gorilla_c['title'],
 				array(
 					'level' => 3,
 					'size'  => 'card-title',
 				)
-			) . "\n" . gorilla_paragraph( $gorilla_s['card']['text'], '', 'small' ) . "\n"
-			. "<!-- wp:group {\"className\":\"gs-service-card__icons\",\"layout\":{\"type\":\"flex\",\"flexWrap\":\"nowrap\"}} -->\n"
-			. '<div class="wp-block-group gs-service-card__icons">' . $gorilla_card_icons . "</div>\n<!-- /wp:group --></div>\n<!-- /wp:group --></div>\n<!-- /wp:group -->";
+			) . "\n" . gorilla_paragraph( $gorilla_c['text'] )
+			. $gorilla_card_icons . "</div>\n<!-- /wp:group --></div>\n<!-- /wp:group -->";
 	} elseif ( ! empty( $gorilla_s['notes'] ) ) {
 		$gorilla_extra = implode( "\n\n", array_map( $gorilla_note, $gorilla_s['notes'] ) );
+	}
+	// Figma connector lines from the device to each note (1:906 / 1:882, 1:732 / 1:731); decorative.
+	for ( $gorilla_l = 1; $gorilla_l <= ( $gorilla_s['lines'] ?? 0 ); $gorilla_l++ ) {
+		$gorilla_extra .= "\n\n<!-- wp:group {\"className\":\"gs-service-line gs-service-line--" . $gorilla_l . '","layout":{"type":"default"}} -->' . "\n"
+			. '<div class="wp-block-group gs-service-line gs-service-line--' . $gorilla_l . "\"></div>\n<!-- /wp:group -->";
 	}
 	$gorilla_items = implode(
 		"\n\n",
@@ -144,8 +166,8 @@ foreach ( $gorilla_services as $gorilla_i => $gorilla_s ) :
 	);
 	?>
 <!-- wp:group {"anchor":"service-<?php echo esc_attr( $gorilla_s['slug'] ); ?>","className":"gs-tabs__panel<?php echo 0 === $gorilla_i ? ' is-active' : ''; ?>","layout":{"type":"default"}} -->
-<div id="service-<?php echo esc_attr( $gorilla_s['slug'] ); ?>" class="wp-block-group gs-tabs__panel<?php echo 0 === $gorilla_i ? ' is-active' : ''; ?>"><!-- wp:columns {"className":"gs-service"} -->
-<div class="wp-block-columns gs-service"><!-- wp:column {"className":"gs-service__text"} -->
+<div id="service-<?php echo esc_attr( $gorilla_s['slug'] ); ?>" class="wp-block-group gs-tabs__panel<?php echo 0 === $gorilla_i ? ' is-active' : ''; ?>"><!-- wp:columns {"className":"gs-service gs-service--<?php echo esc_attr( $gorilla_s['slug'] ); ?>"} -->
+<div class="wp-block-columns gs-service gs-service--<?php echo esc_attr( $gorilla_s['slug'] ); ?>"><!-- wp:column {"className":"gs-service__text"} -->
 <div class="wp-block-column gs-service__text">
 	<?php
 	echo wp_kses_post(

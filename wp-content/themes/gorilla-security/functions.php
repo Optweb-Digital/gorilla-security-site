@@ -52,6 +52,22 @@ function gorilla_enqueue_assets() {
 add_action( 'wp_enqueue_scripts', 'gorilla_enqueue_assets' );
 
 /**
+ * Preload the three Poppins weights so text is laid out in the final font on first paint
+ * (a late font swap re-flows the hero and shifts the page — Lighthouse CLS budget 0.1).
+ *
+ * @return void
+ */
+function gorilla_preload_fonts() {
+	foreach ( array( 400, 500, 600 ) as $weight ) {
+		printf(
+			'<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n",
+			esc_url( get_template_directory_uri() . '/assets/fonts/poppins-' . $weight . '.woff2' )
+		);
+	}
+}
+add_action( 'wp_head', 'gorilla_preload_fonts', 1 );
+
+/**
  * Drop WordPress's emoji polyfill (twemoji + wp-emoji, ~13 KB): browsers render emoji natively,
  * and the JS budget is 50 KB (AGENTS.md §7).
  *
@@ -324,7 +340,7 @@ add_filter( 'render_block_core/cover', 'gorilla_optimize_cover_image' );
  * Values are the ones shown in Figma 1:4 (header 1:531, footer 1:469 / 1:485, contact card 1:199).
  * Social URLs are not in Figma and stay empty until supplied. Figma shows two different opening
  * hours (contact card vs footer); both are kept as designed until the client confirms one —
- * see "Open decisions" in docs/project-context.md.
+ * see "Open decisions" in docs/project-context.md. Social links are '#' placeholders until the URLs are supplied.
  *
  * @param string $key Optional key: phone, email, address, hours, hours_card, social (service => URL).
  * @return array|string All details, or one value ('' when unknown).
@@ -351,11 +367,12 @@ function gorilla_site( $key = '' ) {
 				'days' => 'Mon–Sat',
 				'time' => '8:00 AM–6:00 PM',
 			),
+			// Placeholder '#' links so the icons show as in Figma (hero 1:83, footer 1:451); real URLs pending.
 			'social'     => array(
-				'instagram' => '',
-				'facebook'  => '',
-				'x'         => '',
-				'linkedin'  => '',
+				'instagram' => '#',
+				'facebook'  => '#',
+				'x'         => '#',
+				'linkedin'  => '#',
 			),
 		)
 	);

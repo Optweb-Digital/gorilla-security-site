@@ -13,7 +13,7 @@
  */
 
 $gorilla_bg     = gorilla_img( 'hero-bg' );
-$gorilla_social = array_filter( (array) gorilla_site( 'social' ) );
+$gorilla_social = array_filter( array_intersect_key( (array) gorilla_site( 'social' ), array_flip( array( 'instagram', 'facebook', 'linkedin' ) ) ) ); // Figma 1:83: no X in the rail.
 
 // The real hero image (hero-bg.webp) is composited from Figma 1:69 + 20% dim 1:70 + cut-out 1:72,
 // so it needs no extra overlay. The SVG placeholder gets Figma's 20%; no image at all → solid night.

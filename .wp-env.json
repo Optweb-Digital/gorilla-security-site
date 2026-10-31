@@ -10,7 +10,7 @@
     "https://downloads.wordpress.org/plugin/wordpress-importer.latest-stable.zip",
     "https://downloads.wordpress.org/plugin/contact-form-7.6.2.4.1.zip"
   ],
-  "config": { "WP_DEBUG": true, "SCRIPT_DEBUG": true, "WP_DEVELOPMENT_MODE": "theme" },
+  "config": { "WP_DEBUG": true, "SCRIPT_DEBUG": false, "WP_DEVELOPMENT_MODE": "theme" },
   "lifecycleScripts": {
     "afterStart": "npx wp-env run cli wp theme activate gorilla-security && npx wp-env run cli wp rewrite structure /%postname%/ && npx wp-env run cli wp rewrite flush --hard"
   }

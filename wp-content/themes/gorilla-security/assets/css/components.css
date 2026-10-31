@@ -2074,10 +2074,6 @@ body:not(.gs-has-hero) .gs-header::before {
 	z-index: 2;
 }
 
-/* Over the photo the card is translucent, like Glass · dark inside a Cover. */
-.gs-quote-split__media > .is-style-glass-dark {
-	background: color-mix(in srgb, var(--wp--preset--color--night-2) 58%, transparent);
-}
 
 /* Text above the photo, both full width.
  * !important: core forces nowrap on columns from 782px and sets flex-basis inline. */

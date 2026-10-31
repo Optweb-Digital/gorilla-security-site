@@ -22,6 +22,19 @@
 		};
 		update();
 		window.addEventListener( 'scroll', update, { passive: true } );
+
+		// The hero pads its top by the floating header's real height (CSS has a fallback).
+		const wrap = header.parentElement;
+		const measure = function () {
+			document.documentElement.style.setProperty(
+				'--gs-header-h',
+				wrap.offsetHeight + 'px'
+			);
+		};
+		measure();
+		if ( 'ResizeObserver' in window ) {
+			new window.ResizeObserver( measure ).observe( wrap );
+		}
 	}
 
 	initHeader();

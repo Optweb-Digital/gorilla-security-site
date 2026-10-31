@@ -10,6 +10,9 @@
 	--gs-brand: var(--wp--preset--color--brand-500);
 	--gs-brand-deep: var(--wp--preset--color--brand-700);
 	--gs-focus: var(--wp--preset--color--brand-300);
+	--gs-rating: var(--wp--preset--color--rating);
+	--gs-grad-trust: var(--wp--preset--gradient--trust-strip);
+	--gs-grad-cue: var(--wp--preset--gradient--scroll-cue);
 	--gs-r-xs: var(--wp--custom--radius--xs);
 	--gs-r-sm: var(--wp--custom--radius--sm);
 	--gs-r-md: var(--wp--custom--radius--md);
@@ -56,6 +59,7 @@ mark.gs-accent {
 a[href^="tel:"] {
 	direction: ltr;
 	unicode-bidi: isolate;
+	white-space: nowrap;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -71,12 +75,20 @@ a[href^="tel:"] {
 }
 
 /* ---------- Icons (CSS mask, inherit currentcolor) ---------- */
+.gs-ico-arrow-down {
+	--gs-ico: url(../icons/arrow-down.svg);
+}
+
 .gs-ico-arrow-right {
 	--gs-ico: url(../icons/arrow-right.svg);
 }
 
 .gs-ico-phone {
 	--gs-ico: url(../icons/phone.svg);
+}
+
+.gs-ico-star {
+	--gs-ico: url(../icons/star.svg);
 }
 
 /* ---------- Components (block styles, shared by sections) ----------
@@ -111,10 +123,11 @@ a[href^="tel:"] {
 	padding-inline: var(--wp--preset--spacing--40);
 }
 
-/* Button — glass phone. Figma 1:531. */
+/* Button — glass (1:80) and glass phone (1:531, adds the phone icon below).
+ * No backdrop blur: over the hero photo it costs ~250ms main-thread work (perf gate); in
+ * the header the bar behind is already blurred. */
+.wp-block-button.is-style-glass .wp-block-button__link,
 .wp-block-button.is-style-glass-phone .wp-block-button__link {
-	-webkit-backdrop-filter: blur(var(--gs-blur));
-	backdrop-filter: blur(var(--gs-blur));
 	background: var(--gs-grad-glass-brand);
 	border: 1px solid var(--wp--preset--color--white);
 	box-shadow: var(--gs-shadow-glass);
@@ -164,6 +177,59 @@ a[href^="tel:"] {
 	inset: 0;
 	position: absolute;
 	z-index: -1;
+}
+
+/* Paragraph — Lead with bar. Figma 1:76 (5px bar fading from brand). */
+.is-style-lead-with-bar {
+	padding-inline-start: calc(5px + var(--wp--preset--spacing--20));
+	position: relative;
+}
+
+.is-style-lead-with-bar::before {
+	background: linear-gradient(var(--gs-brand), transparent);
+	content: "";
+	inline-size: 5px;
+	inset-block: 0.25em 0;
+	inset-inline-start: 0;
+	position: absolute;
+}
+
+/* Review badge. Figma 1:114. */
+.gs-review-badge {
+	background: var(--wp--preset--color--white);
+	border-radius: var(--gs-r-sm);
+	box-shadow: var(--gs-shadow-badge);
+	color: var(--gs-brand);
+	gap: var(--wp--preset--spacing--10);
+	min-block-size: var(--gs-h-sm);
+	padding-inline: var(--wp--preset--spacing--10) var(--wp--preset--spacing--30);
+}
+
+.gs-review-badge > * {
+	margin: 0;
+}
+
+/* Rating: five stars from one masked strip. Figma 1:117. */
+.gs-rating {
+	background: var(--gs-rating);
+	block-size: 1em;
+	display: inline-block;
+	inline-size: 5em;
+	mask: url(../icons/star.svg) 0 50% / 1em 1em repeat-x;
+}
+
+/* Trust strip. Figma 1:515. */
+.gs-trust-strip {
+	background: var(--gs-grad-trust);
+	border-radius: var(--gs-r-md);
+	gap: var(--wp--preset--spacing--40) var(--wp--preset--spacing--60);
+	inline-size: fit-content;
+	max-inline-size: 100%;
+	padding: var(--wp--preset--spacing--40) var(--wp--preset--spacing--50);
+}
+
+.gs-trust-strip > * {
+	margin: 0;
 }
 
 /* ---------- Sections (Figma order) ---------- */
@@ -227,10 +293,19 @@ a[href^="tel:"] {
 	text-underline-offset: 0.3em;
 }
 
-/* Matches core's doubled .wp-block-navigation-item__content selector (color: inherit). */
+/* Current page. Glass state: white, bold, underlined — Figma's brand purple measures ~1:1 over
+ * the hero photo. Brand purple returns on white (solid state, overlay menu) where it is 8.6:1.
+ * Matches core's doubled .wp-block-navigation-item__content selector (color: inherit). */
 .gs-header__nav .wp-block-navigation-item__content.wp-block-navigation-item__content[aria-current="page"] {
-	color: var(--gs-brand);
 	font-weight: 600;
+	text-decoration: underline;
+	text-decoration-thickness: 2px;
+	text-underline-offset: 0.35em;
+}
+
+:is(.gs-header--solid, body:not(.gs-has-hero) .gs-header, .gs-header .is-menu-open) .wp-block-navigation-item__content.wp-block-navigation-item__content[aria-current="page"] {
+	color: var(--gs-brand);
+	text-decoration: none;
 	text-shadow: none;
 }
 
@@ -267,7 +342,8 @@ body:not(.gs-has-hero) .gs-header::before {
 	color: var(--gs-brand);
 }
 
-@media (max-width: 1100px) {
+/* Two-row header: in Poppins the one-row bar only fits from ~1420px (approved 1400 breakpoint). */
+@media (max-width: 1400px) {
 
 	.gs-header {
 		padding-block: var(--wp--preset--spacing--10);
@@ -314,6 +390,126 @@ body:not(.gs-has-hero) .gs-header::before {
 		font-size: var(--wp--preset--font-size--small);
 		gap: var(--wp--preset--spacing--10);
 		inline-size: 100%;
-		padding-inline: var(--wp--preset--spacing--20);
+		padding-inline: var(--wp--preset--spacing--10);
+	}
+}
+
+/* Hero — Figma 1:69–1:515; the quote card (1:97) sits in the right column.
+ * The header floats over it, so the top padding adds the header's height: measured by
+ * gorilla.js (--gs-header-h), with a fallback close to the real height for first paint. */
+.gs-has-hero .wp-site-blocks > main {
+	margin-block-start: 0;
+}
+
+.gs-hero.wp-block-cover {
+
+	/* Header heights measured at 1920 / ≤1400 (two rows); JS replaces them with the live value. */
+	--gs-header-h-fallback: 90px;
+	--gs-hero-top: var(--gs-header-h, var(--gs-header-h-fallback));
+	align-items: flex-start;
+
+	/* Figma's hero fills the first screen (986 of 1080px); svh where supported. */
+	min-block-size: 100vh;
+	min-block-size: 100svh;
+	padding-block: calc(var(--gs-hero-top) + var(--wp--preset--spacing--40)) var(--wp--preset--spacing--40);
+	padding-inline: var(--wp--preset--spacing--80);
+}
+
+.gs-hero .wp-block-cover__inner-container {
+	inline-size: 100%;
+}
+
+.gs-hero__cols {
+	gap: var(--wp--preset--spacing--60);
+	margin-block: 0;
+}
+
+.gs-hero__title {
+	color: var(--wp--preset--color--white);
+	font-weight: 400;
+	margin-block: 0;
+}
+
+.gs-hero__row {
+	column-gap: var(--wp--preset--spacing--40);
+	margin-block-start: var(--wp--preset--spacing--30);
+	row-gap: var(--wp--preset--spacing--30);
+}
+
+/* Measure of the lead: Figma 420px at 20px. */
+.gs-hero__row .is-style-lead-with-bar {
+	margin: 0;
+	max-inline-size: 21em;
+}
+
+/* Social rail. Figma 1:83. Hidden until links have URLs (empty links render nothing). */
+.gs-hero__social.wp-block-social-links {
+	background: var(--gs-grad-glass-brand);
+	border: 1px solid var(--wp--preset--color--white);
+	border-radius: var(--gs-r-md);
+	box-shadow: var(--gs-shadow-glass);
+	gap: var(--wp--preset--spacing--10);
+	inline-size: fit-content;
+	margin-block-start: var(--wp--preset--spacing--60);
+	padding: var(--wp--preset--spacing--10);
+}
+
+.gs-hero__social.wp-block-social-links:empty,
+.gs-hero__social.wp-block-social-links:not(:has(.wp-social-link)) {
+	display: none;
+}
+
+.gs-hero__social.wp-block-social-links .wp-social-link {
+	background: var(--wp--preset--color--white);
+	color: var(--gs-brand);
+}
+
+.gs-hero .gs-trust-strip {
+	margin-block-start: var(--wp--preset--spacing--70);
+}
+
+.gs-hero__aside {
+	align-self: flex-start;
+}
+
+/* Scroll cue. Figma 1:73 (86px; sized control.lg). */
+.gs-hero__cue {
+	align-items: center;
+	background: var(--gs-grad-cue);
+	block-size: var(--gs-h-lg);
+	border-radius: 50%;
+	color: var(--wp--preset--color--white);
+	display: flex;
+	inline-size: var(--gs-h-lg);
+	justify-content: center;
+	margin: var(--wp--preset--spacing--50) auto 0;
+}
+
+.gs-hero__cue::before {
+	background: currentcolor;
+	block-size: 40%;
+	content: "";
+	inline-size: 40%;
+	mask: url(../icons/arrow-down.svg) center / contain no-repeat;
+}
+
+.gs-hero__cue:hover {
+	filter: brightness(1.12);
+}
+
+@media (max-width: 1400px) {
+
+	.gs-hero.wp-block-cover {
+		--gs-header-h-fallback: 152px;
+	}
+}
+
+/* Text spans the whole photo here, so the scrim's light right end isn't enough: darken the
+ * photo itself under it (AA contrast). Core's preset gradient class is !important, so the
+ * overlay can't be swapped without !important; the image filter avoids that. */
+@media (max-width: 781px) {
+
+	.gs-hero .wp-block-cover__image-background {
+		filter: brightness(0.55);
 	}
 }

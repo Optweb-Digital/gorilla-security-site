@@ -162,27 +162,33 @@ function gsec_buttons( $buttons ) {
 /**
  * Image block from a theme image name. Returns '' when the file is missing (AGENTS.md §6).
  *
- * @param string $name  Base name in assets/images/, e.g. 'about-portrait'.
- * @param string $alt   Alt text; '' for decorative images.
- * @param string $style Optional block style, e.g. 'deco-frame-left'.
+ * @param string $name   Base name in assets/images/, e.g. 'about-portrait'.
+ * @param string $alt    Alt text; '' for decorative images.
+ * @param string $style  Optional block style, e.g. 'deco-frame-left'.
+ * @param int    $width  Optional display width in px (with $height: sized like a resized core image).
+ * @param int    $height Optional display height in px.
  * @return string
  */
-function gsec_image( $name, $alt = '', $style = '' ) {
+function gsec_image( $name, $alt = '', $style = '', $width = 0, $height = 0 ) {
 	$src = gsec_img( $name );
 	if ( '' === $src ) {
 		return '';
 	}
 	$class   = $style ? 'is-style-' . sanitize_html_class( $style ) : '';
-	$classes = trim( 'wp-block-image size-full ' . $class );
+	$sized   = $width > 0 && $height > 0;
+	$classes = trim( 'wp-block-image size-full ' . ( $sized ? 'is-resized ' : '' ) . $class );
+	$img_css = $sized ? ' style="width:' . absint( $width ) . 'px;height:' . absint( $height ) . 'px"' : '';
 
 	return gsec_block_open(
 		'image',
 		array(
+			'width'     => $sized ? absint( $width ) . 'px' : '',
+			'height'    => $sized ? absint( $height ) . 'px' : '',
 			'sizeSlug'  => 'full',
 			'className' => $class,
 		)
 	) . "\n"
-		. '<figure class="' . esc_attr( $classes ) . '"><img src="' . esc_url( $src ) . '" alt="' . esc_attr( $alt ) . '"/></figure>' . "\n"
+		. '<figure class="' . esc_attr( $classes ) . '"><img src="' . esc_url( $src ) . '" alt="' . esc_attr( $alt ) . '"' . $img_css . '/></figure>' . "\n"
 		. '<!-- /wp:image -->';
 }
 

@@ -101,6 +101,7 @@ function gsec_register_block_styles() {
 	$styles = array(
 		'core/button'       => array(
 			'outline'      => __( 'Outline', 'gorilla-security' ),
+			'glass'        => __( 'Glass', 'gorilla-security' ),
 			'light-phone'  => __( 'Light · phone', 'gorilla-security' ),
 			'glass-phone'  => __( 'Glass · phone', 'gorilla-security' ),
 			'fill-no-icon' => __( 'Fill · no icon', 'gorilla-security' ),

@@ -52,6 +52,7 @@
 		"shadow": {
 			"defaultPresets": false,
 			"presets": [
+				{ "slug": "soft", "name": "Soft", "shadow": "0 4px 13px 0 rgba(0, 0, 0, 0.11)" },
 				{ "slug": "glass", "name": "Glass", "shadow": "-20px 22px 70px 0 rgba(0, 0, 0, 0.25)" },
 				{ "slug": "field", "name": "Field", "shadow": "0 1px 14px 0 rgba(0, 0, 0, 0.1)" },
 				{ "slug": "badge", "name": "Badge", "shadow": "0 4px 4px 0 rgba(0, 0, 0, 0.17)" },

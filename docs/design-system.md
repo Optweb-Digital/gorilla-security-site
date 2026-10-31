@@ -103,8 +103,8 @@ in blocks; pick a slug.
 - Layout: `contentSize 1080px`, `wideSize 1620px` (Figma content width 162 → 1783).
 - Radius: `xs 6` fields · `sm 10` badges/tabs · `md 12` buttons, glass bar · `lg 20` testimonials,
   glass cards (incl. 22px quote card 1:97) · `xl 30` photos, cards · `2xl 37` FAQ container · `pill`.
-- Shadow: `glass` floating (1:524) · `field` inputs (1:179) · `badge` review chip (1:114) · `glow` FAQ (1:342).
-  `soft` is not defined — no Figma layer uses it yet.
+- Shadow: `soft` section panel (1:7, added 2026-10-31) · `glass` floating (1:524) · `field` inputs (1:179) ·
+  `badge` review chip (1:114) · `glow` FAQ (1:342).
 - Custom: `blur.glass` 35px — used only by **Glass · light** (the header bar). Glass buttons, the
   hero scroll cue and social rail keep their glass tint without blur: over the hero photo the
   blur cost ~250ms main-thread work and failed the perf gate (approved 2026-10-31) ·

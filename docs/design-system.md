@@ -129,11 +129,11 @@ Components are **core blocks + block styles + CSS classes + patterns**. No custo
 | Button — glass phone | style **Glass · phone** | 1:531 |
 | Button — no icon (submit) | style **Fill · no icon** | 1:111 |
 | Button sizes | `gs-btn-sm` (48px) · default (60px) · font size `Lead` (71px) | — |
-| Eyebrow | paragraph style **Eyebrow** | 1:24 |
+| Eyebrow | paragraph style **Eyebrow** (on dark cards: `brand-100`, brand purple is ~1.4:1 there) | 1:24, 1:98 |
 | Accent heading words | select words → **Highlight** (renders `<mark>`) | gradient spans in every H2 |
 | Lead with bar | paragraph style **Lead with bar** | 1:76 |
 | Card / Card tint | group styles **Card**, **Card · tint** | 1:28 |
-| Glass light / dark / violet outline | group styles **Glass · light / dark / violet outline** | 1:524, 1:97, 1:314 |
+| Glass light / dark / violet outline | group styles **Glass · light / dark / violet outline**. Glass · dark is translucent only inside a Cover (photo); elsewhere solid `night-2` | 1:524, 1:97, 1:314 |
 | Icon circle | group with `gs-icon-circle gs-ico-{name}` (+ `--sm/--md/--dark/--solid`) | ellipses 1:33 etc. |
 | Feature row | `gs-feature` group (icon circle + title + text) | 1:29 |
 | Stats | columns style **Stats with dividers**, `gs-stat__num` / `gs-stat__label` | 1:12 |
@@ -150,7 +150,7 @@ Components are **core blocks + block styles + CSS classes + patterns**. No custo
 | Slider | `gs-slider` › arrows + `gs-slider__track` (scroll-snap) | 1:418 |
 | Testimonial card | cover `gs-testimonial` + `gs-rating`, `gs-testimonial__*` | 1:4619 |
 | FAQ | group `gs-faq` › details style **FAQ (numbered)** | 1:339 |
-| Forms | wrap plugin form in group `gs-form` (light) or `gs-form gs-form--dark` | 1:97, 1:172 |
+| Forms | wrap plugin form in group `gs-form` (light) or `gs-form gs-form--dark`. CF7 fields use floating labels: `<p class="gs-field">[field … placeholder "Label"]<label for=…>Label</label></p>` — templates in `docs/forms/` | 1:97, 1:172 |
 | Contact card / list / hours | patterns `contact-card`, footer `gs-contact-list`, `gs-hours` | 1:199, 1:469, 1:485 |
 
 ### Patterns (`patterns/*.php`, inserter → *Gorilla · Sections / Components*)

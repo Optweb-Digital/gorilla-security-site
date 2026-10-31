@@ -213,6 +213,20 @@ function gsec_body_class( $classes ) {
 add_filter( 'body_class', 'gsec_body_class' );
 
 /**
+ * Run shortcodes inside Shortcode blocks when they render.
+ *
+ * Block templates run do_shortcode() before patterns are expanded, so a shortcode in a
+ * pattern placed in a template (e.g. the quote card's Contact Form 7 form) stays literal.
+ *
+ * @param string $content Rendered shortcode block.
+ * @return string
+ */
+function gsec_render_shortcode_block( $content ) {
+	return do_shortcode( $content );
+}
+add_filter( 'render_block_core/shortcode', 'gsec_render_shortcode_block' );
+
+/**
  * Site Logo fallback: use assets/images/logo.* until a logo is set in the editor.
  *
  * @param string $html Custom logo markup ('' when no logo is set).

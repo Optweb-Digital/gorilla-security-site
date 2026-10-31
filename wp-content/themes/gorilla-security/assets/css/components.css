@@ -83,6 +83,10 @@ a[href^="tel:"] {
 	--gs-ico: url(../icons/arrow-right.svg);
 }
 
+.gs-ico-chevron-down {
+	--gs-ico: url(../icons/chevron-down.svg);
+}
+
 .gs-ico-phone {
 	--gs-ico: url(../icons/phone.svg);
 }
@@ -230,6 +234,201 @@ a[href^="tel:"] {
 
 .gs-trust-strip > * {
 	margin: 0;
+}
+
+/* Paragraph — Eyebrow. Figma 1:98 (the rule before it, 1:24, arrives with the about section). */
+.is-style-eyebrow {
+	color: var(--gs-brand);
+	font-size: var(--wp--preset--font-size--medium);
+	font-weight: 600;
+	letter-spacing: 0.13em;
+	text-transform: uppercase;
+}
+
+/* Group — Glass · dark. Figma 1:97. Translucent only over a cover photo; solid elsewhere,
+ * where 58% night over a light page leaves white text below AA. */
+.is-style-glass-dark {
+	background: var(--wp--preset--color--night-2);
+	border: 1px solid transparent;
+	border: 1px solid color-mix(in srgb, var(--wp--preset--color--white) 32%, transparent);
+	border-radius: var(--gs-r-lg);
+	color: var(--wp--preset--color--white);
+}
+
+.wp-block-cover .is-style-glass-dark {
+	background: color-mix(in srgb, var(--wp--preset--color--night-2) 58%, transparent);
+}
+
+/* Form — Contact Form 7 inside .gs-form (light) or .gs-form--dark. Figma 1:97, 1:172.
+ * Floating labels: each field is <p class="gs-field">[control]<label></p> (docs/forms/).
+ * The label sits inside the field until it has focus or a value, then shrinks to the top.
+ * Without :has() the label simply stays small at the top. Placeholders repeat the label
+ * and are hidden; they only exist so :placeholder-shown works.
+ * Grid column minmax(0, 1fr): a long submit label must not widen every field past the card. */
+.gs-form .wpcf7-form {
+	display: grid;
+	gap: var(--wp--preset--spacing--10);
+	grid-template-columns: minmax(0, 1fr);
+}
+
+.gs-form .wpcf7-form > p {
+	margin: 0;
+}
+
+.gs-form .gs-field {
+	position: relative;
+}
+
+.gs-form .wpcf7-form-control-wrap {
+	display: block;
+}
+
+.gs-form :is(input:not([type="submit"]), select, textarea) {
+	border: 1px solid transparent;
+	border-radius: var(--gs-r-md);
+	box-sizing: border-box;
+	font: inherit;
+	font-size: var(--wp--preset--font-size--small);
+	inline-size: 100%;
+	min-block-size: var(--gs-h-md);
+	padding: 1.6em var(--wp--preset--spacing--40) 0.5em;
+}
+
+.gs-form textarea {
+	display: block;
+	resize: vertical;
+}
+
+.gs-form ::placeholder {
+	color: transparent;
+}
+
+/* Long labels end in an ellipsis inside the field; the accessible name stays complete. */
+.gs-form .gs-field > label {
+	font-size: var(--wp--preset--font-size--caption);
+	inset-block-start: var(--wp--preset--spacing--10);
+	inset-inline: calc(var(--wp--preset--spacing--40) + 1px);
+	overflow: hidden;
+	pointer-events: none;
+	position: absolute;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.gs-form .gs-field--select > label {
+	inset-inline-end: calc(var(--wp--preset--spacing--40) * 2);
+}
+
+/* Select: own chevron (Figma 1:186), native list stays. */
+.gs-form .gs-field--select select {
+	appearance: none;
+	padding-inline-end: calc(var(--wp--preset--spacing--40) * 2);
+}
+
+.gs-form .gs-field--select .wpcf7-form-control-wrap::after {
+	background: currentcolor;
+	block-size: 1.25em;
+	content: "";
+	inline-size: 1.25em;
+	inset-block-start: 50%;
+	inset-inline-end: var(--wp--preset--spacing--30);
+	mask: url(../icons/chevron-down.svg) center / contain no-repeat;
+	pointer-events: none;
+	position: absolute;
+	transform: translateY(-50%);
+}
+
+.gs-form select option {
+	background: var(--wp--preset--color--white);
+	color: var(--wp--preset--color--heading);
+}
+
+@supports selector(:has(a)) {
+
+	.gs-form .gs-field:has(:placeholder-shown):not(:focus-within) > label {
+		font-size: var(--wp--preset--font-size--small);
+		inset-block-start: 50%;
+		transform: translateY(-50%);
+	}
+
+	.gs-form .gs-field--textarea:has(:placeholder-shown):not(:focus-within) > label {
+		inset-block-start: var(--wp--preset--spacing--20);
+		transform: none;
+	}
+
+	/* Empty select shows its first option ("Service Interested In *") as the label. */
+	.gs-form .gs-field--select:has(option:checked[value=""]) > label {
+		clip-path: inset(50%);
+		overflow: hidden;
+		white-space: nowrap;
+	}
+
+	.gs-form .gs-field--select:has(option:checked[value=""]) select {
+		padding-block: 0;
+	}
+}
+
+/* Submit — looks like Button · Fill · no icon (1:111). */
+.gs-form .gs-form__submit {
+	margin-block-start: var(--wp--preset--spacing--20);
+	position: relative;
+}
+
+.gs-form .wpcf7-submit {
+	appearance: none;
+	background: var(--gs-grad);
+	border: 1px solid transparent;
+	border: 1px solid color-mix(in srgb, var(--wp--preset--color--white) 25%, transparent);
+	border-radius: var(--gs-r-md);
+	color: var(--wp--preset--color--white);
+	cursor: pointer;
+	font: inherit;
+	font-size: var(--wp--preset--font-size--medium);
+	inline-size: 100%;
+	min-block-size: var(--gs-h-md);
+	padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--40);
+	white-space: normal;
+}
+
+.gs-form .wpcf7-submit:hover {
+	filter: brightness(1.12);
+}
+
+.gs-form .wpcf7-spinner {
+	inset-block-start: 50%;
+	inset-inline-end: var(--wp--preset--spacing--30);
+	margin: 0;
+	position: absolute;
+	transform: translateY(-50%);
+}
+
+.gs-form .wpcf7-response-output {
+	border-radius: var(--gs-r-md);
+	margin: var(--wp--preset--spacing--20) 0 0;
+}
+
+/* Dark form. Figma 1:101: fields night-2 38%, white 28% border, white text. */
+.gs-form--dark :is(input:not([type="submit"]), select, textarea) {
+	background: var(--wp--preset--color--night-2);
+	background: color-mix(in srgb, var(--wp--preset--color--night-2) 38%, transparent);
+	border-color: var(--wp--preset--color--white);
+	border-color: color-mix(in srgb, var(--wp--preset--color--white) 28%, transparent);
+	color: var(--wp--preset--color--white);
+}
+
+.gs-form--dark .gs-field > label {
+	color: var(--wp--preset--color--on-dark);
+}
+
+/* No error colour in the design system yet; CF7's red is ~3:1 on the dark card. */
+.gs-form--dark .wpcf7-not-valid-tip {
+	color: var(--wp--preset--color--white);
+	font-size: var(--wp--preset--font-size--caption);
+	margin-block-start: var(--wp--preset--spacing--10);
+}
+
+.gs-form--dark [aria-invalid="true"] {
+	border-color: var(--wp--preset--color--white);
 }
 
 /* ---------- Sections (Figma order) ---------- */
@@ -468,8 +667,10 @@ body:not(.gs-has-hero) .gs-header::before {
 	margin-block-start: var(--wp--preset--spacing--70);
 }
 
+/* Card column: 28% at 1920 (Figma 465px), never narrower than the form needs. */
 .gs-hero__aside {
 	align-self: flex-start;
+	min-inline-size: 26rem;
 }
 
 /* Scroll cue. Figma 1:73 (86px; sized control.lg). */
@@ -504,6 +705,20 @@ body:not(.gs-has-hero) .gs-header::before {
 	}
 }
 
+/* Stack the quote card under the hero copy below 1100px (at 28% it shrinks to ~260px).
+ * !important: core forces nowrap on columns from 782px and sets flex-basis inline. */
+@media (max-width: 1100px) {
+
+	.gs-hero__cols {
+		flex-wrap: wrap !important;
+	}
+
+	.gs-hero__cols > .wp-block-column {
+		flex-basis: 100% !important;
+		min-inline-size: 0;
+	}
+}
+
 /* Text spans the whole photo here, so the scrim's light right end isn't enough: darken the
  * photo itself under it (AA contrast). Core's preset gradient class is !important, so the
  * overlay can't be swapped without !important; the image filter avoids that. */
@@ -512,4 +727,34 @@ body:not(.gs-has-hero) .gs-header::before {
 	.gs-hero .wp-block-cover__image-background {
 		filter: brightness(0.55);
 	}
+}
+
+/* Quote card — Figma 1:97 (hero right column; component). */
+.gs-quote-card {
+	padding: var(--wp--preset--spacing--50);
+}
+
+.gs-quote-card > * {
+	margin-block: 0;
+}
+
+.gs-quote-card > * + * {
+	margin-block-start: var(--wp--preset--spacing--10);
+}
+
+.gs-quote-card > .wpcf7 {
+	margin-block-start: var(--wp--preset--spacing--30);
+}
+
+/* Figma's purple eyebrow is ~1.4:1 on the dark card; brand-100 keeps the tint at AA. */
+.gs-quote-card .is-style-eyebrow {
+	color: var(--wp--preset--color--brand-100);
+}
+
+.gs-quote-card__title {
+	color: var(--wp--preset--color--white);
+}
+
+.gs-quote-card > p:not(.is-style-eyebrow) {
+	color: var(--wp--preset--color--on-dark);
 }

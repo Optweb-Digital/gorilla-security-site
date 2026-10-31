@@ -112,7 +112,7 @@
 			"blur": { "glass": "35px" },
 			"text-shadow": { "on-photo": "0 0 4px rgba(0, 0, 0, 0.53)" },
 			"control": { "sm": "48px", "md": "60px", "lg": "71px" },
-			"duration": { "marquee": "40s" }
+			"duration": { "marquee": "40s", "step": "8s" }
 		}
 	},
 	"styles": {

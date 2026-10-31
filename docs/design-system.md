@@ -114,6 +114,7 @@ in blocks; pick a slug.
 - Off-scale Figma spacing snaps to the nearest slug (approved 2026-10-31): header nav gap 60 → `70`,
   header button gap 20 → `40`, header side inset 42 → `60`.
   Motion: `duration.marquee` 40s per logo loop (brands, added 2026-10-31; Figma has no motion values).
+  `duration.step` 8s per Why-us step (auto-advance, added 2026-10-31; long enough to read a ~20-word step).
   No `easing` token yet; ask before adding motion tokens.
 
 ---

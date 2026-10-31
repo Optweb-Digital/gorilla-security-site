@@ -1,5 +1,6 @@
 name: Claude
-# Needs repo secret ANTHROPIC_API_KEY (or run /install-github-app in Claude Code).
+# Needs the Claude GitHub App on the repo and repo secret ANTHROPIC_API_KEY (or run /install-github-app in Claude Code).
+# Until the secret exists the review step is skipped, so the check passes instead of failing.
 # Review job only for now; add an @claude mention job once the team trusts it.
 on:
   pull_request: { types: [opened, synchronize] }
@@ -7,9 +8,17 @@ permissions: { contents: read, pull-requests: write, issues: write, id-token: wr
 jobs:
   review:
     runs-on: ubuntu-latest
+    env:
+      # Secrets can't be read in an `if`, so expose whether the key is set.
+      HAS_ANTHROPIC_KEY: ${{ secrets.ANTHROPIC_API_KEY != '' }}
     steps:
+      - name: Claude review not set up yet
+        if: env.HAS_ANTHROPIC_KEY != 'true'
+        run: echo "::notice::Claude review skipped — install https://github.com/apps/claude and add the ANTHROPIC_API_KEY secret to enable it."
       - uses: actions/checkout@v4
+        if: env.HAS_ANTHROPIC_KEY == 'true'
       - uses: anthropics/claude-code-action@v1
+        if: env.HAS_ANTHROPIC_KEY == 'true'
         with:
           anthropic_api_key: "${{ secrets.ANTHROPIC_API_KEY }}"
           prompt: |

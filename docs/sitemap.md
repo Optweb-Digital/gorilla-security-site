@@ -31,7 +31,7 @@ Figma order, top to bottom. "Root" is the group to pass to `get_metadata`; the o
 | 9 | `split-image-left` | 1:238 | deco 1:240/1:241 · image 1:252 | Deco frame · left | done locally (`feat/splits`) — "& Locksmith" built as "Gorilla Security" | TBD |
 | 10 | `split-icon-trio` | 1:253 | deco 1:254/1:255 · icon trio 1:265 · image 1:288 | Deco frame · right, Icon trio | done locally (`feat/splits`) | TBD |
 | 11 | `cta-dark` | 1:289 | bg 1:291 + overlay 1:292 · model 1:320 · stat cards 1:314 / 1:321 · buttons 1:299 / 1:302 | Glass · violet outline, Button light phone | done locally (`feat/cta-dark`) — phone button shows once the phone number is confirmed | TBD |
-| 12 | `testimonials` | 1:407 | slider 1:418 (cards 1:4619…) · **testimonial arrows 1:419** | Slider, Testimonial card, Round arrows | not started | TBD |
+| 12 | `testimonials` | 1:407 | slider 1:418 (cards 1:4619…) · **testimonial arrows 1:419** | Slider, Testimonial card, Round arrows | done locally (`feat/testimonials`) — 5 reviews; genuineness and photo rights pending | TBD |
 | 13 | `faq` | 1:334 | container 1:342 · open row 1:343 · items 1:339 | FAQ (numbered) | not started | TBD |
 | 14 | `footer` | 1:426 | bg image 1:428 + overlays 1:429 / 1:430 · logo 1:503 · badge 1:507 · services 1:432 · quick links 1:441 · contact list 1:469 · hours 1:485 · social 1:451 | `gs-contact-list`, `gs-hours`, Social links · tint circles | not started | TBD |
 

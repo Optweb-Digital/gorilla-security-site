@@ -228,8 +228,73 @@
 		} );
 	}
 
+	/**
+	 * Slider: .gs-arrow buttons (aria-controls = track id) scroll a .gs-slider__track by one card.
+	 * The track is a native scroll-snap scroller, so without JS it still scrolls by touch/trackpad.
+	 */
+	function initSliders() {
+		const smooth = window.matchMedia( '(prefers-reduced-motion: reduce)' )
+			.matches
+			? 'auto'
+			: 'smooth';
+
+		document
+			.querySelectorAll( '.gs-slider__track[id]' )
+			.forEach( function ( track ) {
+				const arrows = document.querySelectorAll(
+					'.gs-arrow[aria-controls="' + track.id + '"]'
+				);
+				const section = track.closest( '.alignfull' );
+				const heading = section && section.querySelector( 'h2' );
+
+				track.setAttribute( 'role', 'region' );
+				track.setAttribute( 'tabindex', '0' );
+				if ( heading ) {
+					track.setAttribute( 'aria-label', heading.textContent );
+				}
+
+				const step = function () {
+					const cards = track.children;
+					return cards.length > 1
+						? Math.abs(
+								cards[ 1 ].offsetLeft - cards[ 0 ].offsetLeft
+						  )
+						: track.clientWidth;
+				};
+				const update = function () {
+					const max = track.scrollWidth - track.clientWidth - 1;
+					const pos = Math.abs( track.scrollLeft );
+					arrows.forEach( function ( arrow ) {
+						arrow.disabled =
+							'prev' === arrow.dataset.gsDir
+								? pos <= 1
+								: pos >= max;
+					} );
+				};
+
+				arrows.forEach( function ( arrow ) {
+					arrow.addEventListener( 'click', function () {
+						const rtl =
+							'rtl' ===
+							window.getComputedStyle( track ).direction;
+						const dir =
+							( 'prev' === arrow.dataset.gsDir ? -1 : 1 ) *
+							( rtl ? -1 : 1 );
+						track.scrollBy( {
+							left: dir * step(),
+							behavior: smooth,
+						} );
+					} );
+				} );
+				track.addEventListener( 'scroll', update, { passive: true } );
+				window.addEventListener( 'resize', update );
+				update();
+			} );
+	}
+
 	initHeader();
 	initMarquees();
 	initSteppers();
 	initTabs();
+	initSliders();
 } )();

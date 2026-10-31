@@ -2434,3 +2434,218 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 		font-size: 4.4cqi;
 	}
 }
+
+/* ---------- Testimonials — Figma 1:407 ---------- */
+.gs-testimonials.wp-block-group {
+	margin-block-start: 0;
+	padding-block: var(--wp--preset--spacing--60) var(--wp--preset--spacing--80);
+	background-color: var(--wp--preset--color--white);
+}
+
+/* Figma: heading from x 133, copy and arrows run to 48px from the right edge like the track. */
+.gs-testimonials__head.wp-block-group {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--60);
+	align-items: flex-start;
+	justify-content: space-between;
+	margin-block-end: var(--wp--preset--spacing--70);
+	padding-inline: var(--wp--style--root--padding-left) var(--wp--preset--spacing--60);
+}
+
+.gs-testimonials__intro.wp-block-group {
+	flex: 1 1 0;
+	min-inline-size: min(100%, 20rem);
+}
+
+.gs-testimonials__intro > *,
+.gs-testimonials__aside > * {
+	margin-block: 0;
+}
+
+.gs-testimonials__intro > .is-style-eyebrow {
+	margin-block-end: var(--wp--preset--spacing--50);
+}
+
+.gs-testimonials .gs-testimonials__intro > .wp-block-heading {
+	max-inline-size: 14.5em;
+	letter-spacing: -0.03em;
+	line-height: 1.22;
+}
+
+.gs-testimonials__aside.wp-block-group {
+	flex: 0 1 36%;
+}
+
+.gs-testimonials .wp-block-group.gs-testimonials__aside > p.has-lead-font-size {
+	letter-spacing: -0.03em;
+	line-height: 1.75;
+}
+
+.gs-testimonials__actions.wp-block-group {
+	gap: var(--wp--preset--spacing--60);
+	align-items: center;
+}
+
+/* Figma 1:419: 76px arrows; prev brand-100 with grey icon, next solid brand-600. */
+.gs-testimonials .gs-arrows .gs-arrow {
+	inline-size: clamp(48px, 4vw, 76px);
+	block-size: clamp(48px, 4vw, 76px);
+	border-color: var(--wp--preset--color--brand-100);
+	background-color: var(--wp--preset--color--brand-100);
+	color: var(--wp--preset--color--body);
+}
+
+.gs-testimonials .gs-arrows .gs-arrow + .gs-arrow {
+	border-color: var(--wp--preset--color--brand-600);
+	background-color: var(--wp--preset--color--brand-600);
+	background-image: none;
+	color: var(--wp--preset--color--white);
+}
+
+.gs-arrows .gs-arrow.gs-arrow:disabled {
+	cursor: default;
+	opacity: 0.4;
+}
+
+/* Slider — Figma 1:418: native scroll-snap track; JS only adds the arrows. */
+.gs-slider__track.wp-block-group {
+	display: flex;
+	gap: var(--wp--preset--spacing--60);
+	margin: 0;
+	padding-block-end: var(--wp--preset--spacing--20);
+	padding-inline: var(--wp--style--root--padding-left) var(--wp--preset--spacing--60);
+	overflow-x: auto;
+	overscroll-behavior-x: contain;
+	scroll-padding-inline: var(--wp--style--root--padding-left);
+	scroll-snap-type: x mandatory;
+}
+
+.gs-js .gs-slider__track.wp-block-group {
+	scrollbar-width: none;
+}
+
+.gs-js .gs-slider__track::-webkit-scrollbar {
+	display: none;
+}
+
+.gs-slider__track:focus-visible {
+	outline: 2px solid var(--gs-brand);
+	outline-offset: 4px;
+}
+
+/* Testimonial card — Figma 1:4619: 348 × 423 photo card, radius 20, photo-shade, text at the foot. */
+.gs-slider__track > .gs-testimonial.wp-block-group {
+	display: grid;
+	flex: 0 0 auto;
+	grid-template: 1fr / 1fr;
+	inline-size: clamp(260px, 18.1vw, 348px);
+	aspect-ratio: 348 / 423;
+	margin: 0;
+	border-radius: var(--gs-r-lg);
+	background-color: var(--wp--preset--color--night);
+	color: var(--wp--preset--color--white);
+	scroll-snap-align: start;
+}
+
+.gs-testimonial > * {
+	grid-area: 1 / 1;
+	margin: 0;
+}
+
+/* The photo clips itself (not the card), so aspect-ratio can still grow the card for long reviews. */
+.gs-testimonial > .gs-testimonial__photo.wp-block-image {
+	position: relative;
+	overflow: hidden;
+	border-radius: inherit;
+}
+
+.gs-testimonial__photo::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background-image: var(--wp--preset--gradient--photo-shade);
+}
+
+.gs-testimonial .gs-testimonial__photo img {
+	inline-size: 100%;
+	block-size: 100%;
+	object-fit: cover;
+}
+
+.gs-testimonial > .gs-testimonial__body.wp-block-group {
+	display: flex;
+	position: relative;
+	flex-direction: column;
+	align-self: end;
+	padding: var(--wp--preset--spacing--40);
+}
+
+.gs-testimonial__body > * {
+	margin-block: 0;
+}
+
+/* Rating pill — Figma 1:4622: brand-500 → brand-900, 1px border, radius 10. */
+.gs-testimonial__body > .gs-rating {
+	display: inline-flex;
+	gap: var(--wp--preset--spacing--10);
+	align-items: center;
+	align-self: flex-start;
+	padding: 0.2em var(--wp--preset--spacing--20);
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: var(--gs-r-sm);
+	background-image: linear-gradient(90deg, var(--wp--preset--color--brand-500), var(--wp--preset--color--brand-900));
+	font-size: var(--wp--preset--font-size--base);
+	font-weight: 500;
+	letter-spacing: -0.03em;
+	line-height: 1.5;
+}
+
+.gs-rating__stars {
+	font-size: 0.65em;
+	letter-spacing: 0.08em;
+}
+
+.gs-testimonial__body > .gs-testimonial__meta.wp-block-group {
+	gap: var(--wp--preset--spacing--20);
+	align-items: baseline;
+	margin-block: var(--wp--preset--spacing--10) var(--wp--preset--spacing--20);
+}
+
+.gs-slider__track .gs-testimonial .gs-testimonial__meta.wp-block-group p {
+	margin: 0;
+	line-height: 1.4;
+}
+
+.gs-testimonial__meta .gs-testimonial__name {
+	font-size: var(--wp--preset--font-size--lead);
+	font-weight: 600;
+}
+
+.gs-testimonial__meta .gs-testimonial__date {
+	font-size: var(--wp--preset--font-size--medium);
+}
+
+.gs-testimonial__body > .gs-testimonial__quote {
+	font-size: var(--wp--preset--font-size--caption);
+	line-height: 1.6;
+}
+
+@media (max-width: 781px) {
+
+	.gs-testimonials__aside.wp-block-group {
+		flex-basis: 100%;
+	}
+
+	.gs-testimonials__actions.wp-block-group {
+		justify-content: flex-start;
+	}
+}
+
+@media (max-width: 600px) {
+
+	/* Wider cards on phones so the photo still shows above the review text. */
+	.gs-slider__track > .gs-testimonial.wp-block-group {
+		inline-size: min(80vw, 348px);
+	}
+}

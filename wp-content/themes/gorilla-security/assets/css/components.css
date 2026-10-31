@@ -21,7 +21,7 @@
 	--gs-r-md: var(--wp--custom--radius--md);
 	--gs-r-lg: var(--wp--custom--radius--lg);
 	--gs-r-xl: var(--wp--custom--radius--xl);
-	--gs-r-2xl: var(--wp--custom--radius--2xl);
+	--gs-r-2xl: var(--wp--custom--radius--2-xl); /* WP kebab-cases "2xl" to "2-xl" */
 	--gs-r-pill: var(--wp--custom--radius--pill);
 	--gs-grad: var(--wp--preset--gradient--brand);
 	--gs-grad-text: var(--wp--preset--gradient--brand-text);
@@ -2507,5 +2507,143 @@ body:not(.gs-has-hero) .gs-header::before {
 
 	.gs-testimonials__head > .wp-block-column {
 		flex-basis: 100% !important;
+	}
+}
+
+/* FAQ — Figma 1:334. Soft background, heading row, then a white card of numbered
+ * questions. Details — FAQ (numbered): CSS counter number, question, plus/close icon;
+ * the open item sits on a brand-100 panel. Native <details>, no JS. */
+.gs-faq {
+	background: var(--gs-grad-soft);
+	counter-reset: gs-faq;
+	padding-block: var(--wp--preset--spacing--70) var(--wp--preset--spacing--80);
+}
+
+.gs-faq .gs-faq__head {
+	align-items: flex-start;
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--40);
+	justify-content: space-between;
+	margin-block-start: 0;
+}
+
+.gs-faq .gs-faq__intro > * {
+	margin: 0;
+}
+
+.gs-faq .gs-faq__intro .wp-block-heading {
+	letter-spacing: -0.03em;
+	line-height: 1.2;
+	margin-block-start: var(--wp--preset--spacing--30);
+	max-inline-size: 14em;
+}
+
+.gs-faq .gs-faq__head > .wp-block-buttons {
+	margin: var(--wp--preset--spacing--40) 0 0;
+}
+
+/* Card: Figma 1328 of 1620 wide, radius 37, glow shadow. */
+.gs-faq .gs-faq__list {
+	background: var(--wp--preset--color--white);
+	border-radius: var(--gs-r-2xl);
+	box-shadow: var(--gs-shadow-glow);
+	margin-block-start: var(--wp--preset--spacing--40);
+	max-inline-size: 82%;
+	padding: var(--wp--preset--spacing--40) var(--wp--preset--spacing--50);
+}
+
+.gs-faq .gs-faq__list > * {
+	margin: 0;
+}
+
+.is-style-faq-numbered {
+	counter-increment: gs-faq;
+	padding-inline: var(--wp--preset--spacing--30);
+}
+
+.is-style-faq-numbered + .is-style-faq-numbered:not([open]) {
+	border-block-start: 1px solid var(--wp--preset--color--border);
+}
+
+.is-style-faq-numbered[open] {
+	background: var(--wp--preset--color--brand-100);
+	border-radius: var(--gs-r-2xl);
+}
+
+.is-style-faq-numbered[open] + .is-style-faq-numbered {
+	border-block-start: 0;
+}
+
+.is-style-faq-numbered > summary {
+	align-items: center;
+	color: var(--wp--preset--color--muted);
+	cursor: pointer;
+	display: grid;
+	font-size: var(--wp--preset--font-size--lead);
+	font-weight: 500;
+	gap: var(--wp--preset--spacing--30);
+	grid-template-columns: clamp(2.5em, 18%, 13em) 1fr auto;
+	letter-spacing: -0.03em;
+	line-height: 1.5;
+	list-style: none;
+	padding-block: var(--wp--preset--spacing--40);
+}
+
+.is-style-faq-numbered > summary::-webkit-details-marker {
+	display: none;
+}
+
+/* Number (decorative counter) and icon. */
+.is-style-faq-numbered > summary::before {
+	color: var(--wp--preset--color--body);
+	content: counter(gs-faq, decimal-leading-zero);
+	font-size: var(--wp--preset--font-size--h-5);
+	font-weight: 400;
+}
+
+.is-style-faq-numbered > summary::after {
+	background: currentcolor;
+	block-size: 1.2em;
+	content: "";
+	inline-size: 1.2em;
+	mask: url(../icons/plus.svg) center / contain no-repeat;
+	opacity: 0.6;
+}
+
+.is-style-faq-numbered[open] > summary {
+	color: var(--wp--preset--color--brand-700);
+}
+
+.is-style-faq-numbered[open] > summary::before {
+	color: var(--wp--preset--color--brand-700);
+}
+
+.is-style-faq-numbered[open] > summary::after {
+	mask-image: url(../icons/close.svg);
+	opacity: 1;
+}
+
+.is-style-faq-numbered > :not(summary) {
+	color: var(--wp--preset--color--body);
+	line-height: 1.95;
+	margin: 0 0 var(--wp--preset--spacing--40);
+	margin-inline-start: calc(clamp(2.5em, 18%, 13em) + var(--wp--preset--spacing--30));
+	max-inline-size: 40em;
+}
+
+@media (max-width: 781px) {
+
+	.gs-faq .gs-faq__list {
+		max-inline-size: none;
+		padding-inline: var(--wp--preset--spacing--20);
+	}
+
+	.is-style-faq-numbered > summary {
+		grid-template-columns: auto 1fr auto;
+	}
+
+	.is-style-faq-numbered > :not(summary) {
+		margin-inline-start: 0;
 	}
 }

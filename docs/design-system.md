@@ -152,7 +152,7 @@ Components are **core blocks + block styles + CSS classes + patterns**. No custo
 | Marquee | `gs-marquee` › `gs-marquee__track` › `gs-marquee__row` (Image blocks). gorilla.js clones each row once (aria-hidden) and adds a pause button (WCAG 2.2.2); no motion without JS or with reduced motion (rows wrap). Speed: `duration.marquee` | 1:510 |
 | Slider | `gs-slider` › `gsec_arrows( track id )` + `gs-slider__track` (full-bleed scroll-snap row from the wide edge). gorilla.js: arrows scroll one card, track becomes a labelled focusable region, scrollbar hidden; without JS the row scrolls natively and the arrows hide | 1:418 |
 | Testimonial card | group `gs-testimonial` (photo + `gs-testimonial__body` on the `photo-shade` gradient: `__score` pill with `gs-rating`, `__meta` name + age, `__text`) | 1:4375 |
-| FAQ | group `gs-faq` › details style **FAQ (numbered)** | 1:339 |
+| FAQ | group `gs-faq` › `gs-faq__list` card › Details blocks, style **FAQ (numbered)**: CSS counter number, plus/close icon, open item on a `brand-100` panel; native `<details>`, no JS | 1:339 |
 | Forms | wrap plugin form in group `gs-form` (light) or `gs-form gs-form--dark`. CF7 fields use floating labels: `<p class="gs-field">[field … placeholder "Label"]<label for=…>Label</label></p>` — templates in `docs/forms/` | 1:97, 1:172 |
 | Contact card / list / hours | pattern `contact-card` (group `gs-contact-card` + Glass · dark: phone and hours items from `gsec_site()`, each only when set; hours hidden until the Figma conflict is resolved), footer `gs-contact-list`, `gs-hours` | 1:199, 1:469, 1:485 |
 

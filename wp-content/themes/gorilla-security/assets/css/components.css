@@ -2210,3 +2210,227 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 		font-size: var(--wp--preset--font-size--small);
 	}
 }
+
+/* ---------- CTA · dark — Figma 1:289 ---------- */
+.wp-block-cover.gs-cta {
+	align-items: stretch;
+	min-block-size: 0;
+	margin-block-start: 0;
+	padding-block: var(--wp--preset--spacing--50) 0;
+	padding-inline: var(--wp--style--root--padding-left) var(--wp--style--root--padding-right);
+	overflow: clip;
+
+	/* Accent words on dark: brand-text ends near black, and Figma's #890C6C end is 2.1:1 on night.
+	   This keeps Figma's magenta → violet and stays ≥ 3.9:1 (large text needs 3:1). */
+	--gs-grad-text: linear-gradient(90deg, var(--wp--preset--color--brand-300), color-mix(in srgb, var(--wp--preset--color--brand-200) 80%, var(--wp--preset--color--white)));
+
+	/* Solid night under the photo: fallback if it fails to load, and what contrast checkers measure. */
+	background-color: var(--wp--preset--color--night);
+	color: var(--wp--preset--color--white);
+}
+
+/* Solid accent fallback that reads on night (3.7:1); the gradient hides it with text-fill only,
+   so contrast checkers that ignore gradients still measure a real colour, not transparent. */
+.gs-cta mark.gs-accent {
+	color: var(--wp--preset--color--brand-300);
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+
+	.gs-cta .wp-block-heading mark.gs-accent {
+		color: var(--wp--preset--color--brand-300);
+		-webkit-text-fill-color: transparent;
+	}
+}
+
+.gs-cta .wp-block-cover__inner-container {
+	display: flex;
+	inline-size: 100%;
+}
+
+/* Figma: text 682px, gap 90, media 967px (cards reach 48px from the right edge). */
+.wp-block-columns.gs-cta__cols {
+	flex: 1;
+	gap: var(--wp--preset--spacing--80);
+	align-items: stretch;
+	margin: 0;
+}
+
+.wp-block-columns.gs-cta__cols > .wp-block-column.gs-cta__text {
+	display: flex;
+	flex: 1 1 0;
+	flex-direction: column;
+	align-self: center;
+	padding-block-end: var(--wp--preset--spacing--50);
+}
+
+.wp-block-columns.gs-cta__cols > .wp-block-column.gs-cta__media {
+	flex: 1.42 1 0;
+	align-self: flex-end;
+	min-inline-size: 0;
+	margin-inline-end: calc(var(--wp--preset--spacing--60) - var(--wp--style--root--padding-right));
+}
+
+.gs-cta__text > * {
+	margin-block: 0;
+}
+
+.gs-cta .is-style-eyebrow,
+.gs-cta .wp-block-column.gs-cta__text > p.has-lead-font-size,
+.gs-cta__title.wp-block-heading {
+	color: color-mix(in srgb, var(--wp--preset--color--white) 90%, transparent);
+}
+
+.gs-cta__text > .is-style-eyebrow {
+	margin-block-end: var(--wp--preset--spacing--30);
+}
+
+.gs-cta__title.wp-block-heading {
+	margin-block-end: var(--wp--preset--spacing--50);
+	letter-spacing: -0.03em;
+	line-height: 1.09;
+}
+
+.gs-cta .wp-block-column.gs-cta__text > p.has-lead-font-size {
+	margin-block-end: var(--wp--preset--spacing--50);
+	letter-spacing: -0.03em;
+	line-height: 1.75;
+}
+
+/* Figma 1:299 / 1:302: 272 × 71 buttons with 22px labels. */
+.gs-cta .wp-block-buttons {
+	gap: var(--wp--preset--spacing--50);
+}
+
+.gs-cta .wp-block-buttons > .wp-block-button > .wp-block-button__link.wp-element-button {
+	min-block-size: var(--wp--custom--control--lg);
+	padding-inline: var(--wp--preset--spacing--60);
+	font-size: var(--wp--preset--font-size--card-title);
+}
+
+/* Panel, photo and cards share one grid cell; sizes are Figma's, as % of the 967 × 867 stage. */
+.gs-cta__stage.wp-block-group {
+	display: grid;
+	grid-template: 1fr / 1fr;
+	aspect-ratio: 967 / 867;
+	container-type: inline-size;
+}
+
+.gs-cta__stage > * {
+	grid-area: 1 / 1;
+	margin: 0;
+}
+
+.gs-cta__stage > .gs-cta__panel.wp-block-group {
+	align-self: end;
+	inline-size: 65.9%;
+	block-size: 86.6%;
+	margin-inline-start: 17.1%;
+	padding: 0;
+	border-block-end: 0;
+	border-radius: var(--gs-r-2xl) var(--gs-r-2xl) 0 0;
+	opacity: 0.62;
+}
+
+/* Positioned so it paints above the panel: the panel's opacity lifts it to the positioned layer. */
+.gs-cta__stage > .gs-cta__model.wp-block-image {
+	position: relative;
+	align-self: end;
+	inline-size: 91.1%;
+	margin-inline-start: 4.4%;
+}
+
+.gs-cta__stage .gs-cta__model img {
+	display: block;
+	inline-size: 100%;
+	block-size: auto;
+}
+
+/* Glass stat cards — Figma 1:314 / 1:321: 214px square, icon, 32px label, brand-700 rule. */
+.gs-cta__stage > .gs-cta__card.wp-block-group {
+	display: flex;
+	flex-direction: column;
+	gap: 0.8cqi;
+	align-items: center;
+	justify-content: center;
+	inline-size: 22.1%;
+	aspect-ratio: 1;
+	padding: 1cqi;
+	text-align: center;
+}
+
+.gs-cta__stage > .gs-cta__card--support.wp-block-group {
+	align-self: start;
+	justify-self: end;
+	margin-block-start: 17.6%;
+}
+
+.gs-cta__stage > .gs-cta__card--homes.wp-block-group {
+	align-self: end;
+	justify-self: start;
+	margin-block-end: 5%;
+}
+
+/* Figma #A87CBC, composed from brand-200 and on-dark. */
+.gs-cta__icon.wp-block-group {
+	--gs-ico-size: 5.6cqi;
+	display: flex;
+	color: color-mix(in srgb, var(--wp--preset--color--brand-200) 50%, var(--wp--preset--color--on-dark));
+}
+
+.gs-cta .gs-cta__stage .gs-cta__card.wp-block-group p {
+	margin: 0;
+	color: color-mix(in srgb, var(--wp--preset--color--white) 90%, transparent);
+	font-size: min(var(--wp--preset--font-size--h-5), 3.3cqi);
+	font-weight: 500;
+	letter-spacing: -0.03em;
+	line-height: 1.1;
+	overflow-wrap: normal;
+	text-wrap: balance;
+}
+
+.gs-cta__card::after {
+	content: "";
+	inline-size: 79%;
+	block-size: 3px;
+	margin-block-start: 1cqi;
+	background-image: linear-gradient(90deg, var(--wp--preset--color--brand-700), transparent);
+}
+
+@media (max-width: 1100px) {
+
+	.wp-block-cover.gs-cta {
+		padding-block-start: var(--wp--preset--spacing--80);
+	}
+
+	.wp-block-columns.gs-cta__cols {
+		flex-wrap: wrap !important; /* core forces nowrap from 782px */
+	}
+
+	.wp-block-columns.gs-cta__cols > .wp-block-column.gs-cta__text,
+	.wp-block-columns.gs-cta__cols > .wp-block-column.gs-cta__media {
+		flex-basis: 100%;
+	}
+
+	.wp-block-columns.gs-cta__cols > .wp-block-column.gs-cta__media {
+		max-inline-size: 760px;
+		margin-inline: auto;
+	}
+}
+
+@media (max-width: 600px) {
+
+	/* Figma's 22% cards read too small on phones; grow them and their labels with the stage. */
+	.gs-cta__stage > .gs-cta__card.wp-block-group {
+		inline-size: 30%;
+		padding: 1.5cqi;
+	}
+
+	.gs-cta__icon.wp-block-group {
+		--gs-ico-size: 7.5cqi;
+	}
+
+	.gs-cta .gs-cta__stage .gs-cta__card.wp-block-group p {
+		font-size: 4.4cqi;
+	}
+}

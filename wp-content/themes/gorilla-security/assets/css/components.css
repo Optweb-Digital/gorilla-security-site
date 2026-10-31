@@ -1950,3 +1950,138 @@ body:not(:has(.gs-hero-page)) .wp-block-button.gs-header__phone .wp-block-button
 		flex-wrap: wrap;
 	}
 }
+
+/* ---------- Quote split — Figma 1:169 ---------- */
+
+/* Photo 1:170 sits on the right; the soft-section wash 1:171 keeps the form side light. */
+.wp-block-cover.gs-quote-split {
+	align-items: stretch;
+	min-block-size: 779px;
+	margin-block-start: 0;
+	padding-block: var(--wp--preset--spacing--70);
+	padding-inline: clamp(16px, 7.4vw, 143px);
+	background-color: var(--wp--preset--color--white);
+}
+
+.wp-block-cover.gs-quote-split::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	background-image: var(--wp--preset--gradient--soft-section);
+	pointer-events: none;
+}
+
+.gs-quote-split .wp-block-cover__inner-container {
+	z-index: 2;
+	display: flex;
+	color: inherit;
+}
+
+.gs-quote-split__inner.wp-block-group {
+	display: flex;
+	flex: 1;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--60);
+	align-items: flex-end;
+	justify-content: space-between;
+}
+
+.gs-quote-split__form.wp-block-group {
+	display: flex;
+	flex: 0 1 797px;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--30);
+	color: var(--wp--preset--color--body);
+}
+
+.gs-quote-split__form > * {
+	margin-block: 0;
+}
+
+.gs-quote-split__form .wp-block-heading {
+	line-height: 1.13;
+}
+
+.gs-quote-split__form .gs-form {
+	margin-block-start: var(--wp--preset--spacing--30);
+}
+
+/* Light form: Figma fields 48px, message 99px, submit full width 60px with arrow. */
+.gs-quote-split .gs-form :where(input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]), select) {
+	min-block-size: var(--wp--custom--control--sm);
+}
+
+.gs-quote-split .gs-form :where(textarea) {
+	min-block-size: 99px;
+	block-size: 99px;
+	resize: vertical;
+}
+
+/* Contact card — Figma 1:200: glass, white text, two items split by a faint 2px divider. */
+.gs-contact-card.wp-block-group {
+	flex: 0 1 586px;
+	gap: 0;
+	padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+	color: var(--wp--preset--color--white);
+}
+
+.gs-contact-card__item.wp-block-group {
+	flex: 1 1 220px;
+	gap: var(--wp--preset--spacing--20);
+	align-items: center;
+	padding-block: var(--wp--preset--spacing--10);
+}
+
+.gs-contact-card__item + .gs-contact-card__item {
+	padding-inline-start: var(--wp--preset--spacing--40);
+	border-inline-start: 2px solid color-mix(in srgb, var(--wp--preset--color--border) 20%, transparent);
+}
+
+.gs-contact-card__text > * {
+	margin: 0;
+	line-height: 1.35;
+}
+
+.wp-block-group.gs-contact-card .gs-contact-card__item .gs-contact-card__text p {
+	font-size: var(--wp--preset--font-size--medium);
+}
+
+.wp-block-group.gs-contact-card .gs-contact-card__item .gs-contact-card__text .gs-contact-card__value {
+	font-size: var(--wp--preset--font-size--lead);
+	font-weight: 600;
+}
+
+.gs-contact-card .gs-contact-card__text .gs-contact-card__value a {
+	color: inherit;
+	text-decoration: none;
+}
+
+@media (max-width: 1100px) {
+
+	.wp-block-cover.gs-quote-split {
+		min-block-size: 0;
+	}
+
+	/* Photo moves behind a stronger wash so the form stays readable over it. */
+	.wp-block-cover.gs-quote-split::before {
+		background-image: linear-gradient(180deg, color-mix(in srgb, var(--wp--preset--color--white) 94%, transparent) 55%, color-mix(in srgb, var(--wp--preset--color--white) 40%, transparent));
+	}
+
+	.gs-quote-split__form.wp-block-group {
+		flex-basis: 100%;
+	}
+
+	/* Over the lighter part of the photo: darker glass keeps the white text readable. */
+	.wp-block-group.gs-contact-card {
+		background-color: color-mix(in srgb, var(--wp--preset--color--night-2) 72%, transparent);
+	}
+}
+
+@media (max-width: 600px) {
+
+	.gs-contact-card__item + .gs-contact-card__item {
+		padding-inline-start: 0;
+		border-inline-start: 0;
+	}
+}

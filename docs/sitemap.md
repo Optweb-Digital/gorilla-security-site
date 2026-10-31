@@ -26,7 +26,7 @@ Figma order, top to bottom. "Root" is the group to pass to `get_metadata`; the o
 | 4 | `brands` | 1:508 | title panel 1:511 · marquee 1:510 (10 logos, repeated) | Marquee | done locally (`feat/brands`) — logo placeholders until partner files are approved | TBD |
 | 5 | `why-us` | 1:522 (instance) | stepper track I1:522;1:4087 / active I1:522;1:4088 · dividers I1:522;1:4081… · images I1:522;1:4091–1:4101 | Stepper | done locally (`feat/why-us`) — copy for steps 02–06 pending | TBD |
 | 6 | `services-tabs` | 1:162 | panels 1:615–1:1078 · services arrows 1:607 · checklist 1:565 · float card 1:1051. **Panel layers are in reverse order to the tab bar** — map by tab label, not layer order | Tabs, Checklist, Float card, Round arrows | done locally (`feat/services`) — "Know More" waits for service pages | TBD |
-| 7 | `quote-split` (+ `contact-card`) | 1:169 | photo 1:170 · wash 1:171 · form 1:172 · contact card 1:199 | `gs-form`, contact card | not started | TBD |
+| 7 | `quote-split` (+ `contact-card`) | 1:169 | photo 1:170 · wash 1:171 · form 1:172 · contact card 1:199 | `gs-form`, contact card | done locally (`feat/quote-split`) — contact card shows once phone/hours are confirmed; dropdown options pending | TBD |
 | 8 | `split-intro` | 1:220 | deco 1:221/1:222 · image 1:237 | Deco frame · right | not started | TBD |
 | 9 | `split-image-left` | 1:238 | deco 1:240/1:241 · image 1:252 | Deco frame · left | not started | TBD |
 | 10 | `split-icon-trio` | 1:253 | deco 1:254/1:255 · icon trio 1:265 · image 1:288 | Deco frame · right, Icon trio | not started | TBD |

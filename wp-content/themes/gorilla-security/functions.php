@@ -286,33 +286,40 @@ function gorilla_optimize_theme_image( $block_content ) {
 add_filter( 'render_block_core/image', 'gorilla_optimize_theme_image' );
 
 /**
- * The hero cover photo is the LCP image: give it dimensions and fetch priority.
+ * Cover photos from the theme: add dimensions. The hero's is the LCP image (fetch priority);
+ * every other cover photo is below the fold and lazy-loads.
  *
  * @param string $block_content Rendered block HTML.
  * @return string
  */
-function gorilla_prioritize_hero_image( $block_content ) {
-	if ( false === strpos( $block_content, 'gs-hero' ) ) {
-		return $block_content;
-	}
+function gorilla_optimize_cover_image( $block_content ) {
 	$tags = new WP_HTML_Tag_Processor( $block_content );
-	if ( $tags->next_tag(
+	if ( ! $tags->next_tag(
 		array(
 			'tag_name'   => 'img',
 			'class_name' => 'wp-block-cover__image-background',
 		)
 	) ) {
-		$size = gorilla_theme_image_size( (string) $tags->get_attribute( 'src' ) );
-		if ( $size && null === $tags->get_attribute( 'width' ) ) {
-			$tags->set_attribute( 'width', (string) $size[0] );
-			$tags->set_attribute( 'height', (string) $size[1] );
-		}
+		return $block_content;
+	}
+	$size = gorilla_theme_image_size( (string) $tags->get_attribute( 'src' ) );
+	if ( ! $size ) {
+		return $block_content;
+	}
+	if ( null === $tags->get_attribute( 'width' ) ) {
+		$tags->set_attribute( 'width', (string) $size[0] );
+		$tags->set_attribute( 'height', (string) $size[1] );
+	}
+	if ( false !== strpos( $block_content, 'gs-hero' ) ) {
 		$tags->set_attribute( 'fetchpriority', 'high' );
 		$tags->remove_attribute( 'loading' );
+	} elseif ( null === $tags->get_attribute( 'loading' ) ) {
+		$tags->set_attribute( 'loading', 'lazy' );
+		$tags->set_attribute( 'decoding', 'async' );
 	}
 	return $tags->get_updated_html();
 }
-add_filter( 'render_block_core/cover', 'gorilla_prioritize_hero_image' );
+add_filter( 'render_block_core/cover', 'gorilla_optimize_cover_image' );
 
 /**
  * Site-wide business details used by patterns (header, footer, contact card).

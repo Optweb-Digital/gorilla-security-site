@@ -283,5 +283,260 @@
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 	</item>
+	<!-- Contact Form 7 forms (exported from wp-admin data with WP-CLI wp export, post type wpcf7_contact_form). Recipient: site admin email until confirmed. -->
+	<item>
+  <title><![CDATA[Hero quote form]]></title>
+  <link>http://localhost:8888/?post_type=wpcf7_contact_form&amp;p=111</link>
+  <pubDate>Sat, 31 Oct 2026 03:17:01 +0000</pubDate>
+  <dc:creator/>
+  <guid isPermaLink="false">http://localhost:8888/?post_type=wpcf7_contact_form&amp;p=111</guid>
+  <description/>
+  <content:encoded><![CDATA[<label><span class="screen-reader-text">Full name (required)</span>[text* your-name autocomplete:name placeholder "Full Name *"]</label>
+<label><span class="screen-reader-text">Phone number (required)</span>[tel* your-phone autocomplete:tel placeholder "Phone Number *"]</label>
+<label><span class="screen-reader-text">Email address (required)</span>[email* your-email autocomplete:email placeholder "Email Address *"]</label>
+<label><span class="screen-reader-text">Service interested in (required)</span>[select* your-service first_as_label "Service Interested In *" "CCTV Systems" "Alarm System" "Intercom System" "Access Control System" "Smart Lock Installation" "Smart Home Installation"]</label>
+<label><span class="screen-reader-text">Your message (optional)</span>[textarea your-message placeholder "Your Message (Optional)"]</label>
+[submit "Request a Quote"]
+[_site_title] Hero quote form: [your-name]
+[_site_title] <wordpress@example.com>
+From: [your-name] <[your-email]>
+Phone: [your-phone]
+
+[your-message]
+
+-- 
+Sent from [_site_url]
+[_site_admin_email]
+Reply-To: [your-email]
+
+0
+0
+
+[_site_title] "[your-subject]"
+[_site_title] <wordpress@example.com>
+Message Body:
+[your-message]
+
+-- 
+This email is a receipt for your contact form submission on our website ([_site_title] [_site_url]) in which your email address was used. If that was not you, please ignore this message.
+[your-email]
+Reply-To: [_site_admin_email]
+
+0
+0
+Thank you for your message. It has been sent.
+There was an error trying to send your message. Please try again later.
+One or more fields have an error. Please check and try again.
+There was an error trying to send your message. Please try again later.
+You must accept the terms and conditions before sending your message.
+Please fill out this field.
+This field has a too long input.
+This field has a too short input.
+There was an unknown error uploading the file.
+You are not allowed to upload files of this type.
+The uploaded file is too large.
+There was an error uploading the file.
+Please enter a date in YYYY-MM-DD format.
+This field has a too early date.
+This field has a too late date.
+Please enter a number.
+This field has a too small number.
+This field has a too large number.
+The answer to the quiz is incorrect.
+Your entered code is incorrect.
+Please enter an email address.
+Please enter a URL.
+Please enter a telephone number.]]></content:encoded>
+  <excerpt:encoded><![CDATA[]]></excerpt:encoded>
+  <wp:post_id>111</wp:post_id>
+  <wp:post_date>2026-10-31 03:17:01</wp:post_date>
+  <wp:post_date_gmt>2026-10-31 03:17:01</wp:post_date_gmt>
+  <wp:post_modified>2026-10-31 03:17:01</wp:post_modified>
+  <wp:post_modified_gmt>2026-10-31 03:17:01</wp:post_modified_gmt>
+  <wp:comment_status>closed</wp:comment_status>
+  <wp:ping_status>closed</wp:ping_status>
+  <wp:post_name>hero-quote-form</wp:post_name>
+  <wp:status>publish</wp:status>
+  <wp:post_parent>0</wp:post_parent>
+  <wp:menu_order>0</wp:menu_order>
+  <wp:post_type>wpcf7_contact_form</wp:post_type>
+  <wp:post_password/>
+  <wp:is_sticky>0</wp:is_sticky>
+  <wp:postmeta>
+    <wp:meta_key>_form</wp:meta_key>
+    <wp:meta_value><![CDATA[<label><span class="screen-reader-text">Full name (required)</span>[text* your-name autocomplete:name placeholder "Full Name *"]</label>
+<label><span class="screen-reader-text">Phone number (required)</span>[tel* your-phone autocomplete:tel placeholder "Phone Number *"]</label>
+<label><span class="screen-reader-text">Email address (required)</span>[email* your-email autocomplete:email placeholder "Email Address *"]</label>
+<label><span class="screen-reader-text">Service interested in (required)</span>[select* your-service first_as_label "Service Interested In *" "CCTV Systems" "Alarm System" "Intercom System" "Access Control System" "Smart Lock Installation" "Smart Home Installation"]</label>
+<label><span class="screen-reader-text">Your message (optional)</span>[textarea your-message placeholder "Your Message (Optional)"]</label>
+[submit "Request a Quote"]]]></wp:meta_value>
+  </wp:postmeta>
+  <wp:postmeta>
+    <wp:meta_key>_mail</wp:meta_key>
+    <wp:meta_value><![CDATA[a:8:{s:7:"subject";s:42:"[_site_title] Hero quote form: [your-name]";s:6:"sender";s:37:"[_site_title] <wordpress@example.com>";s:4:"body";s:95:"From: [your-name] <[your-email]>
+Phone: [your-phone]
+
+[your-message]
+
+-- 
+Sent from [_site_url]";s:9:"recipient";s:19:"[_site_admin_email]";s:18:"additional_headers";s:22:"Reply-To: [your-email]";s:11:"attachments";s:0:"";s:8:"use_html";i:0;s:13:"exclude_blank";i:0;}]]></wp:meta_value>
+  </wp:postmeta>
+  <wp:postmeta>
+    <wp:meta_key>_mail_2</wp:meta_key>
+    <wp:meta_value><![CDATA[a:9:{s:6:"active";b:0;s:7:"subject";s:30:"[_site_title] "[your-subject]"";s:6:"sender";s:37:"[_site_title] <wordpress@example.com>";s:4:"body";s:220:"Message Body:
+[your-message]
+
+-- 
+This email is a receipt for your contact form submission on our website ([_site_title] [_site_url]) in which your email address was used. If that was not you, please ignore this message.";s:9:"recipient";s:12:"[your-email]";s:18:"additional_headers";s:29:"Reply-To: [_site_admin_email]";s:11:"attachments";s:0:"";s:8:"use_html";i:0;s:13:"exclude_blank";i:0;}]]></wp:meta_value>
+  </wp:postmeta>
+  <wp:postmeta>
+    <wp:meta_key>_messages</wp:meta_key>
+    <wp:meta_value><![CDATA[a:23:{s:12:"mail_sent_ok";s:45:"Thank you for your message. It has been sent.";s:12:"mail_sent_ng";s:71:"There was an error trying to send your message. Please try again later.";s:16:"validation_error";s:61:"One or more fields have an error. Please check and try again.";s:4:"spam";s:71:"There was an error trying to send your message. Please try again later.";s:12:"accept_terms";s:69:"You must accept the terms and conditions before sending your message.";s:16:"invalid_required";s:27:"Please fill out this field.";s:16:"invalid_too_long";s:32:"This field has a too long input.";s:17:"invalid_too_short";s:33:"This field has a too short input.";s:13:"upload_failed";s:46:"There was an unknown error uploading the file.";s:24:"upload_file_type_invalid";s:49:"You are not allowed to upload files of this type.";s:21:"upload_file_too_large";s:31:"The uploaded file is too large.";s:23:"upload_failed_php_error";s:38:"There was an error uploading the file.";s:12:"invalid_date";s:41:"Please enter a date in YYYY-MM-DD format.";s:14:"date_too_early";s:32:"This field has a too early date.";s:13:"date_too_late";s:31:"This field has a too late date.";s:14:"invalid_number";s:22:"Please enter a number.";s:16:"number_too_small";s:34:"This field has a too small number.";s:16:"number_too_large";s:34:"This field has a too large number.";s:23:"quiz_answer_not_correct";s:36:"The answer to the quiz is incorrect.";s:17:"captcha_not_match";s:31:"Your entered code is incorrect.";s:13:"invalid_email";s:30:"Please enter an email address.";s:11:"invalid_url";s:19:"Please enter a URL.";s:11:"invalid_tel";s:32:"Please enter a telephone number.";}]]></wp:meta_value>
+  </wp:postmeta>
+  <wp:postmeta>
+    <wp:meta_key>_additional_settings</wp:meta_key>
+    <wp:meta_value><![CDATA[]]></wp:meta_value>
+  </wp:postmeta>
+  <wp:postmeta>
+    <wp:meta_key>_locale</wp:meta_key>
+    <wp:meta_value><![CDATA[en_US]]></wp:meta_value>
+  </wp:postmeta>
+  <wp:postmeta>
+    <wp:meta_key>_hash</wp:meta_key>
+    <wp:meta_value><![CDATA[d1f8ec30aa9c381aaa2792f9e6068084c726457c98893a4ebb70685a33d4df5c]]></wp:meta_value>
+  </wp:postmeta>
+</item>
+<item>
+  <title><![CDATA[Quote split form]]></title>
+  <link>http://localhost:8888/?post_type=wpcf7_contact_form&amp;p=112</link>
+  <pubDate>Sat, 31 Oct 2026 03:17:01 +0000</pubDate>
+  <dc:creator/>
+  <guid isPermaLink="false">http://localhost:8888/?post_type=wpcf7_contact_form&amp;p=112</guid>
+  <description/>
+  <content:encoded><![CDATA[<div class="gs-form__row">
+<label><span class="screen-reader-text">Name (required)</span>[text* your-name autocomplete:name placeholder "Name"]</label>
+<label><span class="screen-reader-text">Email (required)</span>[email* your-email autocomplete:email placeholder "Email"]</label>
+<label><span class="screen-reader-text">Phone (required)</span>[tel* your-phone autocomplete:tel placeholder "Phone"]</label>
+</div>
+<div class="gs-form__row">
+<label><span class="screen-reader-text">Purpose of your services</span>[select your-purpose first_as_label "Choose the purpose of your services ?" "Options to be confirmed (TODO: purpose options)"]</label>
+<label><span class="screen-reader-text">What is required</span>[select your-requirement first_as_label "Choose what is required ?" "Options to be confirmed (TODO: requirement options)"]</label>
+</div>
+<label><span class="screen-reader-text">Message</span>[textarea your-message placeholder "Message"]</label>
+[submit "Get A Quote"]
+[_site_title] Quote split form: [your-name]
+[_site_title] <wordpress@example.com>
+From: [your-name] <[your-email]>
+Phone: [your-phone]
+
+[your-message]
+
+-- 
+Sent from [_site_url]
+[_site_admin_email]
+Reply-To: [your-email]
+
+0
+0
+
+[_site_title] "[your-subject]"
+[_site_title] <wordpress@example.com>
+Message Body:
+[your-message]
+
+-- 
+This email is a receipt for your contact form submission on our website ([_site_title] [_site_url]) in which your email address was used. If that was not you, please ignore this message.
+[your-email]
+Reply-To: [_site_admin_email]
+
+0
+0
+Thank you for your message. It has been sent.
+There was an error trying to send your message. Please try again later.
+One or more fields have an error. Please check and try again.
+There was an error trying to send your message. Please try again later.
+You must accept the terms and conditions before sending your message.
+Please fill out this field.
+This field has a too long input.
+This field has a too short input.
+There was an unknown error uploading the file.
+You are not allowed to upload files of this type.
+The uploaded file is too large.
+There was an error uploading the file.
+Please enter a date in YYYY-MM-DD format.
+This field has a too early date.
+This field has a too late date.
+Please enter a number.
+This field has a too small number.
+This field has a too large number.
+The answer to the quiz is incorrect.
+Your entered code is incorrect.
+Please enter an email address.
+Please enter a URL.
+Please enter a telephone number.]]></content:encoded>
+  <excerpt:encoded><![CDATA[]]></excerpt:encoded>
+  <wp:post_id>112</wp:post_id>
+  <wp:post_date>2026-10-31 03:17:01</wp:post_date>
+  <wp:post_date_gmt>2026-10-31 03:17:01</wp:post_date_gmt>
+  <wp:post_modified>2026-10-31 03:17:01</wp:post_modified>
+  <wp:post_modified_gmt>2026-10-31 03:17:01</wp:post_modified_gmt>
+  <wp:comment_status>closed</wp:comment_status>
+  <wp:ping_status>closed</wp:ping_status>
+  <wp:post_name>quote-split-form</wp:post_name>
+  <wp:status>publish</wp:status>
+  <wp:post_parent>0</wp:post_parent>
+  <wp:menu_order>0</wp:menu_order>
+  <wp:post_type>wpcf7_contact_form</wp:post_type>
+  <wp:post_password/>
+  <wp:is_sticky>0</wp:is_sticky>
+  <wp:postmeta>
+    <wp:meta_key>_form</wp:meta_key>
+    <wp:meta_value><![CDATA[<div class="gs-form__row">
+<label><span class="screen-reader-text">Name (required)</span>[text* your-name autocomplete:name placeholder "Name"]</label>
+<label><span class="screen-reader-text">Email (required)</span>[email* your-email autocomplete:email placeholder "Email"]</label>
+<label><span class="screen-reader-text">Phone (required)</span>[tel* your-phone autocomplete:tel placeholder "Phone"]</label>
+</div>
+<div class="gs-form__row">
+<label><span class="screen-reader-text">Purpose of your services</span>[select your-purpose first_as_label "Choose the purpose of your services ?" "Options to be confirmed (TODO: purpose options)"]</label>
+<label><span class="screen-reader-text">What is required</span>[select your-requirement first_as_label "Choose what is required ?" "Options to be confirmed (TODO: requirement options)"]</label>
+</div>
+<label><span class="screen-reader-text">Message</span>[textarea your-message placeholder "Message"]</label>
+[submit "Get A Quote"]]]></wp:meta_value>
+  </wp:postmeta>
+  <wp:postmeta>
+    <wp:meta_key>_mail</wp:meta_key>
+    <wp:meta_value><![CDATA[a:8:{s:7:"subject";s:43:"[_site_title] Quote split form: [your-name]";s:6:"sender";s:37:"[_site_title] <wordpress@example.com>";s:4:"body";s:95:"From: [your-name] <[your-email]>
+Phone: [your-phone]
+
+[your-message]
+
+-- 
+Sent from [_site_url]";s:9:"recipient";s:19:"[_site_admin_email]";s:18:"additional_headers";s:22:"Reply-To: [your-email]";s:11:"attachments";s:0:"";s:8:"use_html";i:0;s:13:"exclude_blank";i:0;}]]></wp:meta_value>
+  </wp:postmeta>
+  <wp:postmeta>
+    <wp:meta_key>_mail_2</wp:meta_key>
+    <wp:meta_value><![CDATA[a:9:{s:6:"active";b:0;s:7:"subject";s:30:"[_site_title] "[your-subject]"";s:6:"sender";s:37:"[_site_title] <wordpress@example.com>";s:4:"body";s:220:"Message Body:
+[your-message]
+
+-- 
+This email is a receipt for your contact form submission on our website ([_site_title] [_site_url]) in which your email address was used. If that was not you, please ignore this message.";s:9:"recipient";s:12:"[your-email]";s:18:"additional_headers";s:29:"Reply-To: [_site_admin_email]";s:11:"attachments";s:0:"";s:8:"use_html";i:0;s:13:"exclude_blank";i:0;}]]></wp:meta_value>
+  </wp:postmeta>
+  <wp:postmeta>
+    <wp:meta_key>_messages</wp:meta_key>
+    <wp:meta_value><![CDATA[a:23:{s:12:"mail_sent_ok";s:45:"Thank you for your message. It has been sent.";s:12:"mail_sent_ng";s:71:"There was an error trying to send your message. Please try again later.";s:16:"validation_error";s:61:"One or more fields have an error. Please check and try again.";s:4:"spam";s:71:"There was an error trying to send your message. Please try again later.";s:12:"accept_terms";s:69:"You must accept the terms and conditions before sending your message.";s:16:"invalid_required";s:27:"Please fill out this field.";s:16:"invalid_too_long";s:32:"This field has a too long input.";s:17:"invalid_too_short";s:33:"This field has a too short input.";s:13:"upload_failed";s:46:"There was an unknown error uploading the file.";s:24:"upload_file_type_invalid";s:49:"You are not allowed to upload files of this type.";s:21:"upload_file_too_large";s:31:"The uploaded file is too large.";s:23:"upload_failed_php_error";s:38:"There was an error uploading the file.";s:12:"invalid_date";s:41:"Please enter a date in YYYY-MM-DD format.";s:14:"date_too_early";s:32:"This field has a too early date.";s:13:"date_too_late";s:31:"This field has a too late date.";s:14:"invalid_number";s:22:"Please enter a number.";s:16:"number_too_small";s:34:"This field has a too small number.";s:16:"number_too_large";s:34:"This field has a too large number.";s:23:"quiz_answer_not_correct";s:36:"The answer to the quiz is incorrect.";s:17:"captcha_not_match";s:31:"Your entered code is incorrect.";s:13:"invalid_email";s:30:"Please enter an email address.";s:11:"invalid_url";s:19:"Please enter a URL.";s:11:"invalid_tel";s:32:"Please enter a telephone number.";}]]></wp:meta_value>
+  </wp:postmeta>
+  <wp:postmeta>
+    <wp:meta_key>_additional_settings</wp:meta_key>
+    <wp:meta_value><![CDATA[]]></wp:meta_value>
+  </wp:postmeta>
+  <wp:postmeta>
+    <wp:meta_key>_locale</wp:meta_key>
+    <wp:meta_value><![CDATA[en_US]]></wp:meta_value>
+  </wp:postmeta>
+  <wp:postmeta>
+    <wp:meta_key>_hash</wp:meta_key>
+    <wp:meta_value><![CDATA[dc55722c1d87edbf2112513c54e1566039ce1f940c3d7f37d266e9149159b629]]></wp:meta_value>
+  </wp:postmeta>
+</item>
 </channel>
 </rss>

@@ -148,7 +148,7 @@ Components are **core blocks + block styles + CSS classes + patterns**. No custo
 | Round arrows | `gsec_arrows()` helper (core/html buttons) | 1:607 |
 | Tabs | `gs-tabs` › `gs-tabs__nav` (buttons, `gs-ico-*`) + `gs-tabs__panel` × n | 1:162 |
 | Stepper | `gs-steps` › `gs-steps__media` (images) + `gs-steps__list` › `gs-step` × n | 1:522 |
-| Marquee | `gs-marquee` › `gs-marquee__track` | 1:510 |
+| Marquee | `gs-marquee` › `gs-marquee__track` › `gs-marquee__row` (Image blocks). gorilla.js clones each row once (aria-hidden) and adds a pause button (WCAG 2.2.2); no motion without JS or with reduced motion (rows wrap). Speed: `duration.marquee` | 1:510 |
 | Slider | `gs-slider` › arrows + `gs-slider__track` (scroll-snap) | 1:418 |
 | Testimonial card | cover `gs-testimonial` + `gs-rating`, `gs-testimonial__*` | 1:4619 |
 | FAQ | group `gs-faq` › details style **FAQ (numbered)** | 1:339 |

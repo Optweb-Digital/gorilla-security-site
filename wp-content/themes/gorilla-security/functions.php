@@ -40,6 +40,18 @@ function gsec_enqueue_assets() {
 			'in_footer' => true,
 		)
 	);
+
+	// Translatable strings for gorilla.js (no build step, so no wp.i18n).
+	wp_add_inline_script(
+		'gsec-gorilla',
+		'window.gsecI18n = ' . wp_json_encode(
+			array(
+				'pauseLogos' => __( 'Pause the moving logos', 'gorilla-security' ),
+				'playLogos'  => __( 'Play the moving logos', 'gorilla-security' ),
+			)
+		) . ';',
+		'before'
+	);
 }
 add_action( 'wp_enqueue_scripts', 'gsec_enqueue_assets' );
 

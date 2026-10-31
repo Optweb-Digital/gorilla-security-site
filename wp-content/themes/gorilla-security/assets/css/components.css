@@ -13,6 +13,8 @@
 	--gs-rating: var(--wp--preset--color--rating);
 	--gs-grad-trust: var(--wp--preset--gradient--trust-strip);
 	--gs-grad-cue: var(--wp--preset--gradient--scroll-cue);
+	--gs-grad-surface-fade: var(--wp--preset--gradient--surface-fade);
+	--gs-marquee-duration: var(--wp--custom--duration--marquee);
 	--gs-r-xs: var(--wp--custom--radius--xs);
 	--gs-r-sm: var(--wp--custom--radius--sm);
 	--gs-r-md: var(--wp--custom--radius--md);
@@ -91,8 +93,16 @@ a[href^="tel:"] {
 	--gs-ico: url(../icons/chevron-down.svg);
 }
 
+.gs-ico-pause {
+	--gs-ico: url(../icons/pause.svg);
+}
+
 .gs-ico-phone {
 	--gs-ico: url(../icons/phone.svg);
+}
+
+.gs-ico-play {
+	--gs-ico: url(../icons/play.svg);
 }
 
 .gs-ico-star {
@@ -996,5 +1006,167 @@ body:not(.gs-has-hero) .gs-header::before {
 	.gs-about__media .wp-block-image img {
 		aspect-ratio: 4 / 5;
 		block-size: auto;
+	}
+}
+
+/* Brands — Figma 1:508 / 1:510. Heading panel fades over two rows of partner logos.
+ * The panel and the marquee share one grid cell so the logos slide under the fade. */
+.gs-brands {
+	background: var(--wp--preset--color--white);
+	display: grid;
+	overflow: hidden;
+}
+
+.gs-brands > * {
+	grid-area: 1 / 1;
+	margin: 0;
+}
+
+/* Figma panel: 664 of 1925px, heading inset 58px. */
+.gs-brands__panel {
+	align-items: center;
+	align-self: stretch;
+	background: var(--gs-grad-surface-fade);
+	display: flex;
+	inline-size: 35%;
+	padding-inline: var(--wp--preset--spacing--70) var(--wp--preset--spacing--50);
+	position: relative;
+	z-index: 1;
+}
+
+.gs-brands__title {
+	color: var(--wp--preset--color--brand-600);
+	font-weight: 500;
+	margin: 0;
+}
+
+/* Marquee. Logos start under the fade (Figma x=534 of 1925). It carries the vertical
+ * padding so the fade panel spans the full height (Figma 231px). */
+.gs-marquee {
+	overflow: hidden;
+	padding-block: var(--wp--preset--spacing--50);
+	padding-inline-start: 28%;
+	position: relative;
+}
+
+.gs-marquee__track {
+	display: flex;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--60);
+}
+
+.gs-marquee__row {
+	align-items: center;
+	gap: var(--wp--preset--spacing--90);
+}
+
+.gs-marquee__row > * {
+	flex: none;
+	margin: 0;
+}
+
+.gs-marquee__row .wp-block-image img {
+	display: block;
+}
+
+/* Still (no JS or reduced motion): rows wrap so every logo is visible. */
+.gs-marquee:not(.is-animated) .gs-marquee__row {
+	flex-wrap: wrap;
+}
+
+/* Animated: each row holds its logos twice; sliding half its width loops seamlessly.
+ * The end padding equals the gap so both halves are the same width. */
+.gs-marquee.is-animated .gs-marquee__row {
+	animation: gs-marquee var(--gs-marquee-duration) linear infinite;
+	inline-size: max-content;
+	padding-inline-end: var(--wp--preset--spacing--90);
+}
+
+.gs-marquee.is-paused .gs-marquee__row,
+.gs-marquee:hover .gs-marquee__row,
+.gs-marquee:focus-within .gs-marquee__row {
+	animation-play-state: paused;
+}
+
+[dir="rtl"] .gs-marquee.is-animated .gs-marquee__row {
+	animation-name: gs-marquee-rtl;
+}
+
+/* Second row starts offset, as in Figma (rows staggered). */
+.gs-marquee.is-animated .gs-marquee__row + .gs-marquee__row {
+	margin-inline-start: var(--wp--preset--spacing--80);
+}
+
+@keyframes gs-marquee {
+
+	to {
+		transform: translateX(-50%);
+	}
+}
+
+@keyframes gs-marquee-rtl {
+
+	to {
+		transform: translateX(50%);
+	}
+}
+
+/* Pause / play (added by gorilla.js): bottom-left, under the heading, clear of the logos. */
+.gs-marquee__toggle {
+	align-items: center;
+	background: var(--wp--preset--color--white);
+	block-size: var(--gs-h-sm);
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: 50%;
+	color: var(--wp--preset--color--heading);
+	cursor: pointer;
+	display: flex;
+	inline-size: var(--gs-h-sm);
+	inset-block-end: var(--wp--preset--spacing--30);
+	inset-inline-start: var(--wp--preset--spacing--70);
+	justify-content: center;
+	padding: 0;
+	position: absolute;
+	z-index: 2;
+}
+
+.gs-marquee__toggle::before {
+	--gs-ico: url(../icons/pause.svg);
+	background: currentcolor;
+	block-size: 50%;
+	content: "";
+	inline-size: 50%;
+	mask: var(--gs-ico) center / contain no-repeat;
+}
+
+.gs-marquee.is-paused .gs-marquee__toggle::before {
+	--gs-ico: url(../icons/play.svg);
+}
+
+/* Narrow screens: heading above the logos, no fade overlap. */
+@media (max-width: 781px) {
+
+	.gs-brands > .gs-marquee {
+		grid-area: 2 / 1;
+		padding-inline-start: 0;
+	}
+
+	.gs-brands__panel {
+		background: none;
+		inline-size: auto;
+		padding: var(--wp--preset--spacing--50) var(--wp--preset--spacing--40) 0;
+	}
+
+	.gs-marquee:not(.is-animated) {
+		padding-inline: var(--wp--preset--spacing--40);
+	}
+
+	/* Room under the logos for the pause button (the marquee clips anything outside it). */
+	.gs-marquee.is-animated {
+		padding-block-end: calc(var(--gs-h-sm) + var(--wp--preset--spacing--40));
+	}
+
+	.gs-marquee__toggle {
+		inset-inline-start: var(--wp--preset--spacing--40);
 	}
 }
